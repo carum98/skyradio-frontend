@@ -1,0 +1,29 @@
+{
+  "name": "skyradio-frontend",
+  "version": "1.0.0",
+  "description": "FrontEnd to SkyRadio",
+  "main": "index.js",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carum98/skyradio-frontend.git"
+  },
+  "author": "Carlos Eduardo Umaña Acevedo <cumana3098@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/carum98/skyradio-frontend/issues"
+  },
+  "homepage": "https://github.com/carum98/skyradio-frontend#readme",
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "nuxt": "^3.8.0",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5"
+  }
+}

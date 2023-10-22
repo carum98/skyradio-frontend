@@ -1,0 +1,7 @@
+services:
+    web:
+      environment:
+        - NODE_ENV=production
+
+      # Start the API service
+      command: npm run build && npm run preview

@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  web:
+    image: skyradio-web
+    container_name: skyradio-web
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:3000"

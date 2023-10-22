@@ -1,0 +1,14 @@
+services:
+    web:
+      volumes:
+        - ./src:/app/src
+        # - ./.git:/app/.git
+        # 
+        - .devcontainer:/app/.devcontainer
+        - .gitignore:/app/.gitignore
+        - ./docker:/app/docker
+        - ./package.json:/app/package.json
+        # 
+        - ..:/workspaces:cached
+  
+      command: npm run dev

@@ -1,0 +1,26 @@
+**/node_modules/
+**/dist
+
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+docker/
+
+Dockerfile
+docker-compose
+Dockerfile.*
+docker-compose*
+
+.gitignore
+.git
+.devcontainer
+
+# dotenv environment variable files
+.env
+.env.example
+
+run.sh
