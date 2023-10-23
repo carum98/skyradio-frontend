@@ -1,13 +1,17 @@
 services:
     web:
       volumes:
-        - ./src:/app/src
-        # - ./.git:/app/.git
+        - ./.git:/app/.git
         # 
         - .devcontainer:/app/.devcontainer
         - .gitignore:/app/.gitignore
         - ./docker:/app/docker
         - ./package.json:/app/package.json
+        #
+        - ./server:/app/server
+        - ./pages:/app/pages
+        - ./middleware:/app/middleware
+        - ./nuxt.config.js:/app/nuxt.config.js
         # 
         - ..:/workspaces:cached
   
