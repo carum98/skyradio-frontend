@@ -1,3 +1,12 @@
+<script setup lang="ts">
+const data = ref({})
+
+const response = await useFetch('/api/companies')
+data.value = response
+</script>
+
 <template>
-    <h1>Carlos 2</h1>
+    <div>
+        {{ data }}
+    </div>
 </template>

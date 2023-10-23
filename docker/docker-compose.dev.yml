@@ -11,7 +11,8 @@ services:
         - ./server:/app/server
         - ./pages:/app/pages
         - ./middleware:/app/middleware
-        - ./nuxt.config.js:/app/nuxt.config.js
+        - .env/app/.env
+        - ./nuxt.config.ts:/app/nuxt.config.ts
         # 
         - ..:/workspaces:cached
   

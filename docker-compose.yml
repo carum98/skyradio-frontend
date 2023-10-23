@@ -7,4 +7,6 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     ports:
-      - "3000:3000"
+      - "${PORT}:${PORT}"
+    environment:
+      - NUXT_API_BASE_URL=${NUXT_API_BASE_URL}

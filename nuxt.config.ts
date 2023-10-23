@@ -7,5 +7,13 @@ export default defineNuxtConfig({
       methods: ['get']
     }
   },
+  runtimeConfig: {
+    apiBaseUrl: ''
+  },
+  routeRules: {
+    '/': {
+      ssr: false
+    }
+  }
 })
   
