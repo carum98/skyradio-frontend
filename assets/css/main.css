@@ -2,3 +2,13 @@ body {
     background-color: #292d3e;
     color-scheme: dark;
 }
+
+table {
+    background-color: white;
+
+    & td, th {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+    }
+}
