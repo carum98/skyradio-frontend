@@ -14,6 +14,7 @@ services:
         - ./assets:/app/assets
         - ./layouts:/app/layouts
         - ./components:/app/components
+        - ./plugins:/app/plugins
         - .env/app/.env
         - ./nuxt.config.ts:/app/nuxt.config.ts
         # 

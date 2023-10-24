@@ -17,8 +17,6 @@ async function onSubmit(e: Event){
         method: 'POST',
         body: form
     })
-
-    console.log(data)
     
     // Redirect to dashboard
     router.push('/')
