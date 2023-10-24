@@ -8,9 +8,12 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event)
     const { email, password } = body
 
-    const data = await apiFetch('/login', {
+    const config = useRuntimeConfig()
+
+    const data = await $fetch('/login', {
         method: 'POST',
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
+        baseURL: config.apiBaseUrl,
     })
 
     // Save token session
