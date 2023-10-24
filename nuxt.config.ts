@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@sidebase/nuxt-session'],
+  css: [
+    '@/assets/css/main.css',
+  ],
   session: {
     api: {
       methods: ['get']
@@ -10,10 +13,5 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiBaseUrl: ''
   },
-  routeRules: {
-    '/': {
-      ssr: false
-    }
-  }
 })
   
