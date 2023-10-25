@@ -5,5 +5,5 @@ export default defineEventHandler(async (event) => {
         method: 'GET',
     })
 
-    return data
+    return data as ITable<IRadio>
 })

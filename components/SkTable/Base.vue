@@ -1,10 +1,7 @@
-<script setup lang="ts">
-defineProps({
-    data: {
-        type: Array,
-        required: true
-    }
-})
+<script setup lang="ts" generic="T extends { code: string, [x: string]: any }">
+const props = defineProps<{
+    items: T[]
+}>()
 
 defineEmits(['click-row'])
 </script>
@@ -13,13 +10,13 @@ defineEmits(['click-row'])
     <table>
         <thead>
             <tr>
-                <th v-for="key in Object.keys(data[0])" :key="key">
+                <th v-for="key in Object.keys({...items.at(0)})" :key="key">
                     {{ key }}
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in data" :key="item.id" @click="$emit('click-row', item)">
+            <tr v-for="item in props.items" :key="item.code" @click="$emit('click-row', item)">
                 <td v-for="key in Object.keys(item)" :key="key">
                     {{ item[key] }}
                 </td>

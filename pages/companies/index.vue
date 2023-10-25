@@ -1,7 +1,11 @@
 <script setup lang="ts">
-const { data } = await useFetch('/api/companies')
+const { data, pending } = await useFetch<ITable<ICompany>>('/api/companies')
 </script>
 
 <template>
-    <TableBase :data="data['data']" @click-row="$router.push({ name: 'companies-profile', params: { code: $event.code } })" />
+    <SkTable
+        v-if="!pending"
+        :table="data!" 
+        @click-row="$router.push({ name: 'companies-profile', params: { code: $event.code } })"
+    />
 </template>
