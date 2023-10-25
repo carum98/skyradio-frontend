@@ -2,8 +2,9 @@
     <header>
         <h1>SkyRadio</h1>
         <nav>
-            <NuxtLink to="/">Home</NuxtLink>
-            <NuxtLink to="/companies">Companies</NuxtLink>
+            <NuxtLink :to="{ name: 'index' }">Home</NuxtLink>
+            <NuxtLink :to="{ name: 'companies' }">Companies</NuxtLink>
+            <NuxtLink :to="{ name: 'radios' }">Radios</NuxtLink>
         </nav>
     </header>
     <main>
