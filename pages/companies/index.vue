@@ -2,7 +2,7 @@
 const { data, pending, refresh } = await useFetch<ITable<ICompany>>('/api/companies')
 
 const { open: OpenCreate, close } = useModal({
-    component: import('../pages/companies/create.vue'),
+    component: import('@pages/companies/create.vue'),
     props: {
         onCreated(_company: ICompany) {
             refresh()

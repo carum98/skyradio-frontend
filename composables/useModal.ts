@@ -15,7 +15,7 @@ export function useModal(params: UseModalOptions): UseModalReturnType {
     let instance: VNode
 
     async function create() {
-        const modal = await import(`../components/SkModal/Index.vue`)
+        const modal = await import(`@components/SkModal/Index.vue`)
         const componentData = await params.component
     
         instance = createVNode(modal.default, {
