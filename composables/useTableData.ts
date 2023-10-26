@@ -1,5 +1,6 @@
 export async function useTableData<T>(path: string) {
     const page = ref(1)
+    const search = ref('')
 
     const key = path.split('/').pop() as string
 
@@ -7,16 +8,18 @@ export async function useTableData<T>(path: string) {
         key,
         async () => $fetch(path, {
             query: {
-                page: page.value
+                page: page.value || undefined,
+                search: search.value || undefined
             }
         }),
         {
-            watch: [page]
+            watch: [page, search]
         }
     )
 
     return {
         data,
+        search,
         page,
         refresh,
         pending

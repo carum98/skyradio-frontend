@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { page, data, refresh, pending } = await useTableData<ICompany>('/api/companies')
+const { page, search, data, refresh, pending } = await useTableData<ICompany>('/api/companies')
 
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/companies/create.vue'),
@@ -14,9 +14,10 @@ const { open: OpenCreate, close } = useModal({
 
 <template>
     <h1>Companies</h1>
+    <input v-model="search" type="search" />
     <button @click="OpenCreate">Create</button>
     <SkTable
-        :pending="!pending"
+        v-if="!pending"
         :table="data!" 
         @click-row="$router.push({ name: 'companies-profile', params: { code: $event.code } })"
         @onPage="page = $event"
