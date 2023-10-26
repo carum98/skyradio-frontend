@@ -1,5 +1,5 @@
 import { ofetch, FetchOptions } from 'ofetch'
-import { H3Event, sendRedirect } from 'h3'
+import { H3Event, sendRedirect, createError } from 'h3'
 
 const config = useRuntimeConfig()
 
@@ -22,9 +22,15 @@ export const useApiFetch = async (event: H3Event, request: RequestInfo, options?
         headers: {
             'Authorization': `Bearer ${token}`
         },
-        async onResponseError({ response }) {
+        async onResponseError({ response, error }) {
             if (response.status === 401) {
                 await logout(event)
+            } else {
+                sendError(event, createError({
+                    statusCode: response.status,
+                    data: response._data,
+                    stack: error?.stack
+                }))
             }
         }
     })

@@ -1,10 +1,14 @@
 <script setup lang="ts">
-const { data, pending } = await useFetch<ITable<ICompany>>('/api/companies')
+const { data, pending, refresh } = await useFetch<ITable<ICompany>>('/api/companies')
 
 function create() {
     useModal({
         component: import('../pages/companies/create.vue'),
         props: {
+            onCreated(company: ICompany) {
+                console.log(company)
+                refresh()
+            }
         }
     })
 }

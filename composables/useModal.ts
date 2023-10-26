@@ -2,7 +2,7 @@ import { createVNode, render } from 'vue'
 
 interface ModalProps {
     component: Promise<typeof import("*.vue")>
-    props: Object
+    props: any
 }
 
 export async function useModal(config: ModalProps) {
@@ -17,7 +17,7 @@ export async function useModal(config: ModalProps) {
     })
 
     vNode.children = [
-        createVNode(componentData.default)
+        createVNode(componentData.default, config.props)
     ]
 
     render(vNode, div)
