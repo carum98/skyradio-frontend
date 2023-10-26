@@ -3,10 +3,22 @@ const props = defineProps<{
     table: T
 }>()
 
-defineEmits(['click-row'])
+// Row type
+type Row = T extends ITable<infer R> ? R : never
+
+const emit = defineEmits<{
+    (e: 'clickRow', row: Row): void
+    (e: 'onPage', page: number): void
+}>()
 </script>
 
 <template>
-    <SkTableBase :items="props.table.data" @click-row="$emit('click-row', $event)" />
-    <SkTablePagination :pagination="props.table.pagination" />
+    <SkTableBase 
+        :items="props.table.data" 
+        @clickRow="$emit('clickRow', $event)" 
+    />
+    <SkTablePagination 
+        :pagination="props.table.pagination" 
+        @onPage="$emit('onPage', $event)" 
+    />
 </template>

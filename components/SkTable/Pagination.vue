@@ -1,14 +1,18 @@
 <script setup lang="ts" generic="T extends IPagination">
-defineProps<{
+const props = defineProps<{
     pagination: T
 }>()
 
+const emit = defineEmits<{
+  (e: 'onPage', page: number): void
+}>()
+
 function prevPage() {
-    console.log('prevPage')
+    emit('onPage', props.pagination.page - 1)
 }
 
 function nextPage() {
-    console.log('nextPage')
+    emit('onPage', props.pagination.page + 1)
 }
 </script>
 

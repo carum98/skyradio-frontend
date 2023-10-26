@@ -1,9 +1,11 @@
-<script setup lang="ts" generic="T extends { code: string, [x: string]: any }">
+<script setup lang="ts" generic="T extends { [x: string]: any }">
 const props = defineProps<{
     items: T[]
 }>()
 
-defineEmits(['click-row'])
+const emit = defineEmits<{
+    (e: 'clickRow', row: T): void
+}>()
 </script>
 
 <template>
@@ -16,7 +18,7 @@ defineEmits(['click-row'])
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in props.items" :key="item.code" @click="$emit('click-row', item)">
+            <tr v-for="item in props.items" :key="item.code" @click="$emit('clickRow', item)">
                 <td v-for="key in Object.keys(item)" :key="key">
                     {{ item[key] }}
                 </td>
