@@ -1,33 +1,50 @@
 import { createVNode, render } from 'vue'
 
-interface ModalProps {
+type UseModalOptions = {
     component: Promise<typeof import("*.vue")>
     props: any
 }
 
-export async function useModal(config: ModalProps) {
-    const modal = await import(`../components/SkModal/Index.vue`)
-    const componentData = await config.component
+interface UseModalReturnType {
+    open: () => Promise<void>
+    close: () => void
+}
 
-    const div = document.createElement('div')
-    document.body.appendChild(div)
+export function useModal(params: UseModalOptions): UseModalReturnType {
+    const root = document.createElement('div')
+    let instance: VNode
 
-    let vNode = createVNode(modal.default, {
-        close: destroy
-    })
-
-    vNode.children = [
-        createVNode(componentData.default, config.props)
-    ]
-
-    render(vNode, div)
+    async function create() {
+        const modal = await import(`../components/SkModal/Index.vue`)
+        const componentData = await params.component
+    
+        instance = createVNode(modal.default, {
+            close: destroy
+        })
+    
+        instance.children = [
+            createVNode(componentData.default, params.props)
+        ]
+    
+        document.body.appendChild(root)
+        render(instance, root)
+    }
 
     function destroy() {
-        render(null, div)
-        div.remove()
+        render(null, root)
+        root.remove()
+    }
+
+    async function open() {
+        await create()
+    }
+
+    function close() {
+        destroy()
     }
 
     return {
-        destroy
+        open,
+        close
     }
 }
