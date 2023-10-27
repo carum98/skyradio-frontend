@@ -3,18 +3,19 @@ const props = defineProps<{
     onCreated: (company: ICompany) => void
 }>()
 
-async function send(event: Event) {
-    const form = event.target as HTMLFormElement;
-    const data = new FormData(form);
+// data
+const name = ref('')
+const modality = ref<IModality | null>(null)
+const seller = ref<ISeller | null>(null)
 
-    const name = data.get("name") as string;
-
+// methods
+async function send() {
     const company = await $fetch<ICompany>('/api/companies', {
         method: 'POST',
         body: {
-            name,
-            modality_code: "7b91a1",
-            seller_code: "3d2637"
+            name: name.value,
+            modality_code: modality.value?.code,
+            seller_code: seller.value?.code
         },
         onRequestError(context) {
             console.log(context.response)
@@ -27,7 +28,21 @@ async function send(event: Event) {
 
 <template>
     <form @submit.prevent="send">
-        <input name="name" type="text" />
-        <button type="submit">Submit</button>
+        <label>Nombre</label>
+        <input 
+            type="text" 
+            v-model="name" 
+        />
+        <label>Modalidad</label>
+        <SelectModality 
+            v-model="modality" 
+        />
+        <label>Vendedor</label>
+        <SelectSeller 
+            v-model="seller" 
+        />
+        <button type="submit">
+            Submit
+        </button>
     </form>
 </template>
