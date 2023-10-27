@@ -17,6 +17,11 @@ label {
     display: block;
 }
 
+header nav {
+    display: flex;
+    gap: 15px;
+}
+
 .sk-select {
     position: relative;
 }
