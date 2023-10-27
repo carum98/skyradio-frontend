@@ -8,7 +8,7 @@ const name = ref('')
 
 // methods
 async function send() {
-    const company = await $fetch<ISeller>('/api/sellers', {
+    const company = await $fetch<ISeller>('/api/companies-seller', {
         method: 'POST',
         body: {
             name: name.value,

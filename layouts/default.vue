@@ -7,6 +7,7 @@
             <NuxtLink :to="{ name: 'radios' }">Radios</NuxtLink>
             <NuxtLink :to="{ name: 'modalities' }">Modalities</NuxtLink>
             <NuxtLink :to="{ name: 'sellers' }">Sellers</NuxtLink>
+            <NuxtLink :to="{ name: 'sims' }">Sims</NuxtLink>
         </nav>
     </header>
     <main>

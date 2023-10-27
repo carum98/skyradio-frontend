@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { page, search, data, refresh, pending } = await useTableData<ISeller>('/api/sellers')
+const { page, search, data, refresh, pending } = await useTableData<ISeller>('/api/companies-seller')
 
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/sellers/create.vue'),

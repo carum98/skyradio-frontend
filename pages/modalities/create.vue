@@ -8,7 +8,7 @@ const name = ref('')
 
 // methods
 async function send() {
-    const company = await $fetch<IModality>('/api/modalities', {
+    const company = await $fetch<IModality>('/api/companies-modality', {
         method: 'POST',
         body: {
             name: name.value,

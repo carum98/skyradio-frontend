@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { page, search, data, refresh, pending } = await useTableData<IModality>('/api/modalities')
+const { page, search, data, refresh, pending } = await useTableData<IModality>('/api/companies-modality')
 
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/modalities/create.vue'),
