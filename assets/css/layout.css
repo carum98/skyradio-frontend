@@ -12,7 +12,7 @@ body {
         "aside main";
 
     grid-template-rows: 70px auto;
-    grid-template-columns: 100px auto;
+    grid-template-columns: 95px auto;
 
     > header {
         grid-area: header;
@@ -20,7 +20,7 @@ body {
 
     > main {
         grid-area: main;
-        padding: 0 35px;
+        padding: 0 30px;
     }
 
     > aside {

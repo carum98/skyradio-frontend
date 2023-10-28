@@ -25,5 +25,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiBaseUrl: ''
   },
+  experimental: {
+    componentIslands: true,
+  }
 })
   
