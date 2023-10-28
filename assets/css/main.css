@@ -1,52 +1,6 @@
-body {
-    background-color: #292d3e;
-    color-scheme: dark;
-}
-
-table {
-    background-color: white;
-
-    & td, th {
-        border: 1px solid black;
-        padding: 10px;
-        text-align: center;
-    }
-}
-
-label {
-    display: block;
-}
-
-header nav {
-    display: flex;
-    gap: 15px;
-}
-
-.sk-select {
-    position: relative;
-}
-
-.sk-select__input {
-    border: 1px solid #ccc;
-    height: 20px;
-}
-
-.sk-select__options {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    background-color: red;
-    visibility: hidden;
-
-    & ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-
-    &.show {
-        visibility: visible;
-    }
-}
+@import './reset.css';
+@import './variables.css';
+@import './layout.css';
+@import './aside.css';
+@import './select.css';
+@import './table.css';

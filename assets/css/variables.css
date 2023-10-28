@@ -1,0 +1,16 @@
+:root {
+    --primary-color: #0160be;
+    --background-color: #f2f5fc;
+    --table-color: #fff;
+    --text-color: #000;
+}
+
+/* Dark */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #0057b2;
+        --background-color: #1e2023;
+        --table-color: #131313;
+        --text-color: #fff;
+    }
+}

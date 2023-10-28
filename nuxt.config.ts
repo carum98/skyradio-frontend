@@ -3,6 +3,10 @@ import { resolve } from 'path'
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@sidebase/nuxt-session'],
+  app: {
+    rootId: 'app',
+    rootTag: 'section',
+  },
   alias: {
     '@': resolve(__dirname, './'),
     '@components': resolve(__dirname, './components'),

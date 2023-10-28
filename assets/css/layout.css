@@ -1,0 +1,29 @@
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    color-scheme: dark;
+}
+
+#app {
+    height: 100vh;
+    display: grid;
+    grid-template-areas:
+        "aside header"
+        "aside main";
+
+    grid-template-rows: 70px auto;
+    grid-template-columns: 100px auto;
+
+    > header {
+        grid-area: header;
+    }
+
+    > main {
+        grid-area: main;
+        padding: 0 35px;
+    }
+
+    > aside {
+        grid-area: aside;
+    }
+}

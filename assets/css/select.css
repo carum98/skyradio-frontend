@@ -1,0 +1,28 @@
+.sk-select {
+    position: relative;
+}
+
+.sk-select__input {
+    border: 1px solid #ccc;
+    height: 20px;
+}
+
+.sk-select__options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-color: red;
+    visibility: hidden;
+
+    & ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    &.show {
+        visibility: visible;
+    }
+}

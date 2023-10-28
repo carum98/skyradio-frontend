@@ -1,0 +1,25 @@
+.sk-table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    width: 100%;
+
+    --border-radius: 12px;
+
+    & th, & td {
+        background-color: var(--table-color);
+        line-height: 1.5;
+        padding: 8px 10px;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    & th:first-child, & td:first-child {
+        border-bottom-left-radius: var(--border-radius);
+        border-top-left-radius: var(--border-radius);
+    }
+
+    & th:last-child, & td:last-child {
+        border-bottom-right-radius: var(--border-radius);
+        border-top-right-radius: var(--border-radius);
+    }
+}

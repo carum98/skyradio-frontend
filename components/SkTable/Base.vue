@@ -9,7 +9,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-    <table>
+    <table class="sk-table">
         <thead>
             <tr>
                 <th v-for="key in Object.keys({...items.at(0)})" :key="key">

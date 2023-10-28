@@ -1,6 +1,7 @@
 <template>
     <header>
-        <h1>SkyRadio</h1>
+    </header>
+    <aside>
         <nav>
             <NuxtLink :to="{ name: 'index' }">Home</NuxtLink>
             <NuxtLink :to="{ name: 'companies' }">Companies</NuxtLink>
@@ -12,7 +13,7 @@
             <NuxtLink :to="{ name: 'radios-model' }">Radios Model</NuxtLink>
             <NuxtLink :to="{ name: 'radios-status' }">Radios Status</NuxtLink>
         </nav>
-    </header>
+    </aside>
     <main>
         <slot />
     </main>
