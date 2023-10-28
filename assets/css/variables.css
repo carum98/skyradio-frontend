@@ -13,4 +13,8 @@
         --table-color: #131313;
         --text-color: #fff;
     }
+    
+    body {
+        color-scheme: dark;
+    }
 }

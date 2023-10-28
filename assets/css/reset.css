@@ -12,3 +12,18 @@ label {
 a {
     text-decoration: none;
 }
+
+input {
+    border: none;
+    outline: none;
+    height: 40px;
+    border-radius: 15px;
+    padding: 0 15px;
+}
+
+button {
+    border: unset;
+    outline: unset;
+    cursor: pointer;
+    background-color: transparent;
+}
