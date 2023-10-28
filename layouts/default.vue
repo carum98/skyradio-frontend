@@ -9,6 +9,7 @@
             <NuxtLink :to="{ name: 'sellers' }">Sellers</NuxtLink>
             <NuxtLink :to="{ name: 'sims' }">Sims</NuxtLink>
             <NuxtLink :to="{ name: 'sims-provider' }">Sims Provider</NuxtLink>
+            <NuxtLink :to="{ name: 'radios-model' }">Radios Model</NuxtLink>
         </nav>
     </header>
     <main>
