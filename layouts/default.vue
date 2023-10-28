@@ -10,6 +10,7 @@
             <NuxtLink :to="{ name: 'sims' }">Sims</NuxtLink>
             <NuxtLink :to="{ name: 'sims-provider' }">Sims Provider</NuxtLink>
             <NuxtLink :to="{ name: 'radios-model' }">Radios Model</NuxtLink>
+            <NuxtLink :to="{ name: 'radios-status' }">Radios Status</NuxtLink>
         </nav>
     </header>
     <main>
