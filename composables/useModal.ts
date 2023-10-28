@@ -1,7 +1,7 @@
 import { createVNode, render } from 'vue'
 
 type UseModalOptions = {
-    component: Promise<typeof import("*.vue")>
+    component: Promise<any>
     props: any
 }
 
@@ -11,10 +11,12 @@ interface UseModalReturnType {
 }
 
 export function useModal(params: UseModalOptions): UseModalReturnType {
-    const root = document.createElement('div')
+    let root: HTMLDivElement
     let instance: VNode
 
     async function create() {
+        root = document.createElement('div')
+
         const modal = await import(`@components/SkModal/Index.vue`)
         const componentData = await params.component
     

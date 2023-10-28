@@ -4,16 +4,13 @@ export async function useTableData<T>(path: string) {
 
     const key = path.split('/').pop() as string
 
-    const { data, refresh, pending } = await useAsyncData<ITable<T>>(
-        key,
-        async () => $fetch(path, {
-            query: {
-                page: page.value || undefined,
-                search: search.value || undefined
-            }
-        }),
+    const { data, refresh, pending } = useFetch<ITable<T>>(path, 
         {
-            watch: [page, search]
+            key,
+            query: {
+                page,
+                search
+            }
         }
     )
 
