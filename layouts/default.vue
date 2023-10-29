@@ -1,5 +1,6 @@
 <template>
     <header>
+        <h2>{{ $route.name }}</h2>
     </header>
     <aside>
         <nav>
@@ -13,7 +14,7 @@
                 <span>
                     <IconsCompany />
                 </span>
-                Compañias
+                Clientes
             </NuxtLink>
             <NuxtLink :to="{ name: 'radios' }">
                 <span>

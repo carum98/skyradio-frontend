@@ -41,7 +41,7 @@
     width: 100%;
     background-color: var(--table-color);
     border-radius: 15px;
-    padding: 15px 20px;
+    padding: 12px 20px;
     font-size: 1rem;
     box-sizing: border-box;
     outline: none;
@@ -61,7 +61,7 @@
     background-color: var(--primary-color);
     color: #fff;
     border-radius: 15px;
-    padding: 15px 20px;
+    padding: 12px 20px;
     font-size: 1rem;
     cursor: pointer;
     transition: box-shadow 0.2s ease-in-out;
