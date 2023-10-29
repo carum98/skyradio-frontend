@@ -10,10 +10,6 @@ export default defineNuxtConfig({
       name: 'page',
       mode: 'out-in',
     },
-    layoutTransition: {
-      name: 'page',
-      mode: 'out-in',
-    },
   },
   alias: {
     '@': resolve(__dirname, './'),
@@ -21,6 +17,14 @@ export default defineNuxtConfig({
     '@composables': resolve(__dirname, './composables'),
     '@utils': resolve(__dirname, './utils'),
     '@pages': resolve(__dirname, './pages'),
+  },
+  vite: {
+    vue: {
+      script: {
+        defineModel: true,
+        propsDestructure: true,
+      }
+    }
   },
   css: [
     '@/assets/css/main.css',

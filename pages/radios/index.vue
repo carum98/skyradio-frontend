@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { page, data, pending, search, refresh } = await useTableData<IRadio>('/api/radios')
+const { page, data, search, refresh } = await useTableData<IRadio>('/api/radios')
 
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/radios/create.vue'),
@@ -10,21 +10,30 @@ const { open: OpenCreate, close } = useModal({
         }
     }
 })
+
+function openProfile(radio: IRadio) {
+    navigateTo({
+        name: 'radios-profile',
+        params: {
+            code: radio.code
+        }
+    })
+}
 </script>
 
 <template>
-    <main>
-        <section class="sk-toolbar">
-            <InputSearch v-model="search" />
+<main>
+    <SkTable 
+        :table="data"
+        v-model="search"
+        @click-row="openProfile"
+        @onPage="page = $event"
+    >
+        <template #toolbar>
             <button class="add-button" @click="OpenCreate">
                 <IconsAdd />
             </button>
-        </section>
-        <SkTable 
-            v-if="!pending"
-            :table="data!"
-            @click-row="$router.push({ name: 'radios-profile', params: { code: $event.code } })"
-            @onPage="page = $event"
-        />
-    </main>
+        </template>
+    </SkTable>
+</main>
 </template>

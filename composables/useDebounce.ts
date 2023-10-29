@@ -11,7 +11,7 @@ const debounce = (fn: (value: string) => void, delay = 0, immediate = false) => 
     }
 }
 
-export function useDebounce(initialValue: string, delay: number, immediate: boolean) {
+export function useDebounce(initialValue: string, delay: number, immediate?: boolean) {
     const state = ref(initialValue)
     const debouncedRef = customRef((track, trigger) => ({
       get() {

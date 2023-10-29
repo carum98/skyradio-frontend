@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { page, search, data, refresh, pending } = await useTableData<ICompany>('/api/companies')
+const { page, search, data, refresh } = await useTableData<ICompany>('/api/companies')
 
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/companies/create.vue'),
@@ -10,21 +10,30 @@ const { open: OpenCreate, close } = useModal({
         }
     }
 })
+
+function openProfile(company: ICompany) {
+    navigateTo({
+        name: 'companies-profile',
+        params: {
+            code: company.code
+        }
+    })
+}
 </script>
 
 <template>
-    <main>
-        <section class="sk-toolbar">
-            <InputSearch v-model="search" />
+<main>
+    <SkTable
+        :table="data!" 
+        v-model="search"
+        @click-row="openProfile"
+        @onPage="page = $event"
+    >
+        <template #toolbar>
             <button class="add-button" @click="OpenCreate">
                 <IconsAdd />
             </button>
-        </section>
-        <SkTable
-            v-if="!pending"
-            :table="data!" 
-            @click-row="$router.push({ name: 'companies-profile', params: { code: $event.code } })"
-            @onPage="page = $event"
-        />
-    </main>
+        </template>
+    </SkTable>
+</main>
 </template>

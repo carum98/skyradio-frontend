@@ -1,16 +1,9 @@
 <script setup lang="ts">
-const props = defineProps<{
-    modelValue: string
-}>()
-
-const emit = defineEmits<{
-    (e: 'update:modelValue', value: string): void
-}>()
-
+const model = defineModel<string>()
 const search = useDebounce('', 500)
 
 watch(search, () => {
-    emit('update:modelValue', search.value)
+    model.value = search.value
 })
 </script>
 
