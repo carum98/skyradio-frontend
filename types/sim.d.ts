@@ -5,3 +5,5 @@ declare global {
         provider: ISimProvider
     }
 }
+
+export {}

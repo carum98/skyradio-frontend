@@ -13,9 +13,12 @@ const { open: OpenCreate, close } = useModal({
 </script>
 
 <template>
-    <h1>Sims</h1>
-    <input v-model="search" type="search" />
-    <button @click="OpenCreate">Create</button>
+    <section class="sk-toolbar">
+        <input v-model="search" type="search" />
+        <button class="add-button" @click="OpenCreate">
+            <IconsAdd />
+        </button>
+    </section>
     <SkTable
         v-if="!pending"
         :table="data!" 

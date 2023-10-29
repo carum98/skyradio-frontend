@@ -5,3 +5,15 @@
 @import './select.css';
 @import './table.css';
 @import './dialog.css';
+
+.add-button {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+
+    & svg {
+        width: 30px;
+        height: 30px;
+    }
+}
