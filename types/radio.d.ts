@@ -1,7 +1,7 @@
 declare global {
     interface IRadio {
-        code: String
-        name: String
+        code: string
+        name: string
     }
 }
 

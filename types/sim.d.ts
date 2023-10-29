@@ -1,7 +1,7 @@
 declare global {
     interface ISim {
-        code: String
-        name: String
+        code: string
+        name: string
         provider: ISimProvider
     }
 }
