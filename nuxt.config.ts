@@ -6,6 +6,10 @@ export default defineNuxtConfig({
   app: {
     rootId: 'app',
     rootTag: 'section',
+    pageTransition: {
+      name: 'page',
+      mode: 'out-in',
+    },
   },
   alias: {
     '@': resolve(__dirname, './'),

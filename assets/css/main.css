@@ -9,7 +9,7 @@
 .add-button {
     background-color: var(--primary-color);
     color: #fff;
-    border-radius: 50%;
+    border-radius: 15px;
     height: 40px;
     width: 40px;
 
@@ -72,4 +72,13 @@
     &.block {
         width: 100%;
     }
+}
+
+.page-enter-active,
+.page-leave-active {
+    transition: opacity 0.2s ease;
+}
+.page-enter-from,
+.page-leave-to {
+    opacity: 0;
 }

@@ -39,7 +39,6 @@
             </NuxtLink>
         </nav>
     </aside>
-    <main>
-        <slot />
-    </main>
+    
+    <slot />
 </template>

@@ -9,9 +9,11 @@ const { data, pending } = await useFetch<ITable<IRadio>>(`/api/companies/${route
 </script>
 
 <template>
-    <SkTable 
-        v-if="!pending"
-        :table="data!"
-        @click-row="$router.push({ name: 'radios-profile', params: { code: $event.code } })"
-    />
+    <main>
+        <SkTable 
+            v-if="!pending"
+            :table="data!"
+            @click-row="$router.push({ name: 'radios-profile', params: { code: $event.code } })"
+        />
+    </main>
 </template>

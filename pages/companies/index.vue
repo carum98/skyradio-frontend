@@ -13,16 +13,18 @@ const { open: OpenCreate, close } = useModal({
 </script>
 
 <template>
-    <section class="sk-toolbar">
-        <InputSearch v-model="search" />
-        <button class="add-button" @click="OpenCreate">
-            <IconsAdd />
-        </button>
-    </section>
-    <SkTable
-        v-if="!pending"
-        :table="data!" 
-        @click-row="$router.push({ name: 'companies-profile', params: { code: $event.code } })"
-        @onPage="page = $event"
-    />
+    <main>
+        <section class="sk-toolbar">
+            <InputSearch v-model="search" />
+            <button class="add-button" @click="OpenCreate">
+                <IconsAdd />
+            </button>
+        </section>
+        <SkTable
+            v-if="!pending"
+            :table="data!" 
+            @click-row="$router.push({ name: 'companies-profile', params: { code: $event.code } })"
+            @onPage="page = $event"
+        />
+    </main>
 </template>

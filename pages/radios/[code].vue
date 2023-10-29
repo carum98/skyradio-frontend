@@ -9,5 +9,7 @@ const { data } = await useFetch(`/api/radios/${route.params.code}`)
 </script>
 
 <template>
-    {{ data }}
+    <main>
+        {{ data }}
+    </main>
 </template>
