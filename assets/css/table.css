@@ -23,3 +23,25 @@
         border-top-right-radius: var(--border-radius);
     }
 }
+
+.sk-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    & button {
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        font-size: 16px;
+
+        /* Last two and first two */
+        &:nth-child(1), &:nth-child(2), &:nth-last-child(1), &:nth-last-child(2) {
+            background-color: #2c2d30;
+            font-size: 35px;
+            font-weight: 300;
+            line-height: .1;
+        }
+    }
+}
