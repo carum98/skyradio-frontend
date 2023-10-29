@@ -3,8 +3,7 @@
 }
 
 .sk-select__input {
-    border: 1px solid #ccc;
-    height: 20px;
+    height: 50px;
 }
 
 .sk-select__options {

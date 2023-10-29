@@ -23,13 +23,15 @@ async function send() {
 </script>
 
 <template>
-    <form @submit.prevent="send">
+    <form class="sk-form" @submit.prevent="send">
         <label>Nombre</label>
         <input 
             type="text" 
+            class="sk-input"
+            placeholder="Nombre del estado"
             v-model="name" 
         />
-        <button type="submit">
+        <button type="submit" class="sk-button">
             Submit
         </button>
     </form>

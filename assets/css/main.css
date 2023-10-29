@@ -20,7 +20,7 @@
 }
 
 .sk-form {
-    > input {
+    > input, > .sk-select {
         margin-bottom: 15px;
     }
 
@@ -28,6 +28,11 @@
         display: block;
         margin-bottom: 5px;
         margin-left: 5px;
+    }
+
+    > button[type="submit"] {
+        margin-top: 15px;
+        float: right;
     }
 }
 

@@ -33,7 +33,7 @@ watch(() => props.items, (value) => {
 
 <template>
     <div class="sk-select">
-        <div class="sk-select__input" @click="show = !show">
+        <div class="sk-select__input sk-input" @click="show = !show">
             <slot v-if="value" name="input" :value="value.value">
                 {{ value.name  }}
             </slot>

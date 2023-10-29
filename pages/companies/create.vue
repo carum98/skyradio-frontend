@@ -27,10 +27,12 @@ async function send() {
 </script>
 
 <template>
-    <form @submit.prevent="send">
+    <form class="sk-form" @submit.prevent="send" style="width: 350px;">
         <label>Nombre</label>
         <input 
             type="text" 
+            class="sk-input"
+            placeholder="Nombre de la Compañía"
             v-model="name" 
         />
         <label>Modalidad</label>
@@ -41,7 +43,7 @@ async function send() {
         <SelectSeller 
             v-model="seller" 
         />
-        <button type="submit">
+        <button type="submit" class="sk-button">
             Submit
         </button>
     </form>

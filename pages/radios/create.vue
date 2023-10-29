@@ -29,27 +29,33 @@ async function send() {
 </script>
 
 <template>
-    <form @submit.prevent="send">
+    <form class="sk-form" @submit.prevent="send" style="width: 350px;">
         <label>Nombre</label>
         <input 
             type="text" 
+            class="sk-input"
+            placeholder="Nombre del radio"
             v-model="name" 
         />
         <label>IMEI</label>
         <input 
             type="text" 
+            class="sk-input"
+            placeholder="IMEI"
             v-model="imei"
         />
         <label>Serial</label>
         <input 
             type="text" 
+            class="sk-input"
+            placeholder="Número de serie"
             v-model="serial"
         />
         <label>Modelo</label>
         <SelectRadioModel
             v-model="model"
         />
-        <button type="submit">
+        <button type="submit" class="sk-button">
             Submit
         </button>
     </form>

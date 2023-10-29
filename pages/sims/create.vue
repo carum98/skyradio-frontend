@@ -5,6 +5,7 @@ const props = defineProps<{
 
 // data
 const number = ref('')
+const serial = ref('')
 const provider = ref<ISimProvider | null>(null)
 
 // methods
@@ -13,6 +14,7 @@ async function send() {
         method: 'POST',
         body: {
             number: number.value,
+            serial: serial.value,
             provider_code: provider.value?.code,
         },
         onRequestError(context) {
@@ -25,17 +27,26 @@ async function send() {
 </script>
 
 <template>
-    <form @submit.prevent="send">
+    <form class="sk-form" @submit.prevent="send" style="width: 350px;">
         <label>Nombre</label>
         <input 
             type="text" 
+            class="sk-input"
+            placeholder="Número de la sim"
             v-model="number" 
+        />
+        <label>Serial</label>
+        <input 
+            type="text" 
+            class="sk-input"
+            placeholder="Número de serie"
+            v-model="serial"
         />
         <label>Proveedor</label>
         <SelectSimProvider 
             v-model="provider"
         />
-        <button type="submit">
+        <button type="submit" class="sk-button">
             Submit
         </button>
     </form>

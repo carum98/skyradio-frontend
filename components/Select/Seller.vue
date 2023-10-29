@@ -4,7 +4,7 @@ const value = ref<ISeller | null>(null)
 const data = ref<ITable<ISeller> | null>(null)
 
 async function onData() {
-    data.value = await $fetch<ITable<ISeller>>('/api/sellers')
+    data.value = await $fetch<ITable<ISeller>>('/api/companies-seller')
 }
 
 onMounted(onData)
