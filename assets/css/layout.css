@@ -3,7 +3,7 @@ body {
     color: var(--text-color);
 }
 
-#app {
+#app:has(header, main, aside) {
     height: 100vh;
     display: grid;
     grid-template-areas:
@@ -25,4 +25,10 @@ body {
     > aside {
         grid-area: aside;
     }
+}
+
+#app:has(main):not(:has(aside)) {
+    display: grid;
+    place-items: center;
+    height: 100vh;
 }

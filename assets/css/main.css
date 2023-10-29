@@ -18,3 +18,58 @@
         height: 30px;
     }
 }
+
+.sk-form {
+    > input {
+        margin-bottom: 15px;
+    }
+
+    > label {
+        display: block;
+        margin-bottom: 5px;
+        margin-left: 5px;
+    }
+}
+
+.sk-input {
+    border: 2px solid rgba(177, 177, 177, 0.301);
+    width: 100%;
+    background-color: var(--table-color);
+    border-radius: 15px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+
+        @media (prefers-color-scheme: dark) {
+            box-shadow: 0px 10px 15px -3px rgba(0, 73, 163, 0.2);
+        }
+    }
+}
+
+.sk-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 15px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-in-out;
+
+    &:hover {
+        box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+
+        @media (prefers-color-scheme: dark) {
+            box-shadow: 0px 10px 15px -3px rgba(0, 73, 163, 0.2);
+        }
+    }
+
+    &.block {
+        width: 100%;
+    }
+}

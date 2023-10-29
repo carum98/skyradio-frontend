@@ -24,9 +24,29 @@ async function onSubmit(e: Event){
 </script>
 
 <template>
-    <form @submit.prevent="onSubmit">
-        <input type="email" placeholder="Email" v-model="form.email" />
-        <input type="password" placeholder="Password" v-model="form.password" />
-        <button type="submit">Login</button>
-    </form>
+    <main>
+        <form class="sk-form" @submit.prevent="onSubmit">
+            <label>
+                Correo
+            </label>
+            <input 
+                class="sk-input"
+                type="email" 
+                placeholder="Correo" 
+                v-model="form.email"
+            />
+            <label>
+                Contraseña
+            </label>
+            <input 
+                class="sk-input"
+                type="password"
+                placeholder="Contraseña" 
+                v-model="form.password" 
+            />
+            <button type="submit" class="sk-button block">
+                Login
+            </button>
+        </form>
+    </main>
 </template>
