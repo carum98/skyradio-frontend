@@ -14,7 +14,7 @@ const { open: OpenCreate, close } = useModal({
 
 <template>
     <section class="sk-toolbar">
-        <input v-model="search" type="search" />
+        <InputSearch v-model="search" />
         <button class="add-button" @click="OpenCreate">
             <IconsAdd />
         </button>

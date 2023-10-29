@@ -38,10 +38,15 @@
 
         /* Last two and first two */
         &:nth-child(1), &:nth-child(2), &:nth-last-child(1), &:nth-last-child(2) {
-            background-color: #2c2d30;
+            background-color: #cacbcf;
+            color: #fff;
             font-size: 35px;
             font-weight: 300;
             line-height: .1;
+
+            @media (prefers-color-scheme: dark) {
+                background-color: #2c2d30;
+            }
         }
     }
 }
@@ -49,4 +54,25 @@
 .sk-toolbar {
     display: flex;
     justify-content: space-between;
+}
+
+.input-search {
+    background-color: var(--table-color);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+
+    & svg {
+        width: 20px;
+        height: 20px;
+        color: gray;
+    }
+
+    & input {
+        height: 40px;
+        width: 300px;
+        padding: 0 15px;
+        font-size: 15px;
+    }
 }
