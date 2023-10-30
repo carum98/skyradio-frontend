@@ -24,9 +24,9 @@ function openProfile(company: ICompany) {
 <template>
 <main>
     <SkTable
-        :table="data!" 
+        :table="data" 
         v-model="search"
-        @click-row="openProfile"
+        @onRowClick="openProfile"
         @onPage="page = $event"
     >
         <template #toolbar>

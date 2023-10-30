@@ -1,18 +1,15 @@
-<script setup lang="ts" generic="T extends IPagination">
-const props = defineProps<{
-    pagination: T
-}>()
+<script setup lang="ts">
+import type { SkPaginationProps, SkPaginationEmits } from './sk-table'
 
-const emit = defineEmits<{
-  (e: 'onPage', page: number): void
-}>()
+const { pagination } = defineProps<SkPaginationProps>()
+const emit = defineEmits<SkPaginationEmits>()
 
 function prevPage() {
-    emit('onPage', props.pagination.page - 1)
+    emit('onPage', pagination.page - 1)
 }
 
 function nextPage() {
-    emit('onPage', props.pagination.page + 1)
+    emit('onPage', pagination.page + 1)
 }
 
 function goToPage(page: number) {

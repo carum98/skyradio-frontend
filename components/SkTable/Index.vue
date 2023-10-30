@@ -1,18 +1,15 @@
-<script setup lang="ts" generic="T extends ITable<any>">
-const props = defineProps<{
-    table: T | null
-}>()
-
-// data
-const searchModel = defineModel<string>()
+<script setup lang="ts" generic="T">
+import type { SkTableProps, SkTableEmits, SkPaginationEmits } from './sk-table'
 
 // Row type
 type Row = T extends ITable<infer R> ? R : never
 
-const emit = defineEmits<{
-    clickRow: [row: Row]
-    onPage: [page: number]
-}>()
+const { columns = [], loading = false } = defineProps<SkTableProps<T>>()
+
+// data
+const searchModel = defineModel<string>()
+
+defineEmits<SkTableEmits<Row> & SkPaginationEmits>()
 </script>
 
 <template>
@@ -25,12 +22,13 @@ const emit = defineEmits<{
     </section>
 
     <SkTableBase 
-        :items="props.table?.data ?? []" 
-        @clickRow="$emit('clickRow', $event)" 
+        :data="table?.data ?? [] as any[]" 
+        :columns="columns"
+        :loading="loading"
     />
     <SkTablePagination 
-        v-if="props.table?.pagination"
-        :pagination="props.table.pagination" 
+        v-if="table?.pagination"
+        :pagination="table.pagination" 
         @onPage="$emit('onPage', $event)" 
     />
 </template>
