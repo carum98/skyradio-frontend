@@ -3,6 +3,7 @@
     --background-color: #f2f5fc;
     --table-color: #fff;
     --text-color: #000;
+    --shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
 }
 
 /* Dark */
@@ -12,6 +13,7 @@
         --background-color: #1e2023;
         --table-color: #131313;
         --text-color: #fff;
+        --shadow: 0px 10px 15px -3px rgba(0, 73, 163, 0.2);
     }
     
     body {

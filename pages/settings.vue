@@ -47,9 +47,12 @@
             padding: 10px 20px;
             border-radius: 15px;
             margin-bottom: 15px;
+            transition: background-color .3s ease-in-out, box-shadow .3s ease-in-out;
 
             &:hover, &.link-active {
                 background-color: var(--primary-color);
+                box-shadow: var(--shadow);
+                color: #fff;
             }
         }
 
