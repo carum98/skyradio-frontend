@@ -1,10 +1,14 @@
 <script setup lang="ts">
-const { page, search, data, refresh, pending } = await useTableData<ISimProvider>('/api/sims-provider')
+definePageMeta({
+    name: 'sellers'
+})
+
+const { page, search, data, refresh } = await useTableData<ISeller>('/api/companies-seller')
 
 const { open: OpenCreate, close } = useModal({
-    component: import('@pages/sims-provider/create.vue'),
+    component: import('@pages/settings/sellers/create.vue'),
     props: {
-        onCreated(_company: ISimProvider) {
+        onCreated(_company: ISeller) {
             refresh()
             close()
         }

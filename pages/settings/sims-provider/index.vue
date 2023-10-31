@@ -1,10 +1,14 @@
 <script setup lang="ts">
-const { page, search, data, refresh, pending } = await useTableData<IRadioStatus>('/api/radios-status')
+definePageMeta({
+    name: 'sims-provider'
+})
+
+const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/sims-provider')
 
 const { open: OpenCreate, close } = useModal({
-    component: import('@pages/radios-status/create.vue'),
+    component: import('@pages/settings/sims-provider/create.vue'),
     props: {
-        onCreated(_company: IRadioStatus) {
+        onCreated(_company: ISimProvider) {
             refresh()
             close()
         }

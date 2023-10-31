@@ -1,10 +1,14 @@
 <script setup lang="ts">
-const { page, search, data, refresh } = await useTableData<IRadioModel>('/api/radios-model')
+definePageMeta({
+    name: 'modalities'
+})
+
+const { page, search, data, refresh } = await useTableData<IModality>('/api/companies-modality')
 
 const { open: OpenCreate, close } = useModal({
-    component: import('@pages/radios-model/create.vue'),
+    component: import('@pages/settings/modalities/create.vue'),
     props: {
-        onCreated(_company: IRadioModel) {
+        onCreated(_company: IModality) {
             refresh()
             close()
         }

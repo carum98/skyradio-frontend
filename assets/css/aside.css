@@ -31,7 +31,7 @@
             color: #2a5a8a;
         }
 
-        &.router-link-active span, &:hover span {
+        &.link-active span, &:hover span {
             color: #1f62a5;
             background-color: #aac5fc;
         }

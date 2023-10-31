@@ -39,6 +39,12 @@ export default defineNuxtConfig({
   },
   experimental: {
     componentIslands: true,
+  },
+  router: {
+    options: {
+      linkActiveClass: 'link-active',
+      linkExactActiveClass: 'link-exact-active',
+    }
   }
 })
   
