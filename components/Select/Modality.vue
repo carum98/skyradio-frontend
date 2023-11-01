@@ -1,19 +1,18 @@
 <script setup lang="ts">
-// data
+const { items, onData } = useSelect<IModality>('/api/companies-modality')
+
 const value = ref<IModality | null>(null)
-const data = ref<ITable<IModality> | null>(null)
-
-async function onData() {
-    data.value = await $fetch<ITable<IModality>>('/api/companies-modality')
-}
-
-onMounted(onData)
 </script>
 
 <template>
     <SkSelect
-        v-if="data"
-        :items="data"
-        v-model="value"
-    />
+        label="Modalidad"
+        :options="items"
+        :value="value"
+        @onData="onData"
+    >
+        <template #option="{ item }">
+            {{ item?.name }}
+        </template>
+    </SkSelect>
 </template>

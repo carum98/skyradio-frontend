@@ -1,19 +1,18 @@
 <script setup lang="ts">
-// data
+const { items, onData } = useSelect<ISeller>('/api/companies-seller')
+
 const value = ref<ISeller | null>(null)
-const data = ref<ITable<ISeller> | null>(null)
-
-async function onData() {
-    data.value = await $fetch<ITable<ISeller>>('/api/companies-seller')
-}
-
-onMounted(onData)
 </script>
 
 <template>
     <SkSelect
-        v-if="data"
-        v-model="value"
-        :items="data"
-    />
+        label="Vendedor"
+        :options="items"
+        :value="value"
+        @onData="onData"
+    >
+        <template #option="{ item }">
+            {{ item?.name }}
+        </template>
+    </SkSelect>
 </template>
