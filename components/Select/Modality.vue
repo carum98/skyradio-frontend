@@ -9,6 +9,7 @@ const value = ref<IModality | null>(null)
         label="Modalidad"
         :options="items"
         :value="value"
+        @input="value = $event"
         @onData="onData"
     >
         <template #option="{ item }">

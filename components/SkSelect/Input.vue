@@ -1,11 +1,20 @@
-<script setup lang="ts">
-import type { SkSelectInput } from './sk-select'
+<script setup lang="ts" generic="T">
+import type { SkSelectInput, SkSelectSlots } from './sk-select'
 
-defineProps<SkSelectInput>()
+defineSlots<SkSelectSlots<T>>()
+
+const props = defineProps<SkSelectInput<T>>()
+
+const value = computed<T>(() => props.value)
 </script>
 
 <template>
     <div class="sk-select__input sk-input">
-        {{ label }}
+        <slot v-if="value" name="option" :item="value">
+            {{ value }}
+        </slot>
+        <span v-else>
+            {{ label }}
+        </span> 
     </div>
 </template>

@@ -4,6 +4,10 @@
 
 .sk-select__input {
     height: 50px;
+
+    & span {
+        color: gray;
+    }
 }
 
 .sk-select__options {

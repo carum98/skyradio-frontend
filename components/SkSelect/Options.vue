@@ -24,7 +24,7 @@ watch(() => props.show, (value) => {
             class="sk-select__search"
         />
         <ul>
-            <li v-for="item in options">
+            <li v-for="item in options" @click="$emit('input', item)">
                 <slot name="option" :item="item">
                     {{ item }}
                 </slot>

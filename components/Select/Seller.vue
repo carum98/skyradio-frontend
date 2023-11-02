@@ -9,6 +9,7 @@ const value = ref<ISeller | null>(null)
         label="Vendedor"
         :options="items"
         :value="value"
+        @input="value = $event"
         @onData="onData"
     >
         <template #option="{ item }">
