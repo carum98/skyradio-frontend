@@ -5,7 +5,7 @@ defineSlots<SkSelectSlots<T>>()
 
 const props = defineProps<SkSelectInput<T>>()
 
-const value = computed<T>(() => props.value)
+const value = computed<T>(() => props.modelValue)
 </script>
 
 <template>

@@ -8,8 +8,7 @@ const value = ref<IModality | null>(null)
     <SkSelect
         label="Modalidad"
         :options="items"
-        :value="value"
-        @input="value = $event"
+        v-model="value"
         @onData="onData"
     >
         <template #option="{ item }">

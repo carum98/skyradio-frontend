@@ -5,17 +5,17 @@ export type SkSelectOptions<T> = {
 }
 
 export type SkSelectOptionsEmits<T> = {
-    input: [value: T]
+    'update:modelValue': [value: T]
     onData: []
 }
 
 // Input
 export type SkSelectInput<T> = {
     label: string
-    value: T
+    modelValue: T
 }
 
-export type SkSelectInputEmits<T> = Pick<SkSelectOptionsEmits<T>, 'input'>
+export type SkSelectInputEmits<T> = Pick<SkSelectOptionsEmits<T>, 'update:modelValue'>
 
 // Props
 export type SkSelectProps<T> = Omit<SkSelectOptions<T>, 'show'> & SkSelectInput<T>

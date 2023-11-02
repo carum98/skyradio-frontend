@@ -24,7 +24,7 @@ watch(() => props.show, (value) => {
             class="sk-select__search"
         />
         <ul>
-            <li v-for="item in options" @click="$emit('input', item)">
+            <li v-for="item in options" @click="$emit('update:modelValue', item)">
                 <slot name="option" :item="item">
                     {{ item }}
                 </slot>
