@@ -8,20 +8,52 @@
 
 .sk-select__options {
     position: absolute;
-    top: 100%;
+    top: 110%;
     left: 0;
     right: 0;
     z-index: 1;
-    background-color: red;
+    background-color: var(--table-color);
+    padding: 15px;
+    border-radius: 15px;
+
     visibility: hidden;
+
+    &.show {
+        visibility: visible;
+    }
 
     & ul {
         margin: 0;
         padding: 0;
         list-style: none;
+        margin-top: 15px;
     }
 
-    &.show {
-        visibility: visible;
+    & li {
+        cursor: pointer;
+        padding: 10px 15px;
+        border-radius: 10px;
+        transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+        &.active {
+            color: var(--primary-color);
+        }
+
+        &:hover {
+            background-color: var(--primary-color);
+            box-shadow: var(--shadow);
+        }
     }
+
+    & li:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.sk-select__search {
+    background-color: var(--background-color);
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 1rem;
 }

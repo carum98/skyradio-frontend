@@ -21,6 +21,7 @@ watch(() => props.show, (value) => {
             v-model="search"
             type="text"
             placeholder="Buscar..."
+            class="sk-select__search"
         />
         <ul>
             <li v-for="item in options">
