@@ -6,9 +6,15 @@ const emits = defineEmits<SkSelectOptionsEmits<T>>()
 
 defineSlots<SkSelectSlots<T>>()
 
+const input = ref<HTMLInputElement | null>(null)
+
 watch(() => props.show, (value) => {
     if (value) {
         emits('onData')
+
+        nextTick(() => {
+            input.value?.focus()
+        })
     }
 })
 </script>
@@ -16,9 +22,9 @@ watch(() => props.show, (value) => {
 <template>
     <div class="sk-select__options" :class="{ show }">
         <input
+            ref="input"
             type="text"
             placeholder="Buscar..."
-            autofocus
             :value="search"
             @input="emits('update:search', ($event.target as HTMLInputElement).value)"
             class="sk-select__search"
