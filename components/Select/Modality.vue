@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { items, onData } = useSelect<IModality>('/api/companies-modality')
+const { items, search, onData } = useSelect<IModality>('/api/companies-modality')
 
 const value = ref<IModality | null>(null)
 </script>
@@ -8,7 +8,8 @@ const value = ref<IModality | null>(null)
     <SkSelect
         label="Modalidad"
         :options="items"
-        v-model="value"
+        v-model:value="value"
+        v-model:search="search"
         @onData="onData"
     >
         <template #option="{ item }">

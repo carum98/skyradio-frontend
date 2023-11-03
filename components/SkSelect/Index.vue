@@ -8,10 +8,10 @@ const emits = defineEmits<SkSelectEmits<T>>()
 
 const show = ref(false)
 
-const value = computed<T>(() => props.modelValue)
+const valueC = computed<T>(() => props.value)
 
 function onSelect(event: T) {
-    emits('update:modelValue', event)
+    emits('update:value', event)
     show.value = false
 }
 </script>
@@ -20,7 +20,7 @@ function onSelect(event: T) {
     <div class="sk-select">
         <SkSelectInput 
             :label="label"
-            :modelValue="value"
+            :value="valueC"
             @click.native="show = !show"
         >
             <template #option="{ item }">
@@ -31,8 +31,10 @@ function onSelect(event: T) {
         <SkSelectOptions 
             :options="options"
             :show="show"
-            :modelValue="value"
-            @update:modelValue="onSelect"
+            :value="valueC"
+            :search="search"
+            @update:value="onSelect"
+            @update:search="$emit('update:search', $event)"
             @onData="$emit('onData')"
         >
             <template #option="{ item }">
