@@ -17,12 +17,8 @@ body {
         grid-area: header;
         display: flex;
         align-items: center;
-        justify-content: center;
-
-        > h2 {
-            color: gray;
-            font-weight: 500;
-        }
+        justify-content: end;
+        padding: 0 30px;
     }
 
     > main {

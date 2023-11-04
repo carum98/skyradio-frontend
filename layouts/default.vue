@@ -1,6 +1,6 @@
 <template>
     <header>
-        <h2>{{ $route.name }}</h2>
+        <UserInfo />
     </header>
     <aside>
         <nav>
@@ -22,17 +22,12 @@
                 </span>
                 Radios
             </NuxtLink>
-            <!-- <NuxtLink :to="{ name: 'modalities' }">Modalities</NuxtLink> -->
-            <!-- <NuxtLink :to="{ name: 'sellers' }">Sellers</NuxtLink> -->
             <NuxtLink :to="{ name: 'sims' }">
                 <span>
                     <IconsSim />
                 </span>
                 Sims
             </NuxtLink>
-            <!-- <NuxtLink :to="{ name: 'sims-provider' }">Sims Provider</NuxtLink> -->
-            <!-- <NuxtLink :to="{ name: 'radios-model' }">Radios Model</NuxtLink> -->
-            <!-- <NuxtLink :to="{ name: 'radios-status' }">Radios Status</NuxtLink> -->
             <NuxtLink :to="{ name: 'settings' }">
                 <span>
                     <IconsSettings />

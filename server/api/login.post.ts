@@ -2,6 +2,12 @@ interface LoginResponse {
     token: string
     refreshToken: string
     expiredAt: number
+    user: {
+        id: string
+        email: string
+        name: string
+        role: string
+    }
 }
 
 export default defineEventHandler(async (event) => {
@@ -10,14 +16,19 @@ export default defineEventHandler(async (event) => {
 
     const config = useRuntimeConfig()
 
-    const data = await $fetch('/login', {
+    const data = await $fetch<LoginResponse>('/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         baseURL: config.apiBaseUrl,
     })
 
-    // Save token session
-    event.context.session.auth = data
+    const { user, ...tokenInfo } = data
 
-    return data as LoginResponse
+    // Save token session
+    event.context.session.auth = tokenInfo
+    event.context.session.user = user
+
+    return {
+        success: true,
+    }
 })

@@ -12,6 +12,7 @@
     border-radius: 15px;
     height: 40px;
     width: 40px;
+    padding-top: 5px;
 
     & svg {
         width: 30px;
@@ -79,6 +80,12 @@
     height: 30px;
     background-color: var(--background-color);
     border-radius: 10px;
+}
+
+.user-info {
+    background-color: var(--table-color);
+    border-radius: 15px;
+    padding: 10px 20px;
 }
 
 .page-enter-active,
