@@ -10,7 +10,7 @@
         line-height: 1.5;
         padding: 8px 10px;
         vertical-align: middle;
-        text-align: center;
+        text-align: left;
     }
 
     & th:first-child, & td:first-child {

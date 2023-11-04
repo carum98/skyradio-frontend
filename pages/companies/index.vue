@@ -12,7 +12,6 @@ const columns = [
     {
         title: 'Vendedor',
         key: 'seller',
-        formatter: (value: any) => value?.name ?? 'Sin vendedor'
     },
     {
         title: '',
@@ -55,6 +54,10 @@ function openProfile(company: ICompany) {
             <button class="add-button" @click="OpenCreate">
                 <IconsAdd />
             </button>
+        </template>
+
+        <template #cell(seller)="{ value }">
+            {{ value?.name ?? 'Sin vendedor' }}
         </template>
     </SkTable>
 </main>

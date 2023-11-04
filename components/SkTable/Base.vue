@@ -1,8 +1,9 @@
 <script setup lang="ts" generic="T extends { [x: string]: any }">
-import type { SkTablePropsBase, SkTableEmits, SkTableColumn } from './sk-table'
+import type { SkTablePropsBase, SkTableEmits, SkTableColumn, SkTableSlotsBase } from './sk-table'
 
 const props = defineProps<SkTablePropsBase<T>>()
 const emit = defineEmits<SkTableEmits<T>>()
+defineSlots<SkTableSlotsBase<T>>()
 
 // computed
 const columns = computed(() => {
@@ -42,7 +43,14 @@ function rowContent(row: T, column: SkTableColumn) {
         <tbody>
             <tr v-for="row in data" :key="row.id" @click="onRowClick(row)">
                 <td v-for="column in columns" :key="column.key">
-                    {{ rowContent(row, column) }}
+                    <slot
+                        :name="`cell(${column.key})`"
+                        :value="row[column.key]"
+                        :item="row"
+                        :column="column"
+                    >
+                        {{ rowContent(row, column) }}
+                    </slot>
                 </td>
             </tr>
         </tbody>

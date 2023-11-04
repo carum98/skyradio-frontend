@@ -19,6 +19,15 @@ export type SkTableEmits<T> = {
     onRowClick: [row: T]
 }
 
+// Slots
+export interface SkTableSlotsBase<T> {
+    [name: string]: (props: { value: any, item: T, column: SkTableColumn }) => VNode
+}
+
+export interface SkTableSlots<T> extends SkTableSlotsBase<T> {
+    toolbar?: {}
+}
+
 // Pagination
 export interface SkPaginationProps {
     pagination: IPagination
