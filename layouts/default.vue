@@ -1,8 +1,8 @@
 <template>
     <header>
         <div></div>
-        <h1>SkyRadio</h1>
-        <UserInfo />
+        <!-- <h1>SkyRadio</h1> -->
+        <Toolbar />
     </header>
     <aside>
         <nav>

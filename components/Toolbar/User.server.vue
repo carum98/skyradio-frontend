@@ -4,6 +4,7 @@
 
 <template>
     <div class="user-info">
-        {{ user?.name }}
+        <p>{{ user?.name }}</p>
+        <p>{{ user?.email }}</p>
     </div>
 </template>

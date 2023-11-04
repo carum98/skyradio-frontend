@@ -82,12 +82,6 @@
     border-radius: 10px;
 }
 
-.user-info {
-    background-color: var(--table-color);
-    border-radius: 15px;
-    padding: 10px 20px;
-}
-
 .page-enter-active,
 .page-leave-active {
     transition: opacity 0.2s ease;
