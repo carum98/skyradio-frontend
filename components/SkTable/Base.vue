@@ -3,6 +3,7 @@ import type { SkTablePropsBase, SkTableEmits, SkTableColumn, SkTableSlotsBase } 
 
 const props = defineProps<SkTablePropsBase<T>>()
 const emit = defineEmits<SkTableEmits<T>>()
+
 defineSlots<SkTableSlotsBase<T>>()
 
 // computed
@@ -32,7 +33,7 @@ function rowContent(row: T, column: SkTableColumn) {
 </script>
 
 <template>
-    <table class="sk-table">
+    <table class="sk-table" :class="{ hover }">
         <thead>
             <tr>
                 <th v-for="column in columns" :key="column.key">

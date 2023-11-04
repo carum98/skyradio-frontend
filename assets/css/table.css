@@ -5,8 +5,17 @@
 
     --border-radius: 12px;
 
-    & th, & td {
+    &.hover tr:hover {
+        cursor: pointer;
+        background-color: rgba(var(--table-color-rgb), 0.4);
+    }
+
+    & tr {
         background-color: var(--table-color);
+        transition: background-color 0.2s;
+    }
+
+    & th, & td {
         line-height: 1.5;
         padding: 8px 10px;
         vertical-align: middle;
@@ -16,11 +25,13 @@
     & th:first-child, & td:first-child {
         border-bottom-left-radius: var(--border-radius);
         border-top-left-radius: var(--border-radius);
+        padding-left: 20px;
     }
 
     & th:last-child, & td:last-child {
         border-bottom-right-radius: var(--border-radius);
         border-top-right-radius: var(--border-radius);
+        padding-right: 20px;
     }
 }
 

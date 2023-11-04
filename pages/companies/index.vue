@@ -5,11 +5,6 @@ const columns = [
         key: 'name'
     },
     {
-        title: 'Modalidad',
-        key: 'modality',
-        formatter: (value: any) => value.name
-    },
-    {
         title: 'Vendedor',
         key: 'seller',
     },
@@ -46,6 +41,7 @@ function openProfile(company: ICompany) {
     <SkTable
         :columns="columns"
         :table="data" 
+        hover
         v-model="search"
         @onRowClick="openProfile"
         @onPage="page = $event"
@@ -54,6 +50,11 @@ function openProfile(company: ICompany) {
             <button class="add-button" @click="OpenCreate">
                 <IconsAdd />
             </button>
+        </template>
+
+        <template #cell(name)="{ value, item }">
+            <p>{{ value }}</p>
+            <p>{{ item.modality.name }}</p>
         </template>
 
         <template #cell(seller)="{ value }">

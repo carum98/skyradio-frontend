@@ -9,6 +9,7 @@ export interface SkTablePropsBase<T> {
     columns?: SkTableColumn[]
     data: T[]
     loading?: boolean
+    hover?: boolean
 }
 
 export interface SkTableProps<T> extends Omit<SkTablePropsBase<T>, 'data'> {
