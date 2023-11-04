@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const { data } = await useFetch<IUser>(`/api/user`)
+ const user = useUser()
 </script>
 
 <template>
     <div class="user-info">
-        {{ data?.name }}
+        {{ user?.name }}
     </div>
 </template>

@@ -17,8 +17,13 @@ body {
         grid-area: header;
         display: flex;
         align-items: center;
-        justify-content: end;
+        justify-content: space-between;
         padding: 0 30px;
+
+        > h1 {
+            font-size: 1.4rem;
+            color: rgba(var(--text-color-rgb), 0.4);
+        }
     }
 
     > main {

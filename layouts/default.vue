@@ -1,5 +1,7 @@
 <template>
     <header>
+        <div></div>
+        <h1>SkyRadio</h1>
         <UserInfo />
     </header>
     <aside>
