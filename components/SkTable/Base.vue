@@ -1,23 +1,48 @@
 <script setup lang="ts" generic="T extends { [x: string]: any }">
-import type { SkTablePropsBase, SkTableEmits } from './sk-table'
+import type { SkTablePropsBase, SkTableEmits, SkTableColumn } from './sk-table'
 
-defineProps<SkTablePropsBase<T>>()
-defineEmits<SkTableEmits<T>>()
+const props = defineProps<SkTablePropsBase<T>>()
+const emit = defineEmits<SkTableEmits<T>>()
+
+// computed
+const columns = computed(() => {
+    if (props.columns?.length) {
+        return props.columns
+    }
+
+    return Object.keys({ ...props.data?.at(0) ?? {} }).map(key => ({
+        title: key,
+        key
+    }))
+})
+
+// methods
+function onRowClick(row: T) {
+    emit('onRowClick', row)
+}
+
+function rowContent(row: T, column: SkTableColumn) {
+    if (column.formatter) {
+        return column.formatter(row[column.key])
+    }
+
+    return row[column.key]
+}
 </script>
 
 <template>
     <table class="sk-table">
         <thead>
             <tr>
-                <th v-for="key in Object.keys({...data.at(0)})" :key="key">
-                    {{ key }}
+                <th v-for="column in columns" :key="column.key">
+                    {{ column.title }}
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in data" :key="item.code" @click="$emit('onRowClick', item)">
-                <td v-for="key in Object.keys(item)" :key="key">
-                    {{ item[key] }}
+            <tr v-for="row in data" :key="row.id" @click="onRowClick(row)">
+                <td v-for="column in columns" :key="column.key">
+                    {{ rowContent(row, column) }}
                 </td>
             </tr>
         </tbody>

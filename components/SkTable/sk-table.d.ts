@@ -2,6 +2,7 @@
 interface SkTableColumn {
     title: string
     key: string
+    formatter?: (value: any) => string
 }
 
 export interface SkTablePropsBase<T> {

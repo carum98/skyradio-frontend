@@ -1,4 +1,25 @@
 <script setup lang="ts">
+const columns = [
+    {
+        title: 'Nombre',
+        key: 'name'
+    },
+    {
+        title: 'Modalidad',
+        key: 'modality',
+        formatter: (value: any) => value.name
+    },
+    {
+        title: 'Vendedor',
+        key: 'seller',
+        formatter: (value: any) => value?.name ?? 'Sin vendedor'
+    },
+    {
+        title: '',
+        key: 'radios_count'
+    }
+]
+
 const { page, search, data, refresh } = await useTableData<ICompany>('/api/companies')
 
 const { open: OpenCreate, close } = useModal({
@@ -24,6 +45,7 @@ function openProfile(company: ICompany) {
 <template>
 <main>
     <SkTable
+        :columns="columns"
         :table="data" 
         v-model="search"
         @onRowClick="openProfile"

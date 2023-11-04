@@ -26,7 +26,7 @@ function openProfile(radio: IRadio) {
     <SkTable 
         :table="data"
         v-model="search"
-        @click-row="openProfile"
+        @onRowClick="openProfile"
         @onPage="page = $event"
     >
         <template #toolbar>
