@@ -30,20 +30,49 @@ function rowContent(row: T, column: SkTableColumn) {
 
     return row[column.key]
 }
+
+function columnAttributes(column: SkTableColumn) {
+    return {
+        style: {
+            width: column.width ? `${column.width}px` : undefined,
+            textAlign: column.align
+        }
+    }
+}
+
+function rowAttributes(column: SkTableColumn) {
+    return {
+        style: {
+            textAlign: column.align
+        }
+    }
+}
 </script>
 
 <template>
     <table class="sk-table" :class="{ hover }">
         <thead>
             <tr>
-                <th v-for="column in columns" :key="column.key">
+                <th 
+                    v-for="column in columns" 
+                    :key="column.key" 
+                    v-bind="columnAttributes(column)"
+                >
                     {{ column.title }}
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="row in data" :key="row.id" @click="onRowClick(row)">
-                <td v-for="column in columns" :key="column.key">
+            <tr 
+                v-for="row in data" 
+                :key="row.id" 
+                @click="onRowClick(row)"
+            >
+                <td 
+                    v-for="column in columns" 
+                    :key="column.key"
+                    v-bind="rowAttributes(column)"
+                >
                     <slot
                         :name="`cell(${column.key})`"
                         :value="row[column.key]"

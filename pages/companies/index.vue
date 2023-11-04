@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const columns = [
+import type { SkTableColumn } from '@components/SkTable/sk-table';
+
+const columns: SkTableColumn[] = [
     {
         title: 'Nombre',
         key: 'name'
@@ -7,10 +9,21 @@ const columns = [
     {
         title: 'Vendedor',
         key: 'seller',
+        width: 300,
+        align: 'center',
+    },
+    {
+        title: 'Modalidad',
+        key: 'modality',
+        width: 300,
+        align: 'center',
+        formatter: (modality: IModality) => modality.name
     },
     {
         title: '',
-        key: 'radios_count'
+        key: 'radios_count',
+        width: 100,
+        align: 'center',
     }
 ]
 
@@ -52,13 +65,12 @@ function openProfile(company: ICompany) {
             </button>
         </template>
 
-        <template #cell(name)="{ value, item }">
-            <p>{{ value }}</p>
-            <p>{{ item.modality.name }}</p>
-        </template>
-
         <template #cell(seller)="{ value }">
             {{ value?.name ?? 'Sin vendedor' }}
+        </template>
+
+        <template #cell(radios_count)="{ item }">
+            <span class="counter">{{ item.radios_count }}</span>
         </template>
     </SkTable>
 </main>

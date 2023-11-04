@@ -1,7 +1,9 @@
 // Table
-interface SkTableColumn {
+export interface SkTableColumn {
     title: string
     key: string
+    width?: number
+    align?: 'left' | 'center' | 'right'
     formatter?: (value: any) => string
 }
 
