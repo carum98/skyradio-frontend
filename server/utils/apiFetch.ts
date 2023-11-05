@@ -1,5 +1,5 @@
 import { ofetch, FetchOptions } from 'ofetch'
-import { H3Event, sendRedirect, createError } from 'h3'
+import { H3Event, createError } from 'h3'
 
 const config = useRuntimeConfig()
 
@@ -14,7 +14,7 @@ export const useApiFetch = async (event: H3Event, request: RequestInfo, options?
     const token = event.context.session?.auth?.token
 
     if (!token) {
-        await logout(event)
+        await useLogout(event)
     }
 
     return apiFetch(request, {
@@ -24,7 +24,7 @@ export const useApiFetch = async (event: H3Event, request: RequestInfo, options?
         },
         async onResponseError({ response, error }) {
             if (response.status === 401) {
-                await logout(event)
+                await useLogout(event)
             } else {
                 sendError(event, createError({
                     statusCode: response.status,
@@ -36,8 +36,3 @@ export const useApiFetch = async (event: H3Event, request: RequestInfo, options?
     })
 }
 
-async function logout(event: H3Event): Promise<void> {
-    delete event.context.session.auth
-
-    return await sendRedirect(event, '/login', 302)
-}
