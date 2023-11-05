@@ -5,6 +5,7 @@
 @import './select.css';
 @import './table.css';
 @import './dialog.css';
+@import './popover.css';
 
 .add-button {
     background-color: var(--primary-color);

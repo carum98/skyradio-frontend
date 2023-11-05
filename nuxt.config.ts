@@ -10,6 +10,18 @@ export default defineNuxtConfig({
       name: 'page',
       mode: 'out-in',
     },
+    head: {
+      title: 'SkyRadio',
+      meta: [
+        { charset: 'utf-8' },
+      ],
+      viewport: 'width=device-width, initial-scale=1',
+
+      // Polyfill css anchor
+      script: [
+        { src: './polyfill.js'}
+      ]
+    },
   },
   alias: {
     '@': resolve(__dirname, './'),
@@ -35,7 +47,7 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    apiBaseUrl: ''
+    apiBaseUrl: 'http://192.168.10.147:8080'
   },
   experimental: {
     componentIslands: true,
