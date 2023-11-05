@@ -11,6 +11,7 @@ const columns: SkTableColumn[] = [
         key: 'seller',
         width: 300,
         align: 'center',
+        formatter: (seller: ISeller | null) => seller?.name ?? '-'
     },
     {
         title: 'Modalidad',
@@ -63,10 +64,6 @@ function openProfile(company: ICompany) {
             <button class="add-button" @click="OpenCreate">
                 <IconsAdd />
             </button>
-        </template>
-
-        <template #cell(seller)="{ value }">
-            {{ value?.name ?? 'Sin vendedor' }}
         </template>
 
         <template #cell(radios_count)="{ item }">

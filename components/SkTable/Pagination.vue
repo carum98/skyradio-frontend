@@ -18,7 +18,7 @@ function goToPage(page: number) {
 </script>
 
 <template>
-    <section class="sk-pagination">
+    <section class="sk-pagination" v-if="pagination.total_pages > 1">
         <button @click="goToPage(1)">«</button>
         <button @click="prevPage">‹</button>
         

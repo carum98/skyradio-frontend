@@ -1,4 +1,36 @@
 <script setup lang="ts">
+import type { SkTableColumn } from '@components/SkTable/sk-table'
+
+const columns: SkTableColumn[] = [
+    {
+        title: 'Nombre',
+        key: 'name'
+    },
+    {
+        title: 'IMEI / Serial',
+        key: 'imei',
+    },
+    {
+        title: 'Modelo',
+        key: 'model',
+        formatter: (value: IRadioModel | null) => value?.name ?? '-'
+    },
+    {
+        title: 'Sim / Proveedor',
+        key: 'sim',
+    },
+    {
+        title: 'Cliente',
+        key: 'company',
+        formatter: (value: ICompany | null) => value?.name ?? '-'
+    },
+    {
+        title: 'Estado',
+        key: 'status',
+        formatter: (value: IRadioStatus | null) => value?.name ?? '-'
+    },
+]
+
 const { page, data, search, refresh } = await useTableData<IRadio>('/api/radios')
 
 const { open: OpenCreate, close } = useModal({
@@ -25,6 +57,7 @@ function openProfile(radio: IRadio) {
 <main>
     <SkTable 
         :table="data"
+        :columns="columns"
         v-model="search"
         hover
         @onRowClick="openProfile"
@@ -34,6 +67,16 @@ function openProfile(radio: IRadio) {
             <button class="add-button" @click="OpenCreate">
                 <IconsAdd />
             </button>
+        </template>
+
+        <template #cell(imei)="{ value, item }">
+            <p>{{ value }}</p>
+            <p>{{ item.serial }}</p>
+        </template>
+        
+        <template #cell(sim)="{ value }">
+            <p>{{ value?.number }}</p>
+            <p>{{ value?.provider?.name }}</p>
         </template>
     </SkTable>
 </main>
