@@ -19,6 +19,7 @@ const { open: OpenCreate, close } = useModal({
 <template>
 <main>
     <SkTable
+        gridView
         :table="data" 
         v-model="search"
         @onPage="page = $event"
@@ -27,6 +28,10 @@ const { open: OpenCreate, close } = useModal({
             <button class="add-button" @click="OpenCreate">
                 <IconsAdd />
             </button>
+        </template>
+
+        <template #cell="{ item }">
+            {{ item.name }}
         </template>
     </SkTable>
 </main>

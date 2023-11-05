@@ -4,13 +4,22 @@ import type { SkTableProps, SkTableEmits, SkPaginationEmits, SkTableSlots } from
 // Row type
 type Row = T extends ITable<infer R> ? R : never
 
-const { columns = [], loading = false } = defineProps<SkTableProps<T>>()
+const { table, columns = [], loading = false } = defineProps<SkTableProps<T>>()
 
 defineEmits<SkTableEmits<Row> & SkPaginationEmits>()
 defineSlots<SkTableSlots<T>>()
 
 // data
 const searchModel = defineModel<string>()
+
+// computed
+const data = computed(() => {
+    if (table?.data) {
+        return table.data
+    }
+
+    return []
+}) as ComputedRef<any[]>
 
 </script>
 
@@ -23,8 +32,19 @@ const searchModel = defineModel<string>()
         <slot name="toolbar" />
     </section>
 
+    <SkTableBaseGrid
+        v-if="gridView"
+        :data="data" 
+        :hover="hover"
+    >
+        <template #cell="{ item }">
+            <slot name="cell" :item="item" />
+        </template>
+    </SkTableBaseGrid>
+
     <SkTableBase 
-        :data="table?.data ?? [] as any[]" 
+        v-else
+        :data="data" 
         :columns="columns"
         :loading="loading"
         :hover="hover"

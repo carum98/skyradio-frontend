@@ -14,8 +14,12 @@ export interface SkTablePropsBase<T> {
     hover?: boolean
 }
 
+export interface SkTablePropsBaseGrid<T> extends Omit<SkTablePropsBase<T>, 'columns'> {
+}
+
 export interface SkTableProps<T> extends Omit<SkTablePropsBase<T>, 'data'> {
     table: ITable<T> | null
+    gridView?: boolean
 }
 
 export type SkTableEmits<T> = {
@@ -27,7 +31,11 @@ export interface SkTableSlotsBase<T> {
     [name: string]: (props: { value: any, item: T, column: SkTableColumn }) => VNode
 }
 
-export interface SkTableSlots<T> extends SkTableSlotsBase<T> {
+export interface SkTableSlotsBaseGrid<T> {
+    cell?: (props: { item: T }) => VNode
+}
+
+export interface SkTableSlots<T> extends SkTableSlotsBase<T>, SkTableSlotsBaseGrid<T> {
     toolbar?: {}
 }
 

@@ -102,3 +102,21 @@
         box-shadow: var(--shadow);
     }
 }
+
+.sk-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    gap: 15px;
+    margin: 10px 0;
+
+    &.hover li:hover {
+        cursor: pointer;
+        background-color: rgba(var(--table-color-rgb), 0.4);
+    }
+
+    & li {
+        background-color: var(--table-color);
+        border-radius: 15px;
+        padding: 15px 20px;
+    }
+}
