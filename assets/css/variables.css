@@ -1,4 +1,5 @@
-:root {
+/* Light */
+:root.light {
     --table-color-rgb: 255, 255, 255;
     --table-color: rgb(var(--table-color-rgb));
 
@@ -12,7 +13,7 @@
 
 /* Dark */
 @media (prefers-color-scheme: dark) {
-    :root {
+    :root.dark {
         --table-color-rgb: 18, 18, 18;
         --table-color: rgb(var(--table-color-rgb));
 

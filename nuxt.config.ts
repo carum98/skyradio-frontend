@@ -14,8 +14,15 @@ export default defineNuxtConfig({
       title: 'SkyRadio',
       meta: [
         { charset: 'utf-8' },
+        { name: 'supported-color-schemes', content: 'light dark' },
+        { name: 'color-scheme', content: 'dark light' },
+        { name: 'theme-color', content: '' },
       ],
       viewport: 'width=device-width, initial-scale=1',
+      htmlAttrs: {
+        lang: 'es',
+        class: 'dark',
+      },
 
       // Polyfill css anchor
       script: [
@@ -57,6 +64,9 @@ export default defineNuxtConfig({
       linkActiveClass: 'link-active',
       linkExactActiveClass: 'link-exact-active',
     }
+  },
+  routeRules: {
+    '/login': { static: true },
   }
 })
   

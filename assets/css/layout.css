@@ -10,7 +10,7 @@ body {
         "aside header"
         "aside main";
 
-    grid-template-rows: 60px auto;
+    grid-template-rows: 75px auto;
     grid-template-columns: 95px auto;
 
     > header {
