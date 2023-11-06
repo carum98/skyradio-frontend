@@ -4,17 +4,15 @@ import type { SkSelectInput, SkSelectSlots } from './sk-select'
 defineSlots<SkSelectSlots<T>>()
 
 const props = defineProps<SkSelectInput<T>>()
-
-const valueC = computed<T>(() => props.value)
 </script>
 
 <template>
-    <div class="sk-select__input sk-input">
-        <slot v-if="valueC" name="option" :item="valueC">
-            {{ valueC }}
+    <button class="sk-select__input sk-input" :popovertarget="uniqueId" :id="uniqueId + '_anchor'">
+        <slot v-if="props.value" name="option" :item="props.value">
+            {{ props.value }}
         </slot>
         <span v-else>
             {{ label }}
         </span> 
-    </div>
+    </button>
 </template>

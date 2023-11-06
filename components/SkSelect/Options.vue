@@ -1,36 +1,58 @@
 <script setup lang="ts" generic="T">
 import type { SkSelectOptions, SkSelectOptionsEmits, SkSelectSlots } from './sk-select'
 
-const props = defineProps<SkSelectOptions<T>>()
-const emits = defineEmits<SkSelectOptionsEmits<T>>()
-
 defineSlots<SkSelectSlots<T>>()
 
+defineProps<SkSelectOptions<T>>()
+const emits = defineEmits<SkSelectOptionsEmits<T>>()
+
+// data
 const input = ref<HTMLInputElement | null>(null)
+const popover = ref<HTMLElement | null>(null)
 
-watch(() => props.show, (value) => {
-    if (value) {
-        emits('onData')
+// methods
+function onSelect(event: T) {
+    emits('update:value', event)
 
-        nextTick(() => {
-            input.value?.focus()
-        })
-    }
+    popover.value?.togglePopover()
+}
+
+function onSearch(event: Event) {
+    emits('update:search', (event.target as HTMLInputElement).value)
+}
+
+// lifecycle
+onMounted(() => {
+    popover.value?.addEventListener('toggle', (event: Event) => {
+        let { newState } = event as ToggleEvent
+
+        if (newState === 'open') {
+            emits('onData')
+
+            nextTick(() => input.value?.focus())
+        }
+    })
 })
 </script>
 
 <template>
-    <div class="sk-select__options" :class="{ show }">
+    <div
+        ref="popover"
+        class="sk-select__options"
+        popover 
+        :id="uniqueId"
+        :anchor="uniqueId + '_anchor'"
+    >
         <input
             ref="input"
             type="text"
             placeholder="Buscar..."
             :value="search"
-            @input="emits('update:search', ($event.target as HTMLInputElement).value)"
+            @input="onSearch"
             class="sk-select__search"
         />
         <ul>
-            <li v-for="item in options" @click="$emit('update:value', item)">
+            <li v-for="item in options" @click="onSelect(item)">
                 <slot name="option" :item="item">
                     {{ item }}
                 </slot>

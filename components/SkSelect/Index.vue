@@ -6,13 +6,20 @@ defineSlots<SkSelectSlots<T>>()
 const props = defineProps<SkSelectProps<T>>()
 const emits = defineEmits<SkSelectEmits<T>>()
 
-const show = ref(false)
+// data
+const uniqueId = `sk-select-${Math.random().toString(36).substr(2, 9)}`
 
-const valueC = computed<T>(() => props.value)
-
+// methods
 function onSelect(event: T) {
     emits('update:value', event)
-    show.value = false
+}
+
+function onSearch(event: string) {
+    emits('update:search', event)
+}
+
+function onData() {
+    emits('onData')
 }
 </script>
 
@@ -20,8 +27,8 @@ function onSelect(event: T) {
     <div class="sk-select">
         <SkSelectInput 
             :label="label"
-            :value="valueC"
-            @click.native="show = !show"
+            :value="props.value"
+            :uniqueId="uniqueId"
         >
             <template #option="{ item }">
                 <slot name="option" :item="item" />
@@ -30,12 +37,12 @@ function onSelect(event: T) {
 
         <SkSelectOptions 
             :options="options"
-            :show="show"
-            :value="valueC"
+            :value="props.value"
             :search="search"
+            :uniqueId="uniqueId"
             @update:value="onSelect"
-            @update:search="$emit('update:search', $event)"
-            @onData="$emit('onData')"
+            @update:search="onSearch"
+            @onData="onData"
         >
             <template #option="{ item }">
                 <slot name="option" :item="item" />
