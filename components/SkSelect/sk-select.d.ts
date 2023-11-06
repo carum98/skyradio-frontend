@@ -1,6 +1,5 @@
 // Select
 export type SkSelectOptions<T> = {
-    uniqueId: string
     options: T[]
     search: string
 }
@@ -13,7 +12,6 @@ export type SkSelectOptionsEmits<T> = {
 
 // Input
 export type SkSelectInput<T> = {
-    uniqueId: string
     label: string
     value: T
 }

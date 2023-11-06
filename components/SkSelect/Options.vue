@@ -5,10 +5,12 @@ defineSlots<SkSelectSlots<T>>()
 
 defineProps<SkSelectOptions<T>>()
 const emits = defineEmits<SkSelectOptionsEmits<T>>()
+const attrs = useAttrs()
 
 // data
 const input = ref<HTMLInputElement | null>(null)
 const popover = ref<HTMLElement | null>(null)
+const id = attrs['data-id'] as string
 
 // methods
 function onSelect(event: T) {
@@ -40,8 +42,8 @@ onMounted(() => {
         ref="popover"
         class="sk-select__options"
         popover 
-        :id="uniqueId"
-        :anchor="uniqueId + '_anchor'"
+        :id="id"
+        :anchor="id + '_anchor'"
     >
         <input
             ref="input"
