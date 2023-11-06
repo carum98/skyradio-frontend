@@ -18,6 +18,7 @@ services:
         - ./types:/app/types
         - ./composables:/app/composables
         - ./public:/app/public
+        - ./utils:/app/utils
         - .env/app/.env
         - ./nuxt.config.ts:/app/nuxt.config.ts
         # 

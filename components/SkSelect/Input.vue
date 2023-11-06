@@ -10,7 +10,7 @@ const id = attrs['data-id'] as string
 </script>
 
 <template>
-    <button class="sk-select__input sk-input" :popovertarget="id" :id="id + '_anchor'">
+    <button type="button" class="sk-select__input sk-input" :popovertarget="id" :id="id + '_anchor'">
         <slot v-if="props.value" name="option" :item="props.value">
             {{ props.value }}
         </slot>
