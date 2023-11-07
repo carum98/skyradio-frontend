@@ -54,7 +54,7 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    apiBaseUrl: 'http://192.168.10.147:8080'
+    apiBaseUrl: ''
   },
   experimental: {
     componentIslands: true,
