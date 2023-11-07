@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { items, search, onData } = useSelect<IModality>('/api/companies-modality')
 
-const value = ref<IModality | null>(null)
+const value = defineModel<IModality | null>() 
 </script>
 
 <template>

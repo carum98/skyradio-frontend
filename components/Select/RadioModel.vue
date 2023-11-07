@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { items, search, onData } = useSelect<IRadioModel>('/api/radios-models')
+const { items, search, onData } = useSelect<IRadioModel>('/api/radios-model')
 
-const value = ref<IRadioModel | null>(null)
+const value = defineModel<IRadioModel | null>() 
 </script>
 
 <template>

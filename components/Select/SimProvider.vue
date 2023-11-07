@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { items, search, onData } = useSelect<ISimProvider>('/api/sims-provider')
 
-const value = ref<ISimProvider | null>(null)
+const value = defineModel<ISimProvider | null>() 
 </script>
 
 <template>
