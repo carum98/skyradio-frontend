@@ -33,6 +33,7 @@ async function send() {
             type="text" 
             class="sk-input"
             placeholder="Número de la sim"
+            autofocus
             v-model="number" 
         />
         <label>Serial</label>
@@ -47,7 +48,7 @@ async function send() {
             v-model="provider"
         />
         <button type="submit" class="sk-button">
-            Submit
+            Crear
         </button>
     </form>
 </template>

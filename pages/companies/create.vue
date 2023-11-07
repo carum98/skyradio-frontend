@@ -33,6 +33,7 @@ async function send() {
             type="text" 
             class="sk-input"
             placeholder="Nombre de la Compañía"
+            autofocus
             v-model="name" 
         />
         <label>Modalidad</label>
@@ -44,7 +45,7 @@ async function send() {
             v-model="seller" 
         />
         <button type="submit" class="sk-button">
-            Submit
+            Crear
         </button>
     </form>
 </template>

@@ -29,10 +29,11 @@ async function send() {
             type="text" 
             class="sk-input"
             placeholder="Nombre de la Modalidad"
+            autofocus
             v-model="name" 
         />
         <button type="submit" class="sk-button">
-            Submit
+            Crear
         </button>
     </form>
 </template>

@@ -35,6 +35,7 @@ async function send() {
             type="text" 
             class="sk-input"
             placeholder="Nombre del radio"
+            autofocus
             v-model="name" 
         />
         <label>IMEI</label>
@@ -56,7 +57,7 @@ async function send() {
             v-model="model"
         />
         <button type="submit" class="sk-button">
-            Submit
+            Crear
         </button>
     </form>
 </template>
