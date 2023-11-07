@@ -7,8 +7,12 @@ const columns: SkTableColumn[] = [
         key: 'name'
     },
     {
-        title: 'IMEI / Serial',
+        title: 'IMEI',
         key: 'imei',
+    },
+    {
+        title: 'Serial',
+        key: 'serial',
     },
     {
         title: 'Modelo',
@@ -69,11 +73,6 @@ function openProfile(radio: IRadio) {
             </button>
         </template>
 
-        <template #cell(imei)="{ value, item }">
-            <p>{{ value }}</p>
-            <p>{{ item.serial }}</p>
-        </template>
-        
         <template #cell(sim)="{ value }">
             <p>{{ value?.number }}</p>
             <p>{{ value?.provider?.name }}</p>
