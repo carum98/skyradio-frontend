@@ -25,6 +25,12 @@ const columns: SkTableColumn[] = [
         key: 'radios_count',
         width: 100,
         align: 'center',
+    },
+    {
+        title: '',
+        key: 'actions',
+        width: 65,
+        align: 'center',
     }
 ]
 
@@ -68,6 +74,23 @@ function openProfile(company: ICompany) {
 
         <template #cell(radios_count)="{ item }">
             <span class="counter">{{ item.radios_count }}</span>
+        </template>
+
+        <template #cell(actions)="{ item }">
+            <SkDropdown :options="[
+                {
+                    key: 'edit',
+                    label: 'Editar',
+                    action: () => {
+                    }
+                },
+                {
+                    key: 'history',
+                    label: 'Historial',
+                    action: () => {
+                    }
+                }
+            ]" />
         </template>
     </SkTable>
 </main>
