@@ -33,6 +33,12 @@ const columns: SkTableColumn[] = [
         key: 'status',
         formatter: (value: IRadioStatus | null) => value?.name ?? '-'
     },
+    {
+        title: '',
+        key: 'actions',
+        width: 65,
+        align: 'center',
+    }
 ]
 
 const { page, data, search, refresh } = await useTableData<IRadio>('/api/radios')
@@ -76,6 +82,25 @@ function openProfile(radio: IRadio) {
         <template #cell(sim)="{ value }">
             <p>{{ value?.number }}</p>
             <p>{{ value?.provider?.name }}</p>
+        </template>
+
+        <template #cell(actions)="{ item }">
+            <SkDropdown :options="[
+                {
+                    key: 'change',
+                    label: ActionsStatic.CHANGE.name,
+                    icon: ActionsStatic.CHANGE.icon,
+                    color: ActionsStatic.CHANGE.color,
+                    action: () => {}
+                },
+                {
+                    key: 'remove',
+                    label: ActionsStatic.REMOVE.name,
+                    icon: ActionsStatic.REMOVE.icon,
+                    color: ActionsStatic.REMOVE.color,
+                    action: () => {}
+                }
+            ]" />
         </template>
     </SkTable>
 </main>

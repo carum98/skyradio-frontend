@@ -3,6 +3,8 @@ defineProps<{
     options: {
         key: string
         label: string
+        icon: string
+        color: string
         action: Function
     }[]
 }>()
@@ -43,11 +45,16 @@ onMounted(() => {
         :id="id"
         @click.stop
     >
-        <ul>
-            <li v-for="option in options" :key="option.key" @click="option.action">
-                {{ option.label }}
-            </li>
-        </ul>
+        <button 
+            v-for="option in options" 
+            :key="option.key" 
+            @click="option.action"
+            :style="{ '--color': option.color }"
+            class="button-actions"
+        >
+            <span v-html="option.icon"></span>
+            {{ option.label }}
+        </button>
     </div>
 </template>
 
@@ -63,7 +70,27 @@ onMounted(() => {
 }
 
 .sk-dropdown__options {
+    width: 180px;
+    padding: 15px;
     top: anchor(bottom);
     right: anchor(right);
+
+    > button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 15px;
+        border-radius: 15px;
+        font-size: 15px;
+
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        > span {
+            height: 24px;
+        }
+    }
 }
 </style>

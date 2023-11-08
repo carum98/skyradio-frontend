@@ -79,16 +79,25 @@ function openProfile(company: ICompany) {
         <template #cell(actions)="{ item }">
             <SkDropdown :options="[
                 {
-                    key: 'edit',
-                    label: 'Editar',
-                    action: () => {
-                    }
+                    key: 'change',
+                    label: ActionsStatic.CHANGE.name,
+                    icon: ActionsStatic.CHANGE.icon,
+                    color: ActionsStatic.CHANGE.color,
+                    action: () => {}
                 },
                 {
-                    key: 'history',
-                    label: 'Historial',
-                    action: () => {
-                    }
+                    key: 'add',
+                    label: ActionsStatic.ADD.name,
+                    icon: ActionsStatic.ADD.icon,
+                    color: ActionsStatic.ADD.color,
+                    action: () => {}
+                },
+                {
+                    key: 'remove',
+                    label: ActionsStatic.REMOVE.name,
+                    icon: ActionsStatic.REMOVE.icon,
+                    color: ActionsStatic.REMOVE.color,
+                    action: () => {}
                 }
             ]" />
         </template>

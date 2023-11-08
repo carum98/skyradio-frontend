@@ -30,6 +30,8 @@ const data = computed(() => {
         />
 
         <slot name="toolbar" />
+
+        <slot name="actions" />
     </section>
 
     <SkTableBaseGrid

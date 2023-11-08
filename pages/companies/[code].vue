@@ -28,6 +28,12 @@ const columns: SkTableColumn[] = [
     {
         title: 'Sim / Proveedor',
         key: 'sim',
+    },
+    {
+        title: '',
+        key: 'actions',
+        width: 65,
+        align: 'center',
     }
 ]
 const { data: company } = await useFetch<ICompany>(`/api/companies/${route.params.code}`)
@@ -62,9 +68,42 @@ const { page, data, search } = await useTableData<IRadio>(`/api/companies/${rout
             v-model="search"
             @onPage="page = $event"
         >
+            <template #actions>
+                <div class="table-actions">
+                    <button class="button-actions" :style="{ '--color': ActionsStatic.CHANGE.color }">
+                        <span v-html="ActionsStatic.CHANGE.icon"></span>
+                    </button>
+                    <button class="button-actions" :style="{ '--color': ActionsStatic.REMOVE.color }">
+                        <span v-html="ActionsStatic.REMOVE.icon"></span>
+                    </button>
+                    <button class="button-actions" :style="{ '--color': ActionsStatic.ADD.color }">
+                        <span v-html="ActionsStatic.ADD.icon"></span>
+                    </button>
+                </div>
+            </template>
+
             <template #cell(sim)="{ value }">
                 <p>{{ value?.number }}</p>
                 <p>{{ value?.provider?.name }}</p>
+            </template>
+
+            <template #cell(actions)="{ item }">
+                <SkDropdown :options="[
+                    {
+                        key: 'change',
+                        label: ActionsStatic.CHANGE.name,
+                        icon: ActionsStatic.CHANGE.icon,
+                        color: ActionsStatic.CHANGE.color,
+                        action: () => {}
+                    },
+                    {
+                        key: 'remove',
+                        label: ActionsStatic.REMOVE.name,
+                        icon: ActionsStatic.REMOVE.icon,
+                        color: ActionsStatic.REMOVE.color,
+                        action: () => {}
+                    }
+                ]" />
             </template>
         </SkTable>
     </main>

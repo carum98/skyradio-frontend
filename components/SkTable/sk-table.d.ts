@@ -37,6 +37,7 @@ export interface SkTableSlotsBaseGrid<T> {
 
 export interface SkTableSlots<T> extends SkTableSlotsBase<T>, SkTableSlotsBaseGrid<T> {
     toolbar?: {}
+    actions?: {}
 }
 
 // Pagination
