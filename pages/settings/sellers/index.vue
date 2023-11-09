@@ -3,7 +3,7 @@ definePageMeta({
     name: 'sellers'
 })
 
-const { page, search, data, refresh } = await useTableData<ISeller>('/api/clients-seller')
+const { page, search, data, refresh } = await useTableData<ISeller>('/api/sellers')
 
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/settings/sellers/create.vue'),

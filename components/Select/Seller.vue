@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { items, search, onData } = useSelect<ISeller>('/api/clients-seller')
+const { items, search, onData } = useSelect<ISeller>('/api/sellers')
 
 const value = defineModel<ISeller | null>() 
 </script>
