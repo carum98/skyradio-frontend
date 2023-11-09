@@ -4,7 +4,8 @@ declare global {
         name: string
         imei: string
         serial: string
-        sim: ISim
+        sim: ISim | null
+        company: ICompany | null
     }
 }
 

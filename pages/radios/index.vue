@@ -40,9 +40,10 @@ const columns: SkTableColumn[] = [
         align: 'center',
     }
 ]
-
+// data
 const { page, data, search, refresh } = await useTableData<IRadio>('/api/radios')
 
+// methods
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/radios/create.vue'),
     props: {
@@ -60,6 +61,37 @@ function openProfile(radio: IRadio) {
             code: radio.code
         }
     })
+}
+
+function rowActions(item: IRadio) {
+    if (item.company === null) {
+        return [
+            {
+                key: 'add',
+                label: ActionsStatic.ADD.name,
+                icon: ActionsStatic.ADD.icon,
+                color: ActionsStatic.ADD.color,
+                action: () => {}
+            },
+        ]
+    } else {
+        return [
+            {
+                key: 'change',
+                label: ActionsStatic.CHANGE.name,
+                icon: ActionsStatic.CHANGE.icon,
+                color: ActionsStatic.CHANGE.color,
+                action: () => {}
+            },
+            {
+                key: 'remove',
+                label: ActionsStatic.REMOVE.name,
+                icon: ActionsStatic.REMOVE.icon,
+                color: ActionsStatic.REMOVE.color,
+                action: () => {}
+            }
+        ]
+    }
 }
 </script>
 
@@ -85,22 +117,7 @@ function openProfile(radio: IRadio) {
         </template>
 
         <template #cell(actions)="{ item }">
-            <SkDropdown :options="[
-                {
-                    key: 'change',
-                    label: ActionsStatic.CHANGE.name,
-                    icon: ActionsStatic.CHANGE.icon,
-                    color: ActionsStatic.CHANGE.color,
-                    action: () => {}
-                },
-                {
-                    key: 'remove',
-                    label: ActionsStatic.REMOVE.name,
-                    icon: ActionsStatic.REMOVE.icon,
-                    color: ActionsStatic.REMOVE.color,
-                    action: () => {}
-                }
-            ]" />
+            <SkDropdown :options="rowActions(item)" />
         </template>
     </SkTable>
 </main>
