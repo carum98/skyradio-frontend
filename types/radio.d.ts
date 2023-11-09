@@ -5,7 +5,7 @@ declare global {
         imei: string
         serial: string
         sim: ISim | null
-        company: ICompany | null
+        client: IClient | null
     }
 }
 

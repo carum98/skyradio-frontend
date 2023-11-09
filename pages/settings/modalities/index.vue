@@ -3,12 +3,12 @@ definePageMeta({
     name: 'modalities'
 })
 
-const { page, search, data, refresh } = await useTableData<IModality>('/api/companies-modality')
+const { page, search, data, refresh } = await useTableData<IModality>('/api/clients-modality')
 
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/settings/modalities/create.vue'),
     props: {
-        onCreated(_company: IModality) {
+        onCreated(_client: IModality) {
             refresh()
             close()
         }

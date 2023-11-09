@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-    onCreated: (company: ICompany) => void
+    onCreated: (client: IClient) => void
 }>()
 
 // data
@@ -10,7 +10,7 @@ const seller = ref<ISeller | null>(null)
 
 // methods
 async function send() {
-    const company = await $fetch<ICompany>('/api/companies', {
+    const client = await $fetch<IClient>('/api/clients', {
         method: 'POST',
         body: {
             name: name.value,
@@ -22,7 +22,7 @@ async function send() {
         }
     })
 
-    props.onCreated(company)
+    props.onCreated(client)
 }
 </script>
 

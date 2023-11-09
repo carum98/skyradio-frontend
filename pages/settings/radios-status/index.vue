@@ -8,7 +8,7 @@ const { page, search, data, refresh } = await useTableData<IRadioStatus>('/api/r
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/settings/radios-status/create.vue'),
     props: {
-        onCreated(_company: IRadioStatus) {
+        onCreated(_client: IRadioStatus) {
             refresh()
             close()
         }

@@ -36,9 +36,9 @@ const columns: SkTableColumn[] = [
         align: 'center',
     }
 ]
-const { data: company } = await useFetch<ICompany>(`/api/companies/${route.params.code}`)
+const { data: client } = await useFetch<IClient>(`/api/clients/${route.params.code}`)
 
-const { page, data, search } = await useTableData<IRadio>(`/api/companies/${route.params.code}/radios`)
+const { page, data, search } = await useTableData<IRadio>(`/api/clients/${route.params.code}/radios`)
 
 </script>
 
@@ -46,9 +46,9 @@ const { page, data, search } = await useTableData<IRadio>(`/api/companies/${rout
     <main>
         <section class="header-companies-profile">
             <div>
-                <h2>{{ company?.name }}</h2>
-                <p>{{ company?.seller.name }}</p>
-                <p>{{ company?.modality.name }}</p>
+                <h2>{{ client?.name }}</h2>
+                <p>{{ client?.seller.name }}</p>
+                <p>{{ client?.modality.name }}</p>
 
                 <button class="sk-button">
                     Editar

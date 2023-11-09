@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-    onCreated: (company: IModality) => void
+    onCreated: (client: IModality) => void
 }>()
 
 // data
@@ -8,7 +8,7 @@ const name = ref('')
 
 // methods
 async function send() {
-    const company = await $fetch<IModality>('/api/companies-modality', {
+    const client = await $fetch<IModality>('/api/clients-modality', {
         method: 'POST',
         body: {
             name: name.value,
@@ -18,7 +18,7 @@ async function send() {
         }
     })
 
-    props.onCreated(company)
+    props.onCreated(client)
 }
 </script>
 

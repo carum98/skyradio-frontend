@@ -1,5 +1,5 @@
 declare global {
-    interface ICompany {
+    interface IClient {
         code: string
         name: string
         modality: IModality

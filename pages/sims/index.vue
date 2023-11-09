@@ -23,7 +23,7 @@ const { page, search, data, refresh } = await useTableData<ISim>('/api/sims')
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/sims/create.vue'),
     props: {
-        onCreated(_company: ISim) {
+        onCreated(_client: ISim) {
             refresh()
             close()
         }

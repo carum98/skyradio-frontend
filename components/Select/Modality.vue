@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { items, search, onData } = useSelect<IModality>('/api/companies-modality')
+const { items, search, onData } = useSelect<IModality>('/api/clients-modality')
 
 const value = defineModel<IModality | null>() 
 </script>

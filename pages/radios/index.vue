@@ -25,8 +25,8 @@ const columns: SkTableColumn[] = [
     },
     {
         title: 'Cliente',
-        key: 'company',
-        formatter: (value: ICompany | null) => value?.name ?? '-'
+        key: 'client',
+        formatter: (value: IClient | null) => value?.name ?? '-'
     },
     {
         title: 'Estado',
@@ -47,7 +47,7 @@ const { page, data, search, refresh } = await useTableData<IRadio>('/api/radios'
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/radios/create.vue'),
     props: {
-        onCreated(_company: IRadio) {
+        onCreated(_client: IRadio) {
             refresh()
             close()
         }
@@ -64,7 +64,7 @@ function openProfile(radio: IRadio) {
 }
 
 function rowActions(item: IRadio) {
-    if (item.company === null) {
+    if (item.client === null) {
         return [
             {
                 key: 'add',

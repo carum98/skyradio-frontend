@@ -34,23 +34,23 @@ const columns: SkTableColumn[] = [
     }
 ]
 
-const { page, search, data, refresh } = await useTableData<ICompany>('/api/companies')
+const { page, search, data, refresh } = await useTableData<IClient>('/api/clients')
 
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/companies/create.vue'),
     props: {
-        onCreated(_company: ICompany) {
+        onCreated(_client: IClient) {
             refresh()
             close()
         }
     }
 })
 
-function openProfile(company: ICompany) {
+function openProfile(client: IClient) {
     navigateTo({
         name: 'companies-profile',
         params: {
-            code: company.code
+            code: client.code
         }
     })
 }
