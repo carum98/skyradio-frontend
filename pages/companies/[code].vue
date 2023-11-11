@@ -35,13 +35,14 @@ const columns: SkTableColumn[] = [
     }
 ]
 const route = useRoute()
+const router = useRouter()
 
 // data
 const { data: client } = await useFetch<IClient>(`/api/clients/${route.params.code}`)
 
 const { page, data, search, refresh } = await useTableData<IRadio>(`/api/clients/${route.params.code}/radios`)
-const { OpenAdd, OpenRemove, OpenSwap, OpenDelete } = useActions(refresh)
-const { openRevemoInstance } = useRemoveInstance('Cliente')
+const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
+const { openRemoveInstance } = useRemoveInstance('Cliente', () => router.back())
 </script>
 
 <template>
@@ -64,11 +65,11 @@ const { openRevemoInstance } = useRemoveInstance('Cliente')
                     :options="[
                         {
                             key: 'remove',
-                            label: 'Eliminar',
-                            icon: '',
-                            color: '191, 42, 42',
-                            action: () => openRevemoInstance({ 
-                                path: `/api/clients/${client.code}`,
+                            label: ActionsStatic.DELETE.name,
+                            icon: ActionsStatic.DELETE.icon,
+                            color: ActionsStatic.DELETE.color,
+                            action: () => openRemoveInstance({ 
+                                path: `/api/clients/${client?.code}`,
                             })
                         }
                     ]"

@@ -1,12 +1,10 @@
-export function useRemoveInstance(name: string) {
-    const router = useRouter()
-
+export function useRemoveInstance(name: string, onCallback: () => void) {
     const { open, close } = useModal({
-        component: import('@views/remove-confirmation.vue'),
+        component: import('@views/delete-instance.vue'),
         props: {
             name,
             onUpdate() {
-                router.back()
+                onCallback()
                 close()
             },
             onDiscard() {
@@ -16,6 +14,6 @@ export function useRemoveInstance(name: string) {
     })
 
     return {
-        openRevemoInstance: open,
+        openRemoveInstance: open,
     }
 }

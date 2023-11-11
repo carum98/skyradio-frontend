@@ -11,21 +11,25 @@ function onConfirm() {
         method: 'DELETE'
     })
     .then(() => {
+        console.log('Registro eliminado')
         props.onUpdate()
+    })
+    .catch(() => {
+        alert('Ocurrió un error al eliminar el registro')
     })
 }
 </script>
 
 <template>
     <p>
-        Eliminar <strong>{{ name }}</strong>?
+        ¿Desea eliminar el <strong>{{ name }}</strong>?
     </p>
     <div>
-        <button class="sk-button" @click="onConfirm">
-            Confirmar
-        </button>
         <button class="sk-button" @click="onDiscard">
             Cancelar
+        </button>
+        <button class="sk-button" @click="onConfirm">
+            Confirmar
         </button>
     </div>
 </template>

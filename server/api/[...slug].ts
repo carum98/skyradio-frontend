@@ -20,5 +20,11 @@ export default defineEventHandler(async (event) => {
         })
 
         return data
-    } 
+    }  else if (method === 'DELETE') {
+        const data = await useApiFetch(event, slug, {
+            method
+        })
+
+        return data
+    }
 })

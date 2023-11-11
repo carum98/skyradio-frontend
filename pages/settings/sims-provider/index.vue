@@ -4,6 +4,7 @@ definePageMeta({
 })
 
 const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/sims-provider')
+const { openRemoveInstance } = useRemoveInstance('Proveedor', refresh)
 
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/settings/sims-provider/create.vue'),
@@ -32,6 +33,21 @@ const { open: OpenCreate, close } = useModal({
 
         <template #cell="{ item }">
             {{ item.name }}
+
+            <SkDropdown 
+                class="ml-auto"
+                :options="[
+                    {
+                        key: 'delete',
+                        label: ActionsStatic.DELETE.name,
+                        icon: ActionsStatic.DELETE.icon,
+                        color: ActionsStatic.DELETE.color,
+                        action: () => openRemoveInstance({ 
+                            path: `/api/sims-provider/${item.code}`,
+                        })
+                    }
+                ]"
+            ></SkDropdown>
         </template>
     </SkTable>
 </main>
