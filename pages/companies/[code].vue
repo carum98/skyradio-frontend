@@ -107,14 +107,14 @@ const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
                         label: ActionsStatic.CHANGE.name,
                         icon: ActionsStatic.CHANGE.icon,
                         color: ActionsStatic.CHANGE.color,
-                        action: () => OpenSwap({ client })
+                        action: () => OpenSwap({ client, radio: item })
                     },
                     {
                         key: 'remove',
                         label: ActionsStatic.REMOVE.name,
                         icon: ActionsStatic.REMOVE.icon,
                         color: ActionsStatic.REMOVE.color,
-                        action: () => OpenRemove({ client })
+                        action: () => OpenRemove({ client, radio: item })
                     }
                 ]" />
             </template>

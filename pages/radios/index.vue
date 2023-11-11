@@ -42,6 +42,7 @@ const columns: SkTableColumn[] = [
 ]
 // data
 const { page, data, search, refresh } = await useTableData<IRadio>('/api/radios')
+const { OpenRemove, OpenSwap, OpenAddClient } = useActions(refresh)
 
 // methods
 const { open: OpenCreate, close } = useModal({
@@ -71,24 +72,24 @@ function rowActions(item: IRadio) {
                 label: ActionsStatic.ADD.name,
                 icon: ActionsStatic.ADD.icon,
                 color: ActionsStatic.ADD.color,
-                action: () => {}
+                action: () => OpenAddClient({ radio: item })
             },
         ]
     } else {
         return [
             {
-                key: 'change',
+                key: 'swap',
                 label: ActionsStatic.CHANGE.name,
                 icon: ActionsStatic.CHANGE.icon,
                 color: ActionsStatic.CHANGE.color,
-                action: () => {}
+                action: () => OpenSwap({ radio: item, client: item.client })
             },
             {
                 key: 'remove',
                 label: ActionsStatic.REMOVE.name,
                 icon: ActionsStatic.REMOVE.icon,
                 color: ActionsStatic.REMOVE.color,
-                action: () => {}
+                action: () => OpenRemove({ radio: item, client: item.client })
             }
         ]
     }

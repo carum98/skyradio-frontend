@@ -136,3 +136,21 @@
         filter: brightness(1.2);
     }
 }
+
+.list-radios-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    & li {
+        background-color: var(--table-color);
+        padding: 15px 20px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+
+        & button {
+            margin-left: auto;
+        }
+    }
+}

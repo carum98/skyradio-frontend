@@ -29,9 +29,20 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
+    const { open: OpenAddClient, close: CloseEdit } = useModal({
+        component: import('@views/add-client.vue'),
+        props: {
+            onUpdate() {
+                onRefresh()
+                CloseEdit()
+            }
+        }
+    })
+
     return {
         OpenSwap,
         OpenAdd,
-        OpenRemove
+        OpenRemove,
+        OpenAddClient
     }
 }
