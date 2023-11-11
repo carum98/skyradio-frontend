@@ -1,11 +1,9 @@
 <script setup lang="ts">
+import type { SkTableColumn } from '@components/SkTable/sk-table'
+
 definePageMeta({
     name: 'companies-profile'
 })
-
-import type { SkTableColumn } from '@components/SkTable/sk-table'
-
-const route = useRoute()
 
 const columns: SkTableColumn[] = [
     {
@@ -36,11 +34,14 @@ const columns: SkTableColumn[] = [
         align: 'center',
     }
 ]
+const route = useRoute()
+
+// data
 const { data: client } = await useFetch<IClient>(`/api/clients/${route.params.code}`)
 
 const { page, data, search, refresh } = await useTableData<IRadio>(`/api/clients/${route.params.code}/radios`)
-const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
-
+const { OpenAdd, OpenRemove, OpenSwap, OpenDelete } = useActions(refresh)
+const { openRevemoInstance } = useRemoveInstance('Cliente')
 </script>
 
 <template>
@@ -58,6 +59,20 @@ const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
                 <button class="sk-button">
                     Historial
                 </button>
+
+                <SkDropdown 
+                    :options="[
+                        {
+                            key: 'remove',
+                            label: 'Eliminar',
+                            icon: '',
+                            color: '191, 42, 42',
+                            action: () => openRevemoInstance({ 
+                                path: `/api/clients/${client.code}`,
+                            })
+                        }
+                    ]"
+                ></SkDropdown>
             </div>
             <div>
 
