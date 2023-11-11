@@ -36,6 +36,7 @@ export default defineNuxtConfig({
     '@composables': resolve(__dirname, './composables'),
     '@utils': resolve(__dirname, './utils'),
     '@pages': resolve(__dirname, './pages'),
+    '@views': resolve(__dirname, './views'),
   },
   vite: {
     vue: {

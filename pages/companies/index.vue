@@ -35,6 +35,7 @@ const columns: SkTableColumn[] = [
 ]
 
 const { page, search, data, refresh } = await useTableData<IClient>('/api/clients')
+const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
 
 const { open: OpenCreate, close } = useModal({
     component: import('@pages/companies/create.vue'),
@@ -83,21 +84,21 @@ function openProfile(client: IClient) {
                     label: ActionsStatic.CHANGE.name,
                     icon: ActionsStatic.CHANGE.icon,
                     color: ActionsStatic.CHANGE.color,
-                    action: () => {}
+                    action: () => OpenSwap({ client: item })
                 },
                 {
                     key: 'add',
                     label: ActionsStatic.ADD.name,
                     icon: ActionsStatic.ADD.icon,
                     color: ActionsStatic.ADD.color,
-                    action: () => {}
+                    action: () => OpenAdd({ client: item })
                 },
                 {
                     key: 'remove',
                     label: ActionsStatic.REMOVE.name,
                     icon: ActionsStatic.REMOVE.icon,
                     color: ActionsStatic.REMOVE.color,
-                    action: () => {}
+                    action: () => OpenRemove({ client: item })
                 }
             ]" />
         </template>

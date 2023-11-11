@@ -6,7 +6,7 @@ type UseModalOptions = {
 }
 
 interface UseModalReturnType {
-    open: () => Promise<void>
+    open: (props: any | null) => Promise<void>
     close: () => void
 }
 
@@ -14,7 +14,7 @@ export function useModal(params: UseModalOptions): UseModalReturnType {
     let root: HTMLDivElement
     let instance: VNode
 
-    async function create() {
+    async function open(props: any = {}) {
         root = document.createElement('div')
 
         const modal = await import(`@components/SkModal/Index.vue`)
@@ -25,7 +25,10 @@ export function useModal(params: UseModalOptions): UseModalReturnType {
         })
     
         instance.children = [
-            createVNode(componentData.default, params.props)
+            createVNode(componentData.default, {
+                ...params.props,
+                ...props
+            })
         ]
     
         document.body.appendChild(root)
@@ -35,10 +38,6 @@ export function useModal(params: UseModalOptions): UseModalReturnType {
     function destroy() {
         render(null, root)
         root.remove()
-    }
-
-    async function open() {
-        await create()
     }
 
     function close() {

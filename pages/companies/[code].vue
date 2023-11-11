@@ -38,7 +38,8 @@ const columns: SkTableColumn[] = [
 ]
 const { data: client } = await useFetch<IClient>(`/api/clients/${route.params.code}`)
 
-const { page, data, search } = await useTableData<IRadio>(`/api/clients/${route.params.code}/radios`)
+const { page, data, search, refresh } = await useTableData<IRadio>(`/api/clients/${route.params.code}/radios`)
+const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
 
 </script>
 
@@ -70,13 +71,25 @@ const { page, data, search } = await useTableData<IRadio>(`/api/clients/${route.
         >
             <template #actions>
                 <div class="table-actions">
-                    <button class="button-actions" :style="{ '--color': ActionsStatic.CHANGE.color }">
+                    <button 
+                        class="button-actions" 
+                        :style="{ '--color': ActionsStatic.CHANGE.color }"
+                        @click="() => OpenSwap({ client })"
+                    >
                         <span v-html="ActionsStatic.CHANGE.icon"></span>
                     </button>
-                    <button class="button-actions" :style="{ '--color': ActionsStatic.REMOVE.color }">
+                    <button 
+                        class="button-actions" 
+                        :style="{ '--color': ActionsStatic.REMOVE.color }"
+                        @click="() => OpenRemove({ client })"
+                    >
                         <span v-html="ActionsStatic.REMOVE.icon"></span>
                     </button>
-                    <button class="button-actions" :style="{ '--color': ActionsStatic.ADD.color }">
+                    <button 
+                        class="button-actions"
+                        :style="{ '--color': ActionsStatic.ADD.color }"
+                        @click="() => OpenAdd({ client })"
+                    >
                         <span v-html="ActionsStatic.ADD.icon"></span>
                     </button>
                 </div>
@@ -90,18 +103,18 @@ const { page, data, search } = await useTableData<IRadio>(`/api/clients/${route.
             <template #cell(actions)="{ item }">
                 <SkDropdown :options="[
                     {
-                        key: 'change',
+                        key: 'swap',
                         label: ActionsStatic.CHANGE.name,
                         icon: ActionsStatic.CHANGE.icon,
                         color: ActionsStatic.CHANGE.color,
-                        action: () => {}
+                        action: () => OpenSwap({ client })
                     },
                     {
                         key: 'remove',
                         label: ActionsStatic.REMOVE.name,
                         icon: ActionsStatic.REMOVE.icon,
                         color: ActionsStatic.REMOVE.color,
-                        action: () => {}
+                        action: () => OpenRemove({ client })
                     }
                 ]" />
             </template>
