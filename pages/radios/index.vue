@@ -46,7 +46,7 @@ const { OpenRemove, OpenSwap, OpenAddClient } = useActions(refresh)
 
 // methods
 const { open: OpenCreate, close } = useModal({
-    component: import('@pages/radios/create.vue'),
+    component: import('@views/create-radio.vue'),
     props: {
         onCreated(_client: IRadio) {
             refresh()

@@ -1,30 +1,21 @@
 <script setup lang="ts">
+import { FormDataRadio } from '@utils/form-data-radio'
+
 const props = defineProps<{
-    onCreated: (data: IRadio) => void
+    radio?: IRadio
+}>()
+
+const emits = defineEmits<{
+    submitted: [value: FormDataRadio]
 }>()
 
 // data
-const name = ref('')
-const imei = ref('')
-const serial = ref('')
-const model = ref<IRadioModel | null>(null)
+const form = ref(props.radio ? FormDataRadio.update(props.radio) : FormDataRadio.create())
+const buttonText = props.radio ? 'Actualizar' : 'Crear'
 
 // methods
-async function send() {
-    const data = await $fetch<IRadio>('/api/radios', {
-        method: 'POST',
-        body: {
-            name: name.value,
-            imei: imei.value,
-            serial: serial.value,
-            model_code: model.value?.code,
-        },
-        onRequestError(context) {
-            console.log(context.response)
-        }
-    })
-
-    props.onCreated(data)
+function send() {
+    emits('submitted', form.value)
 }
 </script>
 
@@ -36,28 +27,28 @@ async function send() {
             class="sk-input"
             placeholder="Nombre del radio"
             autofocus
-            v-model="name" 
+            v-model="form.name" 
         />
         <label>IMEI</label>
         <input 
             type="text" 
             class="sk-input"
             placeholder="IMEI"
-            v-model="imei"
+            v-model="form.imei"
         />
         <label>Serial</label>
         <input 
             type="text" 
             class="sk-input"
             placeholder="Número de serie"
-            v-model="serial"
+            v-model="form.serial"
         />
         <label>Modelo</label>
         <SelectRadioModel
-            v-model="model"
+            v-model="form.model"
         />
         <button type="submit" class="sk-button">
-            Crear
+            {{ buttonText }}
         </button>
     </form>
 </template>

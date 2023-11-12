@@ -5,8 +5,6 @@ const props = defineProps<{
     client?: IClient
 }>()
 
-console.log(props)
-
 const emits = defineEmits<{
     submitted: [value: FormDataClient]
 }>()

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { FormDataClient } from '@utils/form-data-clients'
+import { FormDataRadio } from '@utils/form-data-radio'
 
 const props = defineProps<{
-    onCreated: (data: IClient) => void
+    onCreated: (data: IRadio) => void
 }>()
 
 // methods
-async function onSubmitted(formData: FormDataClient) {
-    const data = await $fetch<IClient>('/api/clients', {
+async function onSubmitted(formData: FormDataRadio) {
+    const data = await $fetch<IRadio>('/api/radios', {
         method: 'POST',
         body: formData.toParams(),
     })
@@ -17,7 +17,7 @@ async function onSubmitted(formData: FormDataClient) {
 </script>
 
 <template>
-    <FormClient 
+    <FormRadio 
         @submitted="onSubmitted"
     />
 </template>

@@ -65,7 +65,7 @@ function onUpdate() {
         <section class="header-companies-profile">
             <div>
                 <h2>{{ client?.name }}</h2>
-                <p>{{ client?.seller.name }}</p>
+                <p>{{ client?.seller?.name ?? 'Sin vendedor' }}</p>
                 <p>{{ client?.modality.name }}</p>
 
                 <button class="sk-button" @click="onUpdate">

@@ -5,6 +5,7 @@ declare global {
         imei: string
         serial: string
         sim: ISim | null
+        model: IRadioModel | null
         client: IClient | null
     }
 }

@@ -3,20 +3,17 @@ import { FormDataClient } from '@utils/form-data-clients'
 
 const props = defineProps<{
     client: IClient
-    onUpdate: (client: IClient) => void
+    onUpdate: (data: IClient) => void
 }>()
 
 // methods
 async function onSubmitted(formData: FormDataClient) {
-    const client = await $fetch<IClient>(`/api/clients/${props.client.code}`, {
+    const data = await $fetch<IClient>(`/api/clients/${props.client.code}`, {
         method: 'PUT',
         body: formData.toParams(),
-        onRequestError(context) {
-            console.log(context.response)
-        }
     })
 
-    props.onUpdate(client)
+    props.onUpdate(data)
 }
 </script>
 
