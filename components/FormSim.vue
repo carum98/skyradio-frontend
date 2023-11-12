@@ -1,28 +1,21 @@
 <script setup lang="ts">
+import { FormDataSim } from '#imports'
+
 const props = defineProps<{
-    onCreated: (data: ISim) => void
+    sim?: ISim
+}>()
+
+const emits = defineEmits<{
+    submitted: [value: FormDataSim]
 }>()
 
 // data
-const number = ref('')
-const serial = ref('')
-const provider = ref<ISimProvider | null>(null)
+const form = ref(props.sim ? FormDataSim.update(props.sim) : FormDataSim.create())
+const buttonText = props.sim ? 'Actualizar' : 'Crear'
 
 // methods
-async function send() {
-    const data = await $fetch<ISim>('/api/sims', {
-        method: 'POST',
-        body: {
-            number: number.value,
-            serial: serial.value,
-            provider_code: provider.value?.code,
-        },
-        onRequestError(context) {
-            console.log(context.response)
-        }
-    })
-
-    props.onCreated(data)
+function send() {
+    emits('submitted', form.value)
 }
 </script>
 
@@ -34,21 +27,21 @@ async function send() {
             class="sk-input"
             placeholder="Número de la sim"
             autofocus
-            v-model="number" 
+            v-model="form.number" 
         />
         <label>Serial</label>
         <input 
             type="text" 
             class="sk-input"
             placeholder="Número de serie"
-            v-model="serial"
+            v-model="form.serial"
         />
         <label>Proveedor</label>
         <SelectSimProvider 
-            v-model="provider"
+            v-model="form.provider"
         />
         <button type="submit" class="sk-button">
-            Crear
+            {{ buttonText }}
         </button>
     </form>
 </template>
