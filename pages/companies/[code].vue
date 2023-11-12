@@ -38,11 +38,26 @@ const route = useRoute()
 const router = useRouter()
 
 // data
-const { data: client } = await useFetch<IClient>(`/api/clients/${route.params.code}`)
+const { data: client, refresh: refreshData } = await useFetch<IClient>(`/api/clients/${route.params.code}`)
 
 const { page, data, search, refresh } = await useTableData<IRadio>(`/api/clients/${route.params.code}/radios`)
 const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
 const { openRemoveInstance } = useRemoveInstance('Cliente', () => router.back())
+
+const { open: OpenUpdate, close } = useModal({
+    component: import('@views/update-client.vue'),
+    props: {
+        onUpdate(_client: IClient) {
+            refreshData()
+            close()
+        }
+    }
+})
+
+// methods
+function onUpdate() {
+    OpenUpdate({ client: toRaw(client.value) })
+}
 </script>
 
 <template>
@@ -53,7 +68,7 @@ const { openRemoveInstance } = useRemoveInstance('Cliente', () => router.back())
                 <p>{{ client?.seller.name }}</p>
                 <p>{{ client?.modality.name }}</p>
 
-                <button class="sk-button">
+                <button class="sk-button" @click="onUpdate">
                     Editar
                 </button>
 

@@ -38,7 +38,7 @@ const { page, search, data, refresh } = await useTableData<IClient>('/api/client
 const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
 
 const { open: OpenCreate, close } = useModal({
-    component: import('@pages/companies/create.vue'),
+    component: import('@views/create-client.vue'),
     props: {
         onCreated(_client: IClient) {
             refresh()
