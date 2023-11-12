@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { FormDataClient } from '@utils/form-data-clients'
+
 const props = defineProps<{
     client?: IClient
 }>()
