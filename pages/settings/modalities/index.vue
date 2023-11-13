@@ -7,11 +7,21 @@ const { page, search, data, refresh } = await useTableData<IModality>('/api/clie
 const { openRemoveInstance } = useRemoveInstance('Modalidad', refresh)
 
 const { open: OpenCreate, close } = useModal({
-    component: import('@pages/settings/modalities/create.vue'),
+    component: import('@views/create-modality.vue'),
     props: {
-        onCreated(_client: IModality) {
+        onCreated(_data: IModality) {
             refresh()
             close()
+        }
+    }
+})
+
+const { open: OpenUpdate, close: CloseUpdate } = useModal({
+    component: import('@views/update-modality.vue'),
+    props: {
+        onUpdate(_data: IModality) {
+            refresh()
+            CloseUpdate()
         }
     }
 })
@@ -45,6 +55,13 @@ const { open: OpenCreate, close } = useModal({
                         action: () => openRemoveInstance({ 
                             path: `/api/clients-modality/${item.code}`,
                         })
+                    },
+                    {
+                        key: 'edit',
+                        label: ActionsStatic.UPDATE.name,
+                        icon: ActionsStatic.UPDATE.icon,
+                        color: ActionsStatic.UPDATE.color,
+                        action: () => OpenUpdate({ modality: item })
                     }
                 ]"
             ></SkDropdown>

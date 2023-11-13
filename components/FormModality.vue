@@ -1,24 +1,21 @@
 <script setup lang="ts">
+import { FormDataModality } from '#imports'
+
 const props = defineProps<{
-    onCreated: (client: IModality) => void
+    modality?: IClient
+}>()
+
+const emits = defineEmits<{
+    submitted: [value: FormDataModality]
 }>()
 
 // data
-const name = ref('')
+const form = ref(props.modality ? FormDataModality.update(props.modality) : FormDataModality.create())
+const buttonText = props.modality ? 'Actualizar' : 'Crear'
 
 // methods
-async function send() {
-    const client = await $fetch<IModality>('/api/clients-modality', {
-        method: 'POST',
-        body: {
-            name: name.value,
-        },
-        onRequestError(context) {
-            console.log(context.response)
-        }
-    })
-
-    props.onCreated(client)
+function send() {
+    emits('submitted', form.value)
 }
 </script>
 
@@ -30,10 +27,10 @@ async function send() {
             class="sk-input"
             placeholder="Nombre de la Modalidad"
             autofocus
-            v-model="name" 
+            v-model="form.name" 
         />
         <button type="submit" class="sk-button">
-            Crear
+            {{ buttonText }}
         </button>
     </form>
 </template>

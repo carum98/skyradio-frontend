@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { FormDataClient } from '#imports'
+import { FormDataModality } from '#imports'
 
 const props = defineProps<{
-    onCreated: (data: IClient) => void
+    onCreated: (data: IModality) => void
 }>()
 
 // methods
-async function onSubmitted(formData: FormDataClient) {
-    const data = await $fetch<IClient>('/api/clients', {
+async function onSubmitted(formData: FormDataModality) {
+    const data = await $fetch<IModality>('/api/clients-modality', {
         method: 'POST',
         body: formData.toParams(),
     })
@@ -17,7 +17,7 @@ async function onSubmitted(formData: FormDataClient) {
 </script>
 
 <template>
-    <FormClient 
+    <FormModality
         @submitted="onSubmitted"
     />
 </template>

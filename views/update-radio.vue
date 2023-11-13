@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FormDataRadio } from '@utils/form-data-radio'
+import { FormDataRadio } from '#imports'
 
 const props = defineProps<{
     radio: IRadio 

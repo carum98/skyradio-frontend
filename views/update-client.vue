@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FormDataClient } from '@utils/form-data-clients'
+import { FormDataClient } from '#imports'
 
 const props = defineProps<{
     client: IClient
