@@ -7,11 +7,21 @@ const { page, search, data, refresh } = await useTableData<IRadioModel>('/api/ra
 const { openRemoveInstance } = useRemoveInstance('Modelo', refresh)
 
 const { open: OpenCreate, close } = useModal({
-    component: import('@pages/settings/radios-model/create.vue'),
+    component: import('@views/create-model.vue'),
     props: {
-        onCreated(_client: IRadioModel) {
+        onCreated(_data: IRadioModel) {
             refresh()
             close()
+        }
+    }
+})
+
+const { open: OpenUpdate, close: CloseUpdate } = useModal({
+    component: import('@views/update-model.vue'),
+    props: {
+        onUpdate(_data: IRadioModel) {
+            refresh()
+            CloseUpdate()
         }
     }
 })
@@ -45,6 +55,13 @@ const { open: OpenCreate, close } = useModal({
                         action: () => openRemoveInstance({ 
                             path: `/api/radios-model/${item.code}`,
                         })
+                    },
+                    {
+                        key: 'edit',
+                        label: ActionsStatic.UPDATE.name,
+                        icon: ActionsStatic.UPDATE.icon,
+                        color: ActionsStatic.UPDATE.color,
+                        action: () => OpenUpdate({ model: item })
                     }
                 ]"
             ></SkDropdown>

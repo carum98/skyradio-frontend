@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { FormDataModality } from '#imports'
+import { FormDataModel } from '#imports'
 
 const props = defineProps<{
-    modality?: IModality
+    model?: IRadioModel
 }>()
 
 const emits = defineEmits<{
-    submitted: [value: FormDataModality]
+    submitted: [value: FormDataModel]
 }>()
 
 // data
-const form = ref(props.modality ? FormDataModality.update(props.modality) : FormDataModality.create())
-const buttonText = props.modality ? 'Actualizar' : 'Crear'
+const form = ref(props.model ? FormDataModel.update(props.model) : FormDataModel.create())
+const buttonText = props.model ? 'Actualizar' : 'Crear'
 
 // methods
 function send() {
