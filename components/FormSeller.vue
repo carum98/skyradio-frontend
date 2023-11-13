@@ -1,24 +1,21 @@
 <script setup lang="ts">
+import { FormDataSeller } from '#imports'
+
 const props = defineProps<{
-    onCreated: (client: ISeller) => void
+    seller?: ISeller
+}>()
+
+const emits = defineEmits<{
+    submitted: [value: FormDataSeller]
 }>()
 
 // data
-const name = ref('')
+const form = ref(props.seller ? FormDataSeller.update(props.seller) : FormDataSeller.create())
+const buttonText = props.seller ? 'Actualizar' : 'Crear'
 
 // methods
-async function send() {
-    const client = await $fetch<ISeller>('/api/sellers', {
-        method: 'POST',
-        body: {
-            name: name.value,
-        },
-        onRequestError(context) {
-            console.log(context.response)
-        }
-    })
-
-    props.onCreated(client)
+function send() {
+    emits('submitted', form.value)
 }
 </script>
 
@@ -30,10 +27,10 @@ async function send() {
             class="sk-input"
             placeholder="Nombre del Vendedor"
             autofocus
-            v-model="name" 
+            v-model="form.name" 
         />
         <button type="submit" class="sk-button">
-            Crear
+            {{ buttonText }}
         </button>
     </form>
 </template>

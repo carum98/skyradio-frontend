@@ -7,11 +7,21 @@ const { page, search, data, refresh } = await useTableData<ISeller>('/api/seller
 const { openRemoveInstance } = useRemoveInstance('Vendedor', refresh)
 
 const { open: OpenCreate, close } = useModal({
-    component: import('@pages/settings/sellers/create.vue'),
+    component: import('@views/create-seller.vue'),
     props: {
-        onCreated(_client: ISeller) {
+        onCreated(_data: ISeller) {
             refresh()
             close()
+        }
+    }
+})
+
+const { open: OpenUpdate, close: CloseUpdate } = useModal({
+    component: import('@views/update-seller.vue'),
+    props: {
+        onUpdate(_data: ISeller) {
+            refresh()
+            CloseUpdate()
         }
     }
 })
@@ -45,6 +55,13 @@ const { open: OpenCreate, close } = useModal({
                         action: () => openRemoveInstance({ 
                             path: `/api/sellers/${item.code}`,
                         })
+                    },
+                    {
+                        key: 'edit',
+                        label: ActionsStatic.UPDATE.name,
+                        icon: ActionsStatic.UPDATE.icon,
+                        color: ActionsStatic.UPDATE.color,
+                        action: () => OpenUpdate({ seller: item })
                     }
                 ]"
             ></SkDropdown>
