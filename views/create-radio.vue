@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { FormDataRadio } from '#imports'
 
-const props = defineProps<{
-    onCreated: (data: IRadio) => void
+const emits = defineEmits<{
+    close: []
+    created: [IRadio]
 }>()
 
 // methods
@@ -12,7 +13,8 @@ async function onSubmitted(formData: FormDataRadio) {
         body: formData.toParams(),
     })
 
-    props.onCreated(data)
+    emits('created', data)
+    emits('close')
 }
 </script>
 

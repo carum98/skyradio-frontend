@@ -1,7 +1,9 @@
 <script setup lang="ts">
 const dialog = ref<HTMLDialogElement>()
 
-const emits = defineEmits(['close'])
+const emits = defineEmits<{
+    close: []
+}>()
 
 function open() {
     dialog.value?.showModal()

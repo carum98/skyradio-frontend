@@ -3,7 +3,11 @@ import { FormDataModel } from '#imports'
 
 const props = defineProps<{
     model: IRadioModel
-    onUpdate: (data: IRadioModel) => void
+}>()
+
+const emits = defineEmits<{
+    close: []
+    update: [IRadioModel]
 }>()
 
 // methods
@@ -13,7 +17,8 @@ async function onSubmitted(formData: FormDataModel) {
         body: formData.toParams(),
     })
 
-    props.onUpdate(data)
+    emits('update', data)
+    emits('close')
 }
 </script>
 

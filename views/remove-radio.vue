@@ -2,7 +2,11 @@
 const props = defineProps<{
     client: IClient
     radio?: IRadio
-    onUpdate: () => void
+}>()
+
+const emits = defineEmits<{
+    close: []
+    update: []
 }>()
 
 // data
@@ -18,7 +22,8 @@ async function send() {
         }
     })
 
-    props.onUpdate()
+    emits('update')
+    emits('close')
 }
 
 function removeRadio(radio: IRadio) {

@@ -3,7 +3,11 @@ import { FormDataClient } from '#imports'
 
 const props = defineProps<{
     client: IClient
-    onUpdate: (data: IClient) => void
+}>()
+
+const emits = defineEmits<{
+    close: []
+    update: [IClient]
 }>()
 
 // methods
@@ -13,7 +17,8 @@ async function onSubmitted(formData: FormDataClient) {
         body: formData.toParams(),
     })
 
-    props.onUpdate(data)
+    emits('update', data)
+    emits('close')
 }
 </script>
 

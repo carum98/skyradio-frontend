@@ -37,13 +37,10 @@ const columns: SkTableColumn[] = [
 const { page, search, data, refresh } = await useTableData<IClient>('/api/clients')
 const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
 
-const { open: OpenCreate, close } = useModal({
+const { open: OpenCreate } = useModal({
     component: import('@views/create-client.vue'),
-    props: {
-        onCreated(_client: IClient) {
-            refresh()
-            close()
-        }
+    listeners: {
+        onCreated: () => refresh()
     }
 })
 

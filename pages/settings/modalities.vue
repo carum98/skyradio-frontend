@@ -6,23 +6,17 @@ definePageMeta({
 const { page, search, data, refresh } = await useTableData<IModality>('/api/clients-modality')
 const { openRemoveInstance } = useRemoveInstance('Modalidad', refresh)
 
-const { open: OpenCreate, close } = useModal({
+const { open: OpenCreate } = useModal({
     component: import('@views/create-modality.vue'),
-    props: {
-        onCreated(_data: IModality) {
-            refresh()
-            close()
-        }
+    listeners: {
+        onCreated: () => refresh()
     }
 })
 
-const { open: OpenUpdate, close: CloseUpdate } = useModal({
+const { open: OpenUpdate } = useModal({
     component: import('@views/update-modality.vue'),
-    props: {
-        onUpdate(_data: IModality) {
-            refresh()
-            CloseUpdate()
-        }
+    listeners: {
+        onUpdated: () => refresh()
     }
 })
 </script>

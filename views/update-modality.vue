@@ -3,7 +3,11 @@ import { FormDataModality } from '#imports'
 
 const props = defineProps<{
     modality: IModality
-    onUpdate: (data: IModality) => void
+}>()
+
+const emits = defineEmits<{
+    close: []
+    update: [IModality]
 }>()
 
 // methods
@@ -13,7 +17,8 @@ async function onSubmitted(formData: FormDataModality) {
         body: formData.toParams(),
     })
 
-    props.onUpdate(data)
+    emits('update', data)
+    emits('close')
 }
 </script>
 

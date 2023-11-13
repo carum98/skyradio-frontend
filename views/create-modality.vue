@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { FormDataModality } from '#imports'
 
-const props = defineProps<{
-    onCreated: (data: IModality) => void
+const emits = defineEmits<{
+    close: []
+    created: [IModality]
 }>()
 
 // methods
@@ -12,7 +13,8 @@ async function onSubmitted(formData: FormDataModality) {
         body: formData.toParams(),
     })
 
-    props.onCreated(data)
+    emits('created', data)
+    emits('close')
 }
 </script>
 

@@ -1,7 +1,11 @@
 <script setup lang="ts">
 const props = defineProps<{
     radio: IRadio
-    onUpdate: () => void
+}>()
+
+const emits = defineEmits<{
+    close: []
+    update: []
 }>()
 
 // data
@@ -16,14 +20,17 @@ async function send() {
         }
     })
 
-    props.onUpdate()
+    emits('update')
+    emits('close')
 }
 </script>
 
 <template>
     <form class="sk-form" @submit.prevent="send" style="width: 300px;">
         <label>Cliente</label>
-        <SelectClient v-model="client" />
+        <SelectClient 
+            v-model="client"
+        />
 
         <button type="submit" class="sk-button">
             Aceptar

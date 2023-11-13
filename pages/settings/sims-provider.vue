@@ -6,23 +6,17 @@ definePageMeta({
 const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/sims-provider')
 const { openRemoveInstance } = useRemoveInstance('Proveedor', refresh)
 
-const { open: OpenCreate, close } = useModal({
+const { open: OpenCreate } = useModal({
     component: import('@views/create-provider.vue'),
-    props: {
-        onCreated(_data: ISimProvider) {
-            refresh()
-            close()
-        }
+    listeners: {
+        onCreated: () => refresh()
     }
 })
 
-const { open: OpenUpdate, close: CloseUpdate } = useModal({
+const { open: OpenUpdate } = useModal({
     component: import('@views/update-provider.vue'),
-    props: {
-        onUpdate(_data: ISimProvider) {
-            refresh()
-            CloseUpdate()
-        }
+    listeners: {
+        onUpdated: () => refresh()
     }
 })
 </script>

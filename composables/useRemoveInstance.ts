@@ -1,15 +1,11 @@
 export function useRemoveInstance(name: string, onCallback: () => void) {
-    const { open, close } = useModal({
+    const { open } = useModal({
         component: import('@views/delete-instance.vue'),
         props: {
             name,
-            onUpdate() {
-                onCallback()
-                close()
-            },
-            onDiscard() {
-                close()
-            }
+        },
+        listeners: {
+            onUpdate: () => onCallback()
         }
     })
 

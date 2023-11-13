@@ -3,7 +3,11 @@ import { FormDataRadio } from '#imports'
 
 const props = defineProps<{
     radio: IRadio 
-    onUpdate: (data: IRadio) => void
+}>()
+
+const emits = defineEmits<{
+    close: []
+    update: [IRadio]
 }>()
 
 // methods
@@ -13,7 +17,8 @@ async function onSubmitted(formData: FormDataRadio) {
         body: formData.toParams(),
     })
 
-    props.onUpdate(data)
+    emits('update', data)
+    emits('close')
 }
 </script>
 

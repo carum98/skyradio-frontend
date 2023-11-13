@@ -2,8 +2,11 @@
 const props = defineProps<{
     name: string
     path: string
-    onUpdate: () => void
-    onDiscard: () => void
+}>()
+
+const emits = defineEmits<{
+    close: []
+    update: []
 }>()
 
 function onConfirm() {
@@ -11,8 +14,8 @@ function onConfirm() {
         method: 'DELETE'
     })
     .then(() => {
-        console.log('Registro eliminado')
-        props.onUpdate()
+        emits('update')
+        emits('close')
     })
     .catch(() => {
         alert('Ocurrió un error al eliminar el registro')
@@ -25,7 +28,7 @@ function onConfirm() {
         ¿Desea eliminar el <strong>{{ name }}</strong>?
     </p>
     <div>
-        <button class="sk-button" @click="onDiscard">
+        <button class="sk-button" @click="$emit('close')">
             Cancelar
         </button>
         <button class="sk-button" @click="onConfirm">

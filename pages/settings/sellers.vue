@@ -6,23 +6,17 @@ definePageMeta({
 const { page, search, data, refresh } = await useTableData<ISeller>('/api/sellers')
 const { openRemoveInstance } = useRemoveInstance('Vendedor', refresh)
 
-const { open: OpenCreate, close } = useModal({
+const { open: OpenCreate } = useModal({
     component: import('@views/create-seller.vue'),
-    props: {
-        onCreated(_data: ISeller) {
-            refresh()
-            close()
-        }
+    listeners: {
+        onCreated: () => refresh()
     }
 })
 
-const { open: OpenUpdate, close: CloseUpdate } = useModal({
+const { open: OpenUpdate } = useModal({
     component: import('@views/update-seller.vue'),
-    props: {
-        onUpdate(_data: ISeller) {
-            refresh()
-            CloseUpdate()
-        }
+    listeners: {
+        onUpdated: () => refresh()
     }
 })
 </script>

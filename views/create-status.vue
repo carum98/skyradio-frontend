@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { FormDataStatus } from '#imports'
 
-const props = defineProps<{
-    status: IRadioStatus
-    onCreated: (data: IRadioStatus) => void
+const emits = defineEmits<{
+    close: []
+    created: [IRadioStatus]
 }>()
 
 // methods
@@ -13,13 +13,13 @@ async function onSubmitted(formData: FormDataStatus) {
         body: formData.toParams(),
     })
 
-    props.onCreated(data)
+    emits('created', data)
+    emits('close')
 }
 </script>
 
 <template>
     <FormStatus
-        :status="status"
         @submitted="onSubmitted"
     />
 </template>

@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { FormDataSim } from '#imports'
 
-const props = defineProps<{
-    onCreated: (data: ISim) => void
+const emits = defineEmits<{
+    close: []
+    created: [ISim]
 }>()
 
 // methods
@@ -12,7 +13,8 @@ async function onSubmitted(formData: FormDataSim) {
         body: formData.toParams(),
     })
 
-    props.onCreated(data)
+    emits('created', data)
+    emits('close')
 }
 </script>
 

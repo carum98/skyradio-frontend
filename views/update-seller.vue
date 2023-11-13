@@ -3,7 +3,11 @@ import { FormDataSeller } from '#imports'
 
 const props = defineProps<{
     seller: ISeller 
-    onUpdate: (data: ISeller) => void
+}>()
+
+const emits = defineEmits<{
+    close: []
+    update: [ISeller]
 }>()
 
 // methods
@@ -13,7 +17,8 @@ async function onSubmitted(formData: FormDataSeller) {
         body: formData.toParams(),
     })
 
-    props.onUpdate(data)
+    emits('update', data)
+    emits('close')
 }
 </script>
 

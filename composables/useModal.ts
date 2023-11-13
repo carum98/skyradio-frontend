@@ -2,7 +2,8 @@ import { createVNode, render } from 'vue'
 
 type UseModalOptions = {
     component: Promise<any>
-    props: any
+    props?: Record<string, any>
+    listeners?: Record<string, any>
 }
 
 interface UseModalReturnType {
@@ -27,7 +28,9 @@ export function useModal(params: UseModalOptions): UseModalReturnType {
         instance.children = [
             createVNode(componentData.default, {
                 ...params.props,
-                ...props
+                ...params.listeners,
+                ...props,
+                onClose: destroy
             })
         ]
     

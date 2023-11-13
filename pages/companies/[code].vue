@@ -44,12 +44,11 @@ const { page, data, search, refresh } = await useTableData<IRadio>(`/api/clients
 const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
 const { openRemoveInstance } = useRemoveInstance('Cliente', () => router.back())
 
-const { open: OpenUpdate, close } = useModal({
+const { open: OpenUpdate } = useModal({
     component: import('@views/update-client.vue'),
     props: {
         onUpdate(_client: IClient) {
             refreshData()
-            close()
         }
     }
 })

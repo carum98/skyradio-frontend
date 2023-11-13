@@ -1,41 +1,29 @@
 export function useActions(onRefresh: () => void) {
-    const { open: OpenSwap, close: CloseSwap } = useModal({
+    const { open: OpenSwap } = useModal({
         component: import('@views/swap-radio.vue'),
-        props: {
-            onUpdate() {
-                onRefresh()
-                CloseSwap()
-            }
+        listeners: {
+            onUpdate: () => onRefresh()
         }
     })
 
-    const { open: OpenAdd, close: CloseAdd } = useModal({
+    const { open: OpenAdd } = useModal({
         component: import('@views/add-radio.vue'),
-        props: {
-            onUpdate() {
-                onRefresh()
-                CloseAdd()
-            }
+        listeners: {
+            onUpdate: () => onRefresh()
         }
     })
 
-    const { open: OpenRemove, close: CloseRemove } = useModal({
+    const { open: OpenRemove } = useModal({
         component: import('@views/remove-radio.vue'),
-        props: {
-            onUpdate() {
-                onRefresh()
-                CloseRemove()
-            }
+        listeners: {
+            onUpdate: () => onRefresh()
         }
     })
 
-    const { open: OpenAddClient, close: CloseEdit } = useModal({
+    const { open: OpenAddClient } = useModal({
         component: import('@views/add-client.vue'),
-        props: {
-            onUpdate() {
-                onRefresh()
-                CloseEdit()
-            }
+        listeners: {
+            onUpdate: () => onRefresh()
         }
     })
 

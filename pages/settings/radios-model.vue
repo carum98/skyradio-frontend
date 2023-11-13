@@ -6,23 +6,17 @@ definePageMeta({
 const { page, search, data, refresh } = await useTableData<IRadioModel>('/api/radios-model')
 const { openRemoveInstance } = useRemoveInstance('Modelo', refresh)
 
-const { open: OpenCreate, close } = useModal({
+const { open: OpenCreate } = useModal({
     component: import('@views/create-model.vue'),
-    props: {
-        onCreated(_data: IRadioModel) {
-            refresh()
-            close()
-        }
+    listeners: {
+        onCreated: () => refresh()
     }
 })
 
-const { open: OpenUpdate, close: CloseUpdate } = useModal({
+const { open: OpenUpdate } = useModal({
     component: import('@views/update-model.vue'),
-    props: {
-        onUpdate(_data: IRadioModel) {
-            refresh()
-            CloseUpdate()
-        }
+    listeners: {
+        onUpdated: () => refresh()
     }
 })
 </script>

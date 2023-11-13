@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { FormDataModel } from '#imports'
 
-const props = defineProps<{
-    onCreated: (data: IRadioModel) => void
+const emits = defineEmits<{
+    close: []
+    created: [IRadioModel]
 }>()
 
 // methods
@@ -12,7 +13,8 @@ async function onSubmitted(formData: FormDataModel) {
         body: formData.toParams(),
     })
 
-    props.onCreated(data)
+    emits('created', data)
+    emits('close')
 }
 </script>
 
