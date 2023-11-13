@@ -43,14 +43,25 @@ const columns: SkTableColumn[] = [
 // data
 const { page, data, search, refresh } = await useTableData<IRadio>('/api/radios')
 const { OpenRemove, OpenSwap, OpenAddClient } = useActions(refresh)
+const { openRemoveInstance } = useRemoveInstance('Radio', refresh)
 
 // methods
-const { open: OpenCreate, close } = useModal({
+const { open: OpenCreate, close: CloseCreate } = useModal({
     component: import('@views/create-radio.vue'),
     props: {
         onCreated(_client: IRadio) {
             refresh()
-            close()
+            CloseCreate()
+        }
+    }
+})
+
+const { open: OpenUpdate, close: CloseUpdate } = useModal({
+    component: import('@views/update-radio.vue'),
+    props: {
+        onUpdate(_client: IRadio) {
+            refresh()
+            CloseUpdate()
         }
     }
 })
@@ -65,18 +76,37 @@ function openProfile(radio: IRadio) {
 }
 
 function rowActions(item: IRadio) {
+    let actions = [
+        {
+            key: 'delete',
+            label: ActionsStatic.DELETE.name,
+            icon: ActionsStatic.DELETE.icon,
+            color: ActionsStatic.DELETE.color,
+            action: () => openRemoveInstance({ 
+                path: `/api/radios/${item.code}`,
+            })
+        },
+        {
+            key: 'edit',
+            label: ActionsStatic.UPDATE.name,
+            icon: ActionsStatic.UPDATE.icon,
+            color: ActionsStatic.UPDATE.color,
+            action: () => OpenUpdate({ radio: item })
+        }
+    ]
+
     if (item.client === null) {
-        return [
+        actions.push(
             {
                 key: 'add',
                 label: ActionsStatic.ADD.name,
                 icon: ActionsStatic.ADD.icon,
                 color: ActionsStatic.ADD.color,
                 action: () => OpenAddClient({ radio: item })
-            },
-        ]
+            }
+        )
     } else {
-        return [
+        actions.push(...[
             {
                 key: 'swap',
                 label: ActionsStatic.CHANGE.name,
@@ -91,8 +121,10 @@ function rowActions(item: IRadio) {
                 color: ActionsStatic.REMOVE.color,
                 action: () => OpenRemove({ radio: item, client: item.client })
             }
-        ]
+        ])
     }
+
+    return actions
 }
 </script>
 
