@@ -42,30 +42,68 @@ const columns: SkTableColumn[] = [
 ]
 // data
 const { page, data, search, refresh } = await useTableData<IRadio>('/api/radios')
-const { OpenRemove, OpenSwap, OpenAddClient } = useActions(refresh)
-const { openRemoveInstance } = useRemoveInstance('Radio', refresh)
+const { navigateToAction } = useActions(refresh)
 
 // methods
-const { open: OpenCreate } = useModal({
-    component: import('@views/create-radio.vue'),
-    listeners: {
-        onCreated: () => refresh()
-    }
-})
-
-const { open: OpenUpdate } = useModal({
-    component: import('@views/update-radio.vue'),
-    listeners: {
-        onUpdated: () => refresh()
-    }
-})
-
 function openProfile(radio: IRadio) {
     navigateTo({
         name: 'radios-profile',
         params: {
             code: radio.code
         }
+    })
+}
+
+function openUpdate(radio: IRadio) {
+    navigateToAction({
+        name: 'update-radio',
+        props: {
+            radio
+        }
+    })
+}
+
+function openDelete(radio: IRadio) {
+    navigateToAction({
+        name: 'remove-radio',
+        props: {
+            path: `/api/radios/${radio.code}`,
+        }
+    })
+}
+
+function openAddClient(radio: IRadio) {
+    navigateToAction({
+        name: 'add-client',
+        props: {
+            radio
+        }
+    })
+}
+
+function openSwap(radio: IRadio) {
+    navigateToAction({
+        name: 'swap-radio',
+        props: {
+            radio: radio, 
+            client: radio.client
+        }
+    })
+}
+
+function openRemove(radio: IRadio) {
+    navigateToAction({
+        name: 'remove',
+        props: {
+            radio: radio, 
+            client: radio.client
+        }
+    })
+}
+
+function openCreateRadio() {
+    navigateToAction({
+        name: 'create-radio'
     })
 }
 
@@ -76,16 +114,14 @@ function rowActions(item: IRadio) {
             label: ActionsStatic.DELETE.name,
             icon: ActionsStatic.DELETE.icon,
             color: ActionsStatic.DELETE.color,
-            action: () => openRemoveInstance({ 
-                path: `/api/radios/${item.code}`,
-            })
+            action: () => openDelete(item)
         },
         {
             key: 'edit',
             label: ActionsStatic.UPDATE.name,
             icon: ActionsStatic.UPDATE.icon,
             color: ActionsStatic.UPDATE.color,
-            action: () => OpenUpdate({ radio: item })
+            action: () => openUpdate(item)
         }
     ]
 
@@ -96,7 +132,7 @@ function rowActions(item: IRadio) {
                 label: ActionsStatic.ADD.name,
                 icon: ActionsStatic.ADD.icon,
                 color: ActionsStatic.ADD.color,
-                action: () => OpenAddClient({ radio: item })
+                action: () => openAddClient(item)
             }
         )
     } else {
@@ -106,14 +142,14 @@ function rowActions(item: IRadio) {
                 label: ActionsStatic.CHANGE.name,
                 icon: ActionsStatic.CHANGE.icon,
                 color: ActionsStatic.CHANGE.color,
-                action: () => OpenSwap({ radio: item, client: item.client })
+                action: () => openSwap(item)
             },
             {
                 key: 'remove',
                 label: ActionsStatic.REMOVE.name,
                 icon: ActionsStatic.REMOVE.icon,
                 color: ActionsStatic.REMOVE.color,
-                action: () => OpenRemove({ radio: item, client: item.client })
+                action: () => openRemove(item)
             }
         ])
     }
@@ -133,7 +169,7 @@ function rowActions(item: IRadio) {
         @onPage="page = $event"
     >
         <template #toolbar>
-            <button class="add-button" @click="OpenCreate">
+            <button class="add-button" @click="openCreateRadio">
                 <IconsAdd />
             </button>
         </template>
