@@ -7,11 +7,21 @@ const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/s
 const { openRemoveInstance } = useRemoveInstance('Proveedor', refresh)
 
 const { open: OpenCreate, close } = useModal({
-    component: import('@pages/settings/sims-provider/create.vue'),
+    component: import('@views/create-provider.vue'),
     props: {
-        onCreated(_client: ISimProvider) {
+        onCreated(_data: ISimProvider) {
             refresh()
             close()
+        }
+    }
+})
+
+const { open: OpenUpdate, close: CloseUpdate } = useModal({
+    component: import('@views/update-provider.vue'),
+    props: {
+        onUpdate(_data: ISimProvider) {
+            refresh()
+            CloseUpdate()
         }
     }
 })
@@ -45,6 +55,13 @@ const { open: OpenCreate, close } = useModal({
                         action: () => openRemoveInstance({ 
                             path: `/api/sims-provider/${item.code}`,
                         })
+                    },
+                    {
+                        key: 'edit',
+                        label: ActionsStatic.UPDATE.name,
+                        icon: ActionsStatic.UPDATE.icon,
+                        color: ActionsStatic.UPDATE.color,
+                        action: () => OpenUpdate({ provider: item })
                     }
                 ]"
             ></SkDropdown>
