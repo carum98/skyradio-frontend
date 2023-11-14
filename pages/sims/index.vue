@@ -21,7 +21,7 @@ const columns: SkTableColumn[] = [
 const { page, search, data, refresh } = await useTableData<ISim>('/api/sims')
 
 const { open: OpenCreate } = useModal({
-    component: import('@views/create-sim.vue'),
+    component: () => import('@views/create-sim.vue'),
     listeners: {
         onCreated: () => refresh()
     }

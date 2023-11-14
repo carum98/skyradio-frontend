@@ -1,7 +1,7 @@
 import { createVNode, render } from 'vue'
 
 type UseModalOptions = {
-    component: Promise<any>
+    component: () => Promise<any>
     props?: Record<string, any>
     listeners?: Record<string, any>
 }
@@ -19,7 +19,7 @@ export function useModal(params: UseModalOptions): UseModalReturnType {
         root = document.createElement('div')
 
         const modal = await import(`@components/SkModal/Index.vue`)
-        const componentData = await params.component
+        const componentData = await params.component()
     
         instance = createVNode(modal.default, {
             close: destroy
