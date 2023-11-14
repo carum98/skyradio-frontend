@@ -1,3 +1,30 @@
+type ActionsName = 
+    'swap' 
+    | 'add' 
+    | 'remove' 
+    | 'add-client' 
+    | 'create-radio' 
+    | 'update-radio' 
+    | 'remove-radio' 
+    | 'create-client'
+    | 'update-client'
+    | 'remove-client'
+    | 'create-modality'
+    | 'update-modality'
+    | 'remove-modality'
+    | 'create-model'
+    | 'update-model'
+    | 'remove-model'
+    | 'create-status'
+    | 'update-status'
+    | 'remove-status'
+    | 'create-seller'
+    | 'update-seller'
+    | 'remove-seller'
+    | 'create-provider'
+    | 'update-provider'
+    | 'remove-provider'
+
 export function useActions(onRefresh: () => void) {
     const { open: openSwap } = useModal({
         component: import('@views/swap-radio.vue'),
@@ -41,9 +68,100 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
-    const { openRemoveInstance: openRemoveRadio } = useRemoveInstance('Radio', () => onRefresh())
+    const { open: OpenCreateClient } = useModal({
+        component: import('@views/create-client.vue'),
+        listeners: {
+            onCreated: () => onRefresh()
+        }
+    })
 
-    function navigateToAction({ name, props } : { name: string, props?: Record<string, any> }) {
+    const { open: OpenUpdateClient } = useModal({
+        component: import('@views/update-client.vue'),
+        listeners: {
+            onUpdate: () => onRefresh()
+        }
+    })
+
+    const { open: OpenCreateModality } = useModal({
+        component: import('@views/create-modality.vue'),
+        listeners: {
+            onCreated: () => onRefresh()
+        }
+    })
+    
+    const { open: OpenUpdateModality } = useModal({
+        component: import('@views/update-modality.vue'),
+        listeners: {
+            onUpdated: () => onRefresh()
+        }
+    })
+
+
+    const { open: OpenCreateModel } = useModal({
+        component: import('@views/create-model.vue'),
+        listeners: {
+            onCreated: () => onRefresh()
+        }
+    })
+
+    const { open: OpenUpdateModel } = useModal({
+        component: import('@views/update-model.vue'),
+        listeners: {
+            onUpdated: () => onRefresh()
+        }
+    })
+
+    const { open: OpenCreateStatus } = useModal({
+        component: import('@views/create-status.vue'),
+        listeners: {
+            onCreated: () => onRefresh()
+        }
+    })
+
+    const { open: OpenUpdateStatus } = useModal({
+        component: import('@views/update-status.vue'),
+        listeners: {
+            onUpdated: () => onRefresh()
+        }
+    })
+
+    const { open: OpenCreateSeller } = useModal({
+        component: import('@views/create-seller.vue'),
+        listeners: {
+            onCreated: () => onRefresh()
+        }
+    })
+    
+    const { open: OpenUpdateSeller } = useModal({
+        component: import('@views/update-seller.vue'),
+        listeners: {
+            onUpdated: () => onRefresh()
+        }
+    })
+
+    const { open: OpenCreateProvider } = useModal({
+        component: import('@views/create-provider.vue'),
+        listeners: {
+            onCreated: () => onRefresh()
+        }
+    })
+    
+    const { open: OpenUpdateProvider } = useModal({
+        component: import('@views/update-provider.vue'),
+        listeners: {
+            onUpdated: () => onRefresh()
+        }
+    })
+
+    const { openRemoveInstance: openRemoveRadio } = useRemoveInstance('Radio', () => onRefresh())
+    const { openRemoveInstance: openRemoveClient } = useRemoveInstance('Cliente', () => onRefresh())
+    const { openRemoveInstance: openRemoveModality } = useRemoveInstance('Modality', () => onRefresh())
+    const { openRemoveInstance: openRemoveModel } = useRemoveInstance('Model', () => onRefresh())
+    const { openRemoveInstance: openRemoveStatus } = useRemoveInstance('Estado', () => onRefresh())
+    const { openRemoveInstance: openRemoveSeller } = useRemoveInstance('Vendedor', () => onRefresh())
+    const { openRemoveInstance: openRemoveProvider } = useRemoveInstance('Proveedor', () => onRefresh())
+
+    function navigateToAction({ name, props } : { name: ActionsName, props?: Record<string, any> }) {
         switch (name) {
             case 'swap':
                 openSwap(props)
@@ -66,15 +184,64 @@ export function useActions(onRefresh: () => void) {
             case 'remove-radio':
                 openRemoveRadio(props)
                 break
+            case 'create-client':
+                OpenCreateClient(props)
+                break
+            case 'update-client':
+                OpenUpdateClient(props)
+                break
+            case 'remove-client':
+                openRemoveClient(props)
+                break
+            case 'create-modality':
+                OpenCreateModality(props)
+                break
+            case 'update-modality':
+                OpenUpdateModality(props)
+                break
+            case 'remove-modality':
+                openRemoveModality(props)
+                break
+            case 'create-model':
+                OpenCreateModel(props)
+                break
+            case 'update-model':
+                OpenUpdateModel(props)
+                break
+            case 'remove-model':
+                openRemoveModel(props)
+                break
+            case 'create-status':
+                OpenCreateStatus(props)
+                break
+            case 'update-status':
+                OpenUpdateStatus(props)
+                break
+            case 'remove-status':
+                openRemoveStatus(props)
+                break
+            case 'create-seller':
+                OpenCreateSeller(props)
+                break
+            case 'update-seller':
+                OpenUpdateSeller(props)
+                break
+            case 'remove-seller':
+                openRemoveSeller(props)
+                break
+            case 'create-provider':
+                OpenCreateProvider(props)
+                break
+            case 'update-provider':
+                OpenUpdateProvider(props)
+                break
+            case 'remove-provider':
+                openRemoveProvider(props)
+                break
         }
     }
 
     return {
-        OpenSwap: openSwap,
-        OpenAdd: openAdd,
-        OpenRemove: openRemove,
-        OpenAddClient: openAddClient,
-
         navigateToAction,
     }
 }

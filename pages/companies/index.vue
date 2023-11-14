@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SkTableColumn } from '@components/SkTable/sk-table';
+import type { SkTableColumn } from '@components/SkTable/sk-table'
 
 const columns: SkTableColumn[] = [
     {
@@ -35,14 +35,17 @@ const columns: SkTableColumn[] = [
 ]
 
 const { page, search, data, refresh } = await useTableData<IClient>('/api/clients')
-const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
+const { navigateToAction } = useActions(refresh)
 
-const { open: OpenCreate } = useModal({
-    component: import('@views/create-client.vue'),
-    listeners: {
-        onCreated: () => refresh()
-    }
-})
+// methods
+function openSwap(client: IClient) {
+    navigateToAction({
+        name: 'swap',
+        props: {
+            client
+        }
+    })
+}
 
 function openProfile(client: IClient) {
     navigateTo({
@@ -50,6 +53,30 @@ function openProfile(client: IClient) {
         params: {
             code: client.code
         }
+    })
+}
+
+function openAdd(client: IClient) {
+    navigateToAction({
+        name: 'add',
+        props: {
+            client
+        }
+    })
+}
+
+function openRemove(client: IClient) {
+    navigateToAction({
+        name: 'remove',
+        props: {
+            client
+        }
+    })
+}
+
+function openCreateClient() {
+    navigateToAction({
+        name: 'create-client',
     })
 }
 </script>
@@ -65,7 +92,7 @@ function openProfile(client: IClient) {
         @onPage="page = $event"
     >
         <template #toolbar>
-            <button class="add-button" @click="OpenCreate">
+            <button class="add-button" @click="openCreateClient">
                 <IconsAdd />
             </button>
         </template>
@@ -81,21 +108,21 @@ function openProfile(client: IClient) {
                     label: ActionsStatic.CHANGE.name,
                     icon: ActionsStatic.CHANGE.icon,
                     color: ActionsStatic.CHANGE.color,
-                    action: () => OpenSwap({ client: item })
+                    action: () => openSwap(item)
                 },
                 {
                     key: 'add',
                     label: ActionsStatic.ADD.name,
                     icon: ActionsStatic.ADD.icon,
                     color: ActionsStatic.ADD.color,
-                    action: () => OpenAdd({ client: item })
+                    action: () => openAdd(item)
                 },
                 {
                     key: 'remove',
                     label: ActionsStatic.REMOVE.name,
                     icon: ActionsStatic.REMOVE.icon,
                     color: ActionsStatic.REMOVE.color,
-                    action: () => OpenRemove({ client: item })
+                    action: () => openRemove(item)
                 }
             ]" />
         </template>

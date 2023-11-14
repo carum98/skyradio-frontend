@@ -41,21 +41,57 @@ const router = useRouter()
 const { data: client, refresh: refreshData } = await useFetch<IClient>(`/api/clients/${route.params.code}`)
 
 const { page, data, search, refresh } = await useTableData<IRadio>(`/api/clients/${route.params.code}/radios`)
-const { OpenAdd, OpenRemove, OpenSwap } = useActions(refresh)
-const { openRemoveInstance } = useRemoveInstance('Cliente', () => router.back())
+const { navigateToAction } = useActions(refresh)
+const { navigateToAction: navigateToAction2 } = useActions(refreshData)
+const { navigateToAction: navigateToAction3 } = useActions(() => router.back())
 
-const { open: OpenUpdate } = useModal({
-    component: import('@views/update-client.vue'),
-    props: {
-        onUpdate(_client: IClient) {
-            refreshData()
-        }
-    }
-})
 
 // methods
 function onUpdate() {
-    OpenUpdate({ client: toRaw(client.value) })
+    navigateToAction2({
+        name: 'update-client',
+        props: {
+            client: toRaw(client.value)
+        }
+    })
+}
+
+function onRemove(client: IClient | null) {
+    navigateToAction3({
+        name: 'remove-client',
+        props: {
+            path: `/api/clients/${client?.code}`,
+        }
+    })
+}
+
+function openSwap({ client, radio }: { client: IClient | null, radio: IRadio | null }) {
+    navigateToAction({
+        name: 'swap',
+        props: {
+            client,
+            radio
+        }
+    })
+}
+
+function openRemove({ client, radio }: { client: IClient | null, radio: IRadio | null }) {
+    navigateToAction({
+        name: 'remove',
+        props: {
+            client,
+            radio
+        }
+    })
+}
+
+function openAdd(client: IClient | null) {
+    navigateToAction({
+        name: 'add',
+        props: {
+            client
+        }
+    })
 }
 </script>
 
@@ -82,9 +118,7 @@ function onUpdate() {
                             label: ActionsStatic.DELETE.name,
                             icon: ActionsStatic.DELETE.icon,
                             color: ActionsStatic.DELETE.color,
-                            action: () => openRemoveInstance({ 
-                                path: `/api/clients/${client?.code}`,
-                            })
+                            action: () => onRemove(client)
                         }
                     ]"
                 ></SkDropdown>
@@ -104,21 +138,21 @@ function onUpdate() {
                     <button 
                         class="button-actions" 
                         :style="{ '--color': ActionsStatic.CHANGE.color }"
-                        @click="() => OpenSwap({ client })"
+                        @click="() => openSwap({ client, radio: null })"
                     >
                         <span v-html="ActionsStatic.CHANGE.icon"></span>
                     </button>
                     <button 
                         class="button-actions" 
                         :style="{ '--color': ActionsStatic.REMOVE.color }"
-                        @click="() => OpenRemove({ client })"
+                        @click="() => openRemove({ client, radio: null })"
                     >
                         <span v-html="ActionsStatic.REMOVE.icon"></span>
                     </button>
                     <button 
                         class="button-actions"
                         :style="{ '--color': ActionsStatic.ADD.color }"
-                        @click="() => OpenAdd({ client })"
+                        @click="() => openAdd(client)"
                     >
                         <span v-html="ActionsStatic.ADD.icon"></span>
                     </button>
@@ -137,14 +171,14 @@ function onUpdate() {
                         label: ActionsStatic.CHANGE.name,
                         icon: ActionsStatic.CHANGE.icon,
                         color: ActionsStatic.CHANGE.color,
-                        action: () => OpenSwap({ client, radio: item })
+                        action: () => openSwap({ client, radio: item })
                     },
                     {
                         key: 'remove',
                         label: ActionsStatic.REMOVE.name,
                         icon: ActionsStatic.REMOVE.icon,
                         color: ActionsStatic.REMOVE.color,
-                        action: () => OpenRemove({ client, radio: item })
+                        action: () => openRemove({ client, radio: item })
                     }
                 ]" />
             </template>

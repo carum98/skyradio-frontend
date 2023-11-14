@@ -4,21 +4,32 @@ definePageMeta({
 })
 
 const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/sims-provider')
-const { openRemoveInstance } = useRemoveInstance('Proveedor', refresh)
+const { navigateToAction } = useActions(refresh)
 
-const { open: OpenCreate } = useModal({
-    component: import('@views/create-provider.vue'),
-    listeners: {
-        onCreated: () => refresh()
-    }
-})
+// methods
+function openCreate() {
+    navigateToAction({
+        name: 'create-provider',
+    })
+}
 
-const { open: OpenUpdate } = useModal({
-    component: import('@views/update-provider.vue'),
-    listeners: {
-        onUpdated: () => refresh()
-    }
-})
+function openUpdate(provider: IRadioStatus) {
+    navigateToAction({
+        name: 'update-provider',
+        props: {
+            provider
+        }
+    })
+}
+
+function openRemove(provider: IRadioStatus) {
+    navigateToAction({
+        name: 'remove-provider',
+        props: {
+            path: `/api/sims-provider/${provider.code}`,
+        }
+    })
+}
 </script>
 
 <template>
@@ -30,7 +41,7 @@ const { open: OpenUpdate } = useModal({
         @onPage="page = $event"
     >
         <template #toolbar>
-            <button class="add-button" @click="OpenCreate">
+            <button class="add-button" @click="openCreate">
                 <IconsAdd />
             </button>
         </template>
@@ -46,16 +57,14 @@ const { open: OpenUpdate } = useModal({
                         label: ActionsStatic.DELETE.name,
                         icon: ActionsStatic.DELETE.icon,
                         color: ActionsStatic.DELETE.color,
-                        action: () => openRemoveInstance({ 
-                            path: `/api/sims-provider/${item.code}`,
-                        })
+                        action: () => openUpdate(item)
                     },
                     {
                         key: 'edit',
                         label: ActionsStatic.UPDATE.name,
                         icon: ActionsStatic.UPDATE.icon,
                         color: ActionsStatic.UPDATE.color,
-                        action: () => OpenUpdate({ provider: item })
+                        action: () => openUpdate(item)
                     }
                 ]"
             ></SkDropdown>

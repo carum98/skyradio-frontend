@@ -83,7 +83,7 @@ function openAddClient(radio: IRadio) {
 
 function openSwap(radio: IRadio) {
     navigateToAction({
-        name: 'swap-radio',
+        name: 'swap',
         props: {
             radio: radio, 
             client: radio.client

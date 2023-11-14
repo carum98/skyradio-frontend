@@ -4,21 +4,32 @@ definePageMeta({
 })
 
 const { page, search, data, refresh } = await useTableData<IModality>('/api/clients-modality')
-const { openRemoveInstance } = useRemoveInstance('Modalidad', refresh)
+const { navigateToAction } = useActions(refresh)
 
-const { open: OpenCreate } = useModal({
-    component: import('@views/create-modality.vue'),
-    listeners: {
-        onCreated: () => refresh()
-    }
-})
+// methods
+function openCreate() {
+    navigateToAction({
+        name: 'create-modality',
+    })
+}
 
-const { open: OpenUpdate } = useModal({
-    component: import('@views/update-modality.vue'),
-    listeners: {
-        onUpdated: () => refresh()
-    }
-})
+function openUpdate(modality: IModality) {
+    navigateToAction({
+        name: 'update-modality',
+        props: {
+            modality
+        }
+    })
+}
+
+function openRemove(modality: IModality) {
+    navigateToAction({
+        name: 'remove-modality',
+        props: {
+            path: `/api/clients-modality/${modality.code}`,
+        }
+    })
+}
 </script>
 
 <template>
@@ -30,7 +41,7 @@ const { open: OpenUpdate } = useModal({
         @onPage="page = $event"
     >
         <template #toolbar>
-            <button class="add-button" @click="OpenCreate">
+            <button class="add-button" @click="openCreate">
                 <IconsAdd />
             </button>
         </template>
@@ -46,16 +57,14 @@ const { open: OpenUpdate } = useModal({
                         label: ActionsStatic.DELETE.name,
                         icon: ActionsStatic.DELETE.icon,
                         color: ActionsStatic.DELETE.color,
-                        action: () => openRemoveInstance({ 
-                            path: `/api/clients-modality/${item.code}`,
-                        })
+                        action: () => openRemove(item)
                     },
                     {
                         key: 'edit',
                         label: ActionsStatic.UPDATE.name,
                         icon: ActionsStatic.UPDATE.icon,
                         color: ActionsStatic.UPDATE.color,
-                        action: () => OpenUpdate({ modality: item })
+                        action: () => openUpdate(item)
                     }
                 ]"
             ></SkDropdown>

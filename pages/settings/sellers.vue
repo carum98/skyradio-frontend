@@ -4,21 +4,32 @@ definePageMeta({
 })
 
 const { page, search, data, refresh } = await useTableData<ISeller>('/api/sellers')
-const { openRemoveInstance } = useRemoveInstance('Vendedor', refresh)
+const { navigateToAction } = useActions(refresh)
 
-const { open: OpenCreate } = useModal({
-    component: import('@views/create-seller.vue'),
-    listeners: {
-        onCreated: () => refresh()
-    }
-})
+// methods
+function openCreate() {
+    navigateToAction({
+        name: 'create-seller',
+    })
+}
 
-const { open: OpenUpdate } = useModal({
-    component: import('@views/update-seller.vue'),
-    listeners: {
-        onUpdated: () => refresh()
-    }
-})
+function openUpdate(seller: IRadioStatus) {
+    navigateToAction({
+        name: 'update-seller',
+        props: {
+            seller
+        }
+    })
+}
+
+function openRemove(seller: IRadioStatus) {
+    navigateToAction({
+        name: 'remove-seller',
+        props: {
+            path: `/api/sellers/${seller.code}`,
+        }
+    })
+}
 </script>
 
 <template>
@@ -30,7 +41,7 @@ const { open: OpenUpdate } = useModal({
         @onPage="page = $event"
     >
         <template #toolbar>
-            <button class="add-button" @click="OpenCreate">
+            <button class="add-button" @click="openCreate">
                 <IconsAdd />
             </button>
         </template>
@@ -46,16 +57,14 @@ const { open: OpenUpdate } = useModal({
                         label: ActionsStatic.DELETE.name,
                         icon: ActionsStatic.DELETE.icon,
                         color: ActionsStatic.DELETE.color,
-                        action: () => openRemoveInstance({ 
-                            path: `/api/sellers/${item.code}`,
-                        })
+                        action: () => openRemove(item)
                     },
                     {
                         key: 'edit',
                         label: ActionsStatic.UPDATE.name,
                         icon: ActionsStatic.UPDATE.icon,
                         color: ActionsStatic.UPDATE.color,
-                        action: () => OpenUpdate({ seller: item })
+                        action: () => openUpdate(item)
                     }
                 ]"
             ></SkDropdown>

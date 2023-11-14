@@ -4,21 +4,32 @@ definePageMeta({
 })
 
 const { page, search, data, refresh } = await useTableData<IRadioStatus>('/api/radios-status')
-const { openRemoveInstance } = useRemoveInstance('Estado', refresh)
+const { navigateToAction } = useActions(refresh)
 
-const { open: OpenCreate } = useModal({
-    component: import('@views/create-status.vue'),
-    listeners: {
-        onCreated: () => refresh()
-    }
-})
+// methods
+function openCreate() {
+    navigateToAction({
+        name: 'create-status',
+    })
+}
 
-const { open: OpenUpdate } = useModal({
-    component: import('@views/update-status.vue'),
-    listeners: {
-        onUpdated: () => refresh()
-    }
-})
+function openUpdate(status: IRadioStatus) {
+    navigateToAction({
+        name: 'update-status',
+        props: {
+            status
+        }
+    })
+}
+
+function openRemove(status: IRadioStatus) {
+    navigateToAction({
+        name: 'remove-status',
+        props: {
+            path: `/api/radios-status/${status.code}`,
+        }
+    })
+}
 </script>
 
 <template>
@@ -30,7 +41,7 @@ const { open: OpenUpdate } = useModal({
         @onPage="page = $event"
     >
         <template #toolbar>
-            <button class="add-button" @click="OpenCreate">
+            <button class="add-button" @click="openCreate">
                 <IconsAdd />
             </button>
         </template>
@@ -46,16 +57,14 @@ const { open: OpenUpdate } = useModal({
                         label: ActionsStatic.DELETE.name,
                         icon: ActionsStatic.DELETE.icon,
                         color: ActionsStatic.DELETE.color,
-                        action: () => openRemoveInstance({ 
-                            path: `/api/radios-status/${item.code}`,
-                        })
+                        action: () => openRemove(item)
                     },
                     {
                         key: 'edit',
                         label: ActionsStatic.UPDATE.name,
                         icon: ActionsStatic.UPDATE.icon,
                         color: ActionsStatic.UPDATE.color,
-                        action: () => OpenUpdate({ status: item })
+                        action: () => openUpdate(item)
                     }
                 ]"
             ></SkDropdown>
