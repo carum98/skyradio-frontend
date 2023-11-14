@@ -23,16 +23,14 @@ export function useModal(params: UseModalOptions): UseModalReturnType {
     
         instance = createVNode(modal.default, {
             close: destroy
-        })
-    
-        instance.children = [
+        }, () => [
             createVNode(componentData.default, {
                 ...params.props,
                 ...params.listeners,
                 ...props,
                 onClose: destroy
             })
-        ]
+        ])
     
         document.body.appendChild(root)
         render(instance, root)
