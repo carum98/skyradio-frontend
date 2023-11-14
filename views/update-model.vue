@@ -7,7 +7,7 @@ const props = defineProps<{
 
 const emits = defineEmits<{
     close: []
-    update: [IRadioModel]
+    refresh: [IRadioModel]
 }>()
 
 // methods
@@ -17,7 +17,7 @@ async function onSubmitted(formData: FormDataModel) {
         body: formData.toParams(),
     })
 
-    emits('update', data)
+    emits('refresh', data)
     emits('close')
 }
 </script>

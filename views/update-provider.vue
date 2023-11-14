@@ -7,7 +7,7 @@ const props = defineProps<{
 
 const emits = defineEmits<{
     close: []
-    update: [ISimProvider]
+    refresh: [ISimProvider]
 }>()
 
 // methods
@@ -17,7 +17,7 @@ async function onSubmitted(formData: FormDataProvider) {
         body: formData.toParams(),
     })
 
-    emits('update', data)
+    emits('refresh', data)
     emits('close')
 }
 </script>

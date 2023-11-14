@@ -3,7 +3,7 @@ import { FormDataRadio } from '#imports'
 
 const emits = defineEmits<{
     close: []
-    created: [IRadio]
+    refresh: [IRadio]
 }>()
 
 // methods
@@ -13,7 +13,7 @@ async function onSubmitted(formData: FormDataRadio) {
         body: formData.toParams(),
     })
 
-    emits('created', data)
+    emits('refresh', data)
     emits('close')
 }
 </script>

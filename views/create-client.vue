@@ -3,7 +3,7 @@ import { FormDataClient } from '#imports'
 
 const emits = defineEmits<{
     close: []
-    created: [IClient]
+    refresh: [IClient]
 }>()
 
 // methods
@@ -13,7 +13,7 @@ async function onSubmitted(formData: FormDataClient) {
         body: formData.toParams(),
     })
 
-    emits('created', data)
+    emits('refresh', data)
     emits('close')
 }
 </script>

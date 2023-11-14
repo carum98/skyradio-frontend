@@ -3,7 +3,7 @@ import { FormDataProvider } from '#imports'
 
 const emits = defineEmits<{
     close: []
-    created: [ISimProvider]
+    refresh: [ISimProvider]
 }>()
 
 // methods
@@ -13,7 +13,7 @@ async function onSubmitted(formData: FormDataProvider) {
         body: formData.toParams(),
     })
 
-    emits('created', data)
+    emits('refresh', data)
     emits('close')
 }
 </script>

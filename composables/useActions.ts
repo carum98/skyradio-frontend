@@ -29,70 +29,70 @@ export function useActions(onRefresh: () => void) {
     const { open: openSwap } = useModal({
         component: import('@views/swap-radio.vue'),
         listeners: {
-            onUpdate: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: openAdd } = useModal({
         component: import('@views/add-radio.vue'),
         listeners: {
-            onUpdate: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: openRemove } = useModal({
         component: import('@views/remove-radio.vue'),
         listeners: {
-            onUpdate: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: openAddClient } = useModal({
         component: import('@views/add-client.vue'),
         listeners: {
-            onUpdate: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: openCreateRadio } = useModal({
         component: import('@views/create-radio.vue'),
         listeners: {
-            onCreated: () => onRefresh()
+            onRefresh
         }
     })
     
     const { open: openUpdateRadio } = useModal({
         component: import('@views/update-radio.vue'),
         listeners: {
-            onUpdate: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: OpenCreateClient } = useModal({
         component: import('@views/create-client.vue'),
         listeners: {
-            onCreated: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: OpenUpdateClient } = useModal({
         component: import('@views/update-client.vue'),
         listeners: {
-            onUpdate: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: OpenCreateModality } = useModal({
         component: import('@views/create-modality.vue'),
         listeners: {
-            onCreated: () => onRefresh()
+            onRefresh
         }
     })
     
     const { open: OpenUpdateModality } = useModal({
         component: import('@views/update-modality.vue'),
         listeners: {
-            onUpdated: () => onRefresh()
+            onRefresh
         }
     })
 
@@ -100,56 +100,56 @@ export function useActions(onRefresh: () => void) {
     const { open: OpenCreateModel } = useModal({
         component: import('@views/create-model.vue'),
         listeners: {
-            onCreated: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: OpenUpdateModel } = useModal({
         component: import('@views/update-model.vue'),
         listeners: {
-            onUpdated: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: OpenCreateStatus } = useModal({
         component: import('@views/create-status.vue'),
         listeners: {
-            onCreated: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: OpenUpdateStatus } = useModal({
         component: import('@views/update-status.vue'),
         listeners: {
-            onUpdated: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: OpenCreateSeller } = useModal({
         component: import('@views/create-seller.vue'),
         listeners: {
-            onCreated: () => onRefresh()
+            onRefresh
         }
     })
     
     const { open: OpenUpdateSeller } = useModal({
         component: import('@views/update-seller.vue'),
         listeners: {
-            onUpdated: () => onRefresh()
+            onRefresh
         }
     })
 
     const { open: OpenCreateProvider } = useModal({
         component: import('@views/create-provider.vue'),
         listeners: {
-            onCreated: () => onRefresh()
+            onRefresh
         }
     })
     
     const { open: OpenUpdateProvider } = useModal({
         component: import('@views/update-provider.vue'),
         listeners: {
-            onUpdated: () => onRefresh()
+            onRefresh
         }
     })
 
