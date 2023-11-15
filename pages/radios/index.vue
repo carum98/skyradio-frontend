@@ -67,7 +67,7 @@ function openDelete(radio: IRadio) {
     navigateToAction({
         name: 'remove-radio',
         props: {
-            path: `/api/radios/${radio.code}`,
+            code: radio.code
         }
     })
 }

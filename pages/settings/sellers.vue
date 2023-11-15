@@ -26,7 +26,7 @@ function openRemove(seller: IRadioStatus) {
     navigateToAction({
         name: 'remove-seller',
         props: {
-            path: `/api/sellers/${seller.code}`,
+            code: seller.code
         }
     })
 }

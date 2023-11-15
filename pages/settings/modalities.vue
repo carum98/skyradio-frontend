@@ -26,7 +26,7 @@ function openRemove(modality: IModality) {
     navigateToAction({
         name: 'remove-modality',
         props: {
-            path: `/api/clients-modality/${modality.code}`,
+            code: modality.code
         }
     })
 }

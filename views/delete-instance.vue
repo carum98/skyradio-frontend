@@ -1,20 +1,21 @@
 <script setup lang="ts">
 const props = defineProps<{
     name: string
+    code: string
     path: string
 }>()
 
 const emits = defineEmits<{
     close: []
-    update: []
+    refresh: []
 }>()
 
 function onConfirm() {
-    fetch(props.path, {
+    fetch(props.path.replace(/\/:\w+/, `/${props.code}`), {
         method: 'DELETE'
     })
     .then(() => {
-        emits('update')
+        emits('refresh')
         emits('close')
     })
     .catch(() => {

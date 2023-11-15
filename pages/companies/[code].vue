@@ -60,7 +60,7 @@ function onRemove(client: IClient | null) {
     navigateToAction3({
         name: 'remove-client',
         props: {
-            path: `/api/clients/${client?.code}`,
+            code: client?.code
         }
     })
 }

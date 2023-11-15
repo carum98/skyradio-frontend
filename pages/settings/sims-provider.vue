@@ -26,7 +26,7 @@ function openRemove(provider: IRadioStatus) {
     navigateToAction({
         name: 'remove-provider',
         props: {
-            path: `/api/sims-provider/${provider.code}`,
+            code: provider.code
         }
     })
 }
@@ -57,7 +57,7 @@ function openRemove(provider: IRadioStatus) {
                         label: ActionsStatic.DELETE.name,
                         icon: ActionsStatic.DELETE.icon,
                         color: ActionsStatic.DELETE.color,
-                        action: () => openUpdate(item)
+                        action: () => openRemove(item)
                     },
                     {
                         key: 'edit',

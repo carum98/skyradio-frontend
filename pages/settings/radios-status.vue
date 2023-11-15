@@ -26,7 +26,7 @@ function openRemove(status: IRadioStatus) {
     navigateToAction({
         name: 'remove-status',
         props: {
-            path: `/api/radios-status/${status.code}`,
+            code: status.code
         }
     })
 }

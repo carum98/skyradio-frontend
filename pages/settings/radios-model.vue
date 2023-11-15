@@ -26,7 +26,7 @@ function openRemove(model: IRadioModel) {
     navigateToAction({
         name: 'remove-model',
         props: {
-            path: `/api/radios-model/${model.code}`,
+            code: model.code
         }
     })
 }

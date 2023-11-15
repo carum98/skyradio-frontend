@@ -57,70 +57,68 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
-    const { open: openUpsertRadio } = useModal({
+    const radio = useModal({
         component: () => import('@views/form-radio.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: openUpsertSim } = useModal({
+    const sim = useModal({
         component: () => import('@views/form-sim.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: openUpsertClient } = useModal({
+    const client = useModal({
         component: () => import('@views/form-client.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: OpenUpsertModality } = useModal({
+    const modality = useModal({
         component: () => import('@views/form-modality.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: openUpsertModel } = useModal({
+    const model = useModal({
         component: () => import('@views/form-model.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: openUpsertStatus } = useModal({
+    const status = useModal({
         component: () => import('@views/form-status.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: openUsertSeller } = useModal({
+    const seller = useModal({
         component: () => import('@views/form-seller.vue'),
         listeners: {
             onRefresh
         }
     })
     
-    const { open: OpenUsertProvider } = useModal({
+    const provider = useModal({
         component: () => import('@views/form-provider.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { openRemoveInstance: openRemoveRadio } = useRemoveInstance('Radio', () => onRefresh())
-    const { openRemoveInstance: openRemoveClient } = useRemoveInstance('Cliente', () => onRefresh())
-    const { openRemoveInstance: openRemoveSim } = useRemoveInstance('Sim', () => onRefresh())
-    const { openRemoveInstance: openRemoveModality } = useRemoveInstance('Modality', () => onRefresh())
-    const { openRemoveInstance: openRemoveModel } = useRemoveInstance('Model', () => onRefresh())
-    const { openRemoveInstance: openRemoveStatus } = useRemoveInstance('Estado', () => onRefresh())
-    const { openRemoveInstance: openRemoveSeller } = useRemoveInstance('Vendedor', () => onRefresh())
-    const { openRemoveInstance: openRemoveProvider } = useRemoveInstance('Proveedor', () => onRefresh())
+    const remove = useModal({
+        component: () => import('@views/delete-instance.vue'),
+        listeners: {
+            onRefresh
+        }
+    })
 
     function navigateToAction({ name, props } : { name: ActionsName, props?: Record<string, any> }) {
         switch (name) {
@@ -138,59 +136,83 @@ export function useActions(onRefresh: () => void) {
                 break
             case 'create-radio':
             case 'update-radio':
-                openUpsertRadio(props)
+                radio.open(props)
                 break
             case 'remove-radio':
-                openRemoveRadio(props)
+                remove.open({
+                    name: 'Radio',
+                    path: `/api/radios/${props?.code}`
+                })
                 break
             case 'create-client':
             case 'update-client':
-                openUpsertClient(props)
+                client.open(props)
                 break
             case 'remove-client':
-                openRemoveClient(props)
+                remove.open({
+                    name: 'Cliente',
+                    path: `/api/clients/${props?.code}`
+                })
                 break
             case 'create-sim':
             case 'update-sim':
-                openUpsertSim(props)
+                sim.open(props)
                 break
             case 'remove-sim':
-                openRemoveSim(props)
+                remove.open({
+                    name: 'Sim',
+                    path: `/api/sims/${props?.code}`
+                })
                 break
             case 'create-modality':
             case 'update-modality':
-                OpenUpsertModality(props)
+                modality.open(props)
                 break
             case 'remove-modality':
-                openRemoveModality(props)
+                remove.open({
+                    name: 'Modalidad',
+                    path: `/api/clients-modality/${props?.code}`
+                })
                 break
             case 'create-model':
             case 'update-model':
-                openUpsertModel(props)
+                model.open(props)
                 break
             case 'remove-model':
-                openRemoveModel(props)
+                remove.open({
+                    name: 'Model',
+                    path: `/api/radios-model/${props?.code}`
+                })
                 break
             case 'create-status':
             case 'update-status':
-                openUpsertStatus(props)
+                status.open(props)
                 break
             case 'remove-status':
-                openRemoveStatus(props)
+                remove.open({
+                    name: 'Estado',
+                    path: `/api/radios-status/${props?.code}`
+                })
                 break
             case 'create-seller':
             case 'update-seller':
-                openUsertSeller(props)
+                seller.open(props)
                 break
             case 'remove-seller':
-                openRemoveSeller(props)
+                remove.open({
+                    name: 'Vendedor',
+                    path: `/api/sellers/${props?.code}`
+                })
                 break
             case 'create-provider':
             case 'update-provider':
-                OpenUsertProvider(props)
+                provider.open(props)
                 break
             case 'remove-provider':
-                openRemoveProvider(props)
+                remove.open({
+                    name: 'Proveedor',
+                    path: `/api/sims-provider/${props?.code}`
+                })
                 break
         }
     }
