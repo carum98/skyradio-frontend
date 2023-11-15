@@ -19,13 +19,13 @@ const columns: SkTableColumn[] = [
 ]
 
 const { page, search, data, refresh } = await useTableData<ISim>('/api/sims')
+const { navigateToAction } = useActions(refresh)
 
-const { open: OpenCreate } = useModal({
-    component: () => import('@views/create-sim.vue'),
-    listeners: {
-        onCreated: () => refresh()
-    }
-})
+function openCreate() {
+    navigateToAction({
+        name: 'create-sim'
+    })
+}
 </script>
 
 <template>
@@ -37,7 +37,7 @@ const { open: OpenCreate } = useModal({
         @onPage="page = $event"
     >
         <template #toolbar>
-            <button class="add-button" @click="OpenCreate">
+            <button class="add-button" @click="openCreate">
                 <IconsAdd />
             </button>
         </template>

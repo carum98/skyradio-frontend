@@ -1,10 +1,14 @@
-export class FormDataRadio {
+import { SkFormData } from './form-data'
+
+export class FormDataRadio extends SkFormData {
     public name: string
     public imei: string
     public serial: string
     public model: IRadioModel | null
 
     constructor(name: string, imei: string, serial: string, model: IRadioModel | null) {
+        super({ name, imei, serial, model })
+
         this.name = name
         this.imei = imei
         this.serial = serial
@@ -16,12 +20,16 @@ export class FormDataRadio {
     }
 
     static update(params: IRadio) {
-        return new FormDataRadio(
+        const form = new FormDataRadio(
             params.name,
             params.imei,
             params.serial,
             params.model
         )
+
+        form.code = params.code
+
+        return form
     }
 
     toParams() {

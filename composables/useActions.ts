@@ -24,6 +24,9 @@ type ActionsName =
     | 'create-provider'
     | 'update-provider'
     | 'remove-provider'
+    | 'create-sim'
+    | 'update-sim'
+    | 'remove-sim'
 
 export function useActions(onRefresh: () => void) {
     const { open: openSwap } = useModal({
@@ -54,29 +57,22 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
-    const { open: openCreateRadio } = useModal({
-        component: () => import('@views/create-radio.vue'),
-        listeners: {
-            onRefresh
-        }
-    })
-    
-    const { open: openUpdateRadio } = useModal({
-        component: () => import('@views/update-radio.vue'),
+    const { open: openUpsertRadio } = useModal({
+        component: () => import('@views/form-radio.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: OpenCreateClient } = useModal({
-        component: () => import('@views/create-client.vue'),
+    const { open: openUpsertSim } = useModal({
+        component: () => import('@views/form-sim.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: OpenUpdateClient } = useModal({
-        component: () => import('@views/update-client.vue'),
+    const { open: openUpsertClient } = useModal({
+        component: () => import('@views/form-client.vue'),
         listeners: {
             onRefresh
         }
@@ -119,6 +115,7 @@ export function useActions(onRefresh: () => void) {
 
     const { openRemoveInstance: openRemoveRadio } = useRemoveInstance('Radio', () => onRefresh())
     const { openRemoveInstance: openRemoveClient } = useRemoveInstance('Cliente', () => onRefresh())
+    const { openRemoveInstance: openRemoveSim } = useRemoveInstance('Sim', () => onRefresh())
     const { openRemoveInstance: openRemoveModality } = useRemoveInstance('Modality', () => onRefresh())
     const { openRemoveInstance: openRemoveModel } = useRemoveInstance('Model', () => onRefresh())
     const { openRemoveInstance: openRemoveStatus } = useRemoveInstance('Estado', () => onRefresh())
@@ -140,22 +137,25 @@ export function useActions(onRefresh: () => void) {
                 openAddClient(props)
                 break
             case 'create-radio':
-                openCreateRadio(props)
-                break
             case 'update-radio':
-                openUpdateRadio(props)
+                openUpsertRadio(props)
                 break
             case 'remove-radio':
                 openRemoveRadio(props)
                 break
             case 'create-client':
-                OpenCreateClient(props)
-                break
             case 'update-client':
-                OpenUpdateClient(props)
+                openUpsertClient(props)
                 break
             case 'remove-client':
                 openRemoveClient(props)
+                break
+            case 'create-sim':
+            case 'update-sim':
+                openUpsertSim(props)
+                break
+            case 'remove-sim':
+                openRemoveSim(props)
                 break
             case 'create-modality':
             case 'update-modality':
