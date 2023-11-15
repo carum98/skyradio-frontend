@@ -13,7 +13,7 @@ const form = reactive(props.modality
 </script>
 
 <template>
-    <ScafoldForm
+    <ScaffoldForm
         :form="form"
         v-bind="$attrs"
         path-create="/api/clients-modality"
@@ -29,5 +29,5 @@ const form = reactive(props.modality
                 v-model="form.name" 
             />
         </template>
-    </ScafoldForm>
+    </ScaffoldForm>
 </template>

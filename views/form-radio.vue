@@ -13,7 +13,7 @@ const form = reactive(props.radio
 </script>
 
 <template>
-    <ScafoldForm
+    <ScaffoldForm
         :form="form"
         v-bind="$attrs"
         path-create="/api/radios"
@@ -50,5 +50,5 @@ const form = reactive(props.radio
                 v-model="form.model"
             />
         </template>
-    </ScafoldForm>
+    </ScaffoldForm>
 </template>

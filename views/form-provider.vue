@@ -13,7 +13,7 @@ const form = reactive(props.provider
 </script>
 
 <template>
-    <ScafoldForm
+    <ScaffoldForm
         :form="form"
         v-bind="$attrs"
         path-create="/api/sims-provider"
@@ -29,5 +29,5 @@ const form = reactive(props.provider
                 v-model="form.name" 
             />
         </template>
-    </ScafoldForm>
+    </ScaffoldForm>
 </template>
