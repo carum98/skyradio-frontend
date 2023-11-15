@@ -82,20 +82,12 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
-    const { open: OpenCreateModality } = useModal({
-        component: () => import('@views/create-modality.vue'),
+    const { open: OpenUpsertModality } = useModal({
+        component: () => import('@views/form-modality.vue'),
         listeners: {
             onRefresh
         }
     })
-    
-    const { open: OpenUpdateModality } = useModal({
-        component: () => import('@views/update-modality.vue'),
-        listeners: {
-            onRefresh
-        }
-    })
-
 
     const { open: OpenCreateModel } = useModal({
         component: () => import('@views/create-model.vue'),
@@ -194,10 +186,8 @@ export function useActions(onRefresh: () => void) {
                 openRemoveClient(props)
                 break
             case 'create-modality':
-                OpenCreateModality(props)
-                break
             case 'update-modality':
-                OpenUpdateModality(props)
+                OpenUpsertModality(props)
                 break
             case 'remove-modality':
                 openRemoveModality(props)

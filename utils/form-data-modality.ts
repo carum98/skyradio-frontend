@@ -1,7 +1,10 @@
-export class FormDataModality {
+import { SkFormData } from "./form-data"
+
+export class FormDataModality extends SkFormData {
     public name: string
 
     constructor(name: string) {
+        super({ name })
         this.name = name
     }
 
@@ -10,7 +13,11 @@ export class FormDataModality {
     }
 
     static update(params: IModality) {
-        return new FormDataModality(params.name)
+        const form = new FormDataModality(params.name)
+
+        form.code = params.code
+
+        return form
     }
 
     toParams() {
