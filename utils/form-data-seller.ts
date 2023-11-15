@@ -1,7 +1,10 @@
-export class FormDataSeller {
+import { SkFormData } from "./form-data"
+
+export class FormDataSeller extends SkFormData {
     public name: string
 
     constructor(name: string) {
+        super({ name })
         this.name = name
     }
 
@@ -10,7 +13,11 @@ export class FormDataSeller {
     }
 
     static update(params: ISeller) {
-        return new FormDataSeller(params.name)
+        const form = new FormDataSeller(params.name)
+
+        form.code = params.code
+
+        return form
     }
 
     toParams() {

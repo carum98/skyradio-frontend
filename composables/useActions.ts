@@ -89,57 +89,29 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
-    const { open: OpenCreateModel } = useModal({
-        component: () => import('@views/create-model.vue'),
+    const { open: openUpsertModel } = useModal({
+        component: () => import('@views/form-model.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: OpenUpdateModel } = useModal({
-        component: () => import('@views/update-model.vue'),
+    const { open: openUpsertStatus } = useModal({
+        component: () => import('@views/form-status.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: OpenCreateStatus } = useModal({
-        component: () => import('@views/create-status.vue'),
-        listeners: {
-            onRefresh
-        }
-    })
-
-    const { open: OpenUpdateStatus } = useModal({
-        component: () => import('@views/update-status.vue'),
-        listeners: {
-            onRefresh
-        }
-    })
-
-    const { open: OpenCreateSeller } = useModal({
-        component: () => import('@views/create-seller.vue'),
+    const { open: openUsertSeller } = useModal({
+        component: () => import('@views/form-seller.vue'),
         listeners: {
             onRefresh
         }
     })
     
-    const { open: OpenUpdateSeller } = useModal({
-        component: () => import('@views/update-seller.vue'),
-        listeners: {
-            onRefresh
-        }
-    })
-
-    const { open: OpenCreateProvider } = useModal({
-        component: () => import('@views/create-provider.vue'),
-        listeners: {
-            onRefresh
-        }
-    })
-    
-    const { open: OpenUpdateProvider } = useModal({
-        component: () => import('@views/update-provider.vue'),
+    const { open: OpenUsertProvider } = useModal({
+        component: () => import('@views/form-provider.vue'),
         listeners: {
             onRefresh
         }
@@ -193,37 +165,29 @@ export function useActions(onRefresh: () => void) {
                 openRemoveModality(props)
                 break
             case 'create-model':
-                OpenCreateModel(props)
-                break
             case 'update-model':
-                OpenUpdateModel(props)
+                openUpsertModel(props)
                 break
             case 'remove-model':
                 openRemoveModel(props)
                 break
             case 'create-status':
-                OpenCreateStatus(props)
-                break
             case 'update-status':
-                OpenUpdateStatus(props)
+                openUpsertStatus(props)
                 break
             case 'remove-status':
                 openRemoveStatus(props)
                 break
             case 'create-seller':
-                OpenCreateSeller(props)
-                break
             case 'update-seller':
-                OpenUpdateSeller(props)
+                openUsertSeller(props)
                 break
             case 'remove-seller':
                 openRemoveSeller(props)
                 break
             case 'create-provider':
-                OpenCreateProvider(props)
-                break
             case 'update-provider':
-                OpenUpdateProvider(props)
+                OpenUsertProvider(props)
                 break
             case 'remove-provider':
                 openRemoveProvider(props)

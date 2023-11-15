@@ -1,7 +1,10 @@
-export class FormDataStatus {
+import { SkFormData } from "./form-data"
+
+export class FormDataStatus extends SkFormData {
     public name: string
 
     constructor(name: string) {
+        super({ name })
         this.name = name
     }
 
@@ -10,7 +13,11 @@ export class FormDataStatus {
     }
 
     static update(params: IRadioStatus) {
-        return new FormDataStatus(params.name)
+        const form = new FormDataStatus(params.name)
+
+        form.code = params.code
+
+        return form
     }
 
     toParams() {
