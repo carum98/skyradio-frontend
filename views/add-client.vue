@@ -5,7 +5,7 @@ const props = defineProps<{
 
 const emits = defineEmits<{
     close: []
-    update: []
+    refresh: []
 }>()
 
 // data
@@ -20,7 +20,7 @@ async function send() {
         }
     })
 
-    emits('update')
+    emits('refresh')
     emits('close')
 }
 </script>
