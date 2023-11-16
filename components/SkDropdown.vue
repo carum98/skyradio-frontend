@@ -1,5 +1,6 @@
 <script setup lang='ts'>
-defineProps<{
+const props = defineProps<{
+    dividerPosition?: number
     options: {
         key: string
         label: string
@@ -24,6 +25,13 @@ onMounted(() => {
             }
         }
     })
+
+    if (props.dividerPosition) {
+        const buttons = dropdown.value?.querySelectorAll('button')
+
+        const hr = document.createElement('hr')
+        buttons?.[props.dividerPosition - 1]?.insertAdjacentElement('afterend', hr)
+    }
 })
 </script>
 
@@ -51,47 +59,9 @@ onMounted(() => {
             :key="option.key" 
             @click="option.action"
             :style="{ '--color': option.color }"
-            class="button-actions"
         >
             <span v-html="option.icon"></span>
             {{ option.label }}
         </button>
     </div>
 </template>
-
-<style scoped>
-.sk-dropdown__button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    background-color: #0a4a9b63;
-    border-radius: 10px;
-}
-
-.sk-dropdown__options {
-    width: 180px;
-    padding: 15px;
-    top: anchor(bottom);
-    right: anchor(right);
-
-    > button {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 15px;
-        border-radius: 15px;
-        font-size: 15px;
-
-        &:not(:last-child) {
-            margin-bottom: 15px;
-        }
-
-        > span {
-            height: 24px;
-        }
-    }
-}
-</style>

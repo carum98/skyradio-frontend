@@ -9,12 +9,18 @@ const columns: SkTableColumn[] = [
     {
         title: 'Numero de serie',
         key: 'serial',
-        formatter: (value: ISim | null) => value?.serial ?? '-'
+        formatter: (value: string | null) => value ?? '-'
     },
     {
         title: 'Proveedor',
         key: 'provider',
         formatter: (value: ISimProvider | null) => value?.name ?? '-'
+    },
+    {
+        title: '',
+        key: 'actions',
+        width: 65,
+        align: 'center',
     }
 ]
 
@@ -24,6 +30,24 @@ const { navigateToAction } = useActions(refresh)
 function openCreate() {
     navigateToAction({
         name: 'create-sim'
+    })
+}
+
+function openUpdate(sim: ISim) {
+    navigateToAction({
+        name: 'update-sim',
+        props: {
+            sim
+        }
+    })
+}
+
+function openDelete(sim: ISim) {
+    navigateToAction({
+        name: 'remove-sim',
+        props: {
+            code: sim.code
+        }
     })
 }
 </script>
@@ -40,6 +64,27 @@ function openCreate() {
             <button class="add-button" @click="openCreate">
                 <IconsAdd />
             </button>
+        </template>
+
+        <template #cell(actions)="{ item }">
+            <SkDropdown 
+                :options="[
+                    {
+                        key: 'edit',
+                        label: ActionsStatic.UPDATE.name,
+                        icon: ActionsStatic.UPDATE.icon,
+                        color: ActionsStatic.UPDATE.color,
+                        action: () => openUpdate(item)
+                    },
+                    {
+                        key: 'delete',
+                        label: ActionsStatic.DELETE.name,
+                        icon: ActionsStatic.DELETE.icon,
+                        color: ActionsStatic.DELETE.color,
+                        action: () => openDelete(item)
+                    }
+                ]" 
+            />
         </template>
     </SkTable>
 </main>

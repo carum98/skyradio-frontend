@@ -110,23 +110,23 @@ function openCreateRadio() {
 function rowActions(item: IRadio) {
     let actions = [
         {
-            key: 'delete',
-            label: ActionsStatic.DELETE.name,
-            icon: ActionsStatic.DELETE.icon,
-            color: ActionsStatic.DELETE.color,
-            action: () => openDelete(item)
-        },
-        {
             key: 'edit',
             label: ActionsStatic.UPDATE.name,
             icon: ActionsStatic.UPDATE.icon,
             color: ActionsStatic.UPDATE.color,
             action: () => openUpdate(item)
+        },
+        {
+            key: 'delete',
+            label: ActionsStatic.DELETE.name,
+            icon: ActionsStatic.DELETE.icon,
+            color: ActionsStatic.DELETE.color,
+            action: () => openDelete(item)
         }
     ]
 
     if (item.client === null) {
-        actions.push(
+        actions.unshift(
             {
                 key: 'add',
                 label: ActionsStatic.ADD.name,
@@ -136,7 +136,7 @@ function rowActions(item: IRadio) {
             }
         )
     } else {
-        actions.push(...[
+        actions.unshift(...[
             {
                 key: 'swap',
                 label: ActionsStatic.CHANGE.name,
@@ -180,7 +180,10 @@ function rowActions(item: IRadio) {
         </template>
 
         <template #cell(actions)="{ item }">
-            <SkDropdown :options="rowActions(item)" />
+            <SkDropdown 
+                :dividerPosition="item.client === null ? 1 : 2"
+                :options="rowActions(item)" 
+            />
         </template>
     </SkTable>
 </main>
