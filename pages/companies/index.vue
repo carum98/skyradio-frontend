@@ -79,6 +79,24 @@ function openCreateClient() {
         name: 'create-client',
     })
 }
+
+function openUpdate(client: IClient) {
+    navigateToAction({
+        name: 'update-client',
+        props: {
+            client
+        }
+    })
+}
+
+function openDelete(client: IClient) {
+    navigateToAction({
+        name: 'remove-client',
+        props: {
+            code: client.code
+        }
+    })
+}
 </script>
 
 <template>
@@ -123,6 +141,20 @@ function openCreateClient() {
                     icon: ActionsStatic.REMOVE.icon,
                     color: ActionsStatic.REMOVE.color,
                     action: () => openRemove(item)
+                },
+                {
+                    key: 'delete',
+                    label: ActionsStatic.DELETE.name,
+                    icon: ActionsStatic.DELETE.icon,
+                    color: ActionsStatic.DELETE.color,
+                    action: () => openDelete(item)
+                },
+                {
+                    key: 'edit',
+                    label: ActionsStatic.UPDATE.name,
+                    icon: ActionsStatic.UPDATE.icon,
+                    color: ActionsStatic.UPDATE.color,
+                    action: () => openUpdate(item)
                 }
             ]" />
         </template>
