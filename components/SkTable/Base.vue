@@ -24,8 +24,15 @@ function onRowClick(row: T) {
 }
 
 function rowContent(row: T, column: SkTableColumn) {
-    if (column.formatter) {
-        return column.formatter(row[column.key])
+    const value = getPath(row, column)
+
+    return column.formatter ? column.formatter(value) : value
+}
+
+function getPath(row: T, column: SkTableColumn) {
+    if (column.key.includes('.')) {
+        const value = column.key.split('.').reduce((acc, key) => acc[key] ?? {}, row)
+        return Object.keys(value).length ? value : null
     }
 
     return row[column.key]
@@ -75,7 +82,7 @@ function rowAttributes(column: SkTableColumn) {
                 >
                     <slot
                         :name="`cell(${column.key})`"
-                        :value="row[column.key]"
+                        :value="rowContent(row, column)"
                         :item="row"
                         :column="column"
                     >

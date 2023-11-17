@@ -17,6 +17,14 @@ const columns: SkTableColumn[] = [
         formatter: (value: ISimProvider | null) => value?.name ?? '-'
     },
     {
+        title: 'Radio',
+        key: 'radio',
+    },
+    {
+        title: 'Cliente',
+        key: 'radio.client',
+    },
+    {
         title: '',
         key: 'actions',
         width: 65,
@@ -64,6 +72,25 @@ function openDelete(sim: ISim) {
             <button class="add-button" @click="openCreate">
                 <IconsAdd />
             </button>
+        </template>
+
+        <template #cell(radio)="{ value }">
+            <NuxtLink
+                v-if="value"
+                :to="{ name: 'radios-profile', params: { code: value.code } }"
+            >
+                <p>{{ value.name }}</p>
+                <p>{{ value.imei }}</p>
+            </NuxtLink> 
+        </template>
+
+        <template #cell(radio.client)="{ value }">
+            <NuxtLink 
+                v-if="value"
+                :to="{ name: 'companies-profile', params: { code: value.code } }"
+            >
+                {{ value.name }}
+            </NuxtLink>
         </template>
 
         <template #cell(actions)="{ item }">
