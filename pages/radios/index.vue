@@ -26,7 +26,6 @@ const columns: SkTableColumn[] = [
     {
         title: 'Cliente',
         key: 'client',
-        formatter: (value: IClient | null) => value?.name ?? '-'
     },
     {
         title: 'Estado',
@@ -177,6 +176,16 @@ function rowActions(item: IRadio) {
         <template #cell(sim)="{ value }">
             <p>{{ value?.number }}</p>
             <p>{{ value?.provider?.name }}</p>
+        </template>
+
+        <template #cell(client)="{ value }">
+            <NuxtLink 
+                v-if="value"
+                :to="{ name: 'clients-profile', params: { code: value.code } }"
+                @click.native.stop
+            >
+                {{ value.name }}
+            </NuxtLink>
         </template>
 
         <template #cell(actions)="{ item }">
