@@ -49,7 +49,7 @@ function openSwap(client: IClient) {
 
 function openProfile(client: IClient) {
     navigateTo({
-        name: 'companies-profile',
+        name: 'clients-profile',
         params: {
             code: client.code
         }

@@ -2,7 +2,7 @@
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
 definePageMeta({
-    name: 'companies-profile'
+    name: 'clients-profile'
 })
 
 const columns: SkTableColumn[] = [

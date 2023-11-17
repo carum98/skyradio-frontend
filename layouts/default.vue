@@ -12,7 +12,7 @@
                 </span>
                 Menu
             </NuxtLink>
-            <NuxtLink :to="{ name: 'companies' }">
+            <NuxtLink :to="{ name: 'clients' }">
                 <span>
                     <IconsCompany />
                 </span>

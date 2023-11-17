@@ -87,7 +87,7 @@ function openDelete(sim: ISim) {
         <template #cell(radio.client)="{ value }">
             <NuxtLink 
                 v-if="value"
-                :to="{ name: 'companies-profile', params: { code: value.code } }"
+                :to="{ name: 'clients-profile', params: { code: value.code } }"
             >
                 {{ value.name }}
             </NuxtLink>
