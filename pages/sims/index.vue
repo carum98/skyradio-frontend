@@ -79,7 +79,6 @@ function openDelete(sim: ISim) {
                 v-if="value"
                 :to="{ name: 'radios-profile', params: { code: value.code } }"
             >
-                <p>{{ value.name }}</p>
                 <p>{{ value.imei }}</p>
             </NuxtLink> 
         </template>

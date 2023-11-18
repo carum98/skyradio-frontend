@@ -82,7 +82,7 @@ function openAddClient(radio: IRadio) {
 
 function openSwap(radio: IRadio) {
     navigateToAction({
-        name: 'swap',
+        name: 'swap-radio',
         props: {
             radio: radio, 
             client: radio.client
@@ -92,7 +92,7 @@ function openSwap(radio: IRadio) {
 
 function openRemove(radio: IRadio) {
     navigateToAction({
-        name: 'remove',
+        name: 'remove-radio',
         props: {
             radio: radio, 
             client: radio.client

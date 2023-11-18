@@ -67,7 +67,7 @@ function onRemove(client: IClient | null) {
 
 function openSwap({ client, radio }: { client: IClient | null, radio: IRadio | null }) {
     navigateToAction({
-        name: 'swap',
+        name: 'swap-radio',
         props: {
             client,
             radio
@@ -77,7 +77,7 @@ function openSwap({ client, radio }: { client: IClient | null, radio: IRadio | n
 
 function openRemove({ client, radio }: { client: IClient | null, radio: IRadio | null }) {
     navigateToAction({
-        name: 'remove',
+        name: 'remove-radio',
         props: {
             client,
             radio
@@ -87,7 +87,7 @@ function openRemove({ client, radio }: { client: IClient | null, radio: IRadio |
 
 function openAdd(client: IClient | null) {
     navigateToAction({
-        name: 'add',
+        name: 'add-radio',
         props: {
             client
         }

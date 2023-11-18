@@ -40,7 +40,7 @@ const { navigateToAction } = useActions(refresh)
 // methods
 function openSwap(client: IClient) {
     navigateToAction({
-        name: 'swap',
+        name: 'swap-radio',
         props: {
             client
         }
@@ -58,7 +58,7 @@ function openProfile(client: IClient) {
 
 function openAdd(client: IClient) {
     navigateToAction({
-        name: 'add',
+        name: 'add-radio',
         props: {
             client
         }
@@ -67,7 +67,7 @@ function openAdd(client: IClient) {
 
 function openRemove(client: IClient) {
     navigateToAction({
-        name: 'remove',
+        name: 'remove-radio',
         props: {
             client
         }

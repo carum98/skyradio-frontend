@@ -1,7 +1,7 @@
 type ActionsName = 
-    'swap' 
-    | 'add' 
-    | 'remove' 
+    'swap-radio' 
+    | 'add-radio' 
+    | 'remove-radio' 
     | 'add-client' 
     | 'create-radio' 
     | 'update-radio' 
@@ -29,21 +29,21 @@ type ActionsName =
     | 'remove-sim'
 
 export function useActions(onRefresh: () => void) {
-    const { open: openSwap } = useModal({
+    const { open: openSwapRadio } = useModal({
         component: () => import('@views/swap-radio.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: openAdd } = useModal({
+    const { open: openAddRadio } = useModal({
         component: () => import('@views/add-radio.vue'),
         listeners: {
             onRefresh
         }
     })
 
-    const { open: openRemove } = useModal({
+    const { open: openRemoveRadio } = useModal({
         component: () => import('@views/remove-radio.vue'),
         listeners: {
             onRefresh
@@ -122,14 +122,14 @@ export function useActions(onRefresh: () => void) {
 
     function navigateToAction({ name, props } : { name: ActionsName, props?: Record<string, any> }) {
         switch (name) {
-            case 'swap':
-                openSwap(props)
+            case 'swap-radio':
+                openSwapRadio(props)
                 break
-            case 'add':
-                openAdd(props)
+            case 'add-radio':
+                openAddRadio(props)
                 break
-            case 'remove':
-                openRemove(props)
+            case 'remove-radio':
+                openRemoveRadio(props)
                 break
             case 'add-client':
                 openAddClient(props)
