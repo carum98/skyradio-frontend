@@ -121,39 +121,39 @@ function openDelete(client: IClient) {
 
         <template #cell(actions)="{ item }">
             <SkDropdown 
-                :dividerPosition="3"
+                :dividers="[3]"
                 :options="[
                     {
                         key: 'change',
-                        label: ActionsStatic.CHANGE.name,
+                        name: ActionsStatic.CHANGE.name,
                         icon: ActionsStatic.CHANGE.icon,
                         color: ActionsStatic.CHANGE.color,
                         action: () => openSwap(item)
                     },
                     {
                         key: 'add',
-                        label: ActionsStatic.ADD.name,
+                        name: ActionsStatic.ADD.name,
                         icon: ActionsStatic.ADD.icon,
                         color: ActionsStatic.ADD.color,
                         action: () => openAdd(item)
                     },
                     {
                         key: 'remove',
-                        label: ActionsStatic.REMOVE.name,
+                        name: ActionsStatic.REMOVE.name,
                         icon: ActionsStatic.REMOVE.icon,
                         color: ActionsStatic.REMOVE.color,
                         action: () => openRemove(item)
                     },
                     {
                         key: 'edit',
-                        label: ActionsStatic.UPDATE.name,
+                        name: ActionsStatic.UPDATE.name,
                         icon: ActionsStatic.UPDATE.icon,
                         color: ActionsStatic.UPDATE.color,
                         action: () => openUpdate(item)
                     },
                     {
                         key: 'delete',
-                        label: ActionsStatic.DELETE.name,
+                        name: ActionsStatic.DELETE.name,
                         icon: ActionsStatic.DELETE.icon,
                         color: ActionsStatic.DELETE.color,
                         action: () => openDelete(item)

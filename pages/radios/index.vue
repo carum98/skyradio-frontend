@@ -53,108 +53,12 @@ function openProfile(radio: IRadio) {
     })
 }
 
-function openUpdate(radio: IRadio) {
-    navigateToAction({
-        name: 'update-radio',
-        props: {
-            radio
-        }
-    })
-}
-
-function openDelete(radio: IRadio) {
-    navigateToAction({
-        name: 'remove-radio',
-        props: {
-            code: radio.code
-        }
-    })
-}
-
-function openAddClient(radio: IRadio) {
-    navigateToAction({
-        name: 'add-client',
-        props: {
-            radio
-        }
-    })
-}
-
-function openSwap(radio: IRadio) {
-    navigateToAction({
-        name: 'swap-radio',
-        props: {
-            radio: radio, 
-            client: radio.client
-        }
-    })
-}
-
-function openRemove(radio: IRadio) {
-    navigateToAction({
-        name: 'remove-radio',
-        props: {
-            radio: radio, 
-            client: radio.client
-        }
-    })
-}
-
 function openCreateRadio() {
     navigateToAction({
         name: 'create-radio'
     })
 }
 
-function rowActions(item: IRadio) {
-    let actions = [
-        {
-            key: 'edit',
-            label: ActionsStatic.UPDATE.name,
-            icon: ActionsStatic.UPDATE.icon,
-            color: ActionsStatic.UPDATE.color,
-            action: () => openUpdate(item)
-        },
-        {
-            key: 'delete',
-            label: ActionsStatic.DELETE.name,
-            icon: ActionsStatic.DELETE.icon,
-            color: ActionsStatic.DELETE.color,
-            action: () => openDelete(item)
-        }
-    ]
-
-    if (item.client === null) {
-        actions.unshift(
-            {
-                key: 'add',
-                label: ActionsStatic.ADD.name,
-                icon: ActionsStatic.ADD.icon,
-                color: ActionsStatic.ADD.color,
-                action: () => openAddClient(item)
-            }
-        )
-    } else {
-        actions.unshift(...[
-            {
-                key: 'swap',
-                label: ActionsStatic.CHANGE.name,
-                icon: ActionsStatic.CHANGE.icon,
-                color: ActionsStatic.CHANGE.color,
-                action: () => openSwap(item)
-            },
-            {
-                key: 'remove',
-                label: ActionsStatic.REMOVE.name,
-                icon: ActionsStatic.REMOVE.icon,
-                color: ActionsStatic.REMOVE.color,
-                action: () => openRemove(item)
-            }
-        ])
-    }
-
-    return actions
-}
 </script>
 
 <template>
@@ -189,9 +93,9 @@ function rowActions(item: IRadio) {
         </template>
 
         <template #cell(actions)="{ item }">
-            <SkDropdown 
-                :dividerPosition="item.client === null ? 1 : 2"
-                :options="rowActions(item)" 
+            <ActionsDropdownRadio
+                :radio="item"
+                :refresh="refresh"
             />
         </template>
     </SkTable>

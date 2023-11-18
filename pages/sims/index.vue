@@ -94,39 +94,39 @@ function openDelete(sim: ISim) {
 
         <template #cell(actions)="{ item }">
             <SkDropdown 
-                :dividerPosition="3"
+                :dividers="[3]"
                 :options="[
                     {
                         key: 'swap',
-                        label: ActionsStatic.CHANGE.name,
+                        name: ActionsStatic.CHANGE.name,
                         icon: ActionsStatic.CHANGE.icon,
                         color: ActionsStatic.CHANGE.color,
                         action: () => {}
                     },
                     {
                         key: 'add',
-                        label: 'Relacionar',
+                        name: 'Relacionar',
                         icon: ActionsStatic.ADD.icon,
                         color: ActionsStatic.ADD.color,
                         action: () => {}
                     },
                     {
                         key: 'remove',
-                        label:'Desvincular',
+                        name:'Desvincular',
                         icon: ActionsStatic.REMOVE.icon,
                         color: ActionsStatic.REMOVE.color,
                         action: () => {}
                     },
                     {
                         key: 'edit',
-                        label: ActionsStatic.UPDATE.name,
+                        name: ActionsStatic.UPDATE.name,
                         icon: ActionsStatic.UPDATE.icon,
                         color: ActionsStatic.UPDATE.color,
                         action: () => openUpdate(item)
                     },
                     {
                         key: 'delete',
-                        label: ActionsStatic.DELETE.name,
+                        name: ActionsStatic.DELETE.name,
                         icon: ActionsStatic.DELETE.icon,
                         color: ActionsStatic.DELETE.color,
                         action: () => openDelete(item)

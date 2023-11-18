@@ -93,24 +93,6 @@ function openAdd(client: IClient | null) {
         }
     })
 }
-
-function openUpdate(radio: IRadio) {
-    navigateToAction({
-        name: 'update-radio',
-        props: {
-            radio
-        }
-    })
-}
-
-function openDelete(radio: IRadio) {
-    navigateToAction({
-        name: 'remove-radio',
-        props: {
-            code: radio.code
-        }
-    })
-}
 </script>
 
 <template>
@@ -133,7 +115,7 @@ function openDelete(radio: IRadio) {
                     :options="[
                         {
                             key: 'remove',
-                            label: ActionsStatic.DELETE.name,
+                            name: ActionsStatic.DELETE.name,
                             icon: ActionsStatic.DELETE.icon,
                             color: ActionsStatic.DELETE.color,
                             action: () => onRemove(client)
@@ -183,38 +165,9 @@ function openDelete(radio: IRadio) {
             </template>
 
             <template #cell(actions)="{ item }">
-                <SkDropdown 
-                    :dividerPosition="2"
-                    :options="[
-                        {
-                            key: 'swap',
-                            label: ActionsStatic.CHANGE.name,
-                            icon: ActionsStatic.CHANGE.icon,
-                            color: ActionsStatic.CHANGE.color,
-                            action: () => openSwap({ client, radio: item })
-                        },
-                        {
-                            key: 'remove',
-                            label: ActionsStatic.REMOVE.name,
-                            icon: ActionsStatic.REMOVE.icon,
-                            color: ActionsStatic.REMOVE.color,
-                            action: () => openRemove({ client, radio: item })
-                        },
-                        {
-                            key: 'edit',
-                            label: ActionsStatic.UPDATE.name,
-                            icon: ActionsStatic.UPDATE.icon,
-                            color: ActionsStatic.UPDATE.color,
-                            action: () => openUpdate(item)
-                        },
-                        {
-                            key: 'delete',
-                            label: ActionsStatic.DELETE.name,
-                            icon: ActionsStatic.DELETE.icon,
-                            color: ActionsStatic.DELETE.color,
-                            action: () => openDelete(item)
-                        }
-                    ]" 
+                <ActionsDropdownRadio
+                    :radio="item"
+                    :refresh="refresh"
                 />
             </template>
         </SkTable>

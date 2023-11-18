@@ -1,9 +1,9 @@
 <script setup lang='ts'>
 const props = defineProps<{
-    dividerPosition?: number
+    dividers?: number[]
     options: {
         key: string
-        label: string
+        name: string
         icon: string
         color: string
         action: Function
@@ -26,11 +26,13 @@ onMounted(() => {
         }
     })
 
-    if (props.dividerPosition) {
+    if (props.dividers) {
         const buttons = dropdown.value?.querySelectorAll('button')
 
-        const hr = document.createElement('hr')
-        buttons?.[props.dividerPosition - 1]?.insertAdjacentElement('afterend', hr)
+        props.dividers.forEach((dividerPosition) => {
+            const hr = document.createElement('hr')
+            buttons?.[dividerPosition - 1]?.insertAdjacentElement('afterend', hr)
+        })
     }
 })
 </script>
@@ -61,7 +63,7 @@ onMounted(() => {
             :style="{ '--color': option.color }"
         >
             <span v-html="option.icon"></span>
-            {{ option.label }}
+            {{ option.name }}
         </button>
     </div>
 </template>
