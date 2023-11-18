@@ -40,24 +40,6 @@ function openCreate() {
         name: 'create-sim'
     })
 }
-
-function openUpdate(sim: ISim) {
-    navigateToAction({
-        name: 'update-sim',
-        props: {
-            sim
-        }
-    })
-}
-
-function openDelete(sim: ISim) {
-    navigateToAction({
-        name: 'remove-sim',
-        props: {
-            code: sim.code
-        }
-    })
-}
 </script>
 
 <template>
@@ -93,45 +75,9 @@ function openDelete(sim: ISim) {
         </template>
 
         <template #cell(actions)="{ item }">
-            <SkDropdown 
-                :dividers="[3]"
-                :options="[
-                    {
-                        key: 'swap',
-                        name: ActionsStatic.CHANGE.name,
-                        icon: ActionsStatic.CHANGE.icon,
-                        color: ActionsStatic.CHANGE.color,
-                        action: () => {}
-                    },
-                    {
-                        key: 'add',
-                        name: 'Relacionar',
-                        icon: ActionsStatic.ADD.icon,
-                        color: ActionsStatic.ADD.color,
-                        action: () => {}
-                    },
-                    {
-                        key: 'remove',
-                        name:'Desvincular',
-                        icon: ActionsStatic.REMOVE.icon,
-                        color: ActionsStatic.REMOVE.color,
-                        action: () => {}
-                    },
-                    {
-                        key: 'edit',
-                        name: ActionsStatic.UPDATE.name,
-                        icon: ActionsStatic.UPDATE.icon,
-                        color: ActionsStatic.UPDATE.color,
-                        action: () => openUpdate(item)
-                    },
-                    {
-                        key: 'delete',
-                        name: ActionsStatic.DELETE.name,
-                        icon: ActionsStatic.DELETE.icon,
-                        color: ActionsStatic.DELETE.color,
-                        action: () => openDelete(item)
-                    }
-                ]" 
+            <ActionsDropdownSim 
+                :sim="item"
+                :refresh="refresh"
             />
         </template>
     </SkTable>
