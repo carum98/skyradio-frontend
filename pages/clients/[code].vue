@@ -87,7 +87,7 @@ function openRemove({ client, radio }: { client: IClient | null, radio: IRadio |
 
 function openAdd(client: IClient | null) {
     navigateToAction({
-        name: 'add-radio',
+        name: 'add-radios',
         props: {
             client
         }

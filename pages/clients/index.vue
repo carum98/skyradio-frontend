@@ -58,7 +58,7 @@ function openProfile(client: IClient) {
 
 function openAdd(client: IClient) {
     navigateToAction({
-        name: 'add-radio',
+        name: 'add-radios',
         props: {
             client
         }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-    sim: ISim
+    radio: IRadio
 }>()
 
 const emits = defineEmits<{
@@ -9,14 +9,14 @@ const emits = defineEmits<{
 }>()
 
 // data
-const radio = ref<IRadio | null>(null)
+const sim = ref<ISim | null>(null)
 
 // methods
 async function send() {
-    await $fetch(`/api/sims/${props.sim.code}/radios`, {
-        method: 'POST',
+    await $fetch(`/api/radios/${props.radio.code}/sims`, {
+        method: 'PUT',
         body: {
-            radio_code: radio.value?.code
+            sim_code: sim.value?.code
         }
     })
 
@@ -27,9 +27,9 @@ async function send() {
 
 <template>
     <form class="sk-form" @submit.prevent="send" style="width: 300px;">
-        <label>Radio</label>
-        <SelectRadio 
-            v-model="radio"
+        <label>Sim</label>
+        <SelectSim 
+            v-model="sim"
         />
 
         <button type="submit" class="sk-button">

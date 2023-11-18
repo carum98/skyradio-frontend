@@ -10,22 +10,31 @@ let actions = [
     {
         ...ActionsStatic.ADD,
         key: 'add-sim',
-        name: 'Relacionar SIM',
-        action: () => {},
+        name: 'Relacionar Radio',
+        action: () => navigateToAction({
+            name: 'add-radio',
+            props: { sim: props.sim }
+        }),
         show: props.sim.radio === null
     },
     {
         ...ActionsStatic.CHANGE,
         key: 'swap-sim',
         name: 'Cambiar SIM',
-        action: () => {},
+        action: () => navigateToAction({
+            name: 'swap-sim',
+            props: { radio: props.sim.radio }
+        }),
         show: props.sim.radio !== null
     },
     {
         ...ActionsStatic.REMOVE,
         key: 'remove-sim',
         name: 'Desvincular SIM',
-        action: () => {},
+        action: () => navigateToAction({
+            name: 'remove-sim2',
+            props: { sim: props.sim }
+        }),
         show: props.sim.radio !== null
     },
     {

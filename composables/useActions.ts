@@ -1,6 +1,6 @@
 type ActionsName = 
     'swap-radio' 
-    | 'add-radio' 
+    | 'add-radios' 
     | 'remove-radio' 
     | 'add-client' 
     | 'create-radio' 
@@ -27,10 +27,21 @@ type ActionsName =
     | 'create-sim'
     | 'update-sim'
     | 'remove-sim'
+    | 'add-sim'
+    | 'swap-sim'
+    | 'remove-sim2'
+    | 'add-radio'
 
 export function useActions(onRefresh: () => void) {
     const { open: openSwapRadio } = useModal({
         component: () => import('@views/swap-radio.vue'),
+        listeners: {
+            onRefresh
+        }
+    })
+
+    const { open: openAddRadios } = useModal({
+        component: () => import('@views/add-radios.vue'),
         listeners: {
             onRefresh
         }
@@ -52,6 +63,27 @@ export function useActions(onRefresh: () => void) {
 
     const { open: openAddClient } = useModal({
         component: () => import('@views/add-client.vue'),
+        listeners: {
+            onRefresh
+        }
+    })
+
+    const { open: openAddSim } = useModal({
+        component: () => import('@views/add-sim.vue'),
+        listeners: {
+            onRefresh
+        }
+    })
+
+    const { open: openRemoveSim } = useModal({
+        component: () => import('@views/remove-sim.vue'),
+        listeners: {
+            onRefresh
+        }
+    })
+
+    const { open: openSwapSim } = useModal({
+        component: () => import('@views/swap-sim.vue'),
         listeners: {
             onRefresh
         }
@@ -125,8 +157,8 @@ export function useActions(onRefresh: () => void) {
             case 'swap-radio':
                 openSwapRadio(props)
                 break
-            case 'add-radio':
-                openAddRadio(props)
+            case 'add-radios':
+                openAddRadios(props)
                 break
             case 'remove-radio':
                 openRemoveRadio(props)
@@ -213,6 +245,18 @@ export function useActions(onRefresh: () => void) {
                     name: 'Proveedor',
                     path: `/api/sims-provider/${props?.code}`
                 })
+                break
+            case 'add-sim':
+                openAddSim(props)
+                break
+            case 'remove-sim2':
+                openRemoveSim(props)
+                break
+            case 'add-radio':
+                openAddRadio(props)
+                break
+            case 'swap-sim':
+                openSwapSim(props)
                 break
         }
     }
