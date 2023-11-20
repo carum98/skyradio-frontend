@@ -28,6 +28,12 @@ const columns: SkTableColumn[] = [
     },
     {
         title: '',
+        key: 'logs',
+        width: 65,
+        align: 'center',
+    },
+    {
+        title: '',
         key: 'actions',
         width: 65,
         align: 'center',
@@ -36,6 +42,7 @@ const columns: SkTableColumn[] = [
 
 const { page, search, data, refresh } = await useTableData<IClient>('/api/clients')
 const { navigateToAction } = useActions(refresh)
+const { open: openLogs } = useLogs('clients')
 
 // methods
 function openSwap(client: IClient) {
@@ -117,6 +124,12 @@ function openDelete(client: IClient) {
 
         <template #cell(radios_count)="{ item }">
             <span class="counter">{{ item.radios_count }}</span>
+        </template>
+
+        <template #cell(logs)="{ item }">
+            <button class="sk-dropdown__button" @click.stop="openLogs(item.code)">
+                <IconsLogs />
+            </button>
         </template>
 
         <template #cell(actions)="{ item }">

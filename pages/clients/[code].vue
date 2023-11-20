@@ -29,6 +29,12 @@ const columns: SkTableColumn[] = [
     },
     {
         title: '',
+        key: 'logs',
+        width: 65,
+        align: 'center',
+    },
+    {
+        title: '',
         key: 'actions',
         width: 65,
         align: 'center',
@@ -37,13 +43,19 @@ const columns: SkTableColumn[] = [
 const route = useRoute()
 const router = useRouter()
 
-// data
-const { data: client, refresh: refreshData } = await useFetch<IClient>(`/api/clients/${route.params.code}`)
+const code = route.params.code as string
 
-const { page, data, search, refresh } = await useTableData<IRadio>(`/api/clients/${route.params.code}/radios`)
+// data
+const { data: client, refresh: refreshData } = await useFetch<IClient>(`/api/clients/${code}`)
+
+const { page, data, search, refresh } = await useTableData<IRadio>(`/api/clients/${code}/radios`)
+
+const { open: openClientLogs } = useLogs('clients')
+const { open: openRadioLogs } = useLogs('radios')
 const { navigateToAction } = useActions(refresh)
 const { navigateToAction: navigateToAction2 } = useActions(refreshData)
 const { navigateToAction: navigateToAction3 } = useActions(() => router.back())
+
 
 
 // methods
@@ -107,7 +119,7 @@ function openAdd(client: IClient | null) {
                     Editar
                 </button>
 
-                <button class="sk-button">
+                <button v-if="client" class="sk-button" @click="openClientLogs(client.code)">
                     Historial
                 </button>
 
@@ -162,6 +174,12 @@ function openAdd(client: IClient | null) {
             <template #cell(sim)="{ value }">
                 <p>{{ value?.number }}</p>
                 <p>{{ value?.provider?.name }}</p>
+            </template>
+
+            <template #cell(logs)="{ item }">
+                <button class="sk-dropdown__button" @click.stop="openRadioLogs(item.code)">
+                    <IconsLogs />
+                </button>
             </template>
 
             <template #cell(actions)="{ item }">

@@ -34,6 +34,12 @@ const columns: SkTableColumn[] = [
     },
     {
         title: '',
+        key: 'logs',
+        width: 65,
+        align: 'center',
+    },
+    {
+        title: '',
         key: 'actions',
         width: 65,
         align: 'center',
@@ -42,6 +48,7 @@ const columns: SkTableColumn[] = [
 // data
 const { page, data, search, refresh } = await useTableData<IRadio>('/api/radios')
 const { navigateToAction } = useActions(refresh)
+const { open: openLogs } = useLogs('radios')
 
 // methods
 function openProfile(radio: IRadio) {
@@ -90,6 +97,12 @@ function openCreateRadio() {
             >
                 {{ value.name }}
             </NuxtLink>
+        </template>
+
+        <template #cell(logs)="{ item }">
+            <button class="sk-dropdown__button" @click.stop="openLogs(item.code)">
+                <IconsLogs />
+            </button>
         </template>
 
         <template #cell(actions)="{ item }">
