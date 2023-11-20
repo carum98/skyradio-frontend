@@ -24,7 +24,7 @@ export function programmaticallyComponent(
         const componentData = await params.component()
     
         instance = createVNode(componentRoot.default, {
-            close: destroy
+            onClose: destroy
         }, () => [
             createVNode(componentData.default, {
                 ...params.props,

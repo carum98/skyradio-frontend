@@ -6,6 +6,8 @@
 @import './table.css';
 @import './dialog.css';
 @import './popover.css';
+@import './dropdown.css';
+@import './slideover.css';
 @import './utilities.css';
 
 .add-button {
@@ -152,70 +154,6 @@
 
         & button {
             margin-left: auto;
-        }
-    }
-}
-
-.sk-dropdown__button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    background-color: #0a4a9b63;
-    border-radius: 10px;
-
-    & svg {
-        width: 20px;
-        height: 20px;
-        color: #fff;
-    }
-}
-
-.sk-dropdown__options {
-    width: 200px;
-    padding: 15px;
-    top: anchor(bottom);
-    right: anchor(right);
-
-    --border: 1px solid #e0e0e020;
-
-    outline: var(--border);
-    box-shadow: 0 0 10px #2e2e2e20;
-    padding: 10px;
-
-    > hr {
-        margin: 10px 0;
-        border: none;
-        border-top: var(--border);
-    }
-
-    > button {
-        width: 100%;
-        font-size: 15px;
-        padding: 10px;
-        border-radius: 10px;
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        color: rgba(var(--text-color-rgb), 0.9);
-
-        & span, & svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        & svg {
-            color: gray;
-        }
-
-        &:hover {
-            background-color: rgba(var(--color), 0.1);
-            color: rgba(var(--color), 0.8);
-
-            & svg {
-                color: rgb(var(--color));
-            }
         }
     }
 }

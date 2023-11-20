@@ -1,0 +1,15 @@
+.sk-slideover {
+    padding: 20px;
+    height: 100vh;
+
+    &:popover-open {
+        inset: unset;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+    }
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
