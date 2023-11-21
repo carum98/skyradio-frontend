@@ -45,7 +45,7 @@ function message(log: ILog) {
             }
 
             if (key === 'sim') {
-                message = message.replace(match, `${log.values.sim?.number}`)
+                message = message.replace(match, `<a href="">${log.values.sim?.number}</a>`)
             }
         })
     }
@@ -82,6 +82,7 @@ onMounted(async () => {
 
     items.value = data.map((log) => ({
         ...log,
+        created_at: formatDate(new Date(log.created_at)),
         message: message(log)
     }))
 
@@ -97,14 +98,48 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <ul ref="list">
-        <li v-for="(log, index) in items" :key="index">
-            <p v-html="log.message"></p>
-
-            <div>
+    <ul ref="list" class="list-logs">
+        <li class="list-logs__item" v-for="(log, index) in items" :key="index">
+            <div class="list-logs__item__detial">
                 <p>{{ log.created_at }}</p>
                 <p>{{ log.user?.name }}</p>
             </div>
+
+            <p class="list-logs__item__message" v-html="log.message"></p>
         </li>
     </ul>
 </template>
+
+<style>
+.list-logs {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.list-logs__item__detial {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0 0.5rem;
+    color: gray;
+}
+
+.list-logs__item__message {
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-radius: 1rem;
+
+    & a {
+        background-color: var(--table-color);
+        padding: 0.25rem 0.5rem;
+        color: var(--text-color);
+        border-radius: 0.5rem;
+
+        &:hover {
+            background-color: var(--primary-color);
+        }
+    }
+}
+</style>
