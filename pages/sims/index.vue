@@ -68,7 +68,7 @@ function openCreate() {
                 v-if="value"
                 :to="{ name: 'radios-profile', params: { code: value.code } }"
             >
-                <p>{{ value.imei }}</p>
+                {{ value.imei }}
             </NuxtLink> 
         </template>
 

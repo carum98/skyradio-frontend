@@ -157,3 +157,35 @@
         }
     }
 }
+
+.list-logs {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.list-logs__item__detial {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0 0.5rem;
+    color: gray;
+}
+
+.list-logs__item__message {
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-radius: 1rem;
+
+    & a {
+        background-color: var(--table-color);
+        padding: 0.25rem 0.5rem;
+        color: var(--text-color);
+        border-radius: 0.5rem;
+    
+        &:hover {
+            background-color: var(--primary-color);
+        }
+    }
+}
