@@ -21,6 +21,14 @@
             <NuxtLink :to="{ name: 'radios-status' }">
                 Estados
             </NuxtLink>
+
+            <p>Admin</p>
+            <NuxtLink :to="{ name: 'users' }">
+                Usuarios
+            </NuxtLink>
+            <NuxtLink :to="{ name: 'groups' }">
+                Grupos
+            </NuxtLink>
         </section>
 
         <NuxtPage />

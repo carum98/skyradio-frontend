@@ -1,6 +1,6 @@
 declare global {
     interface IUser {
-        id: number
+        code: string 
         email: string
         name: string
         role: 'admin' | 'user'
