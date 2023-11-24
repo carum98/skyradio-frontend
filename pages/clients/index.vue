@@ -11,14 +11,12 @@ const columns: SkTableColumn[] = [
         key: 'seller',
         width: 300,
         align: 'center',
-        formatter: (seller: ISeller | null) => seller?.name ?? '-'
     },
     {
         title: 'Modalidad',
         key: 'modality',
         width: 300,
         align: 'center',
-        formatter: (modality: IModality) => modality.name
     },
     {
         title: '',
@@ -130,6 +128,22 @@ function openDelete(client: IClient) {
             <button class="sk-dropdown__button" @click.stop="openLogs(item.code)">
                 <IconsLogs />
             </button>
+        </template>
+
+        <template #cell(seller)="{ value }">
+            <NuxtLink
+                v-if="value"
+                :to="{ name: 'sellers-profile', params: { code: value.code } }"
+            >
+                {{ value.name }}
+            </NuxtLink> 
+        </template>
+
+        <template #cell(modality)="{ value }">
+            <a v-if="value" href="">
+                <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
+                {{ value.name }}
+            </a>
         </template>
 
         <template #cell(actions)="{ item }">
