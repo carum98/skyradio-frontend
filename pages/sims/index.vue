@@ -14,7 +14,6 @@ const columns: SkTableColumn[] = [
     {
         title: 'Proveedor',
         key: 'provider',
-        formatter: (value: ISimProvider | null) => value?.name ?? '-'
     },
     {
         title: 'Radio',
@@ -61,6 +60,13 @@ function openCreate() {
             <button class="add-button" @click="openCreate">
                 <IconsAdd />
             </button>
+        </template>
+
+        <template #cell(provider)="{ value }">
+            <a v-if="value" href="">
+                <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
+                {{ value.name }}
+            </a>
         </template>
 
         <template #cell(radio)="{ value }">

@@ -20,8 +20,12 @@ const columns: SkTableColumn[] = [
         formatter: (value: IRadioModel | null) => value?.name ?? '-'
     },
     {
-        title: 'Sim / Proveedor',
+        title: 'Sim',
         key: 'sim',
+    },
+    {
+        title: 'Proveedor',
+        key: 'sim.provider',
     },
     {
         title: 'Cliente',
@@ -85,8 +89,16 @@ function openCreateRadio() {
         </template>
 
         <template #cell(sim)="{ value }">
-            <p>{{ value?.number }}</p>
-            <p>{{ value?.provider?.name }}</p>
+            <a v-if="value" href="">
+                {{ value?.number }}
+            </a>
+        </template>
+
+        <template #cell(sim.provider)="{ value }">
+            <a v-if="value" href="">
+                <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
+                {{ value.name }}
+            </a>
         </template>
 
         <template #cell(client)="{ value }">
