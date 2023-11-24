@@ -9,6 +9,7 @@
 @import './dropdown.css';
 @import './slideover.css';
 @import './utilities.css';
+@import './color_picker.css';
 
 .add-button {
     background-color: var(--primary-color);

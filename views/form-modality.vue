@@ -28,6 +28,12 @@ const form = reactive(props.modality
                 autofocus
                 v-model="form.name" 
             />
+
+            <label>Color</label>
+            <SkColorPicker 
+                v-model="form.color"
+                style="width: 350px"
+            />
         </template>
     </ScaffoldForm>
 </template>
