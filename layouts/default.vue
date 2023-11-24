@@ -6,12 +6,12 @@
     </header>
     <aside>
         <nav>
-            <NuxtLink :to="{ name: 'index' }">
+            <!-- <NuxtLink :to="{ name: 'index' }">
                 <span>
                     <IconsHome />
                 </span>
                 Menu
-            </NuxtLink>
+            </NuxtLink> -->
             <NuxtLink :to="{ name: 'clients' }">
                 <span>
                     <IconsCompany />

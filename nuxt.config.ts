@@ -68,6 +68,7 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/login': { static: true },
+    '/': { redirect: '/clients' }
   }
 })
   
