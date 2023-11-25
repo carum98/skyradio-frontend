@@ -23,14 +23,12 @@ function message(log: ILog) {
             const key = match.replace(/[{}]/g, '').trim()
 
             if (key === 'radio') {
-                const route = props.app.$router.resolve({
-                    name: 'radios-profile',
-                    params: {
-                        code: log.values.radio?.code
-                    }
-                })
+                const a = document.createElement('a')
+                a.href = `?name=profile-radio&code=${log.values.radio?.code}`
+                a.dataset.type = 'modal'
+                a.innerText = log.values.radio?.imei ?? ''
 
-                message = message.replace(match, `<a href="${route.path}">${log.values.radio?.imei}</a>`)
+                message = message.replace(match, a.outerHTML)
             }
 
             if (key === 'client') {
@@ -41,11 +39,20 @@ function message(log: ILog) {
                     }
                 })
 
-                message = message.replace(match, `<a href="${route.path}">${log.values.client?.name}</a>`)
+                const a = document.createElement('a')
+                a.href = route.path
+                a.innerText = log.values.client?.name ?? ''
+
+                message = message.replace(match, a.outerHTML)
             }
 
             if (key === 'sim') {
-                message = message.replace(match, `<a href="">${log.values.sim?.number}</a>`)
+                const a = document.createElement('a')
+                a.href = `?name=profile-sim&code=${log.values.sim?.code}`
+                a.dataset.type = 'modal'
+                a.innerText = log.values.sim?.number ?? ''
+
+                message = message.replace(match, a.outerHTML)
             }
         })
     }
@@ -54,7 +61,7 @@ function message(log: ILog) {
 }
 
 function addListeners() {
-    links = Array.from(list.value?.querySelectorAll('a[href^="/"]') ?? [])
+    links = Array.from(list.value?.querySelectorAll('a[href]') ?? [])
 
     links.forEach((link) => {
         link.addEventListener('click', navigate)
@@ -71,9 +78,18 @@ function navigate(event: Event) {
     event.preventDefault()
 
     const a = event.target as HTMLAnchorElement
-    const path = new URL(a.href).pathname
+    const isModal = a.dataset.type === 'modal'
 
-    props.app.$router.push(path)
+    const path = new URL(a.href)
+
+    if (isModal) {
+        props.app.$routerModal.push({
+            name: path.searchParams.get('name') as 'profile-radio' | 'profile-sim',
+            props: Object.fromEntries(path.searchParams.entries())
+        })
+    } else {
+        props.app.$router.push(path.pathname)
+    }
 }
 
 // lifecycle
