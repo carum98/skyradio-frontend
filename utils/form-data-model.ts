@@ -2,18 +2,20 @@ import { SkFormData } from "./form-data"
 
 export class FormDataModel extends SkFormData {
     public name: string
+    public color: string
 
-    constructor(name: string) {
-        super({ name })
+    constructor(name: string, color: string) {
+        super({ name, color })
         this.name = name
+        this.color = color
     }
 
     static create() {
-        return new FormDataModel('')
+        return new FormDataModel('', '')
     }
 
     static update(params: IModality) {
-        const form = new FormDataModel(params.name)
+        const form = new FormDataModel(params.name, params.color)
 
         form.code = params.code
 
@@ -22,7 +24,8 @@ export class FormDataModel extends SkFormData {
 
     toParams() {
         return {
-            name: this.name
+            name: this.name,
+            color: this.color
         }
     }
 }

@@ -17,7 +17,6 @@ const columns: SkTableColumn[] = [
     {
         title: 'Modelo',
         key: 'model',
-        formatter: (value: IRadioModel | null) => value?.name ?? '-'
     },
     {
         title: 'Sim',
@@ -85,6 +84,13 @@ function openCreateRadio() {
             <button class="add-button" @click="openCreateRadio">
                 <IconsAdd />
             </button>
+        </template>
+
+        <template #cell(model)="{ value }">
+            <a v-if="value" href="">
+                <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
+                {{ value?.name }}
+            </a>
         </template>
 
         <template #cell(sim)="{ value }">
