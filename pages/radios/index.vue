@@ -11,10 +11,6 @@ const columns: SkTableColumn[] = [
         key: 'imei',
     },
     {
-        title: 'Serial',
-        key: 'serial',
-    },
-    {
         title: 'Modelo',
         key: 'model',
     },
@@ -52,11 +48,13 @@ const { page, data, search, refresh } = await useTableData<IRadio>('/api/radios'
 const { navigateToAction } = useActions(refresh)
 const { open: openLogs } = useLogs('radios')
 
+const routerModal = useRouterModal()
+
 // methods
 function openProfile(radio: IRadio) {
-    navigateTo({
-        name: 'radios-profile',
-        params: {
+    routerModal.push({
+        name: 'profile-radio',
+        props: {
             code: radio.code
         }
     })

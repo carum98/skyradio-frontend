@@ -15,17 +15,16 @@ const columns: SkTableColumn[] = [
         key: 'imei',
     },
     {
-        title: 'Serial',
-        key: 'serial',
-    },
-    {
         title: 'Modelo',
         key: 'model',
-        formatter: (value: IRadioModel | null) => value?.name ?? '-'
     },
     {
-        title: 'Sim / Proveedor',
+        title: 'Sim',
         key: 'sim',
+    },
+    {
+        title: 'Proveedor',
+        key: 'sim.provider',
     },
     {
         title: '',
@@ -55,8 +54,6 @@ const { open: openRadioLogs } = useLogs('radios')
 const { navigateToAction } = useActions(refresh)
 const { navigateToAction: navigateToAction2 } = useActions(refreshData)
 const { navigateToAction: navigateToAction3 } = useActions(() => router.back())
-
-
 
 // methods
 function onUpdate() {
@@ -111,13 +108,15 @@ function openAdd(client: IClient | null) {
     <main>
         <section class="header-companies-profile">
             <div>
+                <SkAvatar 
+                    v-if="client"  
+                    :alt="client.name"
+                    :color="client.color" 
+                />
+
                 <h2>{{ client?.name }}</h2>
                 <p>{{ client?.seller?.name ?? 'Sin vendedor' }}</p>
                 <p>{{ client?.modality.name }}</p>
-
-                <button class="sk-button" @click="onUpdate">
-                    Editar
-                </button>
 
                 <button v-if="client" class="sk-button" @click="openClientLogs(client.code)">
                     Historial
@@ -126,10 +125,13 @@ function openAdd(client: IClient | null) {
                 <SkDropdown 
                     :options="[
                         {
+                            key: 'edit',
+                            ...ActionsStatic.UPDATE,
+                            action: () => onUpdate()
+                        },
+                        {
                             key: 'remove',
-                            name: ActionsStatic.DELETE.name,
-                            icon: ActionsStatic.DELETE.icon,
-                            color: ActionsStatic.DELETE.color,
+                            ...ActionsStatic.DELETE,
                             action: () => onRemove(client)
                         }
                     ]"
@@ -171,9 +173,24 @@ function openAdd(client: IClient | null) {
                 </div>
             </template>
 
+            <template #cell(model)="{ value }">
+                <a v-if="value" href="">
+                    <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
+                    {{ value?.name }}
+                </a>
+            </template>
+
             <template #cell(sim)="{ value }">
-                <p>{{ value?.number }}</p>
-                <p>{{ value?.provider?.name }}</p>
+                <a v-if="value" href="">
+                    {{ value?.number }}
+                </a>
+            </template>
+
+            <template #cell(sim.provider)="{ value }">
+                <a v-if="value" href="">
+                    <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
+                    {{ value.name }}
+                </a>
             </template>
 
             <template #cell(logs)="{ item }">

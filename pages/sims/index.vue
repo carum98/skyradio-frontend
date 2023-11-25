@@ -41,6 +41,18 @@ const { page, search, data, refresh } = await useTableData<ISim>('/api/sims')
 const { navigateToAction } = useActions(refresh)
 const { open: openLogs } = useLogs('sims')
 
+const routerModal = useRouterModal()
+
+// methods
+function openProfile(sim: ISim) {
+    routerModal.push({
+        name: 'profile-sim',
+        props: {
+            code: sim.code
+        }
+    })
+}
+
 function openCreate() {
     navigateToAction({
         name: 'create-sim'
@@ -54,6 +66,8 @@ function openCreate() {
         :table="data" 
         :columns="columns"
         v-model="search"
+        hover
+        @onRowClick="openProfile"
         @onPage="page = $event"
     >
         <template #toolbar>
