@@ -112,6 +112,7 @@ function openCreateRadio() {
                 :to="{ name: 'clients-profile', params: { code: value.code } }"
                 @click.native.stop
             >
+                <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
             </NuxtLink>
         </template>

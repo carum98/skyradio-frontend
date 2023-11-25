@@ -120,6 +120,11 @@ function openDelete(client: IClient) {
             </button>
         </template>
 
+        <template #cell(name)="{ value, item }">
+            <SkAvatar class="mr-1" :alt="value" :color="item.color" />
+            {{ value }}
+        </template>
+
         <template #cell(radios_count)="{ item }">
             <span class="counter">{{ item.radios_count }}</span>
         </template>

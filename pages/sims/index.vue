@@ -83,6 +83,7 @@ function openCreate() {
                 v-if="value"
                 :to="{ name: 'clients-profile', params: { code: value.code } }"
             >
+                <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
             </NuxtLink>
         </template>
