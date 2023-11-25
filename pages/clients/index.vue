@@ -125,8 +125,10 @@ function openDelete(client: IClient) {
             {{ value }}
         </template>
 
-        <template #cell(radios_count)="{ item }">
-            <span class="counter">{{ item.radios_count }}</span>
+        <template #cell(radios_count)="{ value }">
+            <span class="counter" :disabled="value === 0">
+                {{ value }}
+            </span>
         </template>
 
         <template #cell(logs)="{ item }">

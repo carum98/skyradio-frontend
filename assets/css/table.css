@@ -4,8 +4,9 @@
     width: 100%;
 
     --border-radius: 12px;
+    --padding: 15px;
 
-    &.hover tbody tr:hover {
+    &.hover tbody tr:hover:not(:has(a:hover)) {
         cursor: pointer;
         background-color: rgba(var(--table-color-rgb), 0.4);
     }
@@ -22,24 +23,24 @@
     }
 
     & th {
-        padding: 8px 15px;
+        padding: 8px var(--padding);
         color: rgba(var(--text-color-rgb), 0.8);
     }
 
     & td {
-        padding: 15px;
+        padding: var(--padding);
     }
 
     & th:first-child, & td:first-child {
         border-bottom-left-radius: var(--border-radius);
         border-top-left-radius: var(--border-radius);
-        padding-left: 20px;
+        padding-left: var(--padding);
     }
 
     & th:last-child, & td:last-child {
         border-bottom-right-radius: var(--border-radius);
         border-top-right-radius: var(--border-radius);
-        padding-right: 20px;
+        padding-right: var(--padding);
     }
 
     & a {
@@ -47,9 +48,11 @@
         padding: 0.25rem 0.5rem;
         color: var(--text-color);
         border-radius: 0.5rem;
+        transition: background-color 0.2s;
     
         &:hover {
             background-color: var(--primary-color);
+            color: #fff;
         }
     }
 }
