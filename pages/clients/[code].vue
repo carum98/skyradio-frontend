@@ -55,7 +55,18 @@ const { navigateToAction } = useActions(refresh)
 const { navigateToAction: navigateToAction2 } = useActions(refreshData)
 const { navigateToAction: navigateToAction3 } = useActions(() => router.back())
 
+const routerModal = useRouterModal()
+
 // methods
+function openProfile(radio: IRadio) {
+    routerModal.push({
+        name: 'profile-radio',
+        props: {
+            code: radio.code
+        }
+    })
+}
+
 function onUpdate() {
     navigateToAction2({
         name: 'update-client',
@@ -145,6 +156,8 @@ function openAdd(client: IClient | null) {
             :table="data"
             :columns="columns"
             v-model="search"
+            hover
+            @onRowClick="openProfile"
             @onPage="page = $event"
         >
             <template #actions>
@@ -174,10 +187,14 @@ function openAdd(client: IClient | null) {
             </template>
 
             <template #cell(model)="{ value }">
-                <a v-if="value" href="">
+                <SkLinkModal
+                    v-if="value"
+                    name="profile-model"
+                    :props="{ code: value.code }"
+                >
                     <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
-                    {{ value?.name }}
-                </a>
+                    {{ value.name }}
+                </SkLinkModal>
             </template>
 
             <template #cell(sim)="{ value }">
@@ -191,10 +208,14 @@ function openAdd(client: IClient | null) {
             </template>
 
             <template #cell(sim.provider)="{ value }">
-                <a v-if="value" href="">
+                <SkLinkModal
+                    v-if="value"
+                    name="profile-provider"
+                    :props="{ code: value.code }"
+                >
                     <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                     {{ value.name }}
-                </a>
+                </SkLinkModal>
             </template>
 
             <template #cell(logs)="{ item }">

@@ -77,10 +77,14 @@ function openCreate() {
         </template>
 
         <template #cell(provider)="{ value }">
-            <a v-if="value" href="">
+            <SkLinkModal
+                v-if="value"
+                name="profile-provider"
+                :props="{ code: value.code }"
+            >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
-            </a>
+            </SkLinkModal>
         </template>
 
         <template #cell(radio)="{ value }">

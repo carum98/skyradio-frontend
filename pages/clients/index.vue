@@ -141,16 +141,21 @@ function openDelete(client: IClient) {
             <NuxtLink
                 v-if="value"
                 :to="{ name: 'sellers-profile', params: { code: value.code } }"
+                @click.stop
             >
                 {{ value.name }}
             </NuxtLink> 
         </template>
 
         <template #cell(modality)="{ value }">
-            <a v-if="value" href="">
+            <SkLinkModal
+                v-if="value"
+                name="profile-modality"
+                :props="{ code: value.code }"
+            >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
-                {{ value.name }}
-            </a>
+                {{ value.name  }}
+            </SkLinkModal>
         </template>
 
         <template #cell(actions)="{ item }">

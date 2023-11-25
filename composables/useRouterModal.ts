@@ -6,6 +6,22 @@ const routes = [
     {
         name: 'profile-sim',
         component: () => import('@views/profile-sim.vue')
+    },
+    {
+        name: 'profile-modality',
+        component: () => import('@views/profile-modality.vue')
+    },
+    {
+        name: 'profile-provider',
+        component: () => import('@views/profile-provider.vue')
+    },
+    {
+        name: 'profile-model',
+        component: () => import('@views/profile-model.vue')
+    },
+    {
+        name: 'profile-status',
+        component: () => import('@views/profile-status.vue')
     }
 ] as const
 

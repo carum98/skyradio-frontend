@@ -85,10 +85,14 @@ function openCreateRadio() {
         </template>
 
         <template #cell(model)="{ value }">
-            <a v-if="value" href="">
+            <SkLinkModal
+                v-if="value"
+                name="profile-model"
+                :props="{ code: value.code }"
+            >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
-                {{ value?.name }}
-            </a>
+                {{ value.name }}
+            </SkLinkModal>
         </template>
 
         <template #cell(sim)="{ value }">
@@ -102,10 +106,14 @@ function openCreateRadio() {
         </template>
 
         <template #cell(sim.provider)="{ value }">
-            <a v-if="value" href="">
+            <SkLinkModal
+                v-if="value"
+                name="profile-provider"
+                :props="{ code: value.code }"
+            >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
-            </a>
+            </SkLinkModal>
         </template>
 
         <template #cell(client)="{ value }">
@@ -120,10 +128,14 @@ function openCreateRadio() {
         </template>
 
         <template #cell(status)="{ value }">
-            <a v-if="value" href="">
+            <SkLinkModal
+                v-if="value"
+                name="profile-status"
+                :props="{ code: value.code }"
+            >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
-                {{ value?.name }}
-            </a>
+                {{ value.name }}
+            </SkLinkModal>
         </template>
 
         <template #cell(logs)="{ item }">
