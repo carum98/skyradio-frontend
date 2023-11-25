@@ -92,9 +92,13 @@ function openCreateRadio() {
         </template>
 
         <template #cell(sim)="{ value }">
-            <a v-if="value" href="">
-                {{ value?.number }}
-            </a>
+            <SkLinkModal
+                v-if="value"
+                name="profile-sim"
+                :props="{ code: value.code }"
+            >
+                {{ value.number  }}
+            </SkLinkModal>
         </template>
 
         <template #cell(sim.provider)="{ value }">

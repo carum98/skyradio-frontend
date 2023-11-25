@@ -11,8 +11,10 @@ const routes = [
 
 type PickPartial<T, K extends keyof T> = {[P in K]: Partial<T[P]>}
 
-type PushParams = {
-    name: typeof routes[number]['name']
+export type RouterModalNames = typeof routes[number]['name']
+
+export type PushParams = {
+    name: RouterModalNames
 } & PickPartial<ProgrammaticallyOptions, 'listeners' | 'props'>
 
 export function useRouterModal() {

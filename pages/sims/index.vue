@@ -84,12 +84,13 @@ function openCreate() {
         </template>
 
         <template #cell(radio)="{ value }">
-            <NuxtLink
+            <SkLinkModal
                 v-if="value"
-                :to="{ name: 'radios-profile', params: { code: value.code } }"
+                name="profile-radio"
+                :props="{ code: value.code }"
             >
-                {{ value.imei }}
-            </NuxtLink> 
+                {{ value.imei  }}
+            </SkLinkModal>
         </template>
 
         <template #cell(radio.client)="{ value }">
