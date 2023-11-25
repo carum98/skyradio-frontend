@@ -34,7 +34,6 @@ const columns: SkTableColumn[] = [
     {
         title: 'Estado',
         key: 'status',
-        formatter: (value: IRadioStatus | null) => value?.name ?? '-'
     },
     {
         title: '',
@@ -109,6 +108,13 @@ function openCreateRadio() {
             >
                 {{ value.name }}
             </NuxtLink>
+        </template>
+
+        <template #cell(status)="{ value }">
+            <a v-if="value" href="">
+                <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
+                {{ value?.name }}
+            </a>
         </template>
 
         <template #cell(logs)="{ item }">

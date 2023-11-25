@@ -2,18 +2,20 @@ import { SkFormData } from "./form-data"
 
 export class FormDataStatus extends SkFormData {
     public name: string
+    public color: string
 
-    constructor(name: string) {
-        super({ name })
+    constructor(name: string, color: string) {
+        super({ name, color })
         this.name = name
+        this.color = color
     }
 
     static create() {
-        return new FormDataStatus('')
+        return new FormDataStatus('', '')
     }
 
     static update(params: IRadioStatus) {
-        const form = new FormDataStatus(params.name)
+        const form = new FormDataStatus(params.name, params.color)
 
         form.code = params.code
 
@@ -22,7 +24,8 @@ export class FormDataStatus extends SkFormData {
 
     toParams() {
         return {
-            name: this.name
+            name: this.name,
+            color: this.color
         }
     }
 }

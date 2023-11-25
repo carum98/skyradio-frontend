@@ -47,6 +47,8 @@ function openRemove(status: IRadioStatus) {
         </template>
 
         <template #cell="{ item }">
+            <span class="badge-color" :style="{ backgroundColor: item.color }"></span>
+
             {{ item.name }}
 
             <SkDropdown 
@@ -54,16 +56,12 @@ function openRemove(status: IRadioStatus) {
                 :options="[
                     {
                         key: 'delete',
-                        label: ActionsStatic.DELETE.name,
-                        icon: ActionsStatic.DELETE.icon,
-                        color: ActionsStatic.DELETE.color,
+                        ...ActionsStatic.DELETE,
                         action: () => openRemove(item)
                     },
                     {
                         key: 'edit',
-                        label: ActionsStatic.UPDATE.name,
-                        icon: ActionsStatic.UPDATE.icon,
-                        color: ActionsStatic.UPDATE.color,
+                        ...ActionsStatic.UPDATE,
                         action: () => openUpdate(item)
                     }
                 ]"
