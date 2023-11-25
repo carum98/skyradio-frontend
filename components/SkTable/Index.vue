@@ -38,6 +38,7 @@ const data = computed(() => {
         v-if="gridView"
         :data="data" 
         :hover="hover"
+        @onRowClick="$emit('onRowClick', $event)"
     >
         <template #cell="{ item }">
             <slot name="cell" :item="item" />

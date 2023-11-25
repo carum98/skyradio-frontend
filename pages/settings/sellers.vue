@@ -7,13 +7,22 @@ const { page, search, data, refresh } = await useTableData<ISeller>('/api/seller
 const { navigateToAction } = useActions(refresh)
 
 // methods
+function openProfile(seller: ISeller) {
+    navigateTo({
+        name: 'sellers-profile',
+        params: {
+            code: seller.code
+        }
+    })
+}
+
 function openCreate() {
     navigateToAction({
         name: 'create-seller',
     })
 }
 
-function openUpdate(seller: IRadioStatus) {
+function openUpdate(seller: ISeller) {
     navigateToAction({
         name: 'update-seller',
         props: {
@@ -22,7 +31,7 @@ function openUpdate(seller: IRadioStatus) {
     })
 }
 
-function openRemove(seller: IRadioStatus) {
+function openRemove(seller: ISeller) {
     navigateToAction({
         name: 'remove-seller',
         props: {
@@ -38,6 +47,8 @@ function openRemove(seller: IRadioStatus) {
         gridView
         :table="data" 
         v-model="search"
+        hover
+        @onRowClick="openProfile"
         @onPage="page = $event"
     >
         <template #toolbar>
@@ -54,16 +65,12 @@ function openRemove(seller: IRadioStatus) {
                 :options="[
                     {
                         key: 'delete',
-                        label: ActionsStatic.DELETE.name,
-                        icon: ActionsStatic.DELETE.icon,
-                        color: ActionsStatic.DELETE.color,
+                        ...ActionsStatic.DELETE,
                         action: () => openRemove(item)
                     },
                     {
                         key: 'edit',
-                        label: ActionsStatic.UPDATE.name,
-                        icon: ActionsStatic.UPDATE.icon,
-                        color: ActionsStatic.UPDATE.color,
+                        ...ActionsStatic.UPDATE,
                         action: () => openUpdate(item)
                     }
                 ]"

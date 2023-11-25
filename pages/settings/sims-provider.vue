@@ -6,14 +6,25 @@ definePageMeta({
 const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/sims-provider')
 const { navigateToAction } = useActions(refresh)
 
+const routerModal = useRouterModal()
+
 // methods
+function openProfile(provider: ISimProvider) {
+    routerModal.push({
+        name: 'profile-provider',
+        props: {
+            code: provider.code
+        }
+    })
+}
+
 function openCreate() {
     navigateToAction({
         name: 'create-provider',
     })
 }
 
-function openUpdate(provider: IRadioStatus) {
+function openUpdate(provider: ISimProvider) {
     navigateToAction({
         name: 'update-provider',
         props: {
@@ -22,7 +33,7 @@ function openUpdate(provider: IRadioStatus) {
     })
 }
 
-function openRemove(provider: IRadioStatus) {
+function openRemove(provider: ISimProvider) {
     navigateToAction({
         name: 'remove-provider',
         props: {
@@ -38,6 +49,8 @@ function openRemove(provider: IRadioStatus) {
         gridView
         :table="data" 
         v-model="search"
+        hover
+        @onRowClick="openProfile"
         @onPage="page = $event"
     >
         <template #toolbar>

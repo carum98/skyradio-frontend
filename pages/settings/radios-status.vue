@@ -6,7 +6,18 @@ definePageMeta({
 const { page, search, data, refresh } = await useTableData<IRadioStatus>('/api/radios-status')
 const { navigateToAction } = useActions(refresh)
 
+const routerModal = useRouterModal()
+
 // methods
+function openProfile(status: IRadioStatus) {
+    routerModal.push({
+        name: 'profile-status',
+        props: {
+            code: status.code
+        }
+    })
+}
+
 function openCreate() {
     navigateToAction({
         name: 'create-status',
@@ -38,6 +49,8 @@ function openRemove(status: IRadioStatus) {
         gridView
         :table="data" 
         v-model="search"
+        hover
+        @onRowClick="openProfile"
         @onPage="page = $event"
     >
         <template #toolbar>

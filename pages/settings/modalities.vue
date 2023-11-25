@@ -6,7 +6,18 @@ definePageMeta({
 const { page, search, data, refresh } = await useTableData<IModality>('/api/clients-modality')
 const { navigateToAction } = useActions(refresh)
 
+const routerModal = useRouterModal()
+
 // methods
+function openProfile(modality: IModality) {
+    routerModal.push({
+        name: 'profile-modality',
+        props: {
+            code: modality.code
+        }
+    })
+}
+
 function openCreate() {
     navigateToAction({
         name: 'create-modality',
@@ -38,6 +49,8 @@ function openRemove(modality: IModality) {
         gridView
         :table="data" 
         v-model="search"
+        hover
+        @onRowClick="openProfile"
         @onPage="page = $event"
     >
         <template #toolbar>
