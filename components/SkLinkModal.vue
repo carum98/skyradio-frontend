@@ -6,6 +6,9 @@ const props = defineProps<{
     props: Record<string, unknown>
 }>()
 
+const routerModal = useRouterModal()
+
+// data
 const object = {
     name: props.name,
     ...props.props
@@ -16,10 +19,15 @@ const query = Object.entries(object).map(([key, value]) => {
 }).join('&')
 
 const href = `?${query}`
+
+// methods
+function onClick() {
+    routerModal.push(props)
+}
 </script>
 
 <template>
-    <a :href="href" @click.stop.prevent="$routerModal.push(props)">
+    <a :href="href" @click.stop.prevent="onClick">
         <slot></slot>
     </a>
 </template>

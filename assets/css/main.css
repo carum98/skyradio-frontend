@@ -224,3 +224,23 @@
         color: #fff;
     }
 }
+
+.sk-card {
+    position: relative;
+    background-color: var(--table-color);
+    padding: 1.5rem;
+    border-radius: 15px;
+
+    & .sk-dropdown__button {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
+.sk-card--flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}

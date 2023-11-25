@@ -118,7 +118,7 @@ function openAdd(client: IClient | null) {
 <template>
     <main>
         <section class="header-companies-profile">
-            <div>
+            <div class="sk-card sk-card--flex-column">
                 <div class="d-flex">
                     <SkAvatar 
                         v-if="client"  
@@ -130,23 +130,27 @@ function openAdd(client: IClient | null) {
                     <h2>{{ client?.name }}</h2>
                 </div>
 
-                <NuxtLink
-                    v-if="client?.seller"
-                    :to="{ name: 'sellers-profile', params: { code: client.seller.code } }"
-                    class="sk-link"
-                >
-                    {{ client.seller.name }}
-                </NuxtLink> 
+                <p v-if="client?.seller">
+                    Vendedor:
+                    <NuxtLink
+                        :to="{ name: 'sellers-profile', params: { code: client.seller.code } }"
+                        class="sk-link"
+                    >
+                        {{ client.seller.name }}
+                    </NuxtLink> 
+                </p>
 
-                <SkLinkModal
-                    v-if="client?.modality"
-                    name="profile-modality"
-                    :props="{ code: client.modality.code }"
-                    class="sk-link"
-                >
-                    <span class="badge-color" :style="{ backgroundColor: client.modality.color }"></span>
-                    {{ client.modality.name  }}
-                </SkLinkModal>
+                <p v-if="client?.modality">
+                    Modalidad:
+                    <SkLinkModal
+                        name="profile-modality"
+                        :props="{ code: client.modality.code }"
+                        class="sk-link"
+                    >
+                        <span class="badge-color" :style="{ backgroundColor: client.modality.color }"></span>
+                        {{ client.modality.name  }}
+                    </SkLinkModal>
+                </p>
 
                 <SkDropdown 
                     :dividers="[1]"
@@ -170,9 +174,6 @@ function openAdd(client: IClient | null) {
                         }
                     ]"
                 ></SkDropdown>
-            </div>
-            <div>
-
             </div>
         </section>
         <SkTable 
@@ -266,25 +267,5 @@ function openAdd(client: IClient | null) {
     grid-template-columns: 2fr 1fr;
     gap: 25px;
     margin-bottom: 25px;
-
-    & > div {
-        position: relative;
-        background-color: var(--table-color);
-        padding: 1.5rem;
-        border-radius: 15px;
-
-        &:first-child {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 15px;
-        }
-    }
-
-    & .sk-dropdown__button {
-        position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-    }
 }
 </style>

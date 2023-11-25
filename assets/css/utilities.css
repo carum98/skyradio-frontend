@@ -9,3 +9,10 @@
 .d-flex {
     display: flex;
 }
+
+.d-2-haft {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}

@@ -7,6 +7,7 @@ declare global {
         sim: ISim | null
         model: IRadioModel | null
         client: IClient | null
+        status: IRadioStatus | null
     }
 }
 
