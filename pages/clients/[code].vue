@@ -119,22 +119,45 @@ function openAdd(client: IClient | null) {
     <main>
         <section class="header-companies-profile">
             <div>
-                <SkAvatar 
-                    v-if="client"  
-                    :alt="client.name"
-                    :color="client.color" 
-                />
+                <div class="d-flex">
+                    <SkAvatar 
+                        v-if="client"  
+                        :alt="client.name"
+                        :color="client.color" 
+                        class="mr-1"
+                    />
 
-                <h2>{{ client?.name }}</h2>
-                <p>{{ client?.seller?.name ?? 'Sin vendedor' }}</p>
-                <p>{{ client?.modality.name }}</p>
+                    <h2>{{ client?.name }}</h2>
+                </div>
 
-                <button v-if="client" class="sk-button" @click="openClientLogs(client.code)">
-                    Historial
-                </button>
+                <NuxtLink
+                    v-if="client?.seller"
+                    :to="{ name: 'sellers-profile', params: { code: client.seller.code } }"
+                    class="sk-link"
+                >
+                    {{ client.seller.name }}
+                </NuxtLink> 
+
+                <SkLinkModal
+                    v-if="client?.modality"
+                    name="profile-modality"
+                    :props="{ code: client.modality.code }"
+                    class="sk-link"
+                >
+                    <span class="badge-color" :style="{ backgroundColor: client.modality.color }"></span>
+                    {{ client.modality.name  }}
+                </SkLinkModal>
 
                 <SkDropdown 
+                    :dividers="[1]"
                     :options="[
+                        {
+                            key: 'history',
+                            name: 'Historial',
+                            icon: '',
+                            action: () => openClientLogs(client?.code ?? ''),
+                            color: ActionsStatic.UPDATE.color
+                        },
                         {
                             key: 'edit',
                             ...ActionsStatic.UPDATE,
@@ -191,6 +214,7 @@ function openAdd(client: IClient | null) {
                     v-if="value"
                     name="profile-model"
                     :props="{ code: value.code }"
+                    class="sk-link"
                 >
                     <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                     {{ value.name }}
@@ -202,6 +226,7 @@ function openAdd(client: IClient | null) {
                     v-if="value"
                     name="profile-sim"
                     :props="{ code: value.code }"
+                    class="sk-link"
                 >
                     {{ value.number  }}
                 </SkLinkModal>
@@ -212,6 +237,7 @@ function openAdd(client: IClient | null) {
                     v-if="value"
                     name="profile-provider"
                     :props="{ code: value.code }"
+                    class="sk-link"
                 >
                     <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                     {{ value.name }}
@@ -234,7 +260,7 @@ function openAdd(client: IClient | null) {
     </main>
 </template>
 
-<style scoped>
+<style>
 .header-companies-profile {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -242,9 +268,23 @@ function openAdd(client: IClient | null) {
     margin-bottom: 25px;
 
     & > div {
+        position: relative;
         background-color: var(--table-color);
         padding: 1.5rem;
         border-radius: 15px;
+
+        &:first-child {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+    }
+
+    & .sk-dropdown__button {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
     }
 }
 </style>

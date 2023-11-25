@@ -81,6 +81,7 @@ function openCreate() {
                 v-if="value"
                 name="profile-provider"
                 :props="{ code: value.code }"
+                class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
@@ -92,6 +93,7 @@ function openCreate() {
                 v-if="value"
                 name="profile-radio"
                 :props="{ code: value.code }"
+                class="sk-link"
             >
                 {{ value.imei  }}
             </SkLinkModal>
@@ -101,6 +103,7 @@ function openCreate() {
             <NuxtLink 
                 v-if="value"
                 :to="{ name: 'clients-profile', params: { code: value.code } }"
+                class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}

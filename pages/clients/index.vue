@@ -142,6 +142,7 @@ function openDelete(client: IClient) {
                 v-if="value"
                 :to="{ name: 'sellers-profile', params: { code: value.code } }"
                 @click.stop
+                class="sk-link"
             >
                 {{ value.name }}
             </NuxtLink> 
@@ -152,6 +153,7 @@ function openDelete(client: IClient) {
                 v-if="value"
                 name="profile-modality"
                 :props="{ code: value.code }"
+                class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name  }}

@@ -89,6 +89,7 @@ function openCreateRadio() {
                 v-if="value"
                 name="profile-model"
                 :props="{ code: value.code }"
+                class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
@@ -100,6 +101,7 @@ function openCreateRadio() {
                 v-if="value"
                 name="profile-sim"
                 :props="{ code: value.code }"
+                class="sk-link"
             >
                 {{ value.number  }}
             </SkLinkModal>
@@ -110,6 +112,7 @@ function openCreateRadio() {
                 v-if="value"
                 name="profile-provider"
                 :props="{ code: value.code }"
+                class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
@@ -121,6 +124,7 @@ function openCreateRadio() {
                 v-if="value"
                 :to="{ name: 'clients-profile', params: { code: value.code } }"
                 @click.native.stop
+                class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
@@ -132,6 +136,7 @@ function openCreateRadio() {
                 v-if="value"
                 name="profile-status"
                 :props="{ code: value.code }"
+                class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
