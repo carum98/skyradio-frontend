@@ -68,13 +68,13 @@ onMounted(async () => {
                 </p>
                 <p v-if="sim.radio.client">
                     Cliente:
-                    <a
-                        :href="`/clients/${sim.radio.client.code}`"
+                    <NuxtLink
+                        :to="{ name: 'clients-profile', params: { code: sim.radio.client.code }  }"
                         class="sk-link"
                     >
                        <span class="badge-color" :style="{ backgroundColor: sim.radio.client.color }"></span>
                         {{ sim.radio.client.name }}
-                    </a>
+                    </NuxtLink>
                 </p>
             </div>
 

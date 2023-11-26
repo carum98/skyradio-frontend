@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { NuxtApp } from '#app'
-
 const props = defineProps<{
     path: string,
-    app: NuxtApp
 }>()
+
+const router = useRouter()
+const routerModal = useRouterModal()
 
 // data
 let links: HTMLAnchorElement[] = []
@@ -32,7 +32,7 @@ function message(log: ILog) {
             }
 
             if (key === 'client') {
-                const route = props.app.$router.resolve({
+                const route = router.resolve({
                     name: 'clients-profile',
                     params: {
                         code: log.values.client?.code
@@ -83,12 +83,12 @@ function navigate(event: Event) {
     const path = new URL(a.href)
 
     if (isModal) {
-        props.app.$routerModal.push({
+        routerModal.push({
             name: path.searchParams.get('name') as 'profile-radio' | 'profile-sim',
             props: Object.fromEntries(path.searchParams.entries())
         })
     } else {
-        props.app.$router.push(path.pathname)
+        router.push(path.pathname)
     }
 }
 
