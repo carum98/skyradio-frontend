@@ -1,4 +1,4 @@
-import { createVNode, render } from 'vue'
+import { render, createApp } from 'vue'
 
 export type ProgrammaticallyOptions = {
     component: () => Promise<any>
@@ -15,27 +15,30 @@ export function programmaticallyComponent(
     { params, component }: { params: ProgrammaticallyOptions, component: Promise<typeof import("*.vue")> }
 ): ProgrammaticallyReturnType {
     let root: HTMLDivElement
-    let instance: VNode
 
     async function open(props: any = {}) {
         root = document.createElement('div')
+        document.body.appendChild(root)
 
         const componentRoot = await component
         const componentData = await params.component()
-    
-        instance = createVNode(componentRoot.default, {
-            onClose: destroy
-        }, () => [
-            createVNode(componentData.default, {
-                ...params.props,
-                ...params.listeners,
-                ...props,
+
+        const instance = defineNuxtComponent({
+            render: () => h(componentRoot.default, {
                 onClose: destroy
-            })
-        ])
-    
-        document.body.appendChild(root)
-        render(instance, root)
+            }, () => [
+                h(componentData.default, {
+                    ...params.props,
+                    ...params.listeners,
+                    ...props,
+                    onClose: destroy
+                })
+            ]),
+        })
+
+        const router = useRouter()
+
+        createApp(instance).use(router).mount(root)
     }
 
     function destroy() {
