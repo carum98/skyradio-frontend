@@ -153,14 +153,17 @@ function openAdd(client: IClient | null) {
                 </p>
 
                 <SkDropdown 
-                    :dividers="[1]"
+                    :dividers="[1, 2]"
                     :options="[
                         {
                             key: 'history',
-                            name: 'Historial',
-                            icon: '',
+                            ...ActionsStatic.HISTORY,
                             action: () => openClientLogs(client?.code ?? ''),
-                            color: ActionsStatic.UPDATE.color
+                        },
+                        {
+                            key: 'download',
+                            ...ActionsStatic.DOWNLOAD,
+                            action: () => {},
                         },
                         {
                             key: 'edit',

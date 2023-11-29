@@ -116,12 +116,12 @@ onUnmounted(() => {
 <template>
     <ul ref="list" class="list-logs">
         <li class="list-logs__item" v-for="(log, index) in items" :key="index">
+            <p class="list-logs__item__message" v-html="log.message"></p>
+
             <div class="list-logs__item__detial">
                 <p>{{ log.created_at }}</p>
                 <p>{{ log.user?.name }}</p>
             </div>
-
-            <p class="list-logs__item__message" v-html="log.message"></p>
         </li>
     </ul>
 </template>

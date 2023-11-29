@@ -34,10 +34,24 @@ const UpdateAction: IAction = {
     color: '7, 80, 188'
 }
 
+const HistoryAction: IAction = {
+    name: 'Historial',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1a11 11 0 1 0 11 11A11 11 0 0 0 12 1Zm0 20a9 9 0 1 1 9-9a9 9 0 0 1-9 9Zm0-16a7 7 0 1 0 7 7a7 7 0 0 0-7-7Zm0 12a5 5 0 1 1 5-5a5 5 0 0 1-5 5Z"/></svg>`,
+    color: '7, 80, 188'
+}
+
+const DownloadAction: IAction = {
+    name: 'Descargar',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5 20h14q.425 0 .713.288T20 21q0 .425-.288.713T19 22H5q-.425 0-.712-.288T4 21q0-.425.288-.712T5 20m7-2.625q-.225 0-.437-.1t-.363-.3l-4.95-6.35q-.375-.5-.1-1.062T7.05 9H9V3q0-.425.288-.712T10 2h4q.425 0 .713.288T15 3v6h1.95q.625 0 .9.563t-.1 1.062l-4.95 6.35q-.15.2-.363.3t-.437.1"/></svg>`,
+    color: '7, 80, 188'
+}
+
 export const ActionsStatic = {
     ADD: AddAction,
     REMOVE: RemoveAction,
     CHANGE: ChangeAction,
     DELETE: DeleteAction,
-    UPDATE: UpdateAction
+    UPDATE: UpdateAction,
+    HISTORY: HistoryAction,
+    DOWNLOAD: DownloadAction
 }
