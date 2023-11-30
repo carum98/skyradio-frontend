@@ -113,6 +113,13 @@ function openAdd(client: IClient | null) {
         }
     })
 }
+
+const { open: openExport } = useModal({
+    component: () => import('@views/export-client.vue'),
+    props: {
+        client: toRaw(client.value)
+    }
+})
 </script>
 
 <template>
@@ -162,8 +169,8 @@ function openAdd(client: IClient | null) {
                         },
                         {
                             key: 'download',
-                            ...ActionsStatic.DOWNLOAD,
-                            action: () => {},
+                            ...ActionsStatic.EXPORT,
+                            action: openExport,
                         },
                         {
                             key: 'edit',
