@@ -3,33 +3,16 @@ const props = defineProps<{
     code: string
 }>()
 
-const { navigateToAction } = useActions(() => {})
-
 // data
 const sim = ref<ISim | null>(null)
 
-function onDelete() {
-    navigateToAction({
-        name: 'remove-sim2',
-        props: {
-            code: sim.value?.code
-        }
-    })
-}
-
-function onUpdate() {
-    navigateToAction({
-        name: 'update-sim',
-        props: {
-            sim: toRaw(sim.value)
-        }
-    })
+// methods
+async function getData() {
+    sim.value = await $fetch(`/api/sims/${props.code}`)
 }
 
 // lifecycle
-onMounted(async () => {
-    sim.value = await $fetch(`/api/sims/${props.code}`)
-})
+onMounted(getData)
 </script>
 
 <template>
@@ -78,20 +61,10 @@ onMounted(async () => {
                 </p>
             </div>
 
-            <SkDropdown 
-                :options="[
-                    {
-                        key: 'edit',
-                        ...ActionsStatic.UPDATE,
-                        action: onUpdate
-                    },
-                    {
-                        key: 'remove',
-                        ...ActionsStatic.DELETE,
-                        action: onDelete
-                    }
-                ]"
-            ></SkDropdown>
+            <ActionsDropdownSim 
+                :sim="sim"
+                :refresh="getData"
+            />
         </section>
     </main>
 </template>

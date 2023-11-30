@@ -18,6 +18,7 @@ const form = reactive(props.sim
         v-bind="$attrs"
         path-create="/api/sims"
         path-update="/api/sims/:code"
+        style="width: 300px;"
     >
         <template #form="{ form }">
             <label>Nombre</label>

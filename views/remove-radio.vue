@@ -47,7 +47,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <form class="sk-form" @submit.prevent="send" style="width: 500px;">
+    <form class="sk-form" @submit.prevent="send" style="width: 300px;">
         <label>Buscar</label>
         <SelectRadio
             :client="client"

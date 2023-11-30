@@ -18,6 +18,7 @@ const form = reactive(props.radio
         v-bind="$attrs"
         path-create="/api/radios"
         path-update="/api/radios/:code"
+        style="width: 300px;"
     >
         <template #form="{ form }">
             <label>Nombre</label>

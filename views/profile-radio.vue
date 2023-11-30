@@ -3,33 +3,16 @@ const props = defineProps<{
     code: string
 }>()
 
-const { navigateToAction } = useActions(() => {})
-
 // data
 const radio = ref<IRadio | null>(null)
 
-function onDelete() {
-    navigateToAction({
-        name: 'remove-radio',
-        props: {
-            code: radio.value?.code
-        }
-    })
-}
-
-function onUpdate() {
-    navigateToAction({
-        name: 'update-radio',
-        props: {
-            radio: toRaw(radio.value)
-        }
-    })
+// methods
+async function getData() {
+    radio.value = await $fetch(`/api/radios/${props.code}`)
 }
 
 // lifecycle
-onMounted(async () => {
-    radio.value = await $fetch(`/api/radios/${props.code}`)
-})
+onMounted(getData)
 </script>
 
 <template>
@@ -97,20 +80,10 @@ onMounted(async () => {
                 </p>
             </div>
 
-            <SkDropdown 
-                :options="[
-                    {
-                        key: 'edit',
-                        ...ActionsStatic.UPDATE,
-                        action: onUpdate
-                    },
-                    {
-                        key: 'remove',
-                        ...ActionsStatic.DELETE,
-                        action: onDelete
-                    }
-                ]"
-            ></SkDropdown>
+            <ActionsDropdownRadio 
+                :radio="radio" 
+                :refresh="getData"
+            />
         </section>
     </main>
 </template>
