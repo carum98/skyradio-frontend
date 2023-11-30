@@ -1,4 +1,5 @@
 import { render, createApp } from 'vue'
+import type { App } from 'vue'
 
 export type ProgrammaticallyOptions = {
     component: () => Promise<any>
@@ -15,6 +16,7 @@ export function programmaticallyComponent(
     { params, component }: { params: ProgrammaticallyOptions, component: Promise<typeof import("*.vue")> }
 ): ProgrammaticallyReturnType {
     let root: HTMLDivElement
+    let app: App
 
     async function open(props: any = {}) {
         root = document.createElement('div')
@@ -38,11 +40,14 @@ export function programmaticallyComponent(
 
         const router = useRouter()
 
-        createApp(instance).use(router).mount(root)
+        app = createApp(instance).use(router)
+        
+        app.mount(root)
     }
 
     function destroy() {
         render(null, root)
+        app.unmount()
         root.remove()
     }
 
