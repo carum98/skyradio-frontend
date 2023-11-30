@@ -75,6 +75,17 @@
     &.block {
         width: 100%;
     }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.sk-button--icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .counter {
