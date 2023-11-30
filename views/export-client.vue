@@ -1,15 +1,46 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
     client: IClient
+}>()
+
+const emits = defineEmits<{
+    close: []
 }>()
 
 // data
 const checked = ref('xlsx')
-const loading = ref(true)
+const loading = ref(false)
 
 // methods
-function onSubmitted() {
-    console.log(checked.value)
+async function onSubmitted() {
+    try {
+        loading.value = true
+
+        const data = await $fetch(`/api/clients/${props.client.code}/export`, {
+            method: 'POST',
+            body: {
+                format: checked.value
+            }
+        })
+
+        const blob = new Blob([data], { type: 'application/octet-stream' })
+
+        const url = window.URL.createObjectURL(blob)
+
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `${props.client.name}.${checked.value}`
+        a.click()
+
+        window.URL.revokeObjectURL(url)
+
+        emits('close')
+    } catch (error) {
+        console.error(error)
+    } finally {
+        loading.value = false
+        emits('close')
+    }
 }
 </script>
 
