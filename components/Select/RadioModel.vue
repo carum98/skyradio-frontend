@@ -13,6 +13,7 @@ const value = defineModel<IRadioModel | null>()
         @onData="onData"
     >
         <template #option="{ item }">
+            <span class="badge-color mr-1" :style="{ backgroundColor: item?.color }"></span>
             {{ item?.name }}
         </template>
     </SkSelect>
