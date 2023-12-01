@@ -76,6 +76,10 @@ function openCreate() {
             </button>
         </template>
 
+        <template #actions>
+            <TableActions />
+        </template>
+
         <template #cell(provider)="{ value }">
             <SkLinkModal
                 v-if="value"

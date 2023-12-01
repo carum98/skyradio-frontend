@@ -84,6 +84,10 @@ function openCreateRadio() {
             </button>
         </template>
 
+        <template #actions>
+            <TableActions />
+        </template>
+
         <template #cell(model)="{ value }">
             <SkLinkModal
                 v-if="value"

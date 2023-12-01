@@ -75,6 +75,10 @@ function openCreateClient() {
             </button>
         </template>
 
+        <template #actions>
+            <TableActions />
+        </template>
+
         <template #cell(name)="{ value, item }">
             <SkAvatar class="mr-1" :alt="value" :color="item.color" />
             {{ value }}
