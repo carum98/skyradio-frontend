@@ -20,18 +20,21 @@ const columns: SkTableColumn[] = [
     },
     {
         title: '',
+        altTitle: 'Cantidad de radios',
         key: 'radios_count',
         width: 100,
         align: 'center',
     },
     {
         title: '',
+        altTitle: 'Historial de cambios',
         key: 'logs',
         width: 65,
         align: 'center',
     },
     {
         title: '',
+        altTitle: 'Acciones',
         key: 'actions',
         width: 65,
         align: 'center',
@@ -76,7 +79,8 @@ function openCreateClient() {
         </template>
 
         <template #actions>
-            <TableActions
+            <TableActionsClient
+                :columns="columns"
                 :onApplied="(value) => query = value"
             />
         </template>

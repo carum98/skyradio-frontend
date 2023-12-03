@@ -255,3 +255,37 @@
     align-items: flex-start;
     gap: 15px;
 }
+
+.list-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    & button {
+        background-color: var(--background-color);
+        color: var(--text-color);
+        border-radius: 15px;
+        padding: 10px 15px;
+        transition: background-color 0.2s;
+        text-align: left;
+        font-size: 15px;
+
+        &[data-active="true"] {
+            background-color: var(--primary-color);
+            color: var(--primary-text-color);
+        }
+
+        &:has(svg) {
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            gap: 10px;
+        }
+
+        & svg {
+            width: 20px;
+            height: 20px;
+            user-select: none;
+        }
+    }
+}

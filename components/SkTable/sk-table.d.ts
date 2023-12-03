@@ -1,6 +1,7 @@
 // Table
 export interface SkTableColumn {
     title: string
+    altTitle?: string
     key: string
     width?: number
     align?: 'left' | 'center' | 'right'

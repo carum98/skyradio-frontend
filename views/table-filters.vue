@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const emits = defineEmits<{
-    close: []
     applied: [Record<string, any>]
 }>()
 
@@ -19,12 +18,13 @@ function onApplied() {
     }
 
     emits('applied', query)
-    emits('close')
 }
+
+watch(form, onApplied, { deep: true })
 </script>
 
 <template>
-    <form class="sk-form" @submit.prevent="onApplied" style="width: 180px;">
+    <form class="sk-form" @submit.prevent style="width: 180px;">
         <label>Modalidad</label>
         <SelectModality 
             v-model="form.modality" 
@@ -34,9 +34,5 @@ function onApplied() {
         <SelectSeller 
             v-model="form.seller" 
         />
-
-        <button type="submit" class="sk-button">
-            Aplicar
-        </button>
     </form>
 </template>
