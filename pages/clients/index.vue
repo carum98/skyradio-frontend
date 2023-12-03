@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
-const columns: SkTableColumn[] = [
+const columns = ref<SkTableColumn[]>([
     {
         title: 'Nombre',
         key: 'name'
@@ -39,7 +39,7 @@ const columns: SkTableColumn[] = [
         width: 65,
         align: 'center',
     }
-]
+])
 
 const { page, search, data, refresh, query } = await useTableData<IClient>('/api/clients')
 const { navigateToAction } = useActions(refresh)

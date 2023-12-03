@@ -9,7 +9,7 @@ defineSlots<SkTableSlotsBase<T>>()
 // computed
 const columns = computed(() => {
     if (props.columns?.length) {
-        return props.columns
+        return props.columns.filter(column => column.show !== false)
     }
 
     return Object.keys({ ...props.data?.at(0) ?? {} }).map(key => ({

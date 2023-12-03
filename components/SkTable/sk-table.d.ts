@@ -6,6 +6,7 @@ export interface SkTableColumn {
     width?: number
     align?: 'left' | 'center' | 'right'
     formatter?: (value: any) => string
+    show?: boolean
 }
 
 export interface SkTablePropsBase<T> {
