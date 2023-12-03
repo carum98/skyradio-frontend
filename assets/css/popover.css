@@ -21,3 +21,15 @@
     right: anchor(right);
     transform: translate(0, 10px);
 }
+
+.sk-popover {
+    border: unset;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: visible;
+    padding: 20px;
+
+    position: absolute;
+    top: var(--popover-top);
+    left: var(--popover-left);
+}

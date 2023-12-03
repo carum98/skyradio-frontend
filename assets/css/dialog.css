@@ -1,4 +1,4 @@
-dialog {
+.sk-modal {
     border: unset;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -26,19 +26,19 @@ dialog {
     }
 }
 
-dialog {
+.sk-modal {
     transform: translateY(-50px);
     opacity: 0;
     transition: transform 0.5s, opacity 0.5s, display 0.5s allow-discrete;
 }
 
-dialog[open] {
+.sk-modal[open] {
     transform: translateY(0);
     opacity: 1;
 }
 
 @starting-style {
-    dialog[open] {
+    .sk-modal[open] {
         transform: translateY(20px);
         opacity: 0;
     }

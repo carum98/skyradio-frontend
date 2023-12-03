@@ -8,7 +8,7 @@ export type ProgrammaticallyOptions = {
 }
 
 export interface ProgrammaticallyReturnType {
-    open: (props: any | null) => Promise<void>
+    open: (props: any | null, rootProps: any | null) => Promise<void>
     close: () => void
 }
 
@@ -18,7 +18,7 @@ export function programmaticallyComponent(
     let root: HTMLDivElement
     let app: App
 
-    async function open(props: any = {}) {
+    async function open(props: any = {}, rootProps: any = {}) {
         root = document.createElement('div')
         document.body.appendChild(root)
 
@@ -27,6 +27,7 @@ export function programmaticallyComponent(
 
         const instance = defineNuxtComponent({
             render: () => h(componentRoot.default, {
+                ...rootProps,
                 onClose: destroy
             }, () => [
                 h(componentData.default, {
