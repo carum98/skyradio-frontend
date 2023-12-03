@@ -1,20 +1,28 @@
 <script setup lang="ts">
-defineProps<{
-    fields: {
-        key: string
-        title: string
-    }[]
+type FormState = {
+    column: string
+    order: 'asc' | 'desc'
+}
+
+const props = defineProps<{
+    inital: FormState | null
 }>()
 
 const emits = defineEmits<{
-    applied: [Record<string, any>]
+    applied: [Record<string, any>, FormState]
 }>()
 
 // data
-const form = reactive({
-    column: 'created_at',
-    order: 'asc',
+const form = reactive<FormState>({
+    column: props.inital?.column ?? 'created_at',
+    order: props.inital?.order ?? 'desc',
 })
+
+const fields = [
+    { key: 'name', title: 'Nombre' },
+    { key: 'created_at', title: 'Fecha de creación' },
+    { key: 'updated_at', title: 'Fecha de actualización' }
+]
 
 // methods
 function onApplied() {
@@ -23,7 +31,7 @@ function onApplied() {
         sort_order: form.order,
     }
 
-    emits('applied', query)
+    emits('applied', query, form)
 }
 
 watch(form, onApplied, { deep: true })

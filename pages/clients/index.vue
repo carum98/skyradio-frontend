@@ -81,7 +81,7 @@ function openCreateClient() {
         <template #actions>
             <TableActionsClient
                 :columns="columns"
-                :onApplied="(value) => query = value"
+                @onApplied="query = $event"
             />
         </template>
 

@@ -1,15 +1,21 @@
 <script setup lang="ts">
-const emits = defineEmits<{
-    applied: [Record<string, any>]
-}>()
-
-const form = reactive({
-    modality: null,
-    seller: null,
-}) as {
+type FormState = {
     modality: IModality | null,
     seller: ISeller | null,
 }
+
+const props = defineProps<{
+    inital: FormState | null
+}>()
+
+const emits = defineEmits<{
+    applied: [Record<string, any>, FormState]
+}>()
+
+const form = reactive<FormState>({
+    modality: props.inital?.modality ?? null,
+    seller: props.inital?.seller ?? null,
+})
 
 function onApplied() {
     let query = {
@@ -17,7 +23,7 @@ function onApplied() {
         ['sellers[code][equal]']: form.seller?.code,
     }
 
-    emits('applied', query)
+    emits('applied', query, form)
 }
 
 watch(form, onApplied, { deep: true })
