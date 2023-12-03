@@ -38,7 +38,7 @@ const columns: SkTableColumn[] = [
     }
 ]
 
-const { page, search, data, refresh } = await useTableData<IClient>('/api/clients')
+const { page, search, data, refresh, query } = await useTableData<IClient>('/api/clients')
 const { navigateToAction } = useActions(refresh)
 const { open: openLogs } = useLogs('clients')
 
@@ -76,7 +76,9 @@ function openCreateClient() {
         </template>
 
         <template #actions>
-            <TableActions />
+            <TableActions
+                :onApplied="(value) => query = value"
+            />
         </template>
 
         <template #cell(name)="{ value, item }">
