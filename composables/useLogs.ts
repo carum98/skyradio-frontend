@@ -8,7 +8,9 @@ export function useLogs(name: 'clients' | 'radios' | 'sims') {
         const path = `/api/${name}/${code}/logs`
 
         slideover.open({
-            path
+            props: {
+                path
+            }
         })
     }
 

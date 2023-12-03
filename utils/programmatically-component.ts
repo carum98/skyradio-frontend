@@ -7,8 +7,13 @@ export type ProgrammaticallyOptions = {
     listeners?: Record<string, any>
 }
 
+export type ProgrammaticallyProps = {
+    props?: Record<string, any>
+    rootProps?: Record<string, any>
+}
+
 export interface ProgrammaticallyReturnType {
-    open: (props: any | null, rootProps: any | null) => Promise<void>
+    open: (params: ProgrammaticallyProps) => Promise<void>
     close: () => void
 }
 
@@ -18,7 +23,9 @@ export function programmaticallyComponent(
     let root: HTMLDivElement
     let app: App
 
-    async function open(props: any = {}, rootProps: any = {}) {
+    async function open(propsParams: ProgrammaticallyProps) {
+        const { props = {}, rootProps = {} } = propsParams
+
         root = document.createElement('div')
         document.body.appendChild(root)
 

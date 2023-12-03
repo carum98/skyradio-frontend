@@ -155,108 +155,124 @@ export function useActions(onRefresh: () => void) {
     function navigateToAction({ name, props } : { name: ActionsName, props?: Record<string, any> }) {
         switch (name) {
             case 'swap-radio':
-                openSwapRadio(props)
+                openSwapRadio({ props })
                 break
             case 'add-radios':
-                openAddRadios(props)
+                openAddRadios({ props })
                 break
             case 'remove-radio':
-                openRemoveRadio(props)
+                openRemoveRadio({ props })
                 break
             case 'add-client':
-                openAddClient(props)
+                openAddClient({ props })
                 break
             case 'create-radio':
             case 'update-radio':
-                radio.open(props)
+                radio.open({ props })
                 break
             case 'remove-radio':
                 remove.open({
-                    name: 'Radio',
-                    path: `/api/radios/${props?.code}`
+                    props: {
+                        name: 'Radio',
+                        path: `/api/radios/${props?.code}`
+                    }
                 })
                 break
             case 'create-client':
             case 'update-client':
-                client.open(props)
+                client.open({ props })
                 break
             case 'remove-client':
                 remove.open({
-                    name: 'Cliente',
-                    path: `/api/clients/${props?.code}`
+                    props: {
+                        name: 'Cliente',
+                        path: `/api/clients/${props?.code}`
+                    }
                 })
                 break
             case 'create-sim':
             case 'update-sim':
-                sim.open(props)
+                sim.open({ props })
                 break
             case 'remove-sim':
                 remove.open({
-                    name: 'Sim',
-                    path: `/api/sims/${props?.code}`
+                    props: {
+                        name: 'Sim',
+                        path: `/api/sims/${props?.code}`
+                    }
                 })
                 break
             case 'create-modality':
             case 'update-modality':
-                modality.open(props)
+                modality.open({ props })
                 break
             case 'remove-modality':
                 remove.open({
-                    name: 'Modalidad',
-                    path: `/api/clients-modality/${props?.code}`
+                    props: {
+                        name: 'Modalidad',
+                        path: `/api/clients-modality/${props?.code}`
+                    }
                 })
                 break
             case 'create-model':
             case 'update-model':
-                model.open(props)
+                model.open({ props })
                 break
             case 'remove-model':
                 remove.open({
-                    name: 'Model',
-                    path: `/api/radios-model/${props?.code}`
+                    props: {
+                        name: 'Model',
+                        path: `/api/radios-model/${props?.code}`
+                    }
                 })
                 break
             case 'create-status':
             case 'update-status':
-                status.open(props)
+                status.open({ props })
                 break
             case 'remove-status':
                 remove.open({
-                    name: 'Estado',
-                    path: `/api/radios-status/${props?.code}`
+                    props: {
+                        name: 'Estado',
+                        path: `/api/radios-status/${props?.code}`
+                    }
                 })
                 break
             case 'create-seller':
             case 'update-seller':
-                seller.open(props)
+                seller.open({ props })
                 break
             case 'remove-seller':
                 remove.open({
-                    name: 'Vendedor',
-                    path: `/api/sellers/${props?.code}`
+                    props: {
+                        name: 'Vendedor',
+                        path: `/api/sellers/${props?.code}`
+                    }
                 })
                 break
             case 'create-provider':
             case 'update-provider':
-                provider.open(props)
+                provider.open({ props })
                 break
             case 'remove-provider':
                 remove.open({
-                    name: 'Proveedor',
-                    path: `/api/sims-provider/${props?.code}`
+                    props: {
+                        name: 'Proveedor',
+                        path: `/api/sims-provider/${props?.code}`
+                    }
                 })
                 break
             case 'add-sim':
-                openAddSim(props)
+                openAddSim({ props })
                 break
             case 'remove-sim2':
-                openRemoveSim(props)
+                openRemoveSim({ props })
                 break
             case 'add-radio':
-                openAddRadio(props)
+                openAddRadio({ props })
                 break
             case 'swap-sim':
-                openSwapSim(props)
+                openSwapSim({ props })
                 break
         }
     }
