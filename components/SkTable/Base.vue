@@ -90,6 +90,12 @@ function rowAttributes(column: SkTableColumn) {
                     </slot>
                 </td>
             </tr>
+
+            <tr v-if="!data.length" class="table-empty">
+                <td :colspan="columns.length">
+                    Sin resultados
+                </td>
+            </tr>
         </tbody>
     </table>
 </template>
