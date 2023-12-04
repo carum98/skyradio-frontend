@@ -11,7 +11,7 @@ const columns = ref<SkTableColumn[]>([
         key: 'imei',
     },
     {
-        title: 'Serial',
+        title: 'Número de serie',
         key: 'serial',
         show: false
     },

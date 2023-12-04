@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
-const columns: SkTableColumn[] = [
+const columns = ref<SkTableColumn[]>([
     {
         title: 'Número',
         key: 'number'
@@ -9,7 +9,8 @@ const columns: SkTableColumn[] = [
     {
         title: 'Numero de serie',
         key: 'serial',
-        formatter: (value: string | null) => value ?? '-'
+        formatter: (value: string | null) => value ?? '',
+        show: false
     },
     {
         title: 'Proveedor',
@@ -25,19 +26,21 @@ const columns: SkTableColumn[] = [
     },
     {
         title: '',
+        altTitle: 'Historial de cambios',
         key: 'logs',
         width: 65,
         align: 'center',
     },
     {
         title: '',
+        altTitle: 'Acciones',
         key: 'actions',
         width: 65,
         align: 'center',
     }
-]
+])
 
-const { page, search, data, refresh } = await useTableData<ISim>('/api/sims')
+const { page, search, data, refresh, query } = await useTableData<ISim>('/api/sims')
 const { navigateToAction } = useActions(refresh)
 const { open: openLogs } = useLogs('sims')
 
@@ -77,7 +80,10 @@ function openCreate() {
         </template>
 
         <template #actions>
-            <TableActions />
+            <TableActionsSims 
+                :columns="columns"
+                @onApplied="query = $event"
+            />
         </template>
 
         <template #cell(provider)="{ value }">
