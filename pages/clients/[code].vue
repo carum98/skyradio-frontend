@@ -40,7 +40,6 @@ const columns: SkTableColumn[] = [
     }
 ]
 const route = useRoute()
-const router = useRouter()
 
 const code = route.params.code as string
 
@@ -49,11 +48,8 @@ const { data: client, refresh: refreshData } = await useFetch<IClient>(`/api/cli
 
 const { page, data, search, refresh } = await useTableData<IRadio>(`/api/clients/${code}/radios`)
 
-const { open: openClientLogs } = useLogs('clients')
 const { open: openRadioLogs } = useLogs('radios')
 const { navigateToAction } = useActions(refresh)
-const { navigateToAction: navigateToAction2 } = useActions(refreshData)
-const { navigateToAction: navigateToAction3 } = useActions(() => router.back())
 
 const routerModal = useRouterModal()
 
@@ -63,24 +59,6 @@ function openProfile(radio: IRadio) {
         name: 'profile-radio',
         props: {
             code: radio.code
-        }
-    })
-}
-
-function onUpdate() {
-    navigateToAction2({
-        name: 'update-client',
-        props: {
-            client: toRaw(client.value)
-        }
-    })
-}
-
-function onRemove(client: IClient | null) {
-    navigateToAction3({
-        name: 'remove-client',
-        props: {
-            code: client?.code
         }
     })
 }
@@ -113,13 +91,6 @@ function openAdd(client: IClient | null) {
         }
     })
 }
-
-const { open: openExport } = useModal({
-    component: () => import('@views/export-client.vue'),
-    props: {
-        client: toRaw(client.value)
-    }
-})
 </script>
 
 <template>
@@ -159,31 +130,12 @@ const { open: openExport } = useModal({
                     </SkLinkModal>
                 </p>
 
-                <SkDropdown 
-                    :dividers="[1, 2]"
-                    :options="[
-                        {
-                            key: 'history',
-                            ...ActionsStatic.HISTORY,
-                            action: () => openClientLogs(client?.code ?? ''),
-                        },
-                        {
-                            key: 'download',
-                            ...ActionsStatic.EXPORT,
-                            action: openExport,
-                        },
-                        {
-                            key: 'edit',
-                            ...ActionsStatic.UPDATE,
-                            action: () => onUpdate()
-                        },
-                        {
-                            key: 'remove',
-                            ...ActionsStatic.DELETE,
-                            action: () => onRemove(client)
-                        }
-                    ]"
-                ></SkDropdown>
+                <ActionsDropdownClient
+                    v-if="client"
+                    :client="client"
+                    :refresh="refreshData"
+                    show-logs
+                />
             </div>
         </section>
         <SkTable 

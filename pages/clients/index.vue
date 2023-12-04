@@ -127,8 +127,10 @@ function openCreateClient() {
 
         <template #cell(actions)="{ item }">
             <ActionsDropdownClient 
+                :key="item.code"
                 :client="item" 
                 :refresh="refresh"
+                show-actions
             />
         </template>
     </SkTable>
