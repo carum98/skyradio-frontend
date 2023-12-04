@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
-const columns: SkTableColumn[] = [
+const columns = ref<SkTableColumn[]>([
     {
         title: 'Nombre',
         key: 'name'
@@ -9,6 +9,11 @@ const columns: SkTableColumn[] = [
     {
         title: 'IMEI',
         key: 'imei',
+    },
+    {
+        title: 'Serial',
+        key: 'serial',
+        show: false
     },
     {
         title: 'Modelo',
@@ -29,22 +34,26 @@ const columns: SkTableColumn[] = [
     {
         title: 'Estado',
         key: 'status',
+        show: false
     },
     {
         title: '',
+        altTitle: 'Historial de cambios',
         key: 'logs',
         width: 65,
         align: 'center',
     },
     {
         title: '',
+        altTitle: 'Acciones',
         key: 'actions',
         width: 65,
         align: 'center',
     }
-]
+])
+
 // data
-const { page, data, search, refresh } = await useTableData<IRadio>('/api/radios')
+const { page, data, search, refresh, query } = await useTableData<IRadio>('/api/radios')
 const { navigateToAction } = useActions(refresh)
 const { open: openLogs } = useLogs('radios')
 
@@ -85,7 +94,10 @@ function openCreateRadio() {
         </template>
 
         <template #actions>
-            <TableActions />
+            <TableActionsRadios
+                :columns="columns"
+                @onApplied="query = $event"
+            />
         </template>
 
         <template #cell(model)="{ value }">

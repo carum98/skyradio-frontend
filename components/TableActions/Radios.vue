@@ -21,7 +21,7 @@ const { open: openColumns } = usePopover({
 })
 
 const { open: openFilters } = usePopover({
-    component: () => import('@views/table-filters-clients.vue'),
+    component: () => import('@views/table-filters-radios.vue'),
     listeners: {
         onApplied: onAppliedFilters,
     }
