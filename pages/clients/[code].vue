@@ -95,7 +95,7 @@ function openAdd(client: IClient | null) {
 
 <template>
     <main>
-        <section class="header-companies-profile">
+        <section class="header-companies-profile mb-1">
             <div class="sk-card sk-card--flex-column">
                 <div class="d-flex">
                     <SkAvatar 
@@ -228,6 +228,5 @@ function openAdd(client: IClient | null) {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 25px;
-    margin-bottom: 25px;
 }
 </style>
