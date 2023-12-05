@@ -64,6 +64,7 @@ onMounted(getData)
 
         <TableClients
             :path="`/api/clients?sellers[code][equal]=${route.params.code}`"
+            hide-seller
         />
     </main>
 </template>

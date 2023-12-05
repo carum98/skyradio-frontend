@@ -2,6 +2,7 @@
     <main>
         <TableClients 
             path="/api/clients"
+            enable-create
             enable-table-actions
         />
     </main>

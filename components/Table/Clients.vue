@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
     path: string
     enableTableActions?: boolean
-}>()
+    enableCreate?: boolean
+    hideSeller?: boolean
+    hideModality?: boolean
+}>(), {
+    enableTableActions: false,
+    enableCreate: false,
+    hideSeller: false,
+    hideModality: false
+})
 
 const columns = ref<SkTableColumn[]>([
     {
@@ -16,12 +24,14 @@ const columns = ref<SkTableColumn[]>([
         key: 'seller',
         width: 300,
         align: 'center',
+        show: !props.hideSeller
     },
     {
         title: 'Modalidad',
         key: 'modality',
         width: 300,
         align: 'center',
+        show: !props.hideModality
     },
     {
         title: '',
@@ -76,7 +86,7 @@ function openCreateClient() {
         @onRowClick="openProfile"
         @onPage="page = $event"
     >
-        <template #toolbar>
+        <template v-if="enableCreate" #toolbar>
             <button class="add-button" @click="openCreateClient">
                 <IconsAdd />
             </button>
