@@ -29,6 +29,7 @@
     "vue-tsc": "1.8.22"
   },
   "dependencies": {
-    "argon2": "0.31.1"
+    "argon2": "0.31.1",
+    "chart.js": "^4.4.1"
   }
 }

@@ -55,6 +55,10 @@ const { data: client, refresh } = await useFetch<IClient>(`/api/clients/${code}`
                     show-logs
                 />
             </div>
+
+            <div>
+                <SkChart />
+            </div>
         </section>
         <TableRadios 
             :path="`/api/clients/${code}/radios`"
