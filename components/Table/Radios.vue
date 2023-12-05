@@ -4,6 +4,7 @@ import type { SkTableColumn } from '@components/SkTable/sk-table'
 const props = withDefaults(defineProps<{
     path: string
     enableTableActions?: boolean
+    enableClientActions?: boolean
     enableCreate?: boolean
     hideModel?: boolean
     hideSim?: boolean
@@ -12,6 +13,7 @@ const props = withDefaults(defineProps<{
     hideStatus?: boolean
 }>(), {
     enableTableActions: false,
+    enableClientActions: false,
     enableCreate: false,
     hideModel: false,
     hideSim: false,
@@ -97,6 +99,35 @@ function openCreateRadio() {
         name: 'create-radio'
     })
 }
+
+function openSwap({ client, radio }: { client: IClient | null, radio: IRadio | null }) {
+    navigateToAction({
+        name: 'swap-radio',
+        props: {
+            client,
+            radio
+        }
+    })
+}
+
+function openRemove({ client, radio }: { client: IClient | null, radio: IRadio | null }) {
+    navigateToAction({
+        name: 'remove-radio',
+        props: {
+            client,
+            radio
+        }
+    })
+}
+
+function openAdd(client: IClient | null) {
+    navigateToAction({
+        name: 'add-radios',
+        props: {
+            client
+        }
+    })
+}
 </script>
 
 <template>
@@ -119,6 +150,16 @@ function openCreateRadio() {
                 :columns="columns"
                 @onApplied="query = $event"
             />
+        </template>
+
+        <template v-if="enableClientActions" #actions>
+            <slot 
+                name="actions" 
+                :openSwap="openSwap"
+                :openRemove="openRemove"
+                :openAdd="openAdd"
+            />
+
         </template>
 
         <template #cell(model)="{ value }">

@@ -1,96 +1,14 @@
 <script setup lang="ts">
-import type { SkTableColumn } from '@components/SkTable/sk-table'
-
 definePageMeta({
     name: 'clients-profile'
 })
 
-const columns: SkTableColumn[] = [
-    {
-        title: 'Nombre',
-        key: 'name'
-    },
-    {
-        title: 'IMEI',
-        key: 'imei',
-    },
-    {
-        title: 'Modelo',
-        key: 'model',
-    },
-    {
-        title: 'Sim',
-        key: 'sim',
-    },
-    {
-        title: 'Proveedor',
-        key: 'sim.provider',
-    },
-    {
-        title: '',
-        key: 'logs',
-        width: 65,
-        align: 'center',
-    },
-    {
-        title: '',
-        key: 'actions',
-        width: 65,
-        align: 'center',
-    }
-]
 const route = useRoute()
 
 const code = route.params.code as string
 
 // data
-const { data: client, refresh: refreshData } = await useFetch<IClient>(`/api/clients/${code}`)
-
-const { page, data, search, refresh } = await useTableData<IRadio>(`/api/clients/${code}/radios`)
-
-const { open: openRadioLogs } = useLogs('radios')
-const { navigateToAction } = useActions(refresh)
-
-const routerModal = useRouterModal()
-
-// methods
-function openProfile(radio: IRadio) {
-    routerModal.push({
-        name: 'profile-radio',
-        props: {
-            code: radio.code
-        }
-    })
-}
-
-function openSwap({ client, radio }: { client: IClient | null, radio: IRadio | null }) {
-    navigateToAction({
-        name: 'swap-radio',
-        props: {
-            client,
-            radio
-        }
-    })
-}
-
-function openRemove({ client, radio }: { client: IClient | null, radio: IRadio | null }) {
-    navigateToAction({
-        name: 'remove-radio',
-        props: {
-            client,
-            radio
-        }
-    })
-}
-
-function openAdd(client: IClient | null) {
-    navigateToAction({
-        name: 'add-radios',
-        props: {
-            client
-        }
-    })
-}
+const { data: client, refresh } = await useFetch<IClient>(`/api/clients/${code}`)
 </script>
 
 <template>
@@ -133,93 +51,42 @@ function openAdd(client: IClient | null) {
                 <ActionsDropdownClient
                     v-if="client"
                     :client="client"
-                    :refresh="refreshData"
+                    :refresh="refresh"
                     show-logs
                 />
             </div>
         </section>
-        <SkTable 
-            :table="data"
-            :columns="columns"
-            v-model="search"
-            hover
-            @onRowClick="openProfile"
-            @onPage="page = $event"
+        <TableRadios 
+            :path="`/api/clients/${code}/radios`"
+            enable-client-actions
+            hide-client
         >
-            <template #actions>
+            <template #actions="{ openSwap, openRemove, openAdd }">
                 <div class="table-actions">
-                    <button 
-                        class="button-actions" 
-                        :style="{ '--color': ActionsStatic.CHANGE.color }"
-                        @click="() => openSwap({ client, radio: null })"
-                    >
-                        <span v-html="ActionsStatic.CHANGE.icon"></span>
-                    </button>
-                    <button 
-                        class="button-actions" 
-                        :style="{ '--color': ActionsStatic.REMOVE.color }"
-                        @click="() => openRemove({ client, radio: null })"
-                    >
-                        <span v-html="ActionsStatic.REMOVE.icon"></span>
-                    </button>
-                    <button 
-                        class="button-actions"
-                        :style="{ '--color': ActionsStatic.ADD.color }"
-                        @click="() => openAdd(client)"
-                    >
-                        <span v-html="ActionsStatic.ADD.icon"></span>
-                    </button>
-                </div>
-            </template>
-
-            <template #cell(model)="{ value }">
-                <SkLinkModal
-                    v-if="value"
-                    name="profile-model"
-                    :props="{ code: value.code }"
-                    class="sk-link"
+                <button 
+                    class="button-actions" 
+                    :style="{ '--color': ActionsStatic.CHANGE.color }"
+                    @click="() => openSwap({ client, radio: null })"
                 >
-                    <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
-                    {{ value.name }}
-                </SkLinkModal>
-            </template>
-
-            <template #cell(sim)="{ value }">
-                <SkLinkModal
-                    v-if="value"
-                    name="profile-sim"
-                    :props="{ code: value.code }"
-                    class="sk-link"
-                >
-                    {{ value.number  }}
-                </SkLinkModal>
-            </template>
-
-            <template #cell(sim.provider)="{ value }">
-                <SkLinkModal
-                    v-if="value"
-                    name="profile-provider"
-                    :props="{ code: value.code }"
-                    class="sk-link"
-                >
-                    <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
-                    {{ value.name }}
-                </SkLinkModal>
-            </template>
-
-            <template #cell(logs)="{ item }">
-                <button class="sk-dropdown__button" @click.stop="openRadioLogs(item.code)">
-                    <IconsLogs />
+                    <span v-html="ActionsStatic.CHANGE.icon"></span>
                 </button>
+                <button 
+                    class="button-actions" 
+                    :style="{ '--color': ActionsStatic.REMOVE.color }"
+                    @click="() => openRemove({ client, radio: null })"
+                >
+                    <span v-html="ActionsStatic.REMOVE.icon"></span>
+                </button>
+                <button 
+                    class="button-actions"
+                    :style="{ '--color': ActionsStatic.ADD.color }"
+                    @click="() => openAdd(client)"
+                >
+                    <span v-html="ActionsStatic.ADD.icon"></span>
+                </button>
+            </div>
             </template>
-
-            <template #cell(actions)="{ item }">
-                <ActionsDropdownRadio
-                    :radio="item"
-                    :refresh="refresh"
-                />
-            </template>
-        </SkTable>
+        </TableRadios>
     </main>
 </template>
 
