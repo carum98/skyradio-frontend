@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import Chart from 'chart.js/auto'
 
+type ChartData = {
+    name: string
+    color: string
+    count: number
+}
+
+const props = defineProps<{
+    data: ChartData[]
+}>()
+
 const chart = ref<HTMLCanvasElement>()
 
 onMounted(() => {
@@ -11,21 +21,13 @@ onMounted(() => {
     new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: [
-                'Red',
-                'Blue',
-                'Yellow'
-            ],
+            labels: props.data.map(item => item.name),
             datasets: [{
-                label: 'Cantidad',
-                data: [300, 50, 100],
-                backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)'
-                ],
-            }],
-
+                data: props.data.map(item => item.count),
+                backgroundColor: props.data.map(item => item.color),
+                borderRadius: 10,
+                spacing: 3,
+            }]
         },
         options: {
             responsive: true,
@@ -33,18 +35,26 @@ onMounted(() => {
                 legend: {
                     display: false
                 },
-                title: {
-                    display: true,
-                    text: 'Modelos'
+                tooltip: {
+                    callbacks: {
+                        label: (context) => {
+                            const label = context.label || ''
+                            const value = context.formattedValue || ''
+
+                            return `${label}: ${value}`
+                        }
+                    }
                 }
-            }
+            },
+            cutout: 60,
+            borderColor: '#FFFFFF00',
         }
     })
 })
 </script>
 
 <template>
-    <div style="width: 250px;">
+    <div style="height: 200px; width: 200px;">
         <canvas ref="chart"></canvas>
     </div>
 </template>

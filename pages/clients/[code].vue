@@ -3,12 +3,15 @@ definePageMeta({
     name: 'clients-profile'
 })
 
+const chartType = ref<'models' | 'providers'>('models')
+
 const route = useRoute()
 
 const code = route.params.code as string
 
 // data
 const { data: client, refresh } = await useFetch<IClient>(`/api/clients/${code}`)
+const { data: stats } = await useFetch<IClientStats>(`/api/clients/${code}/stats`)
 </script>
 
 <template>
@@ -56,8 +59,23 @@ const { data: client, refresh } = await useFetch<IClient>(`/api/clients/${code}`
                 />
             </div>
 
-            <div>
-                <SkChart />
+            <div v-if="stats">
+                <div>
+                    <button @click="chartType = 'models'">
+                        Modelos
+                    </button>
+                    <button @click="chartType = 'providers'">
+                        Provedores
+                    </button>
+                </div>
+                <SkChart
+                    v-if="chartType === 'models'"
+                    :data="stats.models" 
+                />
+                <SkChart 
+                    v-if="chartType === 'providers'"
+                    :data="stats.sims_providers"
+                />
             </div>
         </section>
         <TableRadios 
@@ -97,7 +115,7 @@ const { data: client, refresh } = await useFetch<IClient>(`/api/clients/${code}`
 <style>
 .header-companies-profile {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 25px;
+    grid-template-columns: 1fr auto;
+    gap: 35px;
 }
 </style>
