@@ -3,7 +3,7 @@ definePageMeta({
     name: 'clients-profile'
 })
 
-const chartType = ref<'models' | 'providers'>('models')
+const chartType = ref('models')
 
 const route = useRoute()
 
@@ -60,14 +60,14 @@ const { data: stats } = await useFetch<IClientStats>(`/api/clients/${code}/stats
             </div>
 
             <div v-if="stats">
-                <div>
-                    <button @click="chartType = 'models'">
-                        Modelos
-                    </button>
-                    <button @click="chartType = 'providers'">
-                        Provedores
-                    </button>
-                </div>
+                <SkSwitch 
+                    class="mb-1"
+                    v-model="chartType"
+                    :items="[
+                        { label: 'Modelos', value: 'models' },
+                        { label: 'Provedores', value: 'providers' }
+                    ]"
+                ></SkSwitch>
                 <SkChart
                     v-if="chartType === 'models'"
                     :data="stats.models" 
