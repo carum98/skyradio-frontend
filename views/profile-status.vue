@@ -30,7 +30,6 @@ onMounted(async () => {
         <Suspense>
             <TableRadios 
                 :path="`/api/radios?radios_status[code][equal]=${props.code}&per_page=5`"
-                hide-status
             />
         </Suspense>
     </main>

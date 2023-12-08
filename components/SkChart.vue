@@ -54,7 +54,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div style="height: 200px; width: 200px;">
+    <div style="height: 200px; width: 200px; margin: auto;">
         <canvas ref="chart"></canvas>
     </div>
 </template>

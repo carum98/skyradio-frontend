@@ -80,6 +80,7 @@ const { data: stats } = await useFetch<IClientStats>(`/api/clients/${code}/stats
         </section>
         <TableRadios 
             :path="`/api/clients/${code}/radios`"
+            enable-table-actions
             enable-client-actions
             hide-client
         >

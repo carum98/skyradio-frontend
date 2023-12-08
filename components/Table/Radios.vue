@@ -10,7 +10,6 @@ const props = withDefaults(defineProps<{
     hideSim?: boolean
     hideProvider?: boolean
     hideClient?: boolean
-    hideStatus?: boolean
 }>(), {
     enableTableActions: false,
     enableClientActions: false,
@@ -19,7 +18,6 @@ const props = withDefaults(defineProps<{
     hideSim: false,
     hideProvider: false,
     hideClient: false,
-    hideStatus: false
 })
 
 const columns = ref<SkTableColumn[]>([
@@ -59,7 +57,7 @@ const columns = ref<SkTableColumn[]>([
     {
         title: 'Estado',
         key: 'status',
-        show: !props.hideStatus
+        show: false
     },
     {
         title: '',
@@ -152,7 +150,7 @@ function openAdd(client: IClient | null) {
             />
         </template>
 
-        <template v-if="enableClientActions" #actions>
+        <template v-if="enableClientActions" #toolbar>
             <slot 
                 name="actions" 
                 :openSwap="openSwap"
