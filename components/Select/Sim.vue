@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { items, search, onData } = useSelect<ISim>('/api/sims')
+const { items, search, onData } = useSelect<ISim>('/api/sims?radios[code][is_null]')
 
 const value = defineModel<ISim | null>() 
 </script>

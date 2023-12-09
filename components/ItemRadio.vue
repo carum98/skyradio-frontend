@@ -1,16 +1,42 @@
 <script setup lang="ts">
+const props = withDefaults(defineProps<{
+    radio: IRadio
+    hideSim?: boolean
+    hideName?: boolean
+}>(), {
+    hideSim: false,
+    hideName: false
+})
+
 defineEmits<{
     remove: [IRadio]
 }>()
 
-defineProps<{
-    radio: IRadio
-}>()
+const templateColumns = computed(() => {
+    const columns = {
+        name: '235px',
+        imei: '1fr',
+        model: '70px',
+        sim: '1fr',
+        remove: '35px'
+    }
+
+    if (props.hideName) {
+        delete columns.name
+    }
+
+    if (props.hideSim) {
+        delete columns.sim
+    }
+
+    return Object.values(columns).join(' ')
+})
 </script>
 
 <template>
     <div class="add-radio-item">
         <input
+            v-if="!hideName"
             type="text"
             class="sk-input"
             placeholder="Nombre del radio"
@@ -25,6 +51,7 @@ defineProps<{
         </span>
 
         <SelectSim
+            v-if="!hideSim"
             v-model="radio.sim"
         />
 
@@ -37,7 +64,7 @@ defineProps<{
 <style>
 .add-radio-item {
     display: grid !important;
-    grid-template-columns: 235px 1fr 70px 1fr 35px;
+    grid-template-columns: v-bind(templateColumns);
     gap: 20px;
 
     background-color: var(--table-color);

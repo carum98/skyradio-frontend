@@ -8,6 +8,8 @@ const emits = defineEmits<{
     refresh: []
 }>()
 
+const picker = usePickerRadio('/api/radios?clients[code][is_null]')
+
 // data
 const radio = ref<IRadio | null>(null)
 
@@ -23,14 +25,29 @@ async function send() {
     emits('refresh')
     emits('close')
 }
+
+async function addRadio() {
+    const value = await picker.open()
+
+    if (value) {
+        radio.value = value
+    }
+}
 </script>
 
 <template>
-    <form class="sk-form" @submit.prevent="send" style="width: 300px;">
-        <label>Radio</label>
-        <SelectRadio 
-            v-model="radio"
+    <form class="sk-form" @submit.prevent="send" style="width: 450px;">
+        <ItemRadio
+            v-if="radio"
+            :radio="radio"
+            @remove="radio = null"
+            hideName
+            hideSim
         />
+
+        <button v-else class="button-picker" @click.prevent="addRadio">
+            Seleccionar Radio
+        </button>
 
         <button type="submit" class="sk-button">
             Aceptar
