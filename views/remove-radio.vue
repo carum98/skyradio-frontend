@@ -51,6 +51,12 @@ async function addRadio() {
 function removeRadio(radio: IRadio) {
     radios.value.splice(radios.value.indexOf(radio), 1)
 }
+
+onMounted(() => {
+    if (props.radio) {
+        radios.value.push(props.radio)
+    }
+})
 </script>
 
 <template>
