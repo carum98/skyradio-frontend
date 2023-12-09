@@ -56,27 +56,10 @@ function removeRadio(radio: IRadio) {
     <form class="sk-form" @submit.prevent="send" style="width: 750px;">
         <ul v-if="radios.length" class="list-radios-form mb-1">
             <li v-for="radio in radios" class="add-radio-item">
-                <input
-                    type="text"
-                    class="sk-input"
-                    placeholder="Nombre del radio"
-                    v-model="radio.name" 
+                <ItemRadio
+                    :radio="radio"
+                    @remove="removeRadio"
                 />
-
-                {{ radio.imei }}
-
-                <span v-if="radio.model" class="sk-link">
-                    <span class="badge-color" :style="{ backgroundColor: radio.model.color }"></span>
-                    {{ radio.model.name }}
-                </span>
-
-                <SelectSim
-                    v-model="radio.sim"
-                />
-
-                <button type="button" @click="removeRadio(radio)">
-                    <IconsTrashBin />
-                </button>
             </li>
         </ul>
 
@@ -89,32 +72,3 @@ function removeRadio(radio: IRadio) {
         </button>
     </form>
 </template>
-
-<style>
-.add-radio-item {
-    display: grid !important;
-    grid-template-columns: 235px 1fr 70px 1fr 35px;
-    gap: 20px;
-}
-
-.button-picker {
-    --color: rgba(177, 177, 177, 0.301);
-
-    width: 100%;
-    height: 70px;
-    font-size: 18px;
-    color: var(--color);
-    background-color: var(--table-color);
-    opacity: 0.9;
-    border-radius: 15px;
-    text-align: center;
-    border: 2px dashed var(--color);
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-        border-color: var(--primary-color);
-        color: var(--primary-color);
-        opacity: 0.7;
-    }
-}
-</style>
