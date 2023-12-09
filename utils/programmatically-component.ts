@@ -10,6 +10,7 @@ export type ProgrammaticallyOptions = {
 export type ProgrammaticallyProps = {
     props?: Record<string, any>
     rootProps?: Record<string, any>
+    listeners?: Record<string, any>
 }
 
 export interface ProgrammaticallyReturnType {
@@ -24,7 +25,7 @@ export function programmaticallyComponent(
     let app: App
 
     async function open(propsParams: ProgrammaticallyProps) {
-        const { props = {}, rootProps = {} } = propsParams
+        const { props = {}, rootProps = {}, listeners = {} } = propsParams
 
         root = document.createElement('div')
         document.body.appendChild(root)
@@ -41,6 +42,7 @@ export function programmaticallyComponent(
                     ...params.props,
                     ...params.listeners,
                     ...props,
+                    ...listeners,
                     onClose: destroy
                 })
             ]),
