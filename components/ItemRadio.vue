@@ -9,27 +9,29 @@ defineProps<{
 </script>
 
 <template>
-    <input
-        type="text"
-        class="sk-input"
-        placeholder="Nombre del radio"
-        v-model="radio.name" 
-    />
+    <div class="add-radio-item">
+        <input
+            type="text"
+            class="sk-input"
+            placeholder="Nombre del radio"
+            v-model="radio.name" 
+        />
 
-    {{ radio.imei }}
+        {{ radio.imei }}
 
-    <span v-if="radio.model" class="sk-link">
-        <span class="badge-color" :style="{ backgroundColor: radio.model.color }"></span>
-        {{ radio.model.name }}
-    </span>
+        <span v-if="radio.model" class="sk-link">
+            <span class="badge-color" :style="{ backgroundColor: radio.model.color }"></span>
+            {{ radio.model.name }}
+        </span>
 
-    <SelectSim
-        v-model="radio.sim"
-    />
+        <SelectSim
+            v-model="radio.sim"
+        />
 
-    <button type="button" @click="$emit('remove', radio)">
-        <IconsTrashBin />
-    </button>
+        <button type="button" @click="$emit('remove', radio)">
+            <IconsTrashBin />
+        </button>
+    </div>
 </template>
 
 <style>
@@ -37,5 +39,15 @@ defineProps<{
     display: grid !important;
     grid-template-columns: 235px 1fr 70px 1fr 35px;
     gap: 20px;
+
+    background-color: var(--table-color);
+    padding: 15px 20px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+
+    & button {
+        margin-left: auto;
+    }
 }
 </style>

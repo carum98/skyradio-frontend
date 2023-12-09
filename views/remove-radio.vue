@@ -61,8 +61,8 @@ onMounted(() => {
 
 <template>
     <form class="sk-form" @submit.prevent="send" style="width: 750px;">
-        <ul v-if="radios.length" class="list-radios-form mb-1">
-            <li v-for="radio in radios" class="add-radio-item">
+        <ul v-if="radios.length" class="d-flex-column gap-1 mb-1">
+            <li v-for="radio in radios">
                 <ItemRadio
                     :radio="radio"
                     @remove="removeRadio"
@@ -74,7 +74,7 @@ onMounted(() => {
             Seleccionar Radio
         </button>
 
-        <button type="submit" class="sk-button">
+        <button type="submit" class="sk-button sk-button--block">
             Aceptar
         </button>
     </form>
