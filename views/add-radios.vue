@@ -8,8 +8,9 @@ const emits = defineEmits<{
     refresh: []
 }>()
 
+const picker = usePickerRadio('/api/radios')
+
 // data
-const radio = ref<IRadio | null>(null)
 const radios = ref<IRadio[]>([])
 
 // methods
@@ -38,26 +39,22 @@ async function send() {
     emits('close')
 }
 
+async function addRadio() {
+    const value = await picker.open()
+
+    if (value) {
+        radios.value.push(value)
+    }
+}
+
 function removeRadio(radio: IRadio) {
     radios.value.splice(radios.value.indexOf(radio), 1)
 }
-
-// hooks
-watch(radio, (value) => {
-    if (value) {
-        radios.value.push(value)
-        radio.value = null
-    }
-})
 </script>
 
 <template>
     <form class="sk-form" @submit.prevent="send" style="width: 750px;">
-        <SelectRadio 
-            v-model="radio"
-        />
-
-        <ul class="list-radios-form">
+        <ul v-if="radios.length" class="list-radios-form mb-1">
             <li v-for="radio in radios" class="add-radio-item">
                 <input
                     type="text"
@@ -83,6 +80,10 @@ watch(radio, (value) => {
             </li>
         </ul>
 
+        <button class="button-picker" @click.prevent="addRadio">
+            Seleccionar Radio
+        </button>
+
         <button type="submit" class="sk-button">
             Aceptar
         </button>
@@ -94,5 +95,26 @@ watch(radio, (value) => {
     display: grid !important;
     grid-template-columns: 235px 1fr 70px 1fr 35px;
     gap: 20px;
+}
+
+.button-picker {
+    --color: rgba(177, 177, 177, 0.301);
+
+    width: 100%;
+    height: 70px;
+    font-size: 18px;
+    color: var(--color);
+    background-color: var(--table-color);
+    opacity: 0.9;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px dashed var(--color);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        opacity: 0.7;
+    }
 }
 </style>
