@@ -38,17 +38,51 @@ watch(search, onData, {
 <template>
     <input 
         type="text" 
-        class="sk-input" 
+        class="sk-input"
+        placeholder="Buscar" 
         v-model="search"
+        autofocus
     />
 
-    <ul class="sk-select-options">
+    <ul class="picker-radio">
         <li 
             v-for="item in items" 
             :key="item.code"
             @click="onSelect(item)"
         >
             {{ item.imei }}
+
+            <span v-if="item.model" class="sk-link">
+                <span class="badge-color" :style="{ backgroundColor: item.model.color }"></span>
+                {{ item.model.name }}
+            </span>
         </li>
     </ul>
 </template>
+
+<style>
+.picker-radio {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    height: 400px;
+    width: 350px;
+    overflow-y: auto;
+
+    & li {
+        cursor: pointer;
+        background-color: var(--table-color);
+        padding: 15px 20px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:hover {
+            background-color: var(--primary-color);
+        }
+    }
+}
+</style>
