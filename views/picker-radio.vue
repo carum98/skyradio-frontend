@@ -17,7 +17,7 @@ const search = useDebounce('', 500)
 async function onData() {
     const { data } = await $fetch<ITable<IRadio>>(props.path, {
         params: {
-            search: search.value
+            search: search.value || undefined
         }
     })
 

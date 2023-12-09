@@ -40,7 +40,12 @@ async function send() {
 }
 
 async function addRadio() {
-    const value = await picker.open()
+    const value = await picker.open({
+        filters: {
+            'radios[code][not_in]': radios.value.map((radio) => radio.code).toString() || undefined,
+            'clients[code][is_null]': '',
+        }
+    })
 
     if (value) {
         radios.value.push(value)

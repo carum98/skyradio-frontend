@@ -10,7 +10,7 @@ const emits = defineEmits<{
 }>()
 
 const pickerFrom = usePickerRadio(`/api/clients/${props.client.code}/radios`)
-const pickerTo = usePickerRadio(`/api/radios`)
+const pickerTo = usePickerRadio(`/api/radios?clients[code][is_null]`)
 
 // data
 const radio_from = ref<IRadio | null>(null)
@@ -36,7 +36,10 @@ async function send() {
         }
     })
 
-    const updatePromise = [toRaw(radio_from.value), toRaw(radio_to.value)].map((radio) => $fetch(`/api/radios/${radio.code}`, {
+    const updatePromise = [
+        toRaw(radio_from.value) as IRadio, 
+        toRaw(radio_to.value) as IRadio
+    ].map((radio) => $fetch(`/api/radios/${radio.code}`, {
         method: 'PUT',
         body: {
             name: radio.name,
