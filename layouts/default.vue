@@ -30,6 +30,12 @@
                 </span>
                 Sims
             </NuxtLink>
+            <NuxtLink :to="{ name: 'reports' }">
+                <span>
+                    <IconsReport />
+                </span>
+                Reportes
+            </NuxtLink>
             <NuxtLink :to="{ name: 'settings' }">
                 <span>
                     <IconsSettings />
