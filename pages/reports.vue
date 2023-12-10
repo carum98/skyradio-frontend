@@ -31,7 +31,7 @@ const reports = [
         title: 'Proveedores de SIMs',
         description: 'Reporte por proveedor de SIMs, listado de sims por proveedor.',
         action: useModal({
-            component: () => import('@views/report-sim-provider.vue'),
+            component: () => import('@views/report-provider.vue'),
         })
     }
 ] as Report[]
