@@ -1,22 +1,45 @@
 <script setup lang="ts">
+type Report = {
+    title: string
+    description: string
+    action: ProgrammaticallyReturnType
+}
+
 const reports = [
     {
         title: 'Cliente',
-        description: 'Reporte por cliente, muestra un listado los radios del cliente'
+        description: 'Reporte por cliente, muestra un listado los radios del cliente',
+        action: useModal({
+            component: () => import('@views/report-client.vue'),
+        })
     },
     {
         title: 'Vendedor',
-        description: 'Reporte por vendedor, muestra los clientes del vendedor'
+        description: 'Reporte por vendedor, muestra los clientes del vendedor',
+        action: useModal({
+            component: () => import('@views/report-seller.vue'),
+        })
     },
     {
         title: 'Radios',
-        description: 'Reporte por radio, muestra la informacion de la radio'
+        description: 'Reporte por radio, muestra la informacion de la radio',
+        action: useModal({
+            component: () => import('@views/report-radio.vue'),
+        })
     },
     {
         title: 'Proveedores de SIMs',
-        description: 'Reporte por proveedor de SIMs, listado de sims por proveedor'
+        description: 'Reporte por proveedor de SIMs, listado de sims por proveedor',
+        action: useModal({
+            component: () => import('@views/report-sim-provider.vue'),
+        })
     }
-]
+] as Report[]
+
+// methods
+function openReport(item: Report) {
+    item.action.open({})
+}
 </script>
 
 <template>
@@ -27,7 +50,7 @@ const reports = [
                 <h2>{{ item.title }}</h2>
                 <p>{{ item.description }}</p>
 
-                <button>
+                <button @click="openReport(item)">
                     <IconsReport />
                     Generar
                 </button>
