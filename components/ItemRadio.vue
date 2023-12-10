@@ -19,7 +19,7 @@ const templateColumns = computed(() => {
         model: '70px',
         sim: '1fr',
         remove: '35px'
-    }
+    } as Record<string, string>
 
     if (props.hideName) {
         delete columns.name
