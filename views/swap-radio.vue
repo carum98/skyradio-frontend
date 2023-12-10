@@ -9,8 +9,7 @@ const emits = defineEmits<{
     refresh: []
 }>()
 
-const pickerFrom = usePickerRadio(`/api/clients/${props.client.code}/radios`)
-const pickerTo = usePickerRadio(`/api/radios?clients[code][is_null]`)
+const picker = usePicker<IRadio>()
 
 // data
 const radio_from = ref<IRadio | null>(null)
@@ -18,12 +17,23 @@ const radio_to = ref<IRadio | null>(null)
 
 // methods
 async function pickRadioFrom() {
-    const value = await pickerFrom.open()
+    const value = await picker.open({
+        name: 'radios',
+        path: `/api/clients/${props.client.code}/radios`,
+    })
+
     radio_from.value = value
 }
 
 async function pickRadioTo() {
-    const value = await pickerTo.open()
+    const value = await picker.open({
+        name: 'radios',
+        path: `/api/radios`,
+        filters: {
+            'clients[code][is_null]': '',
+        }
+    })
+
     radio_to.value = value
 }
 

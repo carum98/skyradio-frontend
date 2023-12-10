@@ -1,21 +1,20 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 const props = defineProps<{
     path: string
-    radio: IRadio | null
+    value: T | null
 }>()
 
 const emits = defineEmits<{
-    selected: [IRadio]
-    close: []
+    selected: [T]
 }>()
 
 // data
-const items = ref<IRadio[]>([])
+const items = ref<T[]>([]) as Ref<T[]>
 const search = useDebounce('', 500)
 
 // methods
 async function onData() {
-    const { data } = await $fetch<ITable<IRadio>>(props.path, {
+    const { data } = await $fetch<ITable<T>>(props.path, {
         params: {
             search: search.value || undefined
         }
@@ -24,9 +23,8 @@ async function onData() {
     items.value = data
 }
 
-function onSelect(item: IRadio) {
+function onSelect(item: T) {
     emits('selected', item)
-    emits('close')
 }
 
 // hooks
@@ -47,15 +45,9 @@ watch(search, onData, {
     <ul class="picker-radio">
         <li 
             v-for="item in items" 
-            :key="item.code"
             @click="onSelect(item)"
         >
-            {{ item.imei }}
-
-            <span v-if="item.model" class="sk-link">
-                <span class="badge-color" :style="{ backgroundColor: item.model.color }"></span>
-                {{ item.model.name }}
-            </span>
+            <slot name="option" :item="item" />
         </li>
     </ul>
 </template>

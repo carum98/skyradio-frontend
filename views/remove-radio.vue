@@ -9,7 +9,7 @@ const emits = defineEmits<{
     refresh: []
 }>()
 
-const picker = usePickerRadio(`/api/clients/${props.client.code}/radios`)
+const picker = usePicker<IRadio>()
 
 // data
 const radios = ref<IRadio[]>([])
@@ -42,6 +42,8 @@ async function send() {
 
 async function addRadio() {
     const value = await picker.open({
+        name: 'radios',
+        path: `/api/clients/${props.client.code}/radios`,
         filters: {
             'radios[code][not_in]': radios.value.map((radio) => radio.code).toString() || undefined,
         }
