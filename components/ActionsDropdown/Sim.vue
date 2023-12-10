@@ -23,7 +23,7 @@ let actions = [
         name: 'Cambiar SIM',
         action: () => navigateToAction({
             name: 'swap-sim',
-            props: { radio: props.sim.radio }
+            props: { radio: props.sim.radio, simOld: props.sim }
         }),
         show: props.sim.radio !== null
     },

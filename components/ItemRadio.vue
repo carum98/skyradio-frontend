@@ -16,7 +16,7 @@ const templateColumns = computed(() => {
     const columns = {
         name: '235px',
         imei: '1fr',
-        model: '70px',
+        model: 'auto',
         sim: '1fr',
         remove: '35px'
     } as Record<string, string>
@@ -34,7 +34,7 @@ const templateColumns = computed(() => {
 </script>
 
 <template>
-    <div class="add-radio-item">
+    <div class="item-row">
         <input
             v-if="!hideName"
             type="text"
@@ -61,20 +61,8 @@ const templateColumns = computed(() => {
     </div>
 </template>
 
-<style>
-.add-radio-item {
-    display: grid !important;
+<style scoped>
+.item-row {
     grid-template-columns: v-bind(templateColumns);
-    gap: 20px;
-
-    background-color: var(--table-color);
-    padding: 15px 20px;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-
-    & button {
-        margin-left: auto;
-    }
 }
 </style>

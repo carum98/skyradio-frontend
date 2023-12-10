@@ -4,7 +4,11 @@ const pickers = [
     {
         name: 'radios',
         component: () => import('@components/Picker/Radios.vue')
-    }
+    },
+    {
+        name: 'sims',
+        component: () => import('@components/Picker/Sims.vue')
+    },
 ] as const
 
 type PickersNames = typeof pickers[number]['name']
