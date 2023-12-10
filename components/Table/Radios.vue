@@ -20,6 +20,10 @@ const props = withDefaults(defineProps<{
     hideClient: false,
 })
 
+const emits = defineEmits<{
+    refresh: []
+}>()
+
 const columns = ref<SkTableColumn[]>([
     {
         title: 'Nombre',
@@ -77,12 +81,17 @@ const columns = ref<SkTableColumn[]>([
 
 // data
 const { page, data, search, refresh, query } = await useTableData<IRadio>(props.path)
-const { navigateToAction } = useActions(refresh)
+const { navigateToAction } = useActions(refreshList)
 const { open: openLogs } = useLogs('radios')
 
 const routerModal = useRouterModal()
 
 // methods
+function refreshList() {
+    refresh()
+    emits('refresh')
+}
+
 function openProfile(radio: IRadio) {
     routerModal.push({
         name: 'profile-radio',
@@ -228,7 +237,7 @@ function openAdd(client: IClient | null) {
         <template #cell(actions)="{ item }">
             <ActionsDropdownRadio
                 :radio="item"
-                :refresh="refresh"
+                :refresh="refreshList"
             />
         </template>
     </SkTable>

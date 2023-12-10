@@ -11,7 +11,7 @@ const code = route.params.code as string
 
 // data
 const { data: client, refresh } = await useFetch<IClient>(`/api/clients/${code}`)
-const { data: stats } = await useFetch<IClientStats>(`/api/clients/${code}/stats`)
+const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/api/clients/${code}/stats`)
 </script>
 
 <template>
@@ -83,6 +83,7 @@ const { data: stats } = await useFetch<IClientStats>(`/api/clients/${code}/stats
             enable-table-actions
             enable-client-actions
             hide-client
+            @refresh="refreshStats"
         >
             <template #actions="{ openSwap, openRemove, openAdd }">
                 <div class="table-actions">

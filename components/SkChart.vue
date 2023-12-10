@@ -11,14 +11,26 @@ const props = defineProps<{
     data: ChartData[]
 }>()
 
-const chart = ref<HTMLCanvasElement>()
+// data
+const canvas = ref<HTMLCanvasElement>()
+let chart: Chart<"doughnut", number[], string>
 
+// hooks
+watch(() => props.data, () => {
+    chart.data.labels = props.data.map(item => item.name)
+    chart.data.datasets[0].data = props.data.map(item => item.count)
+    chart.data.datasets[0].backgroundColor = props.data.map(item => item.color)
+
+    chart.update()
+})
+
+// lifecycle
 onMounted(() => {
-    const ctx = chart.value?.getContext('2d')
+    const ctx = canvas.value?.getContext('2d')
 
     if (!ctx) return
 
-    new Chart(ctx, {
+    chart = new Chart(ctx, {
         type: 'doughnut',
         data: {
             labels: props.data.map(item => item.name),
@@ -51,10 +63,14 @@ onMounted(() => {
         }
     })
 })
+
+onUnmounted(() => {
+    chart.destroy()
+})
 </script>
 
 <template>
     <div style="height: 200px; width: 200px; margin: auto;">
-        <canvas ref="chart"></canvas>
+        <canvas ref="canvas"></canvas>
     </div>
 </template>
