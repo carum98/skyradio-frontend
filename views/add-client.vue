@@ -8,6 +8,8 @@ const emits = defineEmits<{
     refresh: []
 }>()
 
+const picker = usePicker<IClient>()
+
 // data
 const client = ref<IClient | null>(null)
 
@@ -23,14 +25,30 @@ async function send() {
     emits('refresh')
     emits('close')
 }
+
+async function addSim() {
+    const value = await picker.open({
+        name: 'clients',
+        path: '/api/clients'
+    })
+
+    if (value) {
+        client.value = value
+    }
+}
 </script>
 
 <template>
-    <form class="sk-form" @submit.prevent="send" style="width: 300px;">
-        <label>Cliente</label>
-        <SelectClient 
-            v-model="client"
+    <form class="sk-form" @submit.prevent="send" style="width: 350px;">
+        <ItemClient
+            v-if="client"
+            :client="client"
+            @remove="client = null"
         />
+
+        <button v-else class="button-picker" @click.prevent="addSim">
+            Seleccionar Cliente
+        </button>
 
         <button type="submit" class="sk-button">
             Aceptar

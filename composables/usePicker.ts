@@ -9,6 +9,10 @@ const pickers = [
         name: 'sims',
         component: () => import('@components/Picker/Sims.vue')
     },
+    {
+        name: 'clients',
+        component: () => import('@components/Picker/Clients.vue')
+    }
 ] as const
 
 type PickersNames = typeof pickers[number]['name']

@@ -12,7 +12,7 @@ let actionsClient = [
         ...ActionsStatic.ADD,
         key: 'add-client',
         action: () => navigateToAction({
-            name: 'remove-radio',
+            name: 'add-client',
             props: {
                 radio: props.radio, 
                 client: props.radio.client
