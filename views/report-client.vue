@@ -14,9 +14,10 @@ const loading = ref(false)
 async function send() {
     loading.value = true
 
-    const data = await $fetch(`/api/clients/${client.value?.code}/export`, {
+    const data = await $fetch(`/api/reports/clients`, {
         method: 'POST',
         body: {
+            client_code: client.value?.code,
             format: format.value
         }
     })

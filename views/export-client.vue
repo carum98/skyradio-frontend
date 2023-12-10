@@ -16,9 +16,10 @@ async function onSubmitted() {
     try {
         loading.value = true
 
-        const data = await $fetch(`/api/clients/${props.client.code}/export`, {
+        const data = await $fetch(`/api/reports/clients`, {
             method: 'POST',
             body: {
+                client_code: props.client.code,
                 format: format.value
             }
         })
