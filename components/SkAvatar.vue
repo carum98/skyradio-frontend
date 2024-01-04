@@ -4,7 +4,7 @@ const props = defineProps<{
     color: string
 }>()
 
-const initials = props.alt.split(' ').map((word) => word[0]).join('').toUpperCase()
+const initials = props.alt.split(' ', 2).map((word) => word.at(0)).join('').toUpperCase()
 </script>
 
 <template>

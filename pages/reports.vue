@@ -73,6 +73,7 @@ function openReport(item: Report) {
 
         & p {
             color: gray;
+            margin-bottom: 20px;
         }
 
         & button {
