@@ -15,6 +15,9 @@ const emits = defineEmits<{
 // data
 const buttonText = props.form.isEditing ? 'Actualizar' : 'Guardar'
 
+// computed
+const disabled = computed<boolean>(() => !props.form.isValid || props.form.isDirty)
+
 // methods
 async function onSubmitted() {
     const path = props.form.isEditing
@@ -39,7 +42,7 @@ async function onSubmitted() {
     <form class="sk-form" @submit.prevent="onSubmitted">
         <slot name="form" :form="form" />
 
-        <button type="submit" class="sk-button">
+        <button type="submit" class="sk-button" :disabled="disabled">
             {{ buttonText }}
         </button>
     </form>

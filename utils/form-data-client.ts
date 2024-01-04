@@ -7,8 +7,7 @@ export class FormDataClient extends SkFormData {
     public color: string
 
     constructor(name: string, modality: IModality | null, seller: ISeller | null, color: string) {
-        super({ name, modality, seller })
-
+        super()
         this.name = name
         this.modality = modality
         this.seller = seller
@@ -34,5 +33,9 @@ export class FormDataClient extends SkFormData {
             seller_code: this.seller?.code,
             color: this.color,
         }
+    }
+
+    get isValid() {
+        return this.name.length > 0 && this.color != null && this.seller != null;
     }
 }

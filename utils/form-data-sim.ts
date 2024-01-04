@@ -6,7 +6,7 @@ export class FormDataSim extends SkFormData {
     public provider: ISimProvider | null
 
     constructor(number: string, serial: string, provider: ISimProvider | null) {
-        super({ number, serial, provider })
+        super()
 
         this.number = number
         this.serial = serial
@@ -35,5 +35,9 @@ export class FormDataSim extends SkFormData {
             serial: this.serial,
             provider_code: this.provider?.code
         }
+    }
+
+    get isValid(): boolean {
+        return this.number.length > 0 && this.provider != null
     }
 }

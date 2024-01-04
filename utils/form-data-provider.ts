@@ -5,7 +5,7 @@ export class FormDataProvider extends SkFormData {
     public color: string
 
     constructor(name: string, color: string) {
-        super({ name, color })
+        super()
         this.name = name
         this.color = color
     }
@@ -27,5 +27,9 @@ export class FormDataProvider extends SkFormData {
             name: this.name,
             color: this.color
         }
+    }
+
+    get isValid(): boolean {
+        return this.name.length > 0 && this.color != null
     }
 }

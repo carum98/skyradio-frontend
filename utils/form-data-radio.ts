@@ -7,8 +7,7 @@ export class FormDataRadio extends SkFormData {
     public model: IRadioModel | null
 
     constructor(name: string, imei: string, serial: string, model: IRadioModel | null) {
-        super({ name, imei, serial, model })
-
+        super()
         this.name = name
         this.imei = imei
         this.serial = serial
@@ -39,5 +38,9 @@ export class FormDataRadio extends SkFormData {
             serial: this.serial,
             model_code: this.model?.code
         }
+    }
+
+    get isValid(): boolean {
+        return this.name.length > 0 && this.imei.length > 0 && this.serial.length > 0 && this.model != null
     }
 }

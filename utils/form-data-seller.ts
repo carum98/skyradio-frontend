@@ -4,7 +4,7 @@ export class FormDataSeller extends SkFormData {
     public name: string
 
     constructor(name: string) {
-        super({ name })
+        super()
         this.name = name
     }
 
@@ -24,5 +24,9 @@ export class FormDataSeller extends SkFormData {
         return {
             name: this.name
         }
+    }
+
+    get isValid(): boolean {
+        return this.name.length > 0
     }
 }

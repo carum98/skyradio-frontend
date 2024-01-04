@@ -1,10 +1,10 @@
 export abstract class SkFormData {
-    private _data: Record<string, any> = {}
+    private _data: Record<string, any> | null = null
 
     public code: string | null = null
 
-    constructor(data: Record<string, any>) {
-        this._data = data
+    constructor() {
+        setTimeout(() => this._data = this.toParams(), 0) 
     }
 
     public abstract toParams(): Record<string, any>
@@ -21,7 +21,18 @@ export abstract class SkFormData {
         throw new Error("Method not implemented.")
     }
 
-    isDirty(): boolean {
-        return Object.keys(this._data).length > 0
+    get isDirty(): boolean {
+        if (this.isEditing) {
+            if (this._data === null) {
+                return true
+            }
+            return JSON.stringify(this._data) === JSON.stringify(this.toParams())
+        } else {
+            return false
+        }
+    }
+
+    get isValid(): boolean {
+        throw new Error("Method 'isValid' not implemented.")
     }
 }
