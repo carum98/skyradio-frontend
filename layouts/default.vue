@@ -12,7 +12,6 @@ onMounted(() => {
 
     const observer = new MutationObserver(() => {
         const text = element.innerText
-        console.log(text)
         title.value = text.includes('|') ? text.split(' | ').at(0) : ''
     })
 
