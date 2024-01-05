@@ -1,3 +1,9 @@
+<script setup lang="ts">
+useHead({
+  title: 'SIMs',
+})
+</script>
+
 <template>
     <main>
         <TableSims

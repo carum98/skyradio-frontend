@@ -1,3 +1,9 @@
+<script setup lang="ts">
+useHead({
+  title: 'Radios',
+})
+</script>
+
 <template>
     <main>
         <TableRadios

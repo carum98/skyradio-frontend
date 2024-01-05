@@ -1,4 +1,8 @@
 <script setup lang="ts">
+useHead({
+  title: 'Proveedores de SIMs',
+})
+
 definePageMeta({
     name: 'sims-provider'
 })

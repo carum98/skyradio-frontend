@@ -1,4 +1,8 @@
 <script setup lang="ts">
+useHead({
+  title: 'Usuarios',
+})
+
 definePageMeta({
     name: 'users'
 })

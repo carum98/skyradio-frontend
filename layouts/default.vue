@@ -1,17 +1,36 @@
+<script setup lang="ts">
+useHead({
+    titleTemplate: (title) => {
+        return title ? `${title} | SkyRadio` : 'SkyRadio'
+    }
+})
+
+const title = ref('')
+
+onMounted(() => {
+    const element = document.querySelector('title') as HTMLTitleElement
+
+    const observer = new MutationObserver(() => {
+        const text = element.innerText
+        console.log(text)
+        title.value = text.includes('|') ? text.split(' | ').at(0) : ''
+    })
+
+    observer.observe(element, { childList: true })
+
+    onUnmounted(() => {
+        observer.disconnect()
+    })
+})
+</script>
+
 <template>
     <header>
-        <div></div>
-        <!-- <h1>SkyRadio</h1> -->
+        <h1>{{ title }}</h1>
         <Toolbar />
     </header>
     <aside>
         <nav>
-            <!-- <NuxtLink :to="{ name: 'index' }">
-                <span>
-                    <IconsHome />
-                </span>
-                Menu
-            </NuxtLink> -->
             <NuxtLink :to="{ name: 'clients' }">
                 <span>
                     <IconsCompany />

@@ -125,6 +125,7 @@ function openCreate() {
                 v-if="value"
                 :to="{ name: 'clients-profile', params: { code: value.code } }"
                 class="sk-link"
+                @click.stop
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}

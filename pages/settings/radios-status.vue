@@ -1,4 +1,8 @@
 <script setup lang="ts">
+useHead({
+  title: 'Estados',
+})
+
 definePageMeta({
     name: 'radios-status'
 })

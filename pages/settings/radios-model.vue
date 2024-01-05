@@ -1,4 +1,8 @@
 <script setup lang="ts">
+useHead({
+  title: 'Modelos',
+})
+
 definePageMeta({
     name: 'radios-model'
 })

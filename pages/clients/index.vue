@@ -1,3 +1,9 @@
+<script setup lang="ts">
+useHead({
+  title: 'Clientes',
+})
+</script>
+
 <template>
     <main>
         <TableClients 
