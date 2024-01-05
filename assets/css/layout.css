@@ -4,21 +4,30 @@ body {
 }
 
 #app:has(header, main, aside) {
+    --sidebar-width: 95px;
+    --header-height: 75px;
+
     height: 100vh;
     display: grid;
     grid-template-areas:
-        "aside header"
+        "aside main"
         "aside main";
 
-    grid-template-rows: 75px auto;
-    grid-template-columns: 95px auto;
+    grid-template-rows: var(--header-height) auto;
+    grid-template-columns: var(--sidebar-width) auto;
 
     > header {
-        grid-area: header;
+        position: fixed;
+        top: 0;
+        right: 10px;
+        left: var(--sidebar-width);
+        height: var(--header-height);
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 0 30px;
+        justify-content: end;
+        padding: 0 20px;
+        backdrop-filter: blur(7px);
+        z-index: 5;
 
         > h1 {
             font-size: 1.4rem;
@@ -28,8 +37,7 @@ body {
 
     > main {
         grid-area: main;
-        padding: 0 30px 30px 30px;
-        height: calc(100vh - 75px);
+        padding: var(--header-height) 30px 30px 30px;
         overflow: scroll;
     }
 
