@@ -117,14 +117,14 @@ function openCreateClient() {
         </template>
 
         <template #cell(seller)="{ value }">
-            <NuxtLink
+            <SkLinkModal
                 v-if="value"
-                :to="{ name: 'sellers-profile', params: { code: value.code } }"
-                @click.stop
+                name="profile-seller"
+                :props="{ code: value.code }"
                 class="sk-link"
             >
                 {{ value.name }}
-            </NuxtLink> 
+            </SkLinkModal> 
         </template>
 
         <template #cell(modality)="{ value }">

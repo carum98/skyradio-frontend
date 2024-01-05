@@ -31,12 +31,13 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
 
                 <p v-if="client?.seller">
                     Vendedor:
-                    <NuxtLink
-                        :to="{ name: 'sellers-profile', params: { code: client.seller.code } }"
+                    <SkLinkModal
+                        name="profile-seller"
+                        :props="{ code: client.seller.code }"
                         class="sk-link"
                     >
                         {{ client.seller.name }}
-                    </NuxtLink> 
+                    </SkLinkModal> 
                 </p>
 
                 <p v-if="client?.modality">

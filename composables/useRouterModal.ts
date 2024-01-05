@@ -22,6 +22,10 @@ const routes = [
     {
         name: 'profile-status',
         component: () => import('@views/profile-status.vue')
+    },
+    {
+        name: 'profile-seller',
+        component: () => import('@views/profile-seller.vue')
     }
 ] as const
 

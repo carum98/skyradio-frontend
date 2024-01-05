@@ -1,9 +1,7 @@
 <script setup lang="ts">
-definePageMeta({
-    name: 'sellers-profile'
-})
-
-const route = useRoute()
+const props = defineProps<{
+    code: string
+}>()
 
 const { navigateToAction } = useActions(getData)
 
@@ -12,7 +10,7 @@ const seller = ref<ISeller | null>()
 
 // methods
 async function getData() {
-    const { data } = await useFetch<ISeller>(`/api/sellers/${route.params.code}`)
+    const { data } = await useFetch<ISeller>(`/api/sellers/${props.code}`)
     seller.value = data.value
 }
 
@@ -41,7 +39,7 @@ onMounted(getData)
 <template>
     <main>
         <section class="mb-1">
-            <div class="sk-card sk-card--flex-column" style="width: 60%;">
+            <div class="sk-card sk-card--flex-column">
                 <h2>{{ seller?.name }}</h2>
 
                 <SkDropdown 
@@ -62,9 +60,11 @@ onMounted(getData)
             </div>
         </section>
 
-        <TableClients
-            :path="`/api/clients?sellers[code][equal]=${route.params.code}`"
-            hide-seller
-        />
+        <Suspense>
+            <TableClients
+                :path="`/api/clients?per_page=5&sellers[code][equal]=${code}`"
+                hide-seller
+            />
+        </Suspense>
     </main>
 </template>

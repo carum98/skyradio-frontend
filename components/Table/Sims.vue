@@ -139,6 +139,7 @@ function openCreate() {
 
         <template #cell(actions)="{ item }">
             <ActionsDropdownSim 
+                :key="item.code"
                 :sim="item"
                 :refresh="refresh"
             />

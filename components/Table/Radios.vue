@@ -236,6 +236,7 @@ function openAdd(client: IClient | null) {
 
         <template #cell(actions)="{ item }">
             <ActionsDropdownRadio
+                :key="item.code"
                 :radio="item"
                 :refresh="refreshList"
             />

@@ -6,11 +6,13 @@ definePageMeta({
 const { page, search, data, refresh } = await useTableData<ISeller>('/api/sellers')
 const { navigateToAction } = useActions(refresh)
 
+const routerModal = useRouterModal()
+
 // methods
 function openProfile(seller: ISeller) {
-    navigateTo({
-        name: 'sellers-profile',
-        params: {
+    routerModal.push({
+        name: 'profile-seller',
+        props: {
             code: seller.code
         }
     })
