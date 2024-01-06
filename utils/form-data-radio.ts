@@ -33,14 +33,14 @@ export class FormDataRadio extends SkFormData {
 
     toParams() {
         return {
-            name: this.name,
+            name: this.name || undefined,
             imei: this.imei,
-            serial: this.serial,
+            serial: this.serial || undefined,
             model_code: this.model?.code
         }
     }
 
     get isValid(): boolean {
-        return this.name.length > 0 && this.imei.length > 0 && this.serial.length > 0 && this.model != null
+        return this.imei.length > 0 && this.model != null
     }
 }
