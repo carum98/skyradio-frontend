@@ -93,6 +93,15 @@
     width: 100%;
 }
 
+.sk-button--transparent {
+    background-color: transparent;
+    color: var(--text-color);
+    
+    &:hover {
+        box-shadow: none;
+    }
+}
+
 .counter {
     display: flex;
     justify-content: center;

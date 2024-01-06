@@ -174,7 +174,8 @@ export function useActions(onRefresh: () => void) {
                 remove.open({
                     props: {
                         name: 'Radio',
-                        path: `/api/radios/${props?.code}`
+                        path: `/api/radios/${props?.code}`,
+                        ...props
                     }
                 })
                 break
@@ -186,7 +187,8 @@ export function useActions(onRefresh: () => void) {
                 remove.open({
                     props: {
                         name: 'Cliente',
-                        path: `/api/clients/${props?.code}`
+                        path: `/api/clients/${props?.code}`,
+                        ...props
                     }
                 })
                 break
@@ -198,7 +200,8 @@ export function useActions(onRefresh: () => void) {
                 remove.open({
                     props: {
                         name: 'Sim',
-                        path: `/api/sims/${props?.code}`
+                        path: `/api/sims/${props?.code}`,
+                        ...props
                     }
                 })
                 break
@@ -210,7 +213,8 @@ export function useActions(onRefresh: () => void) {
                 remove.open({
                     props: {
                         name: 'Modalidad',
-                        path: `/api/clients-modality/${props?.code}`
+                        path: `/api/clients-modality/${props?.code}`,
+                        ...props
                     }
                 })
                 break
@@ -222,7 +226,8 @@ export function useActions(onRefresh: () => void) {
                 remove.open({
                     props: {
                         name: 'Model',
-                        path: `/api/radios-model/${props?.code}`
+                        path: `/api/radios-model/${props?.code}`,
+                        ...props
                     }
                 })
                 break
@@ -234,7 +239,8 @@ export function useActions(onRefresh: () => void) {
                 remove.open({
                     props: {
                         name: 'Estado',
-                        path: `/api/radios-status/${props?.code}`
+                        path: `/api/radios-status/${props?.code}`,
+                        ...props
                     }
                 })
                 break
@@ -246,7 +252,8 @@ export function useActions(onRefresh: () => void) {
                 remove.open({
                     props: {
                         name: 'Vendedor',
-                        path: `/api/sellers/${props?.code}`
+                        path: `/api/sellers/${props?.code}`,
+                        ...props
                     }
                 })
                 break
@@ -258,7 +265,8 @@ export function useActions(onRefresh: () => void) {
                 remove.open({
                     props: {
                         name: 'Proveedor',
-                        path: `/api/sims-provider/${props?.code}`
+                        path: `/api/sims-provider/${props?.code}`,
+                        ...props
                     }
                 })
                 break

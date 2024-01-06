@@ -46,7 +46,7 @@ function onUpdate() {
 function onDelete() {
     navigateToAction({
         name: 'remove-client',
-        props: { client: props.client }
+        props: { code: props.client.code }
     })
 }
 
