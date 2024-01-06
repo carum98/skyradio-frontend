@@ -31,7 +31,10 @@ onMounted(() => {
     })
 
     // Close the dialog after the duration
-    setTimeout(close, props.duration)
+    setTimeout(() => {
+        toast.value?.classList.add('sk-toast--hide')
+        setTimeout(close, 500)
+    }, props.duration)
 })
 </script>
 
