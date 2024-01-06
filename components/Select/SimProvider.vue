@@ -11,6 +11,7 @@ const value = defineModel<ISimProvider | null>()
     <SkSelect
         label="Provedor"
         :options="items"
+        :required="required"
         v-model:value="value"
         v-model:search="search"
         @onData="onData"

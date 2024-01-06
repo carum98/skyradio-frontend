@@ -11,6 +11,7 @@ const value = defineModel<IRadioStatus | null>()
     <SkSelect
         label="Estado"
         :options="items"
+        :required="required"
         v-model:value="value"
         v-model:search="search"
         @onData="onData"

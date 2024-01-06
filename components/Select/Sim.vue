@@ -11,6 +11,7 @@ const value = defineModel<ISim | null>()
     <SkSelect
         label="Sims"
         :options="items"
+        :required="required"
         v-model:value="value"
         v-model:search="search"
         @onData="onData"
