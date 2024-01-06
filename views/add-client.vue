@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const toast = useToast()
+
 const props = defineProps<{
     radio: IRadio
 }>()
@@ -13,17 +15,35 @@ const picker = usePicker<IClient>()
 // data
 const client = ref<IClient | null>(null)
 
+// computed
+const disabled = computed(() => !client.value)
+
 // methods
 async function send() {
-    await $fetch(`/api/radios/${props.radio.code}/clients`, {
-        method: 'POST',
-        body: {
-            client_code: client.value?.code
-        }
-    })
+    try {
+        await $fetch(`/api/radios/${props.radio.code}/clients`, {
+            method: 'POST',
+            body: {
+                client_code: client.value?.code
+            }
+        })
 
-    emits('refresh')
-    emits('close')
+        toast.open({
+            type: 'success',
+            title: 'Exito!!',
+            message: 'Entrega realizada correctamente'
+        })
+
+        emits('refresh')
+        emits('close')
+    } catch (error) {
+        console.error(error)
+        toast.open({
+            type: 'error',
+            title: 'Error!!',
+            message: 'Ocurrio un error al realizar la entrega'
+        })
+    }
 }
 
 async function addSim() {
@@ -50,7 +70,7 @@ async function addSim() {
             Seleccionar Cliente
         </button>
 
-        <button type="submit" class="sk-button">
+        <button type="submit" class="sk-button" :disabled="disabled">
             Aceptar
         </button>
     </form>

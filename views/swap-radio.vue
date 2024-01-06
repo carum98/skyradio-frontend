@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const toast = useToast()
+
 const props = defineProps<{
     client: IClient
     radio?: IRadio
@@ -14,6 +16,9 @@ const picker = usePicker<IRadio>()
 // data
 const radio_from = ref<IRadio | null>(null)
 const radio_to = ref<IRadio | null>(null)
+
+// computed
+const disabled = computed(() => !radio_from.value || !radio_to.value)
 
 // methods
 async function pickRadioFrom() {
@@ -38,32 +43,47 @@ async function pickRadioTo() {
 }
 
 async function send() {
-    const addPromise = $fetch(`/api/clients/${props.client.code}/radios`, {
-        method: 'PUT',
-        body: {
-            radio_code_from: radio_from.value?.code,
-            radio_code_to: radio_to.value?.code
-        }
-    })
+    try {
+        const addPromise = $fetch(`/api/clients/${props.client.code}/radios`, {
+            method: 'PUT',
+            body: {
+                radio_code_from: radio_from.value?.code,
+                radio_code_to: radio_to.value?.code
+            }
+        })
 
-    const updatePromise = [
-        toRaw(radio_from.value) as IRadio, 
-        toRaw(radio_to.value) as IRadio
-    ].map((radio) => $fetch(`/api/radios/${radio.code}`, {
-        method: 'PUT',
-        body: {
-            name: radio.name,
-            sim_code: radio.sim?.code
-        }
-    }))
+        const updatePromise = [
+            toRaw(radio_from.value) as IRadio, 
+            toRaw(radio_to.value) as IRadio
+        ].map((radio) => $fetch(`/api/radios/${radio.code}`, {
+            method: 'PUT',
+            body: {
+                name: radio.name,
+                sim_code: radio.sim?.code
+            }
+        }))
 
-    await Promise.allSettled([
-        addPromise, 
-        ...updatePromise
-    ])
+        await Promise.allSettled([
+            addPromise, 
+            ...updatePromise
+        ])
 
-    emits('refresh')
-    emits('close')
+        toast.open({
+            type: 'success',
+            title: 'Exito!!',
+            message: 'Cambio realizado correctamente'
+        })
+
+        emits('refresh')
+        emits('close')
+    } catch (error) {
+        console.error(error)
+        toast.open({
+            type: 'error',
+            title: 'Error!!',
+            message: 'Ocurrio un error al realizar el cambio'
+        })
+    }
 }
 
 // lifecycle
@@ -96,7 +116,7 @@ onMounted(() => {
             Seleccionar Radio
         </button>
 
-        <button type="submit" class="sk-button sk-button--block">
+        <button type="submit" class="sk-button sk-button--block" :disabled="disabled">
             Aceptar
         </button>
     </form>

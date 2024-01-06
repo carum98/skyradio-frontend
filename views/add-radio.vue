@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const toast = useToast()
+
 const props = defineProps<{
     sim: ISim
 }>()
@@ -13,17 +15,35 @@ const picker = usePicker<IRadio>()
 // data
 const radio = ref<IRadio | null>(null)
 
+// computed
+const disabled = computed(() => !radio.value)
+
 // methods
 async function send() {
-    await $fetch(`/api/sims/${props.sim.code}/radios`, {
-        method: 'POST',
-        body: {
-            radio_code: radio.value?.code
-        }
-    })
+    try {        
+        await $fetch(`/api/sims/${props.sim.code}/radios`, {
+            method: 'POST',
+            body: {
+                radio_code: radio.value?.code
+            }
+        })
 
-    emits('refresh')
-    emits('close')
+        toast.open({
+            type: 'success',
+            title: 'Exito!!',
+            message: 'Radio relacionado correctamente'
+        })
+
+        emits('refresh')
+        emits('close')
+    } catch (error) {
+        console.error(error)
+        toast.open({
+            type: 'error',
+            title: 'Error!!',
+            message: 'Ocurrio un error al relacionar el radio'
+        })
+    }
 }
 
 async function addRadio() {
@@ -56,7 +76,7 @@ async function addRadio() {
             Seleccionar Radio
         </button>
 
-        <button type="submit" class="sk-button">
+        <button type="submit" class="sk-button" :disabled="disabled">
             Aceptar
         </button>
     </form>

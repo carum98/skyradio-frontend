@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const toast = useToast()
+
 const props = defineProps<{
     client: IClient
     radio?: IRadio
@@ -14,30 +16,48 @@ const picker = usePicker<IRadio>()
 // data
 const radios = ref<IRadio[]>([])
 
+// computed
+const disabled = computed(() => !radios.value.length)
+
 // methods
 async function send() {
-    const addPromise = $fetch(`/api/clients/${props.client.code}/radios`, {
-        method: 'DELETE',
-        body: {
-           radios_codes: radios.value.map((radio) => radio.code)
-        }
-    })
+    try {
+        const addPromise = $fetch(`/api/clients/${props.client.code}/radios`, {
+            method: 'DELETE',
+            body: {
+                radios_codes: radios.value.map((radio) => radio.code)
+            }
+        })
 
-    const updatePromise = radios.value.map((radio) => $fetch(`/api/radios/${radio.code}`, {
-        method: 'PUT',
-        body: {
-            name: radio.name,
-            sim_code: radio.sim?.code
-        }
-    }))
+        const updatePromise = radios.value.map((radio) => $fetch(`/api/radios/${radio.code}`, {
+            method: 'PUT',
+            body: {
+                name: radio.name,
+                sim_code: radio.sim?.code
+            }
+        }))
 
-    await Promise.allSettled([
-        addPromise, 
-        ...updatePromise
-    ])
+        await Promise.allSettled([
+            addPromise, 
+            ...updatePromise
+        ])
 
-    emits('refresh')
-    emits('close')
+        toast.open({
+            type: 'success',
+            title: 'Exito!!',
+            message: 'Devolucion realizada correctamente'
+        })
+
+        emits('refresh')
+        emits('close')
+    } catch (error) {
+        console.error(error)
+        toast.open({
+            type: 'error',
+            title: 'Error!!',
+            message: 'Ocurrio un error al realizar la devolucion'
+        })
+    }
 }
 
 async function addRadio() {
@@ -80,7 +100,7 @@ onMounted(() => {
             Seleccionar Radio
         </button>
 
-        <button type="submit" class="sk-button sk-button--block">
+        <button type="submit" class="sk-button sk-button--block" :disabled="disabled">
             Aceptar
         </button>
     </form>
