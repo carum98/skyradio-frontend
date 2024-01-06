@@ -10,6 +10,7 @@
 @import './slideover.css';
 @import './utilities.css';
 @import './color_picker.css';
+@import './toast.css';
 
 .add-button {
     background-color: var(--primary-color);

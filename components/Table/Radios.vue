@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
+const toast = useToast()
+
 const props = withDefaults(defineProps<{
     path: string
     enableTableActions?: boolean
@@ -138,6 +140,12 @@ function openAdd(client: IClient | null) {
 
 function copy(value: string) {
     navigator.clipboard.writeText(value)
+    
+    toast.open({
+        title: 'Copiado',
+        message: 'El IMEI ha sido copiado al portapapeles',
+        type: 'success'
+    })
 }
 </script>
 
