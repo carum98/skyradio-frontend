@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { SkSelectProps } from '../SkSelect/sk-select'
+defineProps<Pick<SkSelectProps<ISeller>, 'required'>>()
+
 const { items, search, onData } = useSelect<ISeller>('/api/sellers')
 
 const value = defineModel<ISeller | null>() 

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { SkSelectProps } from '../SkSelect/sk-select'
+defineProps<Pick<SkSelectProps<ISim>, 'required'>>()
+
 const { items, search, onData } = useSelect<ISim>('/api/sims?radios[code][is_null]')
 
 const value = defineModel<ISim | null>() 

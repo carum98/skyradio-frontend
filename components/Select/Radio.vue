@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { SkSelectProps } from '../SkSelect/sk-select'
+
 const props = defineProps<{
     client?: IClient
-}>()
+} & Pick<SkSelectProps<IRadio>, 'required'>>()
 
 const path = props.client ? `/api/clients/${props.client.code}/radios` : '/api/radios'
 

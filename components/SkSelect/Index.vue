@@ -25,6 +25,12 @@ function onData() {
 
 <template>
     <div class="sk-select">
+        <input 
+            style="display: none;"
+            :value="props.value" 
+            :required="props.required"
+        />
+
         <SkSelectInput 
             :data-id="uniqueId"
             :label="label"

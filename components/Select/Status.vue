@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { SkSelectProps } from '../SkSelect/sk-select'
+defineProps<Pick<SkSelectProps<IRadioStatus>, 'required'>>()
+
 const { items, search, onData } = useSelect<IRadioStatus>('/api/radios-status')
 
 const value = defineModel<IRadioStatus | null>() 

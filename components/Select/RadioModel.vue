@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { SkSelectProps } from '../SkSelect/sk-select'
+defineProps<Pick<SkSelectProps<IRadioModel>, 'required'>>()
+
 const { items, search, onData } = useSelect<IRadioModel>('/api/radios-model')
 
 const value = defineModel<IRadioModel | null>() 
@@ -8,6 +11,7 @@ const value = defineModel<IRadioModel | null>()
     <SkSelect
         label="Modelo"
         :options="items"
+        :required="required"
         v-model:value="value"
         v-model:search="search"
         @onData="onData"

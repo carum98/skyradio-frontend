@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { SkSelectProps } from '../SkSelect/sk-select'
+defineProps<Pick<SkSelectProps<ISimProvider>, 'required'>>()
+
 const { items, search, onData } = useSelect<ISimProvider>('/api/sims-provider')
 
 const value = defineModel<ISimProvider | null>() 

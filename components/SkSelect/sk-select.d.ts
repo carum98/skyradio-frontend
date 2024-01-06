@@ -19,7 +19,9 @@ export type SkSelectInput<T> = {
 export type SkSelectInputEmits<T> = Pick<SkSelectOptionsEmits<T>, 'update:value' | 'update:search'>
 
 // Props
-export type SkSelectProps<T> = Omit<SkSelectOptions<T>, 'show' | 'uniqueId'> & Omit<SkSelectInput<T>, 'uniqueId'>
+export type SkSelectProps<T> = Omit<SkSelectOptions<T>, 'show' | 'uniqueId'> & Omit<SkSelectInput<T>, 'uniqueId'> & {
+    required?: boolean
+}
 
 // Emits
 export type SkSelectEmits<T> = SkSelectOptionsEmits<T> & SkSelectInputEmits<T>

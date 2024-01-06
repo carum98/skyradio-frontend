@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { SkSelectProps } from '../SkSelect/sk-select'
+defineProps<Pick<SkSelectProps<IClient>, 'required'>>()
+
 const { items, search, onData } = useSelect<IClient>('/api/clients')
 
 const value = defineModel<IClient | null>() 
