@@ -1,4 +1,8 @@
 <script setup lang="ts">
+defineProps<{
+    required?: boolean
+}>()
+
 const colors = [
     '#FF0000',
     '#FF7F00',
@@ -29,6 +33,11 @@ onMounted(() => {
 
 <template>
     <div class="sk-color-picker">
+        <input 
+            style="display: none;"
+            :value="color" 
+            :required="required"
+        />
         <button
             v-for="item in colors" 
             :key="item"
