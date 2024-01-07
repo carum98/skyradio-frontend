@@ -22,11 +22,7 @@ export class FormDataSeller extends SkFormData {
 
     toParams() {
         return {
-            name: this.name
+            name: this.name || undefined,
         }
-    }
-
-    get isValid(): boolean {
-        return this.name.length > 0
     }
 }

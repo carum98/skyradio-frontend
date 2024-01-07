@@ -31,8 +31,4 @@ export abstract class SkFormData {
             return false
         }
     }
-
-    get isValid(): boolean {
-        throw new Error("Method 'isValid' not implemented.")
-    }
 }

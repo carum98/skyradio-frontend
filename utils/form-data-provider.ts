@@ -24,12 +24,8 @@ export class FormDataProvider extends SkFormData {
 
     toParams() {
         return {
-            name: this.name,
-            color: this.color
+            name: this.name || undefined,
+            color: this.color || undefined,
         }
-    }
-
-    get isValid(): boolean {
-        return this.name.length > 0 && this.color != null
     }
 }

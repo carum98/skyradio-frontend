@@ -39,8 +39,4 @@ export class FormDataRadio extends SkFormData {
             model_code: this.model?.code
         }
     }
-
-    get isValid(): boolean {
-        return this.imei.length > 0 && this.model != null
-    }
 }

@@ -14,10 +14,9 @@ const emits = defineEmits<{
 }>()
 
 // data
+const disabled = ref(false)
+const formElement = ref<HTMLFormElement | null>(null)
 const buttonText = props.form.isEditing ? 'Actualizar' : 'Guardar'
-
-// computed
-const disabled = computed<boolean>(() => !props.form.isValid || props.form.isDirty)
 
 // methods
 async function onSubmitted() {
@@ -52,10 +51,17 @@ async function onSubmitted() {
         })
     }
 }
+
+// lifecycle
+onMounted(() => {
+    watch(props.form, () => {
+        disabled.value = !(formElement.value as HTMLFormElement).checkValidity() || props.form.isDirty
+    }, { deep: true, flush: 'post', immediate: true })
+})
 </script>
 
 <template>
-    <form class="sk-form" @submit.prevent="onSubmitted">
+    <form ref="formElement" class="sk-form" @submit.prevent="onSubmitted">
         <slot name="form" :form="form" />
 
         <button type="submit" class="sk-button" :disabled="disabled">

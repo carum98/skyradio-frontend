@@ -21,12 +21,15 @@ const form = reactive(props.sim
         style="width: 300px;"
     >
         <template #form="{ form }">
-            <label>Nombre</label>
+            <label>Numero</label>
             <input 
                 type="text" 
                 class="sk-input"
                 placeholder="Número de la sim"
                 autofocus
+                required
+                minlength="3"
+                maxlength="12"
                 v-model="form.number" 
             />
 
@@ -35,11 +38,14 @@ const form = reactive(props.sim
                 type="text" 
                 class="sk-input"
                 placeholder="Número de serie"
+                minlength="3"
+                maxlength="15"
                 v-model="form.serial"
             />
 
             <label>Proveedor</label>
             <SelectSimProvider 
+                required
                 v-model="form.provider"
             />
         </template>

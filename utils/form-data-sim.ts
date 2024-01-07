@@ -31,13 +31,9 @@ export class FormDataSim extends SkFormData {
 
     toParams() {
         return {
-            number: this.number,
-            serial: this.serial,
+            number: this.number || undefined,
+            serial: this.serial || undefined,
             provider_code: this.provider?.code
         }
-    }
-
-    get isValid(): boolean {
-        return this.number.length > 0 && this.provider != null
     }
 }

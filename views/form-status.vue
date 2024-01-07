@@ -26,11 +26,15 @@ const form = reactive(props.status
                 class="sk-input"
                 placeholder="Nombre del Estado"
                 autofocus
+                required
+                minlength="3"
+                maxlength="15"
                 v-model="form.name" 
             />
 
             <label>Color</label>
             <SkColorPicker 
+                required
                 v-model="form.color"
                 style="width: 350px"
             />

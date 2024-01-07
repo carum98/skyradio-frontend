@@ -26,6 +26,9 @@ const form = reactive(props.seller
                 class="sk-input"
                 placeholder="Nombre del Vendedor"
                 autofocus
+                required
+                minlength="3"
+                maxlength="20"
                 v-model="form.name" 
             />
         </template>

@@ -28,14 +28,10 @@ export class FormDataClient extends SkFormData {
 
     toParams() {
         return {
-            name: this.name,
+            name: this.name || undefined,
             modality_code: this.modality?.code,
             seller_code: this.seller?.code,
-            color: this.color,
+            color: this.color || undefined,
         }
-    }
-
-    get isValid() {
-        return this.name.length > 0 && this.color != null && this.seller != null;
     }
 }
