@@ -27,7 +27,6 @@ const form = reactive(props.radio
                 class="sk-input"
                 placeholder="Nombre del radio"
                 autofocus
-                required
                 minlength="3"
                 maxlength="50"
                 v-model="form.name" 
