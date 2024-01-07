@@ -23,11 +23,6 @@ export default defineNuxtConfig({
         lang: 'es',
         class: 'dark',
       },
-
-      // Polyfill css anchor
-      script: [
-        { src: './polyfill.js'}
-      ]
     },
   },
   alias: {
