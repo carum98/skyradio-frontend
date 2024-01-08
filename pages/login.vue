@@ -6,7 +6,7 @@ useHead({
 })
 
 definePageMeta({
-  layout: false,
+  layout: 'login',
 })
 
 const router = useRouter()
@@ -30,40 +30,34 @@ async function onSubmit(e: Event){
 </script>
 
 <template>
-    <main>
-        <form class="sk-form login-form" @submit.prevent="onSubmit">
-            <img 
-                src="/logo.png" 
-                alt="Logo" 
-                width="80" 
-                height="80"
-            />
+    <form class="sk-form login-form" @submit.prevent="onSubmit">
+        <img 
+            src="/logo.png" 
+            alt="Logo" 
+            width="80" 
+            height="80"
+        />
 
-            <label>
-                Correo
-            </label>
-            <input 
-                class="sk-input"
-                type="email" 
-                placeholder="Correo" 
-                v-model="form.email"
-            />
-            <label>
-                Contraseña
-            </label>
-            <input 
-                class="sk-input"
-                type="password"
-                placeholder="Contraseña" 
-                v-model="form.password" 
-            />
-            <button type="submit" class="sk-button block">
-                Iniciar sesión
-            </button>
-        </form>
-    </main>
-
-    <footer>
-        Hecho con 💙 por <a href="https://carum.dev" target="_blank">@carum98</a>
-    </footer>
+        <label>
+            Correo
+        </label>
+        <input 
+            class="sk-input"
+            type="email" 
+            placeholder="Correo" 
+            v-model="form.email"
+        />
+        <label>
+            Contraseña
+        </label>
+        <input 
+            class="sk-input"
+            type="password"
+            placeholder="Contraseña" 
+            v-model="form.password" 
+        />
+        <button type="submit" class="sk-button block">
+            Iniciar sesión
+        </button>
+    </form>
 </template>
