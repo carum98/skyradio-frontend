@@ -1,4 +1,10 @@
 <script setup lang="ts">
+useHead({
+    bodyAttrs: {
+        class: 'login-page'
+    }
+})
+
 definePageMeta({
   layout: false,
 })
@@ -25,7 +31,14 @@ async function onSubmit(e: Event){
 
 <template>
     <main>
-        <form class="sk-form" @submit.prevent="onSubmit">
+        <form class="sk-form login-form" @submit.prevent="onSubmit">
+            <img 
+                src="/logo.png" 
+                alt="Logo" 
+                width="80" 
+                height="80"
+            />
+
             <label>
                 Correo
             </label>
@@ -45,8 +58,12 @@ async function onSubmit(e: Event){
                 v-model="form.password" 
             />
             <button type="submit" class="sk-button block">
-                Login
+                Iniciar sesión
             </button>
         </form>
     </main>
+
+    <footer>
+        Hecho con 💙 por <a href="https://carum.dev" target="_blank">@carum98</a>
+    </footer>
 </template>
