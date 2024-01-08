@@ -346,5 +346,6 @@
     img {
         display: block;
         margin: auto;
+        filter: var(--drop-shadow);
     }
 }

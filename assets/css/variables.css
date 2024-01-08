@@ -1,3 +1,8 @@
+/* Global */
+:root {
+    --drop-shadow: drop-shadow(0 0 0.75rem rgba(0, 73, 163, 0.5));
+}
+
 /* Light */
 :root.light {
     --table-color-rgb: 255, 255, 255;

@@ -12,7 +12,7 @@ onMounted(() => {
 
     const observer = new MutationObserver(() => {
         const text = element.innerText
-        title.value = text.includes('|') ? text.split(' | ').at(0) : ''
+        title.value = text.includes('|') ? text.split(' | ').at(0) ?? '' : ''
     })
 
     observer.observe(element, { childList: true })
@@ -29,6 +29,12 @@ onMounted(() => {
         <Toolbar />
     </header>
     <aside>
+        <img 
+            src="/logo.png" 
+            alt="Logo" 
+            width="65" 
+            height="65"
+        />
         <nav>
             <NuxtLink :to="{ name: 'clients' }">
                 <span>

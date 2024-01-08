@@ -1,22 +1,31 @@
 #app > aside {
-    background-color: var(--primary-color);
-    padding: 20px 0;
-    border-radius: 20px;
-    margin: 15px;
-    margin-right: 0;
+    padding: 20px;
+    padding-right: 0;
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    align-items: center;
 
-    & nav {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        height: 100%;
+    img {
+        filter: var(--drop-shadow);
     }
+}
 
-    & a {
+#app > aside nav {
+    background-color: var(--primary-color);
+    padding: 10px;
+    border-radius: 20px;
+    margin-right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+
+    a {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 5px;
         color: #d2dff9;
         font-size: 13px;
 
