@@ -67,7 +67,9 @@ jobs:
           # Check if container is running
           if [ "$(docker ps -q -f status=running -f name=skyradio-frontend)" ]; then
             # Stop the container
-            docker stop skyradio-frontend
+            docker stop skyradio-frontend &&
+            # Remove the container
+            docker rm skyradio-frontend
           fi &&
           docker run \
           --name skyradio-frontend \
