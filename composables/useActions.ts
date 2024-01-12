@@ -5,7 +5,7 @@ type ActionsName =
     | 'add-client' 
     | 'create-radio' 
     | 'update-radio' 
-    | 'remove-radio' 
+    | 'remove-radio2' 
     | 'create-client'
     | 'update-client'
     | 'remove-client'
@@ -170,7 +170,7 @@ export function useActions(onRefresh: () => void) {
             case 'update-radio':
                 radio.open({ props })
                 break
-            case 'remove-radio':
+            case 'remove-radio2':
                 remove.open({
                     props: {
                         name: 'Radio',

@@ -94,7 +94,7 @@ let actions = [
         ...ActionsStatic.DELETE,
         key: 'delete-radio',
         action: () => navigateToAction({
-            name: 'remove-radio',
+            name: 'remove-radio2',
             props: { code: props.radio.code } 
         })
     }
