@@ -24,9 +24,13 @@ export default defineEventHandler(async (event) => {
 
     const { user, ...tokenInfo } = data
 
+    console.log('session before', event.context.session)
+
     // Save token session
     event.context.session.auth = tokenInfo
     event.context.session.user = user
+
+    console.log('session after', event.context.session)
 
     return {
         success: true,

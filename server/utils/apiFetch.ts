@@ -11,10 +11,8 @@ const apiFetch = ofetch.create({
 })
 
 export const useApiFetch = async (event: H3Event, request: RequestInfo, options?: FetchOptions) => {
-    console.log('useApiFetch event', event)
+    console.log('session', event.context.session)
     const token = event.context.session?.auth?.token
-
-    console.log('useApiFetch token', token)
 
     if (!token) {
         await useLogout(event)
@@ -26,8 +24,6 @@ export const useApiFetch = async (event: H3Event, request: RequestInfo, options?
             'Authorization': `Bearer ${token}`
         },
         async onResponseError({ response, error }) {
-            console.log('onResponseError response', response)
-            console.log('onResponseError error', error)
             if (response.status === 401) {
                 await useLogout(event)
             } else {
