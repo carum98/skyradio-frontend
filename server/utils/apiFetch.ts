@@ -16,6 +16,8 @@ export const useApiFetch = async (event: H3Event, request: RequestInfo, options?
         await useLogout(event)
     }
 
+    console.log('apiBaseUrl', config.apiBaseUrl)
+
     return apiFetch(request, {
         baseURL: config.apiBaseUrl,
         ...options,
