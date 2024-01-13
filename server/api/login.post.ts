@@ -1,14 +1,5 @@
-interface LoginResponse {
-    token: string
-    refreshToken: string
-    expiredAt: number
-    user: {
-        id: string
-        email: string
-        name: string
-        role: string
-    }
-}
+import { setSession } from '../core/session'
+import type { LoginResponse } from '../core/types'
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event)
@@ -24,13 +15,10 @@ export default defineEventHandler(async (event) => {
 
     const { user, ...tokenInfo } = data
 
-    console.log('session before', event.context.session)
-
-    // Save token session
-    event.context.session.auth = tokenInfo
-    event.context.session.user = user
-
-    console.log('session after', event.context.session)
+    await setSession(event, {
+        auth: tokenInfo,
+        user: user,
+    })
 
     return {
         success: true,

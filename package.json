@@ -22,7 +22,6 @@
   "homepage": "https://github.com/carum98/skyradio-frontend#readme",
   "devDependencies": {
     "@nuxt/devtools": "1.0.3",
-    "@sidebase/nuxt-session": "0.2.7",
     "nuxt": "^3.8.2",
     "vue": "^3.3.4",
     "vue-router": "4.2.5",

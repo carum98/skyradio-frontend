@@ -2,7 +2,6 @@ import { resolve } from 'path'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@sidebase/nuxt-session'],
   app: {
     rootId: 'app',
     rootTag: 'section',
@@ -44,11 +43,6 @@ export default defineNuxtConfig({
   css: [
     '@/assets/css/main.css',
   ],
-  session: {
-    api: {
-      methods: ['get']
-    }
-  },
   runtimeConfig: {
     apiBaseUrl: ''
   },

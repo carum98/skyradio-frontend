@@ -1,9 +1,11 @@
-export default defineEventHandler(async (event) => {
-    const token = event.context.session?.user
+import { getSession } from '../core/session'
 
-    if (!token) {
+export default defineEventHandler(async (event) => {
+    const session = await getSession(event)
+
+    if (!session.user) {
         throw new Error('No user found')
     }
 
-    return token
+    return session.user
 })
