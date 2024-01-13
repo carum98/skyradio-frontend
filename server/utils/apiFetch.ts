@@ -1,10 +1,9 @@
-import { ofetch, FetchOptions } from 'ofetch'
+import { ofetch, type FetchOptions } from 'ofetch'
 import { H3Event, createError } from 'h3'
 
 const config = useRuntimeConfig()
 
 const apiFetch = ofetch.create({ 
-    baseURL: config.apiBaseUrl,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -18,6 +17,7 @@ export const useApiFetch = async (event: H3Event, request: RequestInfo, options?
     }
 
     return apiFetch(request, {
+        baseURL: config.apiBaseUrl,
         ...options,
         headers: {
             'Authorization': `Bearer ${token}`
