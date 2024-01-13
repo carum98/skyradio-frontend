@@ -11,6 +11,7 @@ const apiFetch = ofetch.create({
 })
 
 export const useApiFetch = async (event: H3Event, request: RequestInfo, options?: FetchOptions) => {
+    console.log('useApiFetch event', event)
     const token = event.context.session?.auth?.token
 
     console.log('useApiFetch token', token)
