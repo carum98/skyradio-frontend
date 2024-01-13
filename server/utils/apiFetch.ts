@@ -4,6 +4,7 @@ import { H3Event, createError } from 'h3'
 const config = useRuntimeConfig()
 
 const apiFetch = ofetch.create({ 
+    
     headers: {
         'Content-Type': 'application/json'
     }
@@ -16,8 +17,6 @@ export const useApiFetch = async (event: H3Event, request: RequestInfo, options?
         await useLogout(event)
     }
 
-    console.log('apiBaseUrl', config.apiBaseUrl)
-
     return apiFetch(request, {
         baseURL: config.apiBaseUrl,
         ...options,
@@ -25,6 +24,7 @@ export const useApiFetch = async (event: H3Event, request: RequestInfo, options?
             'Authorization': `Bearer ${token}`
         },
         async onResponseError({ response, error }) {
+            console.log('onResponseError', response, error)
             if (response.status === 401) {
                 await useLogout(event)
             } else {
