@@ -76,6 +76,5 @@ jobs:
           --detach \
           -e PORT=${{ secrets.PORT }} \
           -e NUXT_API_BASE_URL=${{ secrets.NUXT_API_BASE_URL }} \
-          -p ${{ secrets.PORT }}:${{ secrets.PORT }} \
           --network skyradio-network \
           ghcr.io/carum98/skyradio-frontend:latest
