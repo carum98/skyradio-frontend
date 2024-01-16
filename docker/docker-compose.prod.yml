@@ -1,4 +1,15 @@
+version: '3.7'
+
+networks:
+  skyradio-network:
+    external: true
+
 services:
-    web:
-      environment:
-        - NODE_ENV=production
+  web:
+    image: skyradio-frontend
+    container_name: skyradio-frontend
+    environment:
+      - NUXT_API_BASE_URL=${NUXT_API_BASE_URL}
+      - NODE_ENV=production
+    networks:
+      - skyradio-network
