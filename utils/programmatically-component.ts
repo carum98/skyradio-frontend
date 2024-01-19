@@ -21,10 +21,14 @@ export interface ProgrammaticallyReturnType {
 export function programmaticallyComponent(
     { params, component }: { params: ProgrammaticallyOptions, component: Promise<typeof import("*.vue")> }
 ): ProgrammaticallyReturnType {
+    const loading = useLoadingIndicator()
+
     let root: HTMLDivElement
     let app: App
 
     async function open(propsParams: ProgrammaticallyProps) {
+        loading.start()
+
         const { props = {}, rootProps = {}, listeners = {} } = propsParams
 
         root = document.createElement('div')
@@ -53,12 +57,15 @@ export function programmaticallyComponent(
         app = createApp(instance).use(router)
         
         app.mount(root)
+
+        loading.finish()
     }
 
     function destroy() {
         render(null, root)
         app.unmount()
         root.remove()
+        loading.clear()
     }
 
     function close() {

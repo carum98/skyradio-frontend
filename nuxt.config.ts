@@ -1,7 +1,13 @@
 import { resolve } from 'path'
 
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: {
+    enabled: true,
+
+    timeline: {
+      enabled: true
+    }
+  },
   app: {
     rootId: 'app',
     rootTag: 'section',
@@ -61,4 +67,3 @@ export default defineNuxtConfig({
     '/settings': { redirect: '/settings/modalities' },
   }
 })
-  
