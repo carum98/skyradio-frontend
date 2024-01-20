@@ -1,6 +1,6 @@
 import { ofetch, type FetchOptions } from 'ofetch'
 import { H3Event, createError } from 'h3'
-import { getSession } from '../core/session'
+import { useToken } from './token'
 
 const config = useRuntimeConfig()
 
@@ -12,11 +12,10 @@ const apiFetch = ofetch.create({
 })
 
 export const useApiFetch = async (event: H3Event, request: RequestInfo, options?: FetchOptions) => {
-    const session = await getSession(event)
-    const token = session.auth.token
+    const token = await useToken(event)
 
-    if (!token) {
-        await useLogout(event)
+    if (token === null) {
+        return await useLogout(event)
     }
 
     return apiFetch(request, {
