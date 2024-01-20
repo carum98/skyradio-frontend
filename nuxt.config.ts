@@ -62,8 +62,10 @@ export default defineNuxtConfig({
     }
   },
   routeRules: {
-    '/login': { static: true },
     '/': { redirect: '/clients' },
+    '/login': { prerender: true },
     '/settings': { redirect: '/settings/modalities' },
+    '/reports': { prerender: true },
+    '/api/**': { cors: true },
   }
 })
