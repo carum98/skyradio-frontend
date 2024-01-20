@@ -1,5 +1,6 @@
 import { H3Event } from 'h3'
-import { getSession } from '../core/session'
+import { getSession, setSession } from '../core/session'
+import type { LoginResponse } from '../core/types'
 
 export async function useToken(event: H3Event): Promise<String | null> {
     const session = await getSession(event)
@@ -10,22 +11,30 @@ export async function useToken(event: H3Event): Promise<String | null> {
 
     if (session.auth.expiredAt < Date.now()) {
         console.log('useRefreshToken')
-        return await useRefreshToken(session.auth.refreshToken)
+        return await useRefreshToken(event, session.auth.refreshToken)
     }
 
     return session.auth.token
 }
 
-async function useRefreshToken(refresh_token: String): Promise<String | null> {
+async function useRefreshToken(event: H3Event, refresh_token: String): Promise<String | null> {
     try {
-        const response = await $fetch('/api/refresh', {
+        const config = useRuntimeConfig()
+
+       const data = await $fetch<LoginResponse>('/refresh-token', {
             method: 'POST',
-            body: {
-                refresh_token,
-            }
+            body: JSON.stringify({ refresh_token }),
+            baseURL: config.apiBaseUrl,
         })
 
-        return response.token
+        const { user, ...tokenInfo } = data
+
+        await setSession(event, {
+            auth: tokenInfo,
+            user: user,
+        })
+
+        return tokenInfo.token
     } catch (error) {
         return null
     }
