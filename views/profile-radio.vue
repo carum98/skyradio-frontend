@@ -4,35 +4,27 @@ const props = defineProps<{
 }>()
 
 // data
-const radio = ref<IRadio | null>(null)
-
-// methods
-async function getData() {
-    radio.value = await $fetch(`/api/radios/${props.code}`)
-}
-
-// lifecycle
-onMounted(getData)
+const { data: radio, refresh } = await useFetch<IRadio>(`/api/radios/${props.code}`)
 </script>
 
 <template>
-    <main v-if="radio">
+    <main>
         <section class="sk-card sk-card--flex-column" style="width: 600px;">
-            <h2>{{ radio.imei }}</h2>
+            <h2>{{ radio?.imei }}</h2>
 
             <div class="d-2-haft">
                 <p>
                     Nombre:
-                    {{ radio.name }}
+                    {{ radio?.name }}
                 </p>
                 <p>
                     Serial:
-                    {{ radio.serial ?? '-' }}
+                    {{ radio?.serial ?? '-' }}
                 </p>
             </div>
 
             <div class="d-2-haft">
-                <p v-if="radio.model">
+                <p v-if="radio?.model">
                     Modelo:
                     <SkLinkModal
                         name="profile-model"
@@ -43,7 +35,7 @@ onMounted(getData)
                         {{ radio.model.name  }}
                     </SkLinkModal>
                 </p>
-                <p v-if="radio.status">
+                <p v-if="radio?.status">
                     Estado:
                     <SkLinkModal
                         name="profile-status"
@@ -57,7 +49,7 @@ onMounted(getData)
             </div>
 
             <div class="d-2-haft">
-                <p v-if="radio.sim">
+                <p v-if="radio?.sim">
                     SIM:
                     <SkLinkModal
                         name="profile-sim"
@@ -67,7 +59,7 @@ onMounted(getData)
                         {{ radio.sim.number  }}
                     </SkLinkModal>
                 </p>
-                <p v-if="radio.sim?.provider">
+                <p v-if="radio?.sim?.provider">
                     Proveedor:
                     <SkLinkModal
                         name="profile-provider"
@@ -81,8 +73,9 @@ onMounted(getData)
             </div>
 
             <ActionsDropdownRadio 
+                v-if="radio"
                 :radio="radio" 
-                :refresh="getData"
+                :refresh="refresh"
             />
         </section>
     </main>

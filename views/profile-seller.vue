@@ -3,17 +3,12 @@ const props = defineProps<{
     code: string
 }>()
 
-const { navigateToAction } = useActions(getData)
-
 // data
-const seller = ref<ISeller | null>()
+const { data: seller, refresh } = await useFetch<ISeller>(`/api/sellers/${props.code}`)
+
+const { navigateToAction } = useActions(refresh)
 
 // methods
-async function getData() {
-    const { data } = await useFetch<ISeller>(`/api/sellers/${props.code}`)
-    seller.value = data.value
-}
-
 function openUpdate() {
     navigateToAction({
         name: 'update-seller',
@@ -31,9 +26,6 @@ function openRemove() {
         }
     })
 }
-
-// lifecycle
-onMounted(getData)
 </script>
 
 <template>

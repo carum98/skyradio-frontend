@@ -3,11 +3,7 @@ const props = defineProps<{
     code: string
 }>()
 
-const model = ref<IRadioModel | null>(null)
-
-onMounted(async () => {
-    model.value = await $fetch(`/api/radios-model/${props.code}`)
-})
+const { data: model } = useFetch<IRadioModel>(`/api/radios-model/${props.code}`)
 </script>
 
 <template>
@@ -29,7 +25,7 @@ onMounted(async () => {
 
         <Suspense>
             <TableRadios 
-                :path="`/api/radios?radios_model[code][equal]=${props.code}&per_page=5`"
+                :path="`/api/radios?radios_model[code][equal]=${code}&per_page=5`"
                 hide-model
             />
         </Suspense>

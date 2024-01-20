@@ -4,24 +4,16 @@ const props = defineProps<{
 }>()
 
 // data
-const sim = ref<ISim | null>(null)
-
-// methods
-async function getData() {
-    sim.value = await $fetch(`/api/sims/${props.code}`)
-}
-
-// lifecycle
-onMounted(getData)
+const { data: sim, refresh } = await useFetch<ISim>(`/api/sims/${props.code}`)
 </script>
 
 <template>
-    <main v-if="sim">
+    <main>
         <section class="sk-card sk-card--flex-column" style="width: 600px;">
-            <h2>{{ sim.number }}</h2>
+            <h2>{{ sim?.number }}</h2>
 
             <div class="d-2-haft">
-                <p v-if="sim.provider">
+                <p v-if="sim?.provider">
                     Proveedor:
                     <SkLinkModal
                         name="profile-provider"
@@ -34,11 +26,11 @@ onMounted(getData)
                 </p>
                 <p>
                     Serial:
-                    {{ sim.serial ?? '-' }}
+                    {{ sim?.serial ?? '-' }}
                 </p>
             </div>
 
-            <div class="d-2-haft" v-if="sim.radio">
+            <div class="d-2-haft" v-if="sim?.radio">
                 <p>
                     Radio:
                     <SkLinkModal
@@ -62,8 +54,9 @@ onMounted(getData)
             </div>
 
             <ActionsDropdownSim 
+                v-if="sim"
                 :sim="sim"
-                :refresh="getData"
+                :refresh="refresh"
             />
         </section>
     </main>

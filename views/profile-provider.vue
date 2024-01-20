@@ -3,11 +3,7 @@ const props = defineProps<{
     code: string
 }>()
 
-const provider = ref<ISimProvider | null>(null)
-
-onMounted(async () => {
-    provider.value = await $fetch(`/api/sims-provider/${props.code}`)
-})
+const { data: provider } = await useFetch<ISimProvider>(`/api/sims-provider/${props.code}`)
 </script>
 
 <template>
@@ -29,7 +25,7 @@ onMounted(async () => {
 
         <Suspense>
             <TableSims 
-                :path="`/api/sims?sims_provider[code][equal]=${props.code}&per_page=5`"
+                :path="`/api/sims?sims_provider[code][equal]=${code}&per_page=5`"
                 hide-provider
             />
         </Suspense>

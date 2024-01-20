@@ -3,11 +3,7 @@ const props = defineProps<{
     code: string
 }>()
 
-const modality = ref<IModality | null>(null)
-
-onMounted(async () => {
-    modality.value = await $fetch(`/api/clients-modality/${props.code}`)
-})
+const { data: modality } = useFetch<IModality>(`/api/clients-modality/${props.code}`)
 </script>
 
 <template>
@@ -29,7 +25,7 @@ onMounted(async () => {
 
         <Suspense>
             <TableClients 
-                :path="`/api/clients?clients_modality[code][equal]=${props.code}&per_page=5`"
+                :path="`/api/clients?clients_modality[code][equal]=${code}&per_page=5`"
                 hide-modality
             />
         </Suspense>
