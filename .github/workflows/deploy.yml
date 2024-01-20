@@ -116,5 +116,10 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           cd ~/frontend &&
-          docker compose down &&
+          # Check if the container is running
+          if [ "$(docker ps -q -f name=skyradio-frontend)" ]; then
+            # Stop the container
+            docker compose -f docker-compose.prod.yml down
+          fi &&
+          # Start the container
           docker compose -f docker-compose.prod.yml -f docker-compose.override.yml --env-file .env up -d
