@@ -9,6 +9,10 @@
     &.hover tbody tr:hover:not(:has(a:hover), .table-empty) {
         cursor: pointer;
         background-color: rgba(var(--table-color-rgb), 0.4);
+
+        & .sk-avatar {
+            view-transition-name: avatar;
+        }
     }
 
     & tr {

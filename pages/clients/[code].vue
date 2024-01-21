@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-    name: 'clients-profile'
+    name: 'clients-profile',
+    pageTransition: false,
 })
 
 const chartType = ref('models')
@@ -120,5 +121,11 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 35px;
+}
+</style>
+
+<style scoped>
+.sk-avatar {
+    view-transition-name: avatar;
 }
 </style>

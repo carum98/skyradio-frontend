@@ -57,6 +57,7 @@ export default defineNuxtConfig({
   },
   experimental: {
     componentIslands: true,
+    viewTransition: true,
   },
   router: {
     options: {
