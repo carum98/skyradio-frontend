@@ -100,7 +100,7 @@ function openCreateClient() {
         </template>
 
         <template #cell(name)="{ value, item }">
-            <SkAvatar class="mr-1" :alt="value" :color="item.color" />
+            <SkAvatar :key="item.code" class="mr-1" :alt="value" :color="item.color" />
             {{ value }}
         </template>
 

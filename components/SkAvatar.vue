@@ -1,14 +1,16 @@
 <script setup lang="ts">
-const props = defineProps<{
+const { alt, color } = defineProps<{
     alt: string
     color: string
 }>()
 
-const initials = props.alt.split(' ', 2).map((word) => word.at(0)).join('').toUpperCase()
+const initials = alt.split(' ', 2).length > 1
+    ? alt.split(' ', 2).map((n) => n[0]).join('')
+    : alt.slice(0, 2)
 </script>
 
 <template>
     <div class="sk-avatar" :style="{ backgroundColor: color }">
-        {{ initials }}
+        {{ initials.toUpperCase() }}
     </div>
 </template>
