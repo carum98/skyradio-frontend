@@ -2,7 +2,7 @@
 import type { SkSelectProps } from '../SkSelect/sk-select'
 defineProps<Pick<SkSelectProps<ISeller>, 'required'>>()
 
-const { items, search, onData } = useSelect<ISeller>('/api/sellers')
+const { items, search, onData, loading } = useSelect<ISeller>('/api/sellers')
 
 const value = defineModel<ISeller | null>() 
 </script>
@@ -12,6 +12,7 @@ const value = defineModel<ISeller | null>()
         label="Vendedor"
         :options="items"
         :required="required"
+        :loading="loading"
         v-model:value="value"
         v-model:search="search"
         @onData="onData"

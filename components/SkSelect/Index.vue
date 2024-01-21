@@ -46,6 +46,7 @@ function onData() {
             :options="options"
             :value="props.value"
             :search="search"
+            :loading="loading"
             @update:value="onSelect"
             @update:search="onSearch"
             @onData="onData"

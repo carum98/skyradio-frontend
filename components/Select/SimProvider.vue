@@ -2,7 +2,7 @@
 import type { SkSelectProps } from '../SkSelect/sk-select'
 defineProps<Pick<SkSelectProps<ISimProvider>, 'required'>>()
 
-const { items, search, onData } = useSelect<ISimProvider>('/api/sims-provider')
+const { items, search, onData, loading } = useSelect<ISimProvider>('/api/sims-provider')
 
 const value = defineModel<ISimProvider | null>() 
 </script>
@@ -12,6 +12,7 @@ const value = defineModel<ISimProvider | null>()
         label="Provedor"
         :options="items"
         :required="required"
+        :loading="loading"
         v-model:value="value"
         v-model:search="search"
         @onData="onData"

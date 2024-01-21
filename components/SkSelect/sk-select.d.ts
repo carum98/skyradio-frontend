@@ -2,6 +2,7 @@
 export type SkSelectOptions<T> = {
     options: T[]
     search: string
+    loading: boolean
 }
 
 export type SkSelectOptionsEmits<T> = {

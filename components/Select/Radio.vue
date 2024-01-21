@@ -7,7 +7,7 @@ const props = defineProps<{
 
 const path = props.client ? `/api/clients/${props.client.code}/radios` : '/api/radios'
 
-const { items, search, onData } = useSelect<IRadio>(path)
+const { items, search, onData, loading } = useSelect<IRadio>(path)
 
 const value = defineModel<IRadio | null>() 
 </script>
@@ -17,6 +17,7 @@ const value = defineModel<IRadio | null>()
         label="Radios"
         :options="items"
         :required="required"
+        :loading="loading"
         v-model:value="value"
         v-model:search="search"
         @onData="onData"

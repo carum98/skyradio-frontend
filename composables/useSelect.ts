@@ -1,31 +1,20 @@
 export function useSelect<T>(path: string) {
-    let page = 1
-
-    const items = ref<T[]>([]) as Ref<T[]>
     const search = useDebounce('', 500)
 
-    async function onData() {
-        const { data, pagination } = await $fetch<ITable<T>>(path, {
-            params: {
-                page,
-                search: search.value
-            }
-        })
-
-        page = pagination.page + 1
-        items.value.push(...data)
-    }
-
-    watch(search, () => {
-        page = 1
-        console.log('search', search.value)
-        items.value = []
-        onData()
+    const { data, pending: loading, refresh: onData } = useFetch<ITable<T>>(path, {
+        query: {
+            search
+        },
+        immediate: false,
+        pick: ['data']
     })
+
+    const items = computed(() => data.value?.data ?? [])
 
     return {
         items,
         search,
+        loading,
         onData
     }
 }
