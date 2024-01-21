@@ -1,9 +1,5 @@
-declare global {
-    interface IRadioModel {
-        code: string
-        name: string
-        color: string
-    }
+interface IRadioModel {
+    code: string
+    name: string
+    color: string
 }
-
-export {}

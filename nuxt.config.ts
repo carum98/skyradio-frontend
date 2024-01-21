@@ -43,6 +43,9 @@ export default defineNuxtConfig({
       script: {
         defineModel: true,
         propsDestructure: true,
+        globalTypeFiles: [
+          './types'
+        ]
       }
     }
   },

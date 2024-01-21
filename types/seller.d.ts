@@ -1,8 +1,4 @@
-declare global {
-    interface ISeller {
-        code: string
-        name: string
-    }
+interface ISeller {
+    code: string
+    name: string
 }
-
-export {}
