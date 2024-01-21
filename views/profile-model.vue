@@ -23,11 +23,9 @@ const { data: model } = useFetch<IRadioModel>(`/api/radios-model/${props.code}`)
             </div>
         </section>
 
-        <Suspense>
-            <TableRadios 
-                :path="`/api/radios?radios_model[code][equal]=${code}&per_page=5`"
-                hide-model
-            />
-        </Suspense>
+        <TableRadios 
+            :path="`/api/radios?radios_model[code][equal]=${code}&per_page=5`"
+            hide-model
+        />
     </main>
 </template>

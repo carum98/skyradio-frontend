@@ -24,7 +24,7 @@ function closeButton() {
 }
 
 onMounted(() => {
-    open()
+    setTimeout(open, 200)
 
     // Listen when the dialog is closed
     dialog.value?.addEventListener('close', () => setTimeout(close, 550))

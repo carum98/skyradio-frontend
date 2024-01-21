@@ -23,10 +23,8 @@ const { data: status } = useFetch<IRadioStatus>(`/api/radios-status/${props.code
             </div>
         </section>
 
-        <Suspense>
-            <TableRadios 
-                :path="`/api/radios?radios_status[code][equal]=${code}&per_page=5`"
-            />
-        </Suspense>
+        <TableRadios 
+            :path="`/api/radios?radios_status[code][equal]=${code}&per_page=5`"
+        />
     </main>
 </template>

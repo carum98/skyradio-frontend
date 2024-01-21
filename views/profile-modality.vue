@@ -23,11 +23,9 @@ const { data: modality } = useFetch<IModality>(`/api/clients-modality/${props.co
             </div>
         </section>
 
-        <Suspense>
-            <TableClients 
-                :path="`/api/clients?clients_modality[code][equal]=${code}&per_page=5`"
-                hide-modality
-            />
-        </Suspense>
+        <TableClients 
+            :path="`/api/clients?clients_modality[code][equal]=${code}&per_page=5`"
+            hide-modality
+        />
     </main>
 </template>

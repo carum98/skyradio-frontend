@@ -23,11 +23,9 @@ const { data: provider } = await useFetch<ISimProvider>(`/api/sims-provider/${pr
             </div>
         </section>
 
-        <Suspense>
-            <TableSims 
-                :path="`/api/sims?sims_provider[code][equal]=${code}&per_page=5`"
-                hide-provider
-            />
-        </Suspense>
+        <TableSims 
+            :path="`/api/sims?sims_provider[code][equal]=${code}&per_page=5`"
+            hide-provider
+        />
     </main>
 </template>

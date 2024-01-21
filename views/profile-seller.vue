@@ -52,11 +52,9 @@ function openRemove() {
             </div>
         </section>
 
-        <Suspense>
-            <TableClients
-                :path="`/api/clients?per_page=5&sellers[code][equal]=${code}`"
-                hide-seller
-            />
-        </Suspense>
+        <TableClients
+            :path="`/api/clients?per_page=5&sellers[code][equal]=${code}`"
+            hide-seller
+        />
     </main>
 </template>
