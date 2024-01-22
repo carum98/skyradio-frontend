@@ -1,33 +1,54 @@
 const routes = [
     {
         name: 'profile-radio',
-        component: () => import('@views/profile-radio.vue')
+        component: () => import('@views/profile-radio.vue'),
+        props: {
+            width: 600
+        }
     },
     {
         name: 'profile-sim',
-        component: () => import('@views/profile-sim.vue')
+        component: () => import('@views/profile-sim.vue'),
+        props: {
+            width: 600
+        }
     },
     {
         name: 'profile-modality',
-        component: () => import('@views/profile-modality.vue')
+        component: () => import('@views/profile-modality.vue'),
+        props: {
+            width: 800
+        }
     },
     {
         name: 'profile-provider',
-        component: () => import('@views/profile-provider.vue')
+        component: () => import('@views/profile-provider.vue'),
+        props: {
+            width: 800
+        }
     },
     {
         name: 'profile-model',
-        component: () => import('@views/profile-model.vue')
+        component: () => import('@views/profile-model.vue'),
+        props: {
+            width: 800
+        }
     },
     {
         name: 'profile-status',
-        component: () => import('@views/profile-status.vue')
+        component: () => import('@views/profile-status.vue'),
+        props: {
+            width: 800
+        }
     },
     {
         name: 'profile-seller',
-        component: () => import('@views/profile-seller.vue')
+        component: () => import('@views/profile-seller.vue'),
+        props: {
+            width: 800
+        }
     }
-] as const
+]
 
 type PickPartial<T, K extends keyof T> = {[P in K]: Partial<T[P]>}
 
@@ -48,7 +69,8 @@ export function useRouterModal() {
         const { open } = useModal({
             component: route.component,
             props,
-            listeners
+            listeners,
+            rootProps: route.props,
         })
 
         open({})

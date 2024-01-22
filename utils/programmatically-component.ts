@@ -4,6 +4,7 @@ import type { App } from 'vue'
 export type ProgrammaticallyOptions = {
     component: () => Promise<any>
     props?: Record<string, any>
+    rootProps?: Record<string, any>
     listeners?: Record<string, any>
 }
 
@@ -40,6 +41,7 @@ export function programmaticallyComponent(
         const instance = defineNuxtComponent({
             render: () => h(componentRoot.default, {
                 ...rootProps,
+                ...params.rootProps,
                 onClose: destroy
             }, () => [
                 h(componentData.default, {
