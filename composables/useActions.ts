@@ -91,6 +91,9 @@ export function useActions(onRefresh: () => void) {
 
     const radio = useModal({
         component: () => import('@views/form-radio.vue'),
+        rootProps: {
+            width: 300
+        },
         listeners: {
             onRefresh
         }
@@ -98,6 +101,9 @@ export function useActions(onRefresh: () => void) {
 
     const sim = useModal({
         component: () => import('@views/form-sim.vue'),
+        rootProps: {
+            width: 300
+        },
         listeners: {
             onRefresh
         }
@@ -105,6 +111,9 @@ export function useActions(onRefresh: () => void) {
 
     const client = useModal({
         component: () => import('@views/form-client.vue'),
+        rootProps: {
+            width: 350
+        },
         listeners: {
             onRefresh
         }

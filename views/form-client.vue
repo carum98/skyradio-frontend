@@ -48,7 +48,6 @@ const form = reactive(props.client
             <SkColorPicker 
                 required
                 v-model="form.color"
-                style="width: 350px"
             />
         </template>
     </ScaffoldForm>
