@@ -35,6 +35,9 @@ type ActionsName =
 export function useActions(onRefresh: () => void) {
     const { open: openSwapRadio } = useModal({
         component: () => import('@views/swap-radio.vue'),
+        rootProps: {
+            width: 750
+        },
         listeners: {
             onRefresh
         }
@@ -42,6 +45,9 @@ export function useActions(onRefresh: () => void) {
 
     const { open: openAddRadios } = useModal({
         component: () => import('@views/add-radios.vue'),
+        rootProps: {
+            width: 750
+        },
         listeners: {
             onRefresh
         }
@@ -49,6 +55,9 @@ export function useActions(onRefresh: () => void) {
 
     const { open: openAddRadio } = useModal({
         component: () => import('@views/add-radio.vue'),
+        rootProps: {
+            width: 450
+        },
         listeners: {
             onRefresh
         }
@@ -56,6 +65,9 @@ export function useActions(onRefresh: () => void) {
 
     const { open: openRemoveRadio } = useModal({
         component: () => import('@views/remove-radio.vue'),
+        rootProps: {
+            width: 750
+        },
         listeners: {
             onRefresh
         }
@@ -63,6 +75,9 @@ export function useActions(onRefresh: () => void) {
 
     const { open: openAddClient } = useModal({
         component: () => import('@views/add-client.vue'),
+        rootProps: {
+            width: 350
+        },
         listeners: {
             onRefresh
         }
@@ -70,6 +85,9 @@ export function useActions(onRefresh: () => void) {
 
     const { open: openAddSim } = useModal({
         component: () => import('@views/add-sim.vue'),
+        rootProps: {
+            width: 350
+        },
         listeners: {
             onRefresh
         }
@@ -84,6 +102,9 @@ export function useActions(onRefresh: () => void) {
 
     const { open: openSwapSim } = useModal({
         component: () => import('@views/swap-sim.vue'),
+        rootProps: {
+            watch: 300
+        },
         listeners: {
             onRefresh
         }

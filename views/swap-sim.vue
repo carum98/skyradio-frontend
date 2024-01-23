@@ -64,7 +64,7 @@ async function addSim() {
 </script>
 
 <template>
-    <form class="sk-form d-flex-column" @submit.prevent="send" style="width: 300px; gap: 15px;">
+    <form class="sk-form d-flex-column" @submit.prevent="send" style="gap: 15px;">
         <ItemSim 
             :sim="simOld" 
             hideRemove

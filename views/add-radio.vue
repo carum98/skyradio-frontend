@@ -63,7 +63,7 @@ async function addRadio() {
 </script>
 
 <template>
-    <form class="sk-form" @submit.prevent="send" style="width: 450px;">
+    <form class="sk-form" @submit.prevent="send">
         <ItemRadio
             v-if="radio"
             :radio="radio"

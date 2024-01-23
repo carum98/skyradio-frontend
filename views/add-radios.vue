@@ -80,7 +80,7 @@ function removeRadio(radio: IRadio) {
 </script>
 
 <template>
-    <form class="sk-form" @submit.prevent="send" style="width: 750px;">
+    <form class="sk-form" @submit.prevent="send">
         <ul v-if="radios.length" class="d-flex-column gap-1 mb-1">
             <li v-for="radio in radios">
                 <ItemRadio

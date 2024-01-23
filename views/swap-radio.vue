@@ -95,7 +95,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <form class="sk-form d-flex-column" @submit.prevent="send" style="width: 750px; gap: 15px;">
+    <form class="sk-form d-flex-column" @submit.prevent="send" style="gap: 15px;">
         <ItemRadio
             v-if="radio_from"
             :radio="radio_from"

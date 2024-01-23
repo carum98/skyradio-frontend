@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    color: inherit;
 }
 
 label {
@@ -44,10 +45,6 @@ h1 {
 
 h2 {
     font-weight: 300;
-}
-
-dialog {
-    color: inherit;
 }
 
 th {
