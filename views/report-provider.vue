@@ -32,7 +32,7 @@ async function send() {
 </script>
 
 <template>
-    <form class="sk-form" @submit.prevent="send" style="width: 350px;">
+    <form class="sk-form" @submit.prevent="send">
         <SelectSimProvider
             v-model="provider"
         />

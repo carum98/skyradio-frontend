@@ -15,6 +15,9 @@ const reports = [
         description: 'Reporte por cliente, muestra un listado los radios del cliente.',
         action: useModal({
             component: () => import('@views/report-client.vue'),
+            rootProps: {
+                width: 315
+            }
         })
     },
     {
@@ -22,6 +25,9 @@ const reports = [
         description: 'Reporte por vendedor, muestra los clientes del vendedor.',
         action: useModal({
             component: () => import('@views/report-seller.vue'),
+            rootProps: {
+                width: 315
+            }
         })
     },
     {
@@ -29,6 +35,9 @@ const reports = [
         description: 'Reporte por modelo, muestra un listado de radios por modelo.',
         action: useModal({
             component: () => import('@views/report-model.vue'),
+            rootProps: {
+                width: 315
+            }
         })
     },
     {
@@ -36,6 +45,9 @@ const reports = [
         description: 'Reporte por proveedor de SIMs, listado de sims por proveedor.',
         action: useModal({
             component: () => import('@views/report-provider.vue'),
+            rootProps: {
+                width: 315
+            }
         })
     }
 ] as Report[]
