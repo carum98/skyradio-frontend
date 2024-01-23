@@ -6,7 +6,7 @@
     --border-radius: 12px;
     --padding: 15px;
 
-    &.hover tbody tr:hover:not(:has(a:hover), .table-empty) {
+    &.hover tbody tr:hover:not(:has(a:hover), .table-empty, :has(button:hover)) {
         cursor: pointer;
         background-color: rgba(var(--table-color-rgb), 0.4);
 
@@ -64,18 +64,14 @@
         height: 30px;
         border-radius: 10px;
         font-size: 16px;
+        color: var(--text-color);
 
         /* Last two and first two */
         &:nth-child(1), &:nth-child(2), &:nth-last-child(1), &:nth-last-child(2) {
-            background-color: #cacbcf;
-            color: #fff;
-            font-size: 35px;
+            background-color: var(--table-color);
+            font-size: 31px;
             font-weight: 300;
             line-height: .1;
-
-            @media (prefers-color-scheme: dark) {
-                background-color: #2c2d30;
-            }
         }
     }
 }
