@@ -20,7 +20,7 @@ const form = reactive(props.sim
         path-update="/api/sims/:code"
     >
         <template #form="{ form }">
-            <label>Numero</label>
+            <label required>Numero</label>
             <input 
                 type="text" 
                 class="sk-input"
@@ -42,7 +42,7 @@ const form = reactive(props.sim
                 v-model="form.serial"
             />
 
-            <label>Proveedor</label>
+            <label required>Proveedor</label>
             <SelectSimProvider 
                 required
                 v-model="form.provider"

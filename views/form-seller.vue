@@ -20,7 +20,7 @@ const form = reactive(props.seller
         path-update="/api/sellers/:code"
     >
         <template #form="{ form }">
-            <label>Nombre</label>
+            <label required>Nombre</label>
             <input 
                 type="text" 
                 class="sk-input"

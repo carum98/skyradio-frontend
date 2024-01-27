@@ -20,7 +20,7 @@ const form = reactive(props.modality
         path-update="/api/clients-modality/:code"
     >
         <template #form="{ form }">
-            <label>Nombre</label>
+            <label required>Nombre</label>
             <input 
                 type="text" 
                 class="sk-input"
@@ -32,7 +32,7 @@ const form = reactive(props.modality
                 v-model="form.name" 
             />
 
-            <label>Color</label>
+            <label required>Color</label>
             <SkColorPicker 
                 required
                 v-model="form.color"

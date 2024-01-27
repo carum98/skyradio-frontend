@@ -20,7 +20,7 @@ const form = reactive(props.client
         path-update="/api/clients/:code"
     >
         <template #form="{ form }">
-            <label>Nombre</label>
+            <label required>Nombre</label>
             <input 
                 type="text" 
                 class="sk-input"
@@ -32,19 +32,19 @@ const form = reactive(props.client
                 v-model="form.name" 
             />
 
-            <label>Modalidad</label>
+            <label required>Modalidad</label>
             <SelectModality 
                 required
                 v-model="form.modality" 
             />
 
-            <label>Vendedor</label>
+            <label required>Vendedor</label>
             <SelectSeller 
                 required
                 v-model="form.seller" 
             />
 
-            <label>Color</label>
+            <label required>Color</label>
             <SkColorPicker 
                 required
                 v-model="form.color"

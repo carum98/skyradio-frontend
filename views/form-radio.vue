@@ -31,7 +31,7 @@ const form = reactive(props.radio
                 v-model="form.name" 
             />
 
-            <label>IMEI</label>
+            <label required>IMEI</label>
             <input 
                 type="text" 
                 class="sk-input"
@@ -52,7 +52,7 @@ const form = reactive(props.radio
                 v-model="form.serial"
             />
 
-            <label>Modelo</label>
+            <label required>Modelo</label>
             <SelectRadioModel
                 required
                 v-model="form.model"

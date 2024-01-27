@@ -20,7 +20,7 @@ const form = reactive(props.model
         path-update="/api/radios-model/:code"
     >
         <template #form="{ form }">
-            <label>Nombre</label>
+            <label required>Nombre</label>
             <input 
                 type="text" 
                 class="sk-input"
@@ -32,7 +32,7 @@ const form = reactive(props.model
                 v-model="form.name" 
             />
 
-            <label>Color</label>
+            <label required>Color</label>
             <SkColorPicker 
                 required
                 v-model="form.color"
