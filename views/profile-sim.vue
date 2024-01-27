@@ -10,7 +10,9 @@ const { data: sim, refresh } = await useFetch<ISim>(`/api/sims/${code}`)
 
 <template>
     <section class="sk-card sk-card--flex-column">
-        <h2>{{ sim?.number }}</h2>
+        <CopyValue :value="sim?.number ?? ''">
+            <h2>{{ sim?.number }}</h2>
+        </CopyValue>
 
         <div class="d-2-haft">
             <p v-if="sim?.provider">

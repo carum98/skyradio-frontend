@@ -97,6 +97,12 @@ function openCreate() {
             />
         </template>
 
+        <template #cell(number)="{ value }">
+            <CopyValue :value="value">
+                {{ value }}
+            </CopyValue>
+        </template>
+
         <template #cell(provider)="{ value }">
             <SkLinkModal
                 v-if="value"

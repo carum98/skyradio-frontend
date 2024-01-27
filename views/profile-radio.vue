@@ -10,7 +10,9 @@ const { data: radio, refresh } = await useFetch<IRadio>(`/api/radios/${code}`)
 
 <template>
     <section class="sk-card sk-card--flex-column">
-        <h2>{{ radio?.imei }}</h2>
+        <CopyValue :value="radio?.imei ?? ''">
+            <h2>{{ radio?.imei }}</h2>
+        </CopyValue>
 
         <div class="d-2-haft">
             <p>
