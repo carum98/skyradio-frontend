@@ -90,6 +90,7 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
             <template #actions="{ openSwap, openRemove, openAdd }">
                 <div class="table-actions">
                 <button 
+                    v-sk-tooltip="ActionsStatic.CHANGE.name"
                     class="button-actions" 
                     :style="{ '--color': ActionsStatic.CHANGE.color }"
                     @click="() => openSwap({ client, radio: null })"
@@ -97,6 +98,7 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
                     <span v-html="ActionsStatic.CHANGE.icon"></span>
                 </button>
                 <button 
+                    v-sk-tooltip="ActionsStatic.REMOVE.name"
                     class="button-actions" 
                     :style="{ '--color': ActionsStatic.REMOVE.color }"
                     @click="() => openRemove({ client, radio: null })"
@@ -104,6 +106,7 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
                     <span v-html="ActionsStatic.REMOVE.icon"></span>
                 </button>
                 <button 
+                    v-sk-tooltip="ActionsStatic.ADD.name"
                     class="button-actions"
                     :style="{ '--color': ActionsStatic.ADD.color }"
                     @click="() => openAdd(client)"
