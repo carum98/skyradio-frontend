@@ -60,7 +60,6 @@ watch(search, onData, {
     gap: 10px;
 
     height: 400px;
-    width: 350px;
     overflow-y: auto;
 
     & li {

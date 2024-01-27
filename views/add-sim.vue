@@ -70,7 +70,7 @@ async function addSim() {
             @remove="sim = null"
         />
 
-        <button v-else class="button-picker" @click="addSim">
+        <button v-else class="button-picker" @click.prevent="addSim">
             Seleccionar SIM
         </button>
 
