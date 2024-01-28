@@ -34,3 +34,10 @@
     top: var(--popover-top);
     left: var(--popover-left);
 }
+
+.sk-tooltip {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 5px 10px;
+    background-color: var(--background-color);
+}

@@ -28,6 +28,7 @@ class SkTooltip {
 
     private onMouseEnter(event: MouseEvent) {
         this.tooltip = document.createElement('div')
+        this.tooltip.classList.add('sk-tooltip')
         this.tooltip.setAttribute('id', this.id)
         this.tooltip.setAttribute('popover', '')
         this.tooltip.setAttribute('anchor', this.id + '-anchor')
@@ -50,7 +51,7 @@ class SkTooltip {
 
         if (newState === 'open') {
             if (!("anchorName" in document.documentElement.style)) {
-                cssAnchorPosition(event as ToggleEvent)
+                cssAnchorPosition(event as ToggleEvent, 'top')
             }
         }
     }
