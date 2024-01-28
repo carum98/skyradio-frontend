@@ -95,6 +95,7 @@ function openReport(item: Report) {
         & button {
             float: right;
             background-color: var(--primary-color);
+            color: white;
             display: flex;
             align-items: center;
             gap: 5px;

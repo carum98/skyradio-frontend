@@ -81,6 +81,10 @@ watch(value, () => {
 
     & input {
         display: none;
+
+        &:checked + label {
+            color: white;
+        }
     }
 
     & label {

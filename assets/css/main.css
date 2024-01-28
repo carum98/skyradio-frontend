@@ -130,6 +130,7 @@
 .button-actions {
     background-color: rgb(var(--color), 0.8);
     transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    color: white;
 
     &:hover {
         box-shadow: 0px 10px 15px -3px rgba(var(--color), 0.6);
