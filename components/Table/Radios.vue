@@ -141,10 +141,10 @@ function openAdd(client: IClient | null) {
     <SkTable 
         :table="data"
         :columns="columns"
-        v-model="search"
+        v-model:search="search"
+        v-model:page="page"
         hover
         @onRowClick="openProfile"
-        @onPage="page = $event"
     >
         <template v-if="enableCreate" #toolbar>
             <button class="add-button" @click="openCreateRadio">

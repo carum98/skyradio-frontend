@@ -1,16 +1,17 @@
 <script setup lang="ts" generic="T">
-import type { SkTableProps, SkTableEmits, SkPaginationEmits, SkTableSlots } from './sk-table'
+import type { SkTableProps, SkTableEmits, SkTableSlots } from './sk-table'
 
 // Row type
 type Row = T extends ITable<infer R> ? R : never
 
 const { table, columns = [], loading = false } = defineProps<SkTableProps<T>>()
 
-defineEmits<SkTableEmits<Row> & SkPaginationEmits>()
+defineEmits<SkTableEmits<Row>>()
 defineSlots<SkTableSlots<T>>()
 
 // data
-const searchModel = defineModel<string>()
+const search = defineModel<string>('search')
+const page = defineModel<number>('page')
 
 // computed
 const data = computed(() => {
@@ -25,9 +26,7 @@ const data = computed(() => {
 
 <template>
     <section class="sk-toolbar">
-        <InputSearch 
-            v-model="searchModel"
-        />
+        <InputSearch v-model="search"/>
 
         <slot name="toolbar" />
 
@@ -60,7 +59,7 @@ const data = computed(() => {
 
     <SkTablePagination 
         v-if="table?.pagination"
-        :pagination="table.pagination" 
-        @onPage="$emit('onPage', $event)" 
+        :pagination="table.pagination"
+        v-model="page"
     />
 </template>

@@ -52,10 +52,10 @@ function openRemove(status: IRadioStatus) {
     <SkTable
         gridView
         :table="data" 
-        v-model="search"
+        v-model:search="search"
+        v-model:page="page"
         hover
         @onRowClick="openProfile"
-        @onPage="page = $event"
     >
         <template #toolbar>
             <button class="add-button" @click="openCreate">

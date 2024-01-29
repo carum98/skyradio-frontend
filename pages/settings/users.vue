@@ -14,9 +14,9 @@ const { page, data, search, refresh } = await useTableData<IUser>('/api/users')
 <main>
     <SkTable 
         :table="data"
-        v-model="search"
+        v-model:search="search"
+        v-model:page="page"
         hover
-        @onPage="page = $event"
     ></SkTable>
 </main>
 </template>

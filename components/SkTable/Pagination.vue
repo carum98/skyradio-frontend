@@ -1,23 +1,13 @@
 <script setup lang="ts">
-import type { SkPaginationProps, SkPaginationEmits } from './sk-table'
-
-const maxPagesToShow = 5
+import type { SkPaginationProps } from './sk-table'
 
 const { pagination } = defineProps<SkPaginationProps>()
-const emit = defineEmits<SkPaginationEmits>()
 
-function prevPage() {
-    emit('onPage', pagination.page - 1)
-}
+// data
+const maxPagesToShow = 5
+const page = defineModel<number>()
 
-function nextPage() {
-    emit('onPage', pagination.page + 1)
-}
-
-function goToPage(page: number) {
-    emit('onPage', page)
-}
-
+// computed
 const disabledPrev = computed(() => pagination.page === 1)
 const disabledNext = computed(() => pagination.page === pagination.total_pages)
 
@@ -50,6 +40,19 @@ const pages = computed(() => {
 
     return pages
 })
+
+// methods
+function prevPage() {
+    page.value = pagination.page - 1
+}
+
+function nextPage() {
+    page.value = pagination.page + 1
+}
+
+function goToPage(value: number) {
+    page.value = value 
+}
 </script>
 
 <template>

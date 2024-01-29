@@ -7,7 +7,7 @@ definePageMeta({
     name: 'groups'
 })
 
-const { page, data, search, refresh } = await useTableData<IGroup>('/api/groups')
+const { page, data, search } = await useTableData<IGroup>('/api/groups')
 </script>
 
 <template>
@@ -15,7 +15,8 @@ const { page, data, search, refresh } = await useTableData<IGroup>('/api/groups'
     <SkTable 
         gridView
         :table="data"
-        v-model="search"
+        v-model:search="search"
+        v-model:page="page"
         hover
         @onPage="page = $event"
     ></SkTable>

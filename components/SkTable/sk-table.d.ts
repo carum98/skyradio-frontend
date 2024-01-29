@@ -46,7 +46,3 @@ export interface SkTableSlots<T> extends SkTableSlotsBase<T>, SkTableSlotsBaseGr
 export interface SkPaginationProps {
     pagination: IPagination
 }
-
-export type SkPaginationEmits = {
-    onPage: [page: number]
-}

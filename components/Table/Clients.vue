@@ -81,10 +81,10 @@ function openCreateClient() {
     <SkTable
         :columns="columns"
         :table="data" 
+        v-model:search="search"
+        v-model:page="page"
         hover
-        v-model="search"
         @onRowClick="openProfile"
-        @onPage="page = $event"
     >
         <template v-if="enableCreate" #toolbar>
             <button class="add-button" @click="openCreateClient">
