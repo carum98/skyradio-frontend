@@ -10,7 +10,7 @@ const emits = defineEmits<SkSelectEmits<T>>()
 const uniqueId = `sk-select-${Math.random().toString(36).substr(2, 9)}`
 
 // methods
-function onSelect(event: T) {
+function onSelect(event: T | null) {
     emits('update:value', event)
 }
 
@@ -35,11 +35,22 @@ function onData() {
             :data-id="uniqueId"
             :label="label"
             :value="props.value"
+            :show-clear="props.showClear"
+            @onClear="onSelect(null)"
         >
             <template #option="{ item }">
                 <slot name="option" :item="item" />
             </template>
         </SkSelectInput>
+
+        <button 
+            v-if="showClear && value"
+            class="sk-select__input--clear"
+            type="button"
+            @click.stop="onSelect(null)"
+        >
+            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 7L7 17M7 7l10 10"/></svg>
+        </button>
 
         <SkSelectOptions 
             :data-id="uniqueId"

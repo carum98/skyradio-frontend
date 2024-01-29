@@ -1,5 +1,6 @@
 .sk-select {
     color: var(--text-color);
+    position: relative;
 }
 
 .sk-select__input {
@@ -9,6 +10,17 @@
     & span {
         color: gray;
     }
+}
+
+.sk-select__input--clear {
+    height: 24px;
+    width: 24px;
+
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: var(--text-color);
 }
 
 .sk-select__options {

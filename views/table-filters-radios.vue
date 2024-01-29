@@ -39,21 +39,25 @@ watch(form, onApplied, { deep: true })
     <form class="sk-form" @submit.prevent style="width: 180px;">
         <label>Modelo</label>
         <SelectRadioModel 
+            show-clear
             v-model="form.model" 
         />
 
         <label>Proveedor</label>
         <SelectSimProvider 
+            show-clear
             v-model="form.provider" 
         />
 
         <label>Estado</label>
         <SelectStatus
+            show-clear
             v-model="form.status"
         />
 
         <label>Cliente</label>
         <SelectClient 
+            show-clear
             v-model="form.client"
         />
     </form>

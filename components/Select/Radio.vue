@@ -3,7 +3,7 @@ import type { SkSelectProps } from '../SkSelect/sk-select'
 
 const props = defineProps<{
     client?: IClient
-} & Pick<SkSelectProps<IRadio>, 'required'>>()
+} & Pick<SkSelectProps<IRadio>, 'required' | 'showClear'>>()
 
 const path = props.client ? `/api/clients/${props.client.code}/radios` : '/api/radios'
 
@@ -18,6 +18,7 @@ const value = defineModel<IRadio | null>()
         :options="items"
         :required="required"
         :loading="loading"
+        :show-clear="showClear"
         v-model:value="value"
         v-model:search="search"
         @onData="onData"

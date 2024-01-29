@@ -33,11 +33,13 @@ watch(form, onApplied, { deep: true })
     <form class="sk-form" @submit.prevent style="width: 180px;">
         <label>Modalidad</label>
         <SelectModality 
+            show-clear
             v-model="form.modality" 
         />
 
         <label>Vendedor</label>
         <SelectSeller 
+            show-clear
             v-model="form.seller" 
         />
     </form>
