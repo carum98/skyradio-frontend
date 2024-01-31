@@ -3,10 +3,6 @@ import { resolve } from 'path'
 export default defineNuxtConfig({
   devtools: {
     enabled: true,
-
-    timeline: {
-      enabled: true
-    }
   },
   app: {
     rootId: 'app',
@@ -15,6 +11,7 @@ export default defineNuxtConfig({
       name: 'page',
       mode: 'out-in',
     },
+    viewTransition: true,
     head: {
       title: 'SkyRadio',
       meta: [
@@ -41,7 +38,6 @@ export default defineNuxtConfig({
   vite: {
     vue: {
       script: {
-        defineModel: true,
         propsDestructure: true,
         globalTypeFiles: [
           './types'
