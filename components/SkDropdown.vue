@@ -11,7 +11,7 @@ const props = defineProps<{
 }>()
 
 // data
-const id = `dropdown-${Math.random().toString(36).substr(2, 9)}`
+const id = useId('dropdown')
 const dropdown = ref<HTMLElement | null>(null)
 
 // lifecycle
