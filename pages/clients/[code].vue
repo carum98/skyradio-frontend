@@ -81,7 +81,7 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
             </div>
         </section>
         <TableRadios 
-            :path="`/api/clients/${code}/radios`"
+            :path="`/api/clients/${code}/radios?per_page=7`"
             enable-table-actions
             enable-client-actions
             hide-client

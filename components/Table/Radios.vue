@@ -32,6 +32,7 @@ const columns = ref<SkTableColumn[]>([
     {
         title: 'IMEI',
         key: 'imei',
+        width: 200,
     },
     {
         title: 'Número de serie',
@@ -41,22 +42,30 @@ const columns = ref<SkTableColumn[]>([
     {
         title: 'Modelo',
         key: 'model',
-        show: !props.hideModel
+        show: !props.hideModel,
+        width: 130,
+        align: 'center',
     },
     {
         title: 'Sim',
         key: 'sim',
-        show: !props.hideSim
+        show: !props.hideSim,
+        width: 150,
+        align: 'center',
     },
     {
         title: 'Proveedor',
         key: 'sim.provider',
-        show: !props.hideProvider
+        show: !props.hideProvider,
+        width: 170,
+        align: 'center',
     },
     {
         title: 'Cliente',
         key: 'client',
-        show: !props.hideClient
+        show: !props.hideClient,
+        width: 200,
+        align: 'center',
     },
     {
         title: 'Estado',
@@ -169,6 +178,12 @@ function openAdd(client: IClient | null) {
 
         </template>
 
+        <template #cell(name)="{ value }">
+            <p class="text-ellipsis">
+                {{ value }}
+            </p>
+        </template>
+
         <template #cell(imei)="{ value }">
             <CopyValue :value="value">
                 {{ value }}
@@ -215,7 +230,7 @@ function openAdd(client: IClient | null) {
                 v-if="value"
                 :to="{ name: 'clients-profile', params: { code: value.code } }"
                 @click.native.stop
-                class="sk-link"
+                class="sk-link text-ellipsis"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}

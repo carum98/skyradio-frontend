@@ -193,6 +193,8 @@
     color: var(--text-color);
     border-radius: 0.5rem;
     transition: background-color 0.2s;
+    white-space: nowrap;
+    width: fit-content;
 
     &:hover {
         background-color: var(--primary-color);
@@ -296,4 +298,15 @@
         margin: auto;
         filter: var(--drop-shadow);
     }
+}
+
+/* Text elipsis */
+.text-ellipsis {
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: normal;
 }

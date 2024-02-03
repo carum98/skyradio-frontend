@@ -26,15 +26,20 @@ const columns = ref<SkTableColumn[]>([
     {
         title: 'Proveedor',
         key: 'provider',
-        show: !props.hideProvider
+        show: !props.hideProvider,
+        width: 170,
+        align: 'center',
     },
     {
         title: 'Radio',
         key: 'radio',
+        align: 'center',
     },
     {
         title: 'Cliente',
         key: 'radio.client',
+        width: 250,
+        align: 'center',
     },
     {
         title: '',
@@ -130,7 +135,7 @@ function openCreate() {
             <NuxtLink 
                 v-if="value"
                 :to="{ name: 'clients-profile', params: { code: value.code } }"
-                class="sk-link"
+                class="sk-link text-ellipsis"
                 @click.stop
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>

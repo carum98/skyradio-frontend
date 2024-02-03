@@ -4,7 +4,7 @@
 
 <template>
     <div class="user-info">
-        <p>{{ user?.name }}</p>
-        <p>{{ user?.email }}</p>
+        <p class="text-ellipsis">{{ user?.name }}</p>
+        <p class="text-ellipsis">{{ user?.email }}</p>
     </div>
 </template>

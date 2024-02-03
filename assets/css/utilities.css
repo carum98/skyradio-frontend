@@ -35,3 +35,10 @@
 .gap-1 {
     gap: 1rem;
 }
+
+.grid-auto-1fr {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.5rem;
+}

@@ -22,14 +22,14 @@ const columns = ref<SkTableColumn[]>([
     {
         title: 'Vendedor',
         key: 'seller',
-        width: 300,
+        width: 200,
         align: 'center',
         show: !props.hideSeller
     },
     {
         title: 'Modalidad',
         key: 'modality',
-        width: 300,
+        width: 200,
         align: 'center',
         show: !props.hideModality
     },
@@ -100,8 +100,10 @@ function openCreateClient() {
         </template>
 
         <template #cell(name)="{ value, item }">
-            <SkAvatar :key="item.code" class="mr-1" :alt="value" :color="item.color" />
-            {{ value }}
+            <div class="grid-auto-1fr">
+                <SkAvatar :key="item.code" :alt="value" :color="item.color" />
+                <p class="text-ellipsis">{{ value }}</p>
+            </div>
         </template>
 
         <template #cell(radios_count)="{ value }">
