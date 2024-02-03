@@ -7,7 +7,7 @@ definePageMeta({
     name: 'modalities'
 })
 
-const { page, search, data, refresh } = await useTableData<IModality>('/api/clients-modality')
+const { page, search, data, refresh } = await useTableData<IModality>('/api/clients-modality?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
 const routerModal = useRouterModal()

@@ -7,7 +7,7 @@ definePageMeta({
     name: 'sellers'
 })
 
-const { page, search, data, refresh } = await useTableData<ISeller>('/api/sellers')
+const { page, search, data, refresh } = await useTableData<ISeller>('/api/sellers?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
 const routerModal = useRouterModal()

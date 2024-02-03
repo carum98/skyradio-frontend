@@ -7,7 +7,7 @@ definePageMeta({
     name: 'radios-status'
 })
 
-const { page, search, data, refresh } = await useTableData<IRadioStatus>('/api/radios-status')
+const { page, search, data, refresh } = await useTableData<IRadioStatus>('/api/radios-status?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
 const routerModal = useRouterModal()

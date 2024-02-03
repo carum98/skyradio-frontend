@@ -7,7 +7,7 @@ definePageMeta({
     name: 'sims-provider'
 })
 
-const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/sims-provider')
+const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/sims-provider?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
 const routerModal = useRouterModal()
