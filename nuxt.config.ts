@@ -62,7 +62,7 @@ export default defineNuxtConfig({
     }
   },
   routeRules: {
-    '/': { redirect: '/radios' },
+    '/': { redirect: '/clients' },
     '/login': { prerender: true },
     '/settings': { redirect: '/settings/modalities' },
     '/reports': { prerender: true },
