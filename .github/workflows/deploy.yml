@@ -35,19 +35,15 @@ jobs:
     environment: production
 
     steps:
-    - name: Checkout the code
-      uses: actions/checkout@v4
-
-    - name: Docker Login
-      uses: docker/login-action@v3.0.0
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.TOKEN_DEPLOY }}
-        logout: true
-
     - name: Pull the image
-      run: docker pull ghcr.io/carum98/skyradio-frontend:latest
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.TOKEN_DEPLOY }} &&
+          docker pull ghcr.io/carum98/skyradio-frontend:latest
 
   create-folder:
     runs-on: ubuntu-latest
