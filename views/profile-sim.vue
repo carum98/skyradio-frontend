@@ -26,34 +26,28 @@ const { data: sim, refresh } = await useFetch<ISim>(`/api/sims/${code}`)
                     {{ sim.provider.name  }}
                 </SkLinkModal>
             </p>
-            <p>
-                Serial:
-                {{ sim?.serial ?? '-' }}
-            </p>
         </div>
 
-        <div class="d-2-haft" v-if="sim?.radio">
-            <p>
-                Radio:
-                <SkLinkModal
-                    name="profile-radio"
-                    :props="{ code: sim.radio.code }"
-                    class="sk-link"
-                >
-                    {{ sim.radio.imei  }}
-                </SkLinkModal>
-            </p>
-            <p v-if="sim.radio.client">
-                Cliente:
-                <NuxtLink
-                    :to="{ name: 'clients-profile', params: { code: sim.radio.client.code }  }"
-                    class="sk-link"
-                >
-                    <span class="badge-color" :style="{ backgroundColor: sim.radio.client.color }"></span>
-                    {{ sim.radio.client.name }}
-                </NuxtLink>
-            </p>
-        </div>
+        <p v-if="sim?.radio">
+            Radio:
+            <SkLinkModal
+                name="profile-radio"
+                :props="{ code: sim.radio.code }"
+                class="sk-link"
+            >
+                {{ sim.radio.imei  }}
+            </SkLinkModal>
+        </p>
+        <p v-if="sim?.radio?.client">
+            Cliente:
+            <NuxtLink
+                :to="{ name: 'clients-profile', params: { code: sim.radio.client.code }  }"
+                class="sk-link"
+            >
+                <span class="badge-color" :style="{ backgroundColor: sim.radio.client.color }"></span>
+                {{ sim.radio.client.name }}
+            </NuxtLink>
+        </p>
 
         <ActionsDropdownSim 
             v-if="sim"

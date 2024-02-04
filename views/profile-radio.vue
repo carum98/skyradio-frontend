@@ -19,10 +19,6 @@ const { data: radio, refresh } = await useFetch<IRadio>(`/api/radios/${code}`)
                 Nombre:
                 {{ radio?.name }}
             </p>
-            <p>
-                Serial:
-                {{ radio?.serial ?? '-' }}
-            </p>
         </div>
 
         <div class="d-2-haft">

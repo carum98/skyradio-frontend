@@ -25,7 +25,6 @@ const form = reactive(props.radio
                 type="text" 
                 class="sk-input"
                 placeholder="Nombre del radio"
-                autofocus
                 minlength="3"
                 maxlength="50"
                 v-model="form.name" 
@@ -36,6 +35,7 @@ const form = reactive(props.radio
                 type="text" 
                 class="sk-input"
                 placeholder="IMEI"
+                autofocus
                 minlength="15"
                 maxlength="15"
                 required

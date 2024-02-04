@@ -35,6 +35,8 @@
     & ul {
         margin: 0;
         padding: 0;
+        max-height: 265px;
+        overflow: scroll;
 
         &:not(:empty) {
             margin-top: 15px;

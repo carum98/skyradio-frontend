@@ -12,7 +12,10 @@ const { open: openClientLogs } = useLogs('clients')
 
 const { open: openExport } = useModal({
     component: () => import('@views/export-client.vue'),
-    props: { client: props.client }
+    props: { client: props.client },
+    rootProps: {
+        width: 300
+    }
 })
 
 function onChange() {
