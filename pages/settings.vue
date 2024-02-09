@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const user = useUser()
+</script>
+
 <template>
     <main>
         <section>
@@ -22,13 +26,15 @@
                 Estados
             </NuxtLink>
 
-            <p>Admin</p>
-            <NuxtLink :to="{ name: 'users' }">
-                Usuarios
-            </NuxtLink>
-            <NuxtLink :to="{ name: 'groups' }">
-                Grupos
-            </NuxtLink>
+            <template v-if="user?.role === 'admin'">
+                <p>Admin</p>
+                <NuxtLink :to="{ name: 'users' }">
+                    Usuarios
+                </NuxtLink>
+                <NuxtLink :to="{ name: 'groups' }">
+                    Grupos
+                </NuxtLink>
+            </template>
         </section>
 
         <NuxtPage />

@@ -3,7 +3,7 @@ useHead({
   title: 'Radios',
 })
 
-const per_page = useTablePerPage({ sm: 8, lg: 12 })
+const per_page = useTablePerPage({ sm: 8, lg: 11 })
 </script>
 
 <template>
