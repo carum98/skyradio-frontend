@@ -3,6 +3,9 @@ import type { SkPaginationProps } from './sk-table'
 
 const { pagination } = defineProps<SkPaginationProps>()
 
+const router = useRouter()
+const route = useRoute()
+
 // data
 const maxPagesToShow = 5
 const page = defineModel<number>()
@@ -53,6 +56,11 @@ function nextPage() {
 function goToPage(value: number) {
     page.value = value 
 }
+
+// hooks
+watch(page, (value) => {
+    router.replace({ query: { ...route.query, page: value } })
+}, { immediate: true })
 </script>
 
 <template>

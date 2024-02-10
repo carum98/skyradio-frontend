@@ -1,7 +1,9 @@
 export async function useTableData<T>(path: string) {
+    const route = useRoute()
+
     // data
-    const page = ref(1)
-    const search = ref('')
+    const page = ref(Number(route.query.page) || 1)
+    const search = ref(route.query.search as string || '')
     const query = ref<Record<string, any>>({})
 
     const key = path.split('/').pop() as string

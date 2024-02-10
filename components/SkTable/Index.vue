@@ -26,7 +26,7 @@ const data = computed(() => {
 
 <template>
     <section class="sk-toolbar">
-        <InputSearch v-model="search"/>
+        <SkTableSearch v-model="search"/>
 
         <slot name="toolbar" />
 

@@ -1,10 +1,17 @@
 <script setup lang="ts">
+const router = useRouter()
+const route = useRoute()
+
 const model = defineModel<string>()
-const search = useDebounce('', 500)
+const search = useDebounce(model.value as string, 500)
 
 watch(search, () => {
     model.value = search.value
 })
+
+watch(search, (value) => {
+    router.push({ query: { ...route.query, search: value || undefined } })
+}, { immediate: true })
 </script>
 
 <template>
