@@ -7,6 +7,9 @@ definePageMeta({
     name: 'radios-model'
 })
 
+const user = useUser()
+const toast = useToast()
+
 const { page, search, data, refresh } = await useTableData<IRadioModel>('/api/radios-model?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
@@ -23,9 +26,17 @@ function openProfile(model: IRadioModel) {
 }
 
 function openCreate() {
-    navigateToAction({
-        name: 'create-model',
-    })
+    if (user.value?.role === 'admin') {
+        navigateToAction({
+            name: 'create-model',
+        })
+    } else {
+        toast.open({
+            title: 'No tienes permisos',
+            message: 'La creación de modelos solo está permitida para usuarios administradores',
+            type: 'warning'
+        })
+    }
 }
 
 function openUpdate(model: IRadioModel) {

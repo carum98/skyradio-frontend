@@ -7,6 +7,9 @@ definePageMeta({
     name: 'modalities'
 })
 
+const user = useUser()
+const toast = useToast()
+
 const { page, search, data, refresh } = await useTableData<IModality>('/api/clients-modality?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
@@ -23,9 +26,17 @@ function openProfile(modality: IModality) {
 }
 
 function openCreate() {
-    navigateToAction({
-        name: 'create-modality',
-    })
+    if (user.value?.role === 'admin') {
+        navigateToAction({
+            name: 'create-modality',
+        })
+    } else {
+        toast.open({
+            title: 'No tienes permisos',
+            message: 'La creación de modalidades solo está permitida para usuarios administradores',
+            type: 'warning'
+        })
+    }
 }
 
 function openUpdate(modality: IModality) {

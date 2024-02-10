@@ -7,6 +7,9 @@ definePageMeta({
     name: 'sellers'
 })
 
+const user = useUser()
+const toast = useToast()
+
 const { page, search, data, refresh } = await useTableData<ISeller>('/api/sellers?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
@@ -23,9 +26,17 @@ function openProfile(seller: ISeller) {
 }
 
 function openCreate() {
-    navigateToAction({
-        name: 'create-seller',
-    })
+    if (user.value?.role === 'admin') {
+        navigateToAction({
+            name: 'create-seller',
+        })
+    } else {
+        toast.open({
+            title: 'No tienes permisos',
+            message: 'La creación de vendedores solo está permitida para usuarios administradores',
+            type: 'warning'
+        })
+    }
 }
 
 function openUpdate(seller: ISeller) {

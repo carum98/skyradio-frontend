@@ -7,6 +7,9 @@ definePageMeta({
     name: 'radios-status'
 })
 
+const user = useUser()
+const toast = useToast()
+
 const { page, search, data, refresh } = await useTableData<IRadioStatus>('/api/radios-status?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
@@ -23,9 +26,17 @@ function openProfile(status: IRadioStatus) {
 }
 
 function openCreate() {
-    navigateToAction({
-        name: 'create-status',
-    })
+    if (user.value?.role === 'admin') {
+        navigateToAction({
+            name: 'create-status',
+        })
+    } else {
+        toast.open({
+            title: 'No tienes permisos',
+            message: 'La creación de estados solo está permitida para usuarios administradores',
+            type: 'warning'
+        })
+    }
 }
 
 function openUpdate(status: IRadioStatus) {

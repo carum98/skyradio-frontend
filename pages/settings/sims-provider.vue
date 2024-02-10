@@ -7,6 +7,9 @@ definePageMeta({
     name: 'sims-provider'
 })
 
+const user = useUser()
+const toast = useToast()
+
 const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/sims-provider?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
@@ -23,9 +26,17 @@ function openProfile(provider: ISimProvider) {
 }
 
 function openCreate() {
-    navigateToAction({
-        name: 'create-provider',
-    })
+    if (user.value?.role === 'admin') {
+        navigateToAction({
+            name: 'create-provider',
+        })
+    } else {
+        toast.open({
+            title: 'No tienes permisos',
+            message: 'La creación de proveedores solo está permitida para usuarios administradores',
+            type: 'warning'
+        })
+    }
 }
 
 function openUpdate(provider: ISimProvider) {
