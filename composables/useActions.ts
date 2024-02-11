@@ -31,6 +31,7 @@ type ActionsName =
     | 'swap-sim'
     | 'remove-sim2'
     | 'add-radio'
+    | 'edit-status'
 
 export function useActions(onRefresh: () => void) {
     const { open: openSwapRadio } = useModal({
@@ -104,6 +105,16 @@ export function useActions(onRefresh: () => void) {
         component: () => import('@views/swap-sim.vue'),
         rootProps: {
             watch: 300
+        },
+        listeners: {
+            onRefresh
+        }
+    })
+
+    const { open: openEditStatus } = useModal({
+        component: () => import('@views/edit-status.vue'),
+        rootProps: {
+            width: 300
         },
         listeners: {
             onRefresh
@@ -311,6 +322,9 @@ export function useActions(onRefresh: () => void) {
                 break
             case 'swap-sim':
                 openSwapSim({ props })
+                break
+            case 'edit-status':
+                openEditStatus({ props })
                 break
         }
     }

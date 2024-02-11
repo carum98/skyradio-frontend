@@ -83,6 +83,16 @@ let actions = [
     ...actionsClient,
     ...actionsSim,
     {
+        ...ActionsStatic.CHANGE,
+        icon: '<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2M9 9h6v6H9"/></svg>',
+        key: 'swap-status',
+        name: 'Cambiar Estado',
+        action: () => navigateToAction({
+            name: 'edit-status',
+            props: { radio: props.radio }
+        }),
+    },
+    {
         ...ActionsStatic.UPDATE,
         key: 'edit-radio',
         action: () => navigateToAction({
@@ -103,6 +113,7 @@ let actions = [
 const dividers = [
     actionsClient.length,
     actionsClient.length + actionsSim.length,
+    actions.length - 2
 ]
 </script>
 

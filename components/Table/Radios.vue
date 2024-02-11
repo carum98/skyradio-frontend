@@ -70,6 +70,8 @@ const columns = ref<SkTableColumn[]>([
     {
         title: 'Estado',
         key: 'status',
+        width: 65,
+        align: 'center',
         show: false
     },
     {

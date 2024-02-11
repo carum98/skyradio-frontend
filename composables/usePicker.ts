@@ -12,6 +12,10 @@ const pickers = [
     {
         name: 'clients',
         component: () => import('@components/Picker/Clients.vue')
+    },
+    {
+        name: 'status',
+        component: () => import('@components/Picker/Status.vue')
     }
 ] as const
 
@@ -20,7 +24,7 @@ type PickersNames = typeof pickers[number]['name']
 type OpenParams<T> = {
     name: PickersNames
     path: string
-    value?: T
+    value?: T | null
     filters?: Record<string, any>
 }
 

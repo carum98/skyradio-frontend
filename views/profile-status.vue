@@ -26,5 +26,8 @@ const { data: status } = useFetch<IRadioStatus>(`/api/radios-status/${code}`)
 
     <TableRadios 
         :path="`/api/radios?radios_status[code][equal]=${code}&per_page=5`"
+        hide-client
+        hide-sim
+        hide-provider
     />
 </template>

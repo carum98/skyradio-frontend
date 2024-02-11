@@ -287,6 +287,15 @@
 
     & button {
         margin-left: auto;
+
+        &:hover {
+            color: red;
+        }
+        
+        svg {
+            width: 25px;
+            height: 25px;
+        }
     }
 }
 
