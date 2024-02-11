@@ -7,11 +7,13 @@ const props = withDefaults(defineProps<{
     enableCreate?: boolean
     hideSeller?: boolean
     hideModality?: boolean
+    hideStatsButton?: boolean
 }>(), {
     enableTableActions: false,
     enableCreate: false,
     hideSeller: false,
-    hideModality: false
+    hideModality: false,
+    hideStatsButton: false
 })
 
 const columns = ref<SkTableColumn[]>([
@@ -95,6 +97,7 @@ function openCreateClient() {
         <template v-if="enableTableActions" #actions>
             <TableActionsClient
                 :columns="columns"
+                :hide-stats-button="hideStatsButton"
                 @onApplied="query = $event"
             />
         </template>

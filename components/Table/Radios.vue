@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<{
     hideSim?: boolean
     hideProvider?: boolean
     hideClient?: boolean
+    hideStatsButton?: boolean
 }>(), {
     enableTableActions: false,
     enableClientActions: false,
@@ -18,6 +19,7 @@ const props = withDefaults(defineProps<{
     hideSim: false,
     hideProvider: false,
     hideClient: false,
+    hideStatsButton: false
 })
 
 const emits = defineEmits<{
@@ -166,6 +168,7 @@ function openAdd(client: IClient | null) {
         <template v-if="enableTableActions" #actions>
             <TableActionsRadios
                 :columns="columns"
+                :hide-stats-button="hideStatsButton"
                 @onApplied="query = $event"
             />
         </template>

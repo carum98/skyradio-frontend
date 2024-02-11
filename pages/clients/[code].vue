@@ -85,6 +85,7 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
             enable-table-actions
             enable-client-actions
             hide-client
+            hide-stats-button
             @refresh="refreshStats"
         >
             <template #actions="{ openSwap, openRemove, openAdd }">

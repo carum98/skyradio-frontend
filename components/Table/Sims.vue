@@ -6,10 +6,12 @@ const props = withDefaults(defineProps<{
     enableTableActions?: boolean
     enableCreate?: boolean
     hideProvider?: boolean
+    hideStatsButton?: boolean
 }>(), {
     enableTableActions: false,
     enableCreate: false,
-    hideProvider: false
+    hideProvider: false,
+    hideStatsButton: false
 })
 
 const columns = ref<SkTableColumn[]>([
@@ -98,6 +100,7 @@ function openCreate() {
         <template v-if="enableTableActions" #actions>
             <TableActionsSims 
                 :columns="columns"
+                :hide-stats-button="hideStatsButton"
                 @onApplied="query = $event"
             />
         </template>

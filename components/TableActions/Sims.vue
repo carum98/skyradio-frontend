@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { SkTableColumn } from '@components/SkTable/sk-table'
+import type { TableActionsProps } from './Index.vue'
 import { useTableActions } from '@components/TableActions/useTableActions'
 
 const props = defineProps<{
     columns: SkTableColumn[]
-}>()
+} & TableActionsProps>()
 
 const emits = defineEmits<{
     onApplied: [Record<string, any>]
@@ -13,42 +14,57 @@ const emits = defineEmits<{
 const { state, onAppliedSort, onAppliedFilters } = useTableActions(emits)
 
 // methods
-const { open: openColumns } = usePopover({
-    component: () => import('@views/table-columns.vue'),
-    props: {
-        columns: props.columns
-    }
-})
+function onFilter(anchor: HTMLButtonElement) {
+    usePopover({
+        component: () => import('@views/table-filters-sims.vue'),
+        props: {
+            inital: state.filters.raw,
+        },
+        listeners: {
+            onApplied: onAppliedFilters,
+        }
+    }).open({
+        rootProps: {
+            anchor
+        }
+    })
+}
 
-const { open: openFilters } = usePopover({
-    component: () => import('@views/table-filters-sims.vue'),
-    listeners: {
-        onApplied: onAppliedFilters,
-    }
-})
+function onSort(anchor: HTMLButtonElement) {
+    usePopover({
+        component: () => import('@views/table-sort.vue'),
+        props: {
+            inital: state.filters.raw,
+        },
+        listeners: {
+            onApplied: onAppliedSort,
+        }
+    }).open({
+        rootProps: {
+            anchor
+        }
+    })
+}
 
-const { open: openSort } = usePopover({
-    component: () => import('@views/table-sort.vue'),
-    listeners: {
-        onApplied: onAppliedSort,
-    }
-})
+function onColumns(anchor: HTMLButtonElement) {
+    usePopover({
+        component: () => import('@views/table-columns.vue'),
+        props: {
+            columns: props.columns
+        }
+    }).open({
+        rootProps: {
+            anchor
+        }
+    })
+}
 </script>
 
 <template>
     <TableActions
-        @onFilters="openFilters({ 
-            ...$event,
-            props: {
-                inital: state.filters.raw,
-            }
-        })"
-        @onSort="openSort({ 
-            ...$event,
-            props: {
-                inital: state.sort.raw,
-            }
-        })"
-        @onColumns="openColumns"
-    />
+        :hideStatsButton="hideStatsButton"
+        @onFilters="onFilter"
+        @onSort="onSort"
+        @onColumns="onColumns"
+    ></TableActions>
 </template>

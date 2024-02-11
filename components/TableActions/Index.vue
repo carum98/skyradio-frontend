@@ -1,42 +1,40 @@
 <script setup lang="ts">
-type EmitsProps = {
-    rootProps: { anchor: HTMLButtonElement }
+export type TableActionsProps = {
+    hideStatsButton?: boolean
 }
 
+defineProps<TableActionsProps>()
+
 const emits = defineEmits<{
-    onFilters: [EmitsProps]
-    onSort: [EmitsProps]
-    onColumns: [EmitsProps]
+    onStats: []
+    onFilters: [HTMLButtonElement]
+    onSort: [HTMLButtonElement]
+    onColumns: [HTMLButtonElement]
 }>()
 
 // methods
 function openFilters(event: MouseEvent) {
-    emits('onFilters', {
-        rootProps: {
-            anchor: event.target as HTMLButtonElement
-        }
-    })
+    emits('onFilters', event.target as HTMLButtonElement)
 }
 
 function openSort(event: MouseEvent) {
-    emits('onSort', {
-        rootProps: {
-            anchor: event.target as HTMLButtonElement
-        }
-    })
+    emits('onSort', event.target as HTMLButtonElement)
 }
 
 function openColumns(event: MouseEvent) {
-    emits('onColumns', {
-        rootProps: {
-            anchor: event.target as HTMLButtonElement
-        }
-    })
+    emits('onColumns',event.target as HTMLButtonElement)
+}
+
+function openStats() {
+    emits('onStats')
 }
 </script>
 
 <template>
     <div class="table-action-buttons">
+        <button v-if="!hideStatsButton" @click="openStats">
+            <svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6zm10 2a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0V8zm-4 3a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0v-5zm8 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2z" clip-rule="evenodd"/></svg>
+        </button>
         <button @click="openFilters">
             <svg viewBox="0 0 24 24"><path fill="currentColor" d="M11 20q-.425 0-.712-.288T10 19v-6L4.2 5.6q-.375-.5-.112-1.05T5 4h14q.65 0 .913.55T19.8 5.6L14 13v6q0 .425-.288.713T13 20h-2Z"/></svg>
             Filtros
@@ -72,6 +70,11 @@ function openColumns(event: MouseEvent) {
             width: 20px;
             height: 20px;
             user-select: none;
+        }
+
+        &:hover {
+            background-color: var(--primary-color);
+            color: #fff;
         }
     }
 }
