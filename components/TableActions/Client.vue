@@ -62,6 +62,9 @@ function onColumns(anchor: HTMLButtonElement) {
 function onStats() {
     useModal({
         component: () => import('@views/stats-client.vue'),
+        rootProps: {
+            width: 600
+        },
     }).open({})
 }
 </script>

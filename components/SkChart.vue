@@ -9,6 +9,7 @@ type ChartData = {
 
 const props = defineProps<{
     data: ChartData[]
+    showList?: boolean
 }>()
 
 // data
@@ -72,5 +73,20 @@ onUnmounted(() => {
 <template>
     <div style="height: 200px; width: 200px; margin: auto;">
         <canvas ref="canvas"></canvas>
+    </div>
+    <div v-if="props.showList" class="mt-1">
+        <ul class="list-group">
+            <li
+                v-for="item in props.data"
+                :key="item.name"
+                class="d-flex justify-content-between align-items-center"
+            >
+                <p>
+                    <span class="badge-color mr-1" :style="{ backgroundColor: item.color }"></span>
+                    {{ item.name }}
+                </p>
+                <span class="counter"> {{ item.count }}</span>
+            </li>
+        </ul>
     </div>
 </template>

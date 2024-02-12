@@ -319,3 +319,16 @@
     word-break: break-all;
     white-space: normal;
 }
+
+.list-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    & li {
+        background-color: var(--table-color);
+        padding: 10px 15px;
+        border-radius: 15px;
+        align-items: center;
+    }
+}

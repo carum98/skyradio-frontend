@@ -19,3 +19,16 @@ interface IClientStats {
         count: number
     }[]
 }
+
+interface IClientsStats {
+    sellers: {
+        name: string
+        color: string
+        count: number
+    }[],
+    modality: {
+        name: string
+        color: string
+        count: number
+    }[],
+}
