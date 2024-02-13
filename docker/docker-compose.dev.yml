@@ -5,6 +5,7 @@ services:
         # 
         - .devcontainer:/app/.devcontainer
         - .gitignore:/app/.gitignore
+        - .env:/app/.env
         - ./docker:/app/docker
         - ./package.json:/app/package.json
         #
@@ -20,7 +21,6 @@ services:
         - ./public:/app/public
         - ./utils:/app/utils
         - ./views:/app/views
-        - .env/app/.env
         - ./nuxt.config.ts:/app/nuxt.config.ts
         # 
         - ..:/workspaces:cached
