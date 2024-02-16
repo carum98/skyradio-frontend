@@ -30,7 +30,7 @@ onMounted(() => {
     </header>
     <aside>
         <img 
-            src="/logo.png" 
+            src="/logo.avif" 
             alt="Logo" 
             width="65" 
             height="65"
