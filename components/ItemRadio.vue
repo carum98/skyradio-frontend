@@ -52,6 +52,7 @@ const templateColumns = computed(() => {
 
         <SelectSim
             v-if="!hideSim"
+            show-clear
             v-model="radio.sim"
         />
 
