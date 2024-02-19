@@ -88,11 +88,12 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
             hide-stats-button
             @refresh="refreshStats"
         >
-            <template #actions="{ openSwap, openRemove, openAdd }">
+            <template #actions="{ openSwap, openRemove, openAdd, hasData }">
                 <div class="table-actions">
                 <button 
                     v-sk-tooltip="ActionsStatic.CHANGE.name"
                     class="button-actions" 
+                    :disabled="!hasData"
                     :style="{ '--color': ActionsStatic.CHANGE.color }"
                     @click="() => openSwap({ client, radio: null })"
                 >
@@ -101,6 +102,7 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
                 <button 
                     v-sk-tooltip="ActionsStatic.REMOVE.name"
                     class="button-actions" 
+                    :disabled="!hasData"
                     :style="{ '--color': ActionsStatic.REMOVE.color }"
                     @click="() => openRemove({ client, radio: null })"
                 >

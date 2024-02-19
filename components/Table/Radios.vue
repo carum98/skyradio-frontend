@@ -179,7 +179,8 @@ function openAdd(client: IClient | null) {
                 :openSwap="openSwap"
                 :openRemove="openRemove"
                 :openAdd="openAdd"
-            />
+                :hasData="(data?.pagination.total ?? 0) > 0"
+            ></slot>
 
         </template>
 
