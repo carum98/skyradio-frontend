@@ -24,15 +24,35 @@ async function onConfirm() {
 </script>
 
 <template>
+    <svg width="48" height="48" viewBox="0 0 12 12">
+        <path fill="currentColor" d="M5.5 6.5a.5.5 0 0 0 1 0V2.707l1.146 1.147a.5.5 0 1 0 .708-.708l-2-2a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L5.5 2.707V6.5ZM6 11a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3Z"/>
+    </svg>
+
     <p>
         ¿Desvincular SIM?
     </p>
-    <div>
-        <button class="sk-button" @click="$emit('close')">
+
+    <div class="d-flex-center">
+        <button class="sk-button sk-button--transparent" @click="$emit('close')">
             Cancelar
         </button>
         <button class="sk-button" @click="onConfirm">
-            Confirmar
+            Aceptar
         </button>
     </div>
 </template>
+
+<style scoped>
+svg {
+    margin: auto;
+    display: block;
+    color: red;
+}
+
+p {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: var(--text-color);
+}
+</style>
