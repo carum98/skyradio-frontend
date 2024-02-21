@@ -70,6 +70,17 @@ const { data: radio, refresh } = await useFetch<IRadio>(`/api/radios/${code}`)
             </p>
         </div>
 
+        <p v-if="radio?.client">
+            Cliente:
+            <NuxtLink
+                :to="{ name: 'clients-profile', params: { code: radio.client.code }  }"
+                class="sk-link"
+            >
+                <span class="badge-color" :style="{ backgroundColor: radio.client.color }"></span>
+                {{ radio.client.name }}
+            </NuxtLink>
+        </p>
+
         <ActionsDropdownRadio 
             v-if="radio"
             :radio="radio" 

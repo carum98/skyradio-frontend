@@ -3,7 +3,7 @@
         <slot />
     </main>
 
-    <footer>
+    <!-- <footer>
         Hecho con 💙 por <a href="https://carum.dev" target="_blank">@carum98</a>
-    </footer>
+    </footer> -->
 </template>
