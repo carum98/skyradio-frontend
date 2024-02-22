@@ -11,7 +11,7 @@ const props = defineProps<{
 }>()
 
 // data
-const id = useId('dropdown')
+const id = useId()
 const dropdown = ref<HTMLElement | null>(null)
 
 // lifecycle
