@@ -92,7 +92,7 @@ function openCreate() {
         @onRowClick="openProfile"
     >
         <template v-if="enableCreate" #toolbar>
-            <button class="add-button" @click="openCreate">
+            <button class="add-button" aria-label="create sim" @click="openCreate">
                 <IconsAdd />
             </button>
         </template>
@@ -147,7 +147,7 @@ function openCreate() {
         </template>
 
         <template #cell(logs)="{ item }">
-            <button class="sk-dropdown__button" @click.stop="openLogs(item.code)">
+            <button class="sk-dropdown__button" aria-label="logs" @click.stop="openLogs(item.code)">
                 <IconsLogs />
             </button>
         </template>

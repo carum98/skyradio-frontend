@@ -14,5 +14,7 @@ function toggleTheme() {
 </script>
 
 <template>
-    <input class="theme-switch" type="checkbox" @click="toggleTheme">
+    <label aria-label="switch theme">
+        <input class="theme-switch" type="checkbox" @click="toggleTheme">
+    </label>
 </template>

@@ -60,7 +60,7 @@ onMounted(() => {
                 </span>
                 Reportes
             </NuxtLink>
-            <NuxtLink :to="{ name: 'settings' }">
+            <NuxtLink :to="{ name: 'settings' }" aria-label="settings">
                 <span>
                     <IconsSettings />
                 </span>

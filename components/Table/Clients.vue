@@ -89,7 +89,7 @@ function openCreateClient() {
         @onRowClick="openProfile"
     >
         <template v-if="enableCreate" #toolbar>
-            <button class="add-button" @click="openCreateClient">
+            <button class="add-button" aria-label="create client" @click="openCreateClient">
                 <IconsAdd />
             </button>
         </template>
@@ -116,7 +116,7 @@ function openCreateClient() {
         </template>
 
         <template #cell(logs)="{ item }">
-            <button class="sk-dropdown__button" @click.stop="openLogs(item.code)">
+            <button class="sk-dropdown__button" aria-label="logs" @click.stop="openLogs(item.code)">
                 <IconsLogs />
             </button>
         </template>

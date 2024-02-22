@@ -69,7 +69,7 @@ function openRemove(modality: IModality) {
         @onRowClick="openProfile"
     >
         <template #toolbar>
-            <button class="add-button" @click="openCreate">
+            <button class="add-button" aria-label="create modality" @click="openCreate">
                 <IconsAdd />
             </button>
         </template>

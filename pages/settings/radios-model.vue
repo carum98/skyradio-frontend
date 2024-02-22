@@ -69,7 +69,7 @@ function openRemove(model: IRadioModel) {
         @onRowClick="openProfile"
     >
         <template #toolbar>
-            <button class="add-button" @click="openCreate">
+            <button class="add-button" aria-label="create model" @click="openCreate">
                 <IconsAdd />
             </button>
         </template>

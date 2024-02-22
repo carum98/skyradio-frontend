@@ -160,7 +160,7 @@ function openAdd(client: IClient | null) {
         @onRowClick="openProfile"
     >
         <template v-if="enableCreate" #toolbar>
-            <button class="add-button" @click="openCreateRadio">
+            <button class="add-button" aria-label="create radio" @click="openCreateRadio">
                 <IconsAdd />
             </button>
         </template>
@@ -256,7 +256,7 @@ function openAdd(client: IClient | null) {
         </template>
 
         <template #cell(logs)="{ item }">
-            <button class="sk-dropdown__button" @click.stop="openLogs(item.code)">
+            <button class="sk-dropdown__button" aria-label="logs" @click.stop="openLogs(item.code)">
                 <IconsLogs />
             </button>
         </template>
