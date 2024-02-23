@@ -31,4 +31,22 @@ interface IClientsStats {
         color: string
         count: number
     }[],
+    clients: {
+        code: string
+        color: string
+        name: string
+        count: number
+        models: {
+            code: string
+            name: string
+            color: string
+            count: number
+        }[]
+        providers: {
+            code: string
+            name: string
+            color: string
+            count: number
+        }[]
+    }[]
 }
