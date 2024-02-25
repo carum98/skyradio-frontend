@@ -36,7 +36,13 @@ onMounted(() => {
             },
             elements: {
                 bar: {
-                    borderRadius: 5
+                    borderSkipped: false,
+                    borderRadius: {
+                        topLeft: 5,
+                        topRight: 5,
+                        bottomLeft: 5,
+                        bottomRight: 5
+                    }
                 }
             },
             scales: {

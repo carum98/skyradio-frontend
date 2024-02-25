@@ -18,29 +18,24 @@ const clients = computed(() => {
     const items = (data?.value?.clients || []).map(item => toRaw(item))
 
     const availableModels = removeDuplicateObjects(items.map(item => item.models).flat(), 'code')
+    const availabelProviders = removeDuplicateObjects(items.map(item => item.providers).flat(), 'code')
 
-    const models: {
-        label: string
-        backgroundColor: string
-        data: number[]
-    }[] = availableModels.map((model, index) => {
-        return {
-            label: model.name,
-            backgroundColor: model.color,
-            borderSkipped: false,
-            borderRadius: {
-                topLeft: 5,
-                topRight: 5,
-                bottomLeft: 5,
-                bottomRight: 5
-            },
-            data: items.map(item => item.models.find(m => m.code === model.code)?.count || 0)
-        }
-    })
+    const models = availableModels.map((model) => ({   
+        label: model.name,
+        backgroundColor: model.color,
+        data: items.map(item => item.models.find(m => m.code === model.code)?.count || 0)
+    }))
+
+    const providers = availabelProviders.map((provider) => ({   
+        label: provider.name,
+        backgroundColor: provider.color,
+        data: items.map(item => item.providers.find(p => p.code === provider.code)?.count || 0)
+    }))
 
     return {
         labels: items.map(item => item.name),
-        datasets: models
+        models,
+        providers
     }
 })
 </script>
@@ -53,7 +48,8 @@ const clients = computed(() => {
                 :items="[
                     { label: 'Modalidades', value: 'modalities' },
                     { label: 'Vendedores', value: 'sellers' },
-                    { label: 'Radios', value: 'radios' }
+                    { label: 'Modelos', value: 'models' },
+                    { label: 'Proveedores', value: 'providers' }
                 ]"
             ></SkSwitch>
         </div>
@@ -68,10 +64,16 @@ const clients = computed(() => {
                 :data="data.modality"
                 show-list
             />
-            <div v-if="chartType === 'radios'" style="height: 630px; overflow-y: scroll;">
+            <div v-if="chartType === 'models'" style="height: 630px; overflow-y: scroll;">
                 <SkBarHorizontal 
                     :label="clients.labels"
-                    :datasets="clients.datasets"
+                    :datasets="clients.models"
+                />
+            </div>
+            <div v-if="chartType === 'providers'" style="height: 630px; overflow-y: scroll;">
+                <SkBarHorizontal 
+                    :label="clients.labels"
+                    :datasets="clients.providers"
                 />
             </div>
         </div>
