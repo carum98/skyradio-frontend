@@ -49,6 +49,16 @@ const reports = [
                 width: 315
             }
         })
+    },
+    {
+        title: 'Inventario',
+        description: 'Reporte de inventario, muestra un listado de los radios en inventario.',
+        action: useModal({
+            component: () => import('@views/report-inventory.vue'),
+            rootProps: {
+                width: 315
+            }
+        })
     }
 ] as Report[]
 
