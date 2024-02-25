@@ -60,7 +60,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div style="height: 400px; width: 600px; margin: auto;">
+    <div style="height: 1900px; width: 600px; margin: auto;">
         <canvas ref="canvas"></canvas>
     </div>
 </template>

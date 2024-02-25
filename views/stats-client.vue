@@ -15,7 +15,7 @@ function removeDuplicateObjects(arr: any[], property: string) {
 }
 
 const clients = computed(() => {
-    const items = (data?.value?.clients?.toReversed() || []).slice(0, 20).map(item => toRaw(item))
+    const items = (data?.value?.clients || []).map(item => toRaw(item))
 
     const availableModels = removeDuplicateObjects(items.map(item => item.models).flat(), 'code')
 
@@ -68,11 +68,12 @@ const clients = computed(() => {
                 :data="data.modality"
                 show-list
             />
-            <SkBarHorizontal 
-                v-if="chartType === 'radios'"
-                :label="clients.labels"
-                :datasets="clients.datasets"
-            />
+            <div v-if="chartType === 'radios'" style="height: 630px; overflow-y: scroll;">
+                <SkBarHorizontal 
+                    :label="clients.labels"
+                    :datasets="clients.datasets"
+                />
+            </div>
         </div>
     </div>
 </template>
