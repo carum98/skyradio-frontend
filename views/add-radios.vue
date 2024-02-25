@@ -66,6 +66,7 @@ async function addRadio() {
         filters: {
             'radios[code][not_in]': radios.value.map((radio) => radio.code).toString() || undefined,
             'clients[code][is_null]': '',
+            'radios_status[code][is_null]': '',
         }
     })
 

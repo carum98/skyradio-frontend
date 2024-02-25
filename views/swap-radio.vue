@@ -36,6 +36,7 @@ async function pickRadioTo() {
         path: `/api/radios`,
         filters: {
             'clients[code][is_null]': '',
+            'radios_status[code][is_null]': '',
         }
     })
 

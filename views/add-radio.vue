@@ -53,6 +53,7 @@ async function addRadio() {
         filters: {
             'radios[code][not_in]': radio.value?.code || undefined,
             'clients[code][is_null]': '',
+            'radios_status[code][is_null]': '',
         }
     })
 
