@@ -68,7 +68,5 @@ onMounted(() => {
         </nav>
     </aside>
     
-    <suspense>
-        <slot />
-    </suspense>
+    <slot />
 </template>
