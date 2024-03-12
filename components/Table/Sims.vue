@@ -80,6 +80,21 @@ function openCreate() {
         name: 'create-sim'
     })
 }
+
+function openImportSims() {
+    useModal({
+        component: () => import('@views/import-items.vue'),
+        rootProps: {
+            width: 300
+        },
+        props: {
+            instance: 'sims'
+        },
+        listeners: {
+            onRefresh: refresh
+        }
+    }).open({})
+}
 </script>
 
 <template>
@@ -94,6 +109,10 @@ function openCreate() {
         <template v-if="enableCreate" #toolbar>
             <button class="add-button" aria-label="create sim" @click="openCreate">
                 <IconsAdd />
+            </button>
+
+            <button aria-label="import sims" @click="openImportSims">
+                <IconsImport />
             </button>
         </template>
 

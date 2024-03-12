@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 const toast = useToast()
 
+const props = defineProps<{
+    instance: string
+}>()
+
 const emits = defineEmits<{
     close: []
     refresh: []
@@ -32,14 +36,14 @@ async function downloadTemplate() {
     try {
         downloading.value = true
 
-        const response = await $fetch('/api/templates/radios', {
+        const response = await $fetch(`/api/templates/${props.instance}`, {
             method: 'GET',
             responseType: 'blob'
         })
 
         const a = document.createElement('a')
         a.href = URL.createObjectURL(response)
-        a.download = 'plantilla-radios.xlsx'
+        a.download = `plantilla-${props.instance}.xlsx`
         a.click()
         a.remove()
 
@@ -67,7 +71,7 @@ async function onSubmitted() {
         const formData = new FormData()
         formData.append('file', file.value as File)
 
-        await $fetch('/api/radios/imports', {
+        await $fetch(`/api/${props.instance}/imports`, {
             method: 'POST',
             body: formData
         })
@@ -75,7 +79,7 @@ async function onSubmitted() {
         toast.open({
             type: 'success',
             title: 'Exito!!',
-            message: 'Radios importados correctamente'
+            message: 'Elementos importados correctamente'
         })
 
         emits('refresh')
@@ -85,7 +89,7 @@ async function onSubmitted() {
         toast.open({
             type: 'error',
             title: 'Error!!',
-            message: 'Ocurrio un error al importar los radios'
+            message: 'Ocurrio un error al importar'
         })
     } finally {
         sending.value = false
