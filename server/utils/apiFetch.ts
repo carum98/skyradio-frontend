@@ -18,8 +18,6 @@ export const useApiFetch = async (event: H3Event, request: RequestInfo, options?
         return await useLogout(event)
     }
 
-    console.log(options)
-
     return apiFetch(request, {
         ...options,
         headers: {
