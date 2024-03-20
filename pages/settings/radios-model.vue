@@ -83,14 +83,14 @@ function openRemove(model: IRadioModel) {
                 class="ml-auto"
                 :options="[
                     {
-                        key: 'delete',
-                        ...ActionsStatic.DELETE,
-                        action: () => openRemove(item)
-                    },
-                    {
                         key: 'edit',
                         ...ActionsStatic.UPDATE,
                         action: () => openUpdate(item)
+                    },
+                    {
+                        key: 'delete',
+                        ...ActionsStatic.DELETE,
+                        action: () => openRemove(item)
                     }
                 ]"
             ></SkDropdown>

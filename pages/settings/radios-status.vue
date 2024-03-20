@@ -83,15 +83,15 @@ function openRemove(status: IRadioStatus) {
                 class="ml-auto"
                 :options="[
                     {
+                        key: 'edit',
+                        ...ActionsStatic.UPDATE,
+                        action: () => openUpdate(item)
+                    },
+                    {
                         key: 'delete',
                         ...ActionsStatic.DELETE,
                         action: () => openRemove(item)
                     },
-                    {
-                        key: 'edit',
-                        ...ActionsStatic.UPDATE,
-                        action: () => openUpdate(item)
-                    }
                 ]"
             ></SkDropdown>
         </template>
