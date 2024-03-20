@@ -27,6 +27,9 @@ type ActionsName =
     | 'create-sim'
     | 'update-sim'
     | 'remove-sim'
+    | 'create-license'
+    | 'update-license'
+    | 'remove-license'
     | 'add-sim'
     | 'swap-sim'
     | 'remove-sim2'
@@ -186,6 +189,16 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
+    const license = useModal({
+        component: () => import('@views/form-license.vue'),
+        rootProps: {
+            width: 300
+        },
+        listeners: {
+            onRefresh
+        }
+    })
+
     const remove = useModal({
         component: () => import('@views/delete-instance.vue'),
         listeners: {
@@ -294,6 +307,19 @@ export function useActions(onRefresh: () => void) {
                     props: {
                         name: 'Vendedor',
                         path: `/api/sellers/${props?.code}`,
+                        ...props
+                    }
+                })
+                break
+            case 'create-license':
+            case 'update-license':
+                license.open({ props })
+                break
+            case 'remove-license':
+                remove.open({
+                    props: {
+                        name: 'Licensia',
+                        path: `/api/licenses/${props?.code}`,
                         ...props
                     }
                 })

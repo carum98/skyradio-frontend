@@ -26,6 +26,11 @@ const user = useUser()
                 Estados
             </NuxtLink>
 
+            <p>General</p>
+            <NuxtLink :to="{ name: 'licenses' }">
+                Licencias
+            </NuxtLink>
+
             <template v-if="user?.role === 'admin'">
                 <p>Admin</p>
                 <NuxtLink :to="{ name: 'users' }">
