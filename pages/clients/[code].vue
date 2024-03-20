@@ -53,6 +53,14 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
                     </SkLinkModal>
                 </p>
 
+                <p>
+                    Consola:
+                    <span class="sk-link">
+                        <span class="badge-color" :style="{ backgroundColor: client?.console != null ? 'green' : 'red' }"></span>
+                        {{ client?.console != null ? 'Habilitada' : 'Deshabilitada' }}
+                    </span>
+                </p>
+
                 <ActionsDropdownClient
                     v-if="client"
                     :client="client"

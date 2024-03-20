@@ -4,6 +4,7 @@ interface IClient {
     color: string
     modality: IModality
     seller: ISeller
+    console: IConsole | null
     radios_count: number
 }
 
