@@ -35,6 +35,8 @@ type ActionsName =
     | 'remove-sim2'
     | 'add-radio'
     | 'edit-status'
+    | 'create-console'
+    | 'update-console'
 
 export function useActions(onRefresh: () => void) {
     const { open: openSwapRadio } = useModal({
@@ -199,6 +201,16 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
+    const console = useModal({
+        component: () => import('@views/form-console.vue'),
+        rootProps: {
+            width: 300
+        },
+        listeners: {
+            onRefresh
+        }
+    })
+
     const remove = useModal({
         component: () => import('@views/delete-instance.vue'),
         listeners: {
@@ -336,6 +348,10 @@ export function useActions(onRefresh: () => void) {
                         ...props
                     }
                 })
+                break
+            case 'create-console':
+            case 'update-console':
+                console.open({ props })
                 break
             case 'add-sim':
                 openAddSim({ props })
