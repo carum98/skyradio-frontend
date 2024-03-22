@@ -79,3 +79,16 @@
     right: 25px;
     color: var(--text-color);
 }
+
+.sk-select__create {
+    background-color: var(--primary-color);
+    padding: 10px 18px;
+    border-radius: 15px;
+    margin-top: 15px;
+    font-size: 15px;
+    width: 100%;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

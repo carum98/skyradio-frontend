@@ -3,12 +3,14 @@ export type SkSelectOptions<T> = {
     options: T[]
     search: string
     loading: boolean
+    enableCreate?: boolean
 }
 
 export type SkSelectOptionsEmits<T> = {
     'update:value': [value: T | null]
     'update:search': [value: string]
     onData: []
+    onCreate: [value: string]
 }
 
 // Input

@@ -21,6 +21,10 @@ function onSearch(event: string) {
 function onData() {
     emits('onData')
 }
+
+function onCreate(event: string) {
+    emits('onCreate', event)
+}
 </script>
 
 <template>
@@ -58,9 +62,11 @@ function onData() {
             :value="props.value"
             :search="search"
             :loading="loading"
+            :enableCreate="props.enableCreate"
             @update:value="onSelect"
             @update:search="onSearch"
             @onData="onData"
+            @onCreate="onCreate"
         >
             <template #option="{ item }">
                 <slot name="option" :item="item" />
