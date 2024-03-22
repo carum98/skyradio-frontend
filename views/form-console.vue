@@ -2,13 +2,13 @@
 import { FormDataConsole } from '#imports'
 
 const props = defineProps<{
-    license?: IConsole
-    client: IClient
+    console?: IConsole
+    client?: IClient
 }>()
 
 // data
-const form = reactive(props.license
-    ? FormDataConsole.update(props.license)
+const form = reactive(props.console
+    ? FormDataConsole.update(props.console)
     : FormDataConsole.create()
 ) as FormDataConsole
 </script>
@@ -17,13 +17,14 @@ const form = reactive(props.license
     <ScaffoldForm
         :form="form"
         v-bind="$attrs"
-        :path-create="`/api/clients/${client.code}/console`"
+        :path-create="`/api/clients/${client?.code}/console`"
         path-update="/api/consoles/:code"
     >
         <template #form="{ form }">
             <label required>Licencia</label>
             <SelectLicense
                 required
+                show-clear
                 v-model="form.license"
             />
         </template>

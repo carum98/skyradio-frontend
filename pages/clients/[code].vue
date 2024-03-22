@@ -13,6 +13,17 @@ const code = route.params.code as string
 // data
 const { data: client, refresh } = await useFetch<IClient>(`/api/clients/${code}`)
 const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/api/clients/${code}/stats`)
+
+const { navigateToAction } = useActions(refresh)
+
+function updateConsole() {
+    navigateToAction({
+        name: 'update-console',
+        props: {
+            console: client.value?.console,
+        }
+    })
+}
 </script>
 
 <template>
@@ -30,9 +41,10 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
                     <h2>{{ client?.name }}</h2>
                 </div>
 
-                <p v-if="client?.seller">
+                <p>
                     Vendedor:
                     <SkLinkModal
+                        v-if="client?.seller"
                         name="profile-seller"
                         :props="{ code: client.seller.code }"
                         class="sk-link"
@@ -55,10 +67,10 @@ const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/ap
 
                 <p>
                     Consola:
-                    <span class="sk-link">
+                    <button class="sk-link" @click="updateConsole">
                         <span class="badge-color" :style="{ backgroundColor: client?.console != null ? 'green' : 'red' }"></span>
                         {{ client?.console != null ? 'Habilitada' : 'Deshabilitada' }}
-                    </span>
+                    </button>
                 </p>
 
                 <ActionsDropdownClient
