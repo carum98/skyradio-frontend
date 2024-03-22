@@ -37,6 +37,7 @@ type ActionsName =
     | 'edit-status'
     | 'create-console'
     | 'update-console'
+    | 'remove-console'
 
 export function useActions(onRefresh: () => void) {
     const { open: openSwapRadio } = useModal({
@@ -352,6 +353,15 @@ export function useActions(onRefresh: () => void) {
             case 'create-console':
             case 'update-console':
                 console.open({ props })
+                break
+            case 'remove-console':
+                remove.open({
+                    props: {
+                        name: 'Consola',
+                        path: `/api/consoles/${props?.code}`,
+                        ...props
+                    }
+                })
                 break
             case 'add-sim':
                 openAddSim({ props })
