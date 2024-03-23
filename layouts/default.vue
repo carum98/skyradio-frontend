@@ -52,7 +52,13 @@ onMounted(() => {
                 <span>
                     <IconsSim />
                 </span>
-                Sims
+                SIMs
+            </NuxtLink>
+            <NuxtLink :to="{ name: 'apps' }">
+                <span>
+                    <IconsMobile />
+                </span>
+                Apps
             </NuxtLink>
             <NuxtLink :to="{ name: 'reports' }">
                 <span>
@@ -60,6 +66,7 @@ onMounted(() => {
                 </span>
                 Reportes
             </NuxtLink>
+
             <NuxtLink :to="{ name: 'settings' }" aria-label="settings">
                 <span>
                     <IconsSettings />

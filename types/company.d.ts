@@ -6,6 +6,7 @@ interface IClient {
     seller: ISeller
     console: IConsole | null
     radios_count: number
+    apps_count: number
 }
 
 interface IClientStats {

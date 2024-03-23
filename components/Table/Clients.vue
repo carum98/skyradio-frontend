@@ -49,6 +49,13 @@ const columns = ref<SkTableColumn[]>([
         align: 'center',
     },
     {
+        title: 'Apps',
+        altTitle: 'Cantidad de aplicaciones',
+        key: 'apps_count',
+        width: 100,
+        align: 'center',
+    },
+    {
         title: '',
         altTitle: 'Historial de cambios',
         key: 'logs',
@@ -121,6 +128,12 @@ function openCreateClient() {
             </span>
         </template>
 
+        <template #cell(apps_count)="{ value }">
+            <span class="counter" :disabled="value === 0">
+                {{ value }}
+            </span>
+        </template>
+
         <template #cell(logs)="{ item }">
             <button class="sk-dropdown__button" aria-label="logs" @click.stop="openLogs(item.code)">
                 <IconsLogs />
@@ -161,7 +174,7 @@ function openCreateClient() {
                 :client="item" 
                 :refresh="refresh"
                 show-actions
-            />
+            ></ActionsDropdownClient>
         </template>
     </SkTable>
 </template>

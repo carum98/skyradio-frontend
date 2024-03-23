@@ -5,6 +5,7 @@ definePageMeta({
 })
 
 const chartType = ref('models')
+const listType = ref('radios')
 
 const route = useRoute()
 
@@ -100,7 +101,18 @@ function updateConsole() {
                 />
             </div>
         </section>
-        <TableRadios 
+
+        <SkSwitch 
+            class="mb-1 mx-auto"
+            v-model="listType"
+            :items="[
+                { label: 'Radios', value: 'radios' },
+                { label: 'Aplicaciones', value: 'apps' }
+            ]"
+        ></SkSwitch>
+
+        <TableRadios
+            v-if="listType === 'radios'"
             :path="`/api/clients/${code}/radios?per_page=7`"
             enable-table-actions
             enable-client-actions
@@ -139,6 +151,12 @@ function updateConsole() {
             </div>
             </template>
         </TableRadios>
+
+        <TableApps
+            v-if="listType === 'apps'"
+            :path="`/api/clients/${code}/apps?per_page=7`"
+            hide-client
+        ></TableApps>
     </main>
 </template>
 
