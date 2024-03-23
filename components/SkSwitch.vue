@@ -65,6 +65,7 @@ watch(value, () => {
     background-color: var(--table-color);
     padding: 10px;
     position: relative;
+    width: fit-content;
 
     &::after {
         content: '';
