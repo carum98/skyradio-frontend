@@ -18,7 +18,7 @@ export const dialogs: Dialog[] = [
     },
     {
         name: 'clients-form',
-        component: () => import('@pages/clients/form-client.dialog.vue'),
+        component: () => import('@pages/clients/form.dialog.vue'),
         rootProps: {
             width: 350
         }

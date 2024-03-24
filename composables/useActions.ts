@@ -6,8 +6,8 @@ type ActionsName =
     | 'create-radio' 
     | 'update-radio' 
     | 'remove-radio2' 
-    | 'create-client'
-    | 'update-client'
+    // | 'create-client'
+    // | 'update-client'
     | 'remove-client'
     | 'create-modality'
     | 'update-modality'
@@ -147,15 +147,15 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
-    const client = useModal({
-        component: () => import('@views/form-client.vue'),
-        rootProps: {
-            width: 350
-        },
-        listeners: {
-            onRefresh
-        }
-    })
+    // const client = useModal({
+    //     component: () => import('@views/form-client.vue'),
+    //     rootProps: {
+    //         width: 350
+    //     },
+    //     listeners: {
+    //         onRefresh
+    //     }
+    // })
 
     const modality = useModal({
         component: () => import('@views/form-modality.vue'),
@@ -246,10 +246,10 @@ export function useActions(onRefresh: () => void) {
                     }
                 })
                 break
-            case 'create-client':
-            case 'update-client':
-                client.open({ props })
-                break
+            // case 'create-client':
+            // case 'update-client':
+            //     client.open({ props })
+            //     break
             case 'remove-client':
                 remove.open({
                     props: {

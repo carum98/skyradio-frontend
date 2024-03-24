@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
+const dialog = useDialogs()
+
 const props = withDefaults(defineProps<{
     path: string
     enableTableActions?: boolean
@@ -72,7 +74,6 @@ const columns = ref<SkTableColumn[]>([
 ])
 
 const { page, search, data, refresh, query } = await useTableData<IClient>(props.path)
-const { navigateToAction } = useActions(refresh)
 const { open: openLogs } = useLogs('clients')
 
 // methods
@@ -86,8 +87,11 @@ function openProfile(client: IClient) {
 }
 
 function openCreateClient() {
-    navigateToAction({
-        name: 'create-client',
+    dialog.push({
+        name: 'clients-form',
+        listeners: {
+            onRefresh: refresh
+        }
     })
 }
 </script>

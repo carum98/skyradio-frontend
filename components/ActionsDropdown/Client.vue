@@ -6,6 +6,8 @@ const props = defineProps<{
     refresh: () => void
 }>()
 
+const dialog = useDialogs()
+
 const { navigateToAction } = useActions(props.refresh)
 
 const { open: openClientLogs } = useLogs('clients')
@@ -40,9 +42,12 @@ function onRemove() {
 }
 
 function onUpdate() {
-    navigateToAction({
-        name: 'update-client',
-        props: { client: props.client }
+    dialog.push({
+        name: 'clients-form',
+        props: { client: props.client },
+        listeners: {
+            onRefresh: props.refresh
+        }
     })
 }
 
