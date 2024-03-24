@@ -59,9 +59,12 @@ function onDelete() {
 }
 
 function onEnableConsole() {
-    navigateToAction({
-        name: 'create-console',
-        props: { client: props.client }
+    dialog.push({
+        name: 'consoles-form',
+        props: { client: props.client },
+        listeners: {
+            onRefresh: props.refresh
+        }
     })
 }
 

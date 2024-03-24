@@ -98,6 +98,7 @@ const { navigateToAction } = useActions(refreshList)
 const { open: openLogs } = useLogs('radios')
 
 const routerModal = useRouterModal()
+const dialog = useDialogs()
 
 // methods
 function refreshList() {
@@ -115,8 +116,11 @@ function openProfile(radio: IRadio) {
 }
 
 function openCreateRadio() {
-    navigateToAction({
-        name: 'create-radio'
+    dialog.push({
+        name: 'radios-form',
+        listeners: {
+            onRefresh: refreshList
+        }
     })
 }
 

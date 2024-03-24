@@ -1,9 +1,16 @@
 import type { ProgrammaticallyProps } from '@utils/programmatically-component'
 
 export type DialogNames = 
-    'apps-form' 
+    // Apps
+    | 'apps-form' 
+    // Clients
     | 'clients-form' 
     | 'clients-report'
+    // Radios
+    | 'radios-form'
+    // Consoles
+    | 'consoles-form'
+    // Reports
     | 'reports-clients'
     | 'reports-inventory'
     | 'reports-model'
@@ -12,14 +19,9 @@ export type DialogNames =
 
 type PushOptions = {
     name: DialogNames
-} & ProgrammaticallyProps
+} & ProgrammaticallyOptions
 
-type Dialog = {
-    name: DialogNames
-    component: () => Promise<typeof import('*.vue')>
-} & ProgrammaticallyProps
-
-export const dialogs: Dialog[] = [
+export const dialogs: PushOptions[] = [
     {
         name: 'apps-form',
         component: () => import('@pages/apps/form.dialog.vue'),
@@ -29,6 +31,20 @@ export const dialogs: Dialog[] = [
         component: () => import('@pages/clients/form.dialog.vue'),
         rootProps: {
             width: 350
+        }
+    },
+    {
+        name: 'consoles-form',
+        component: () => import('@pages/consoles/form.dialog.vue'),
+        rootProps: {
+            width: 300
+        }
+    },
+    {
+        name: 'radios-form',
+        component: () => import('@pages/radios/form.dialog.vue'),
+        rootProps: {
+            width: 300
         }
     },
     {
@@ -69,7 +85,7 @@ export const dialogs: Dialog[] = [
 ]
 
 export function useDialogs() {
-    function push(options: PushOptions) {
+    function push(options: Omit<PushOptions, 'component'>) {
         const { name } = options
         const dialog = dialogs.find(dialog => dialog.name === name)
 

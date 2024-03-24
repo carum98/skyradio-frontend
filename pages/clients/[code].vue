@@ -8,6 +8,7 @@ const chartType = ref('models')
 const listType = ref('radios')
 
 const route = useRoute()
+const dialog = useDialogs()
 
 const code = route.params.code as string
 
@@ -15,13 +16,14 @@ const code = route.params.code as string
 const { data: client, refresh } = await useFetch<IClient>(`/api/clients/${code}`)
 const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/api/clients/${code}/stats`)
 
-const { navigateToAction } = useActions(refresh)
-
 function updateConsole() {
-    navigateToAction({
-        name: 'update-console',
+    dialog.push({
+        name: 'consoles-form',
         props: {
             console: client.value?.console,
+        },
+        listeners: {
+            onRefresh: refresh
         }
     })
 }

@@ -3,11 +3,7 @@ type ActionsName =
     | 'add-radios' 
     | 'remove-radio' 
     | 'add-client' 
-    | 'create-radio' 
-    | 'update-radio' 
     | 'remove-radio2' 
-    // | 'create-client'
-    // | 'update-client'
     | 'remove-client'
     | 'create-modality'
     | 'update-modality'
@@ -35,8 +31,6 @@ type ActionsName =
     | 'remove-sim2'
     | 'add-radio'
     | 'edit-status'
-    | 'create-console'
-    | 'update-console'
     | 'remove-console'
 
 export function useActions(onRefresh: () => void) {
@@ -127,16 +121,6 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
-    const radio = useModal({
-        component: () => import('@views/form-radio.vue'),
-        rootProps: {
-            width: 300
-        },
-        listeners: {
-            onRefresh
-        }
-    })
-
     const sim = useModal({
         component: () => import('@views/form-sim.vue'),
         rootProps: {
@@ -146,16 +130,6 @@ export function useActions(onRefresh: () => void) {
             onRefresh
         }
     })
-
-    // const client = useModal({
-    //     component: () => import('@views/form-client.vue'),
-    //     rootProps: {
-    //         width: 350
-    //     },
-    //     listeners: {
-    //         onRefresh
-    //     }
-    // })
 
     const modality = useModal({
         component: () => import('@views/form-modality.vue'),
@@ -202,16 +176,6 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
-    const console = useModal({
-        component: () => import('@views/form-console.vue'),
-        rootProps: {
-            width: 300
-        },
-        listeners: {
-            onRefresh
-        }
-    })
-
     const remove = useModal({
         component: () => import('@views/delete-instance.vue'),
         listeners: {
@@ -233,10 +197,6 @@ export function useActions(onRefresh: () => void) {
             case 'add-client':
                 openAddClient({ props })
                 break
-            case 'create-radio':
-            case 'update-radio':
-                radio.open({ props })
-                break
             case 'remove-radio2':
                 remove.open({
                     props: {
@@ -246,10 +206,6 @@ export function useActions(onRefresh: () => void) {
                     }
                 })
                 break
-            // case 'create-client':
-            // case 'update-client':
-            //     client.open({ props })
-            //     break
             case 'remove-client':
                 remove.open({
                     props: {
@@ -349,10 +305,6 @@ export function useActions(onRefresh: () => void) {
                         ...props
                     }
                 })
-                break
-            case 'create-console':
-            case 'update-console':
-                console.open({ props })
                 break
             case 'remove-console':
                 remove.open({
