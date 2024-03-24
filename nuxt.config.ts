@@ -4,6 +4,9 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
+  ignore: [
+    'pages/*/*.dialog.vue'
+  ],
   app: {
     rootId: 'app',
     rootTag: 'section',
@@ -34,7 +37,6 @@ export default defineNuxtConfig({
     '@utils': resolve(__dirname, './utils'),
     '@pages': resolve(__dirname, './pages'),
     '@views': resolve(__dirname, './views'),
-    '@dialogs': resolve(__dirname, './dialogs'),
   },
   vite: {
     vue: {
