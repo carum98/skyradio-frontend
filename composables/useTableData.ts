@@ -1,3 +1,5 @@
+import { parseURL } from 'ufo'
+
 export async function useTableData<T>(path: string) {
     const route = useRoute()
 
@@ -6,7 +8,7 @@ export async function useTableData<T>(path: string) {
     const search = ref(route.query.search as string || '')
     const query = ref<Record<string, any>>({})
 
-    const key = path.split('/').pop() as string
+    const key = parseURL(path).pathname.split('/').pop()
 
     // computed
     const searchPurified = computed(() => search.value || undefined)

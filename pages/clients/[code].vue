@@ -13,7 +13,13 @@ const dialog = useDialogs()
 const code = route.params.code as string
 
 // data
-const { data: client, refresh } = await useFetch<IClient>(`/api/clients/${code}`)
+const { data: clients } = useNuxtData<ITable<IClient>>('clients')
+
+const { data: client, refresh } = await useFetch(`/api/clients/${code}`, {
+    key: `clients-${code}`,
+    getCachedData: () => clients.value?.data.find(client => client.code === code) as IClient
+})
+
 const { data: stats, refresh: refreshStats } = await useFetch<IClientStats>(`/api/clients/${code}/stats`)
 
 function updateConsole() {
