@@ -14,6 +14,7 @@ const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/s
 const { navigateToAction } = useActions(refresh)
 
 const routerModal = useRouterModal()
+const dialog = useDialogs()
 
 // methods
 function openProfile(provider: ISimProvider) {
@@ -27,8 +28,11 @@ function openProfile(provider: ISimProvider) {
 
 function openCreate() {
     if (user.value?.role === 'admin') {
-        navigateToAction({
-            name: 'create-provider',
+        dialog.push({
+            name: 'providers-form',
+            listeners: {
+                onRefresh: refresh
+            }
         })
     } else {
         toast.open({
@@ -40,10 +44,13 @@ function openCreate() {
 }
 
 function openUpdate(provider: ISimProvider) {
-    navigateToAction({
-        name: 'update-provider',
+    dialog.push({
+        name: 'providers-form',
         props: {
             provider
+        },
+        listeners: {
+            onRefresh: refresh
         }
     })
 }

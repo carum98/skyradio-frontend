@@ -13,6 +13,7 @@ const toast = useToast()
 const { page, search, data, refresh } = await useTableData<ISeller>('/api/sellers?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
+const dialog = useDialogs()
 const routerModal = useRouterModal()
 
 // methods
@@ -27,8 +28,11 @@ function openProfile(seller: ISeller) {
 
 function openCreate() {
     if (user.value?.role === 'admin') {
-        navigateToAction({
-            name: 'create-seller',
+        dialog.push({
+            name: 'sellers-form',
+            listeners: {
+                onRefresh: refresh
+            }
         })
     } else {
         toast.open({
@@ -40,10 +44,13 @@ function openCreate() {
 }
 
 function openUpdate(seller: ISeller) {
-    navigateToAction({
-        name: 'update-seller',
+    dialog.push({
+        name: 'sellers-form',
         props: {
             seller
+        },
+        listeners: {
+            onRefresh: refresh
         }
     })
 }

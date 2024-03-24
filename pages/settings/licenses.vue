@@ -8,19 +8,26 @@ definePageMeta({
 })
 
 const { page, search, data, refresh } = await useTableData<ILicense>('/api/licenses?per_page=20')
+const dialog = useDialogs()
 const { navigateToAction } = useActions(refresh)
 
 function openCreate() {
-    navigateToAction({
-        name: 'create-license',
+    dialog.push({
+        name: 'licenses-form',
+        listeners: {
+            onRefresh: refresh
+        }
     })
 }
 
 function openUpdate(license: ILicense) {
-    navigateToAction({
-        name: 'update-license',
+    dialog.push({
+        name: 'licenses-form',
         props: {
             license
+        },
+        listeners: {
+            onRefresh: refresh
         }
     })
 }

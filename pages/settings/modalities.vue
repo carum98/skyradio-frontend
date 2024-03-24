@@ -13,6 +13,7 @@ const toast = useToast()
 const { page, search, data, refresh } = await useTableData<IModality>('/api/clients-modality?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
+const dialog = useDialogs()
 const routerModal = useRouterModal()
 
 // methods
@@ -27,8 +28,11 @@ function openProfile(modality: IModality) {
 
 function openCreate() {
     if (user.value?.role === 'admin') {
-        navigateToAction({
-            name: 'create-modality',
+        dialog.push({
+            name: 'modalities-form',
+            listeners: {
+                onRefresh: refresh
+            }
         })
     } else {
         toast.open({
@@ -40,10 +44,13 @@ function openCreate() {
 }
 
 function openUpdate(modality: IModality) {
-    navigateToAction({
-        name: 'update-modality',
+    dialog.push({
+        name: 'modalities-form',
         props: {
             modality
+        },
+        listeners: {
+            onRefresh: refresh
         }
     })
 }

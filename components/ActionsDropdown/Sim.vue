@@ -4,6 +4,7 @@ const props = defineProps<{
     refresh: () => void
 }>()
 
+const dialog = useDialogs()
 const { navigateToAction } = useActions(props.refresh)
 
 let actions = [
@@ -40,9 +41,14 @@ let actions = [
     {
         ...ActionsStatic.UPDATE,
         key: 'edit-radio',
-        action: () => navigateToAction({
-            name: 'update-sim',
-            props: { sim: props.sim }
+        action: () => dialog.push({
+            name: 'sims-form',
+            props: {
+                sim: props.sim
+            },
+            listeners: {
+                onRefresh: props.refresh
+            }
         }),
         show: true
     },

@@ -20,7 +20,7 @@ export interface ProgrammaticallyReturnType {
 }
 
 export function programmaticallyComponent(
-    { params, component }: { params: ProgrammaticallyOptions, component: Promise<typeof import("*.vue")> }
+    { params, component }: { params: ProgrammaticallyOptions, component: Promise<any> }
 ): ProgrammaticallyReturnType {
     const loading = useLoadingIndicator()
 

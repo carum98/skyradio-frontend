@@ -13,6 +13,7 @@ const toast = useToast()
 const { page, search, data, refresh } = await useTableData<IRadioStatus>('/api/radios-status?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
+const dialog = useDialogs()
 const routerModal = useRouterModal()
 
 // methods
@@ -27,8 +28,11 @@ function openProfile(status: IRadioStatus) {
 
 function openCreate() {
     if (user.value?.role === 'admin') {
-        navigateToAction({
-            name: 'create-status',
+        dialog.push({
+            name: 'status-form',
+            listeners: {
+                onRefresh: refresh
+            }
         })
     } else {
         toast.open({
@@ -40,10 +44,13 @@ function openCreate() {
 }
 
 function openUpdate(status: IRadioStatus) {
-    navigateToAction({
-        name: 'update-status',
+    dialog.push({
+        name: 'status-form',
         props: {
             status
+        },
+        listeners: {
+            onRefresh: refresh
         }
     })
 }

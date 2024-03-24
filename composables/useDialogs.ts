@@ -8,8 +8,22 @@ export type DialogNames =
     | 'clients-report'
     // Radios
     | 'radios-form'
+    // SIMs
+    | 'sims-form'
     // Consoles
     | 'consoles-form'
+    // Licenses
+    | 'licenses-form'
+    // Modalities
+    | 'modalities-form'
+    // Models
+    | 'models-form'
+    // Providers
+    | 'providers-form'
+    // Sellers
+    | 'sellers-form'
+    // Status
+    | 'status-form'
     // Reports
     | 'reports-clients'
     | 'reports-inventory'
@@ -45,6 +59,55 @@ export const dialogs: PushOptions[] = [
         component: () => import('@pages/radios/form.dialog.vue'),
         rootProps: {
             width: 300
+        }
+    },
+    {
+        name: 'sims-form',
+        component: () => import('@pages/sims/form.dialog.vue'),
+        rootProps: {
+            width: 300
+        }
+    },
+    {
+        name: 'licenses-form',
+        component: () => import('@pages/licenses/form.dialog.vue'),
+        rootProps: {
+            width: 300
+        }
+    },
+    {
+        name: 'modalities-form',
+        component: () => import('@pages/modalities/form.dialog.vue'),
+        rootProps: {
+            width: 310
+        }
+    },
+    {
+        name: 'models-form',
+        component: () => import('@pages/models/form.dialog.vue'),
+        rootProps: {
+            width: 310
+        }
+    },
+    {
+        name: 'providers-form',
+        component: () => import('@pages/providers/form.dialog.vue'),
+        rootProps: {
+            width: 310
+        }
+    },
+    {
+        name: 'sellers-form',
+        component: () => import('@pages/sellers/form.dialog.vue'),
+        rootProps: {
+            width: 310
+        }
+    },
+    {
+        name: 'status-form',
+        component: () => import('@pages/status/form.dialog.vue'),
+        rootProps: {
+            width: 310
         }
     },
     {

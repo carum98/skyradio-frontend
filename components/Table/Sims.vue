@@ -60,9 +60,9 @@ const columns = ref<SkTableColumn[]>([
 ])
 
 const { page, search, data, refresh, query } = await useTableData<ISim>(props.path)
-const { navigateToAction } = useActions(refresh)
 const { open: openLogs } = useLogs('sims')
 
+const dialog = useDialogs()
 const routerModal = useRouterModal()
 
 // methods
@@ -76,8 +76,11 @@ function openProfile(sim: ISim) {
 }
 
 function openCreate() {
-    navigateToAction({
-        name: 'create-sim'
+    dialog.push({
+        name: 'sims-form',
+        listeners: {
+            onRefresh: refresh
+        }
     })
 }
 

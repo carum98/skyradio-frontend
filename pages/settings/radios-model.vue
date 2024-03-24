@@ -14,6 +14,7 @@ const { page, search, data, refresh } = await useTableData<IRadioModel>('/api/ra
 const { navigateToAction } = useActions(refresh)
 
 const routerModal = useRouterModal()
+const dialog = useDialogs()
 
 // methods
 function openProfile(model: IRadioModel) {
@@ -27,8 +28,11 @@ function openProfile(model: IRadioModel) {
 
 function openCreate() {
     if (user.value?.role === 'admin') {
-        navigateToAction({
-            name: 'create-model',
+        dialog.push({
+            name: 'models-form',
+            listeners: {
+                onRefresh: refresh
+            }
         })
     } else {
         toast.open({
@@ -40,10 +44,13 @@ function openCreate() {
 }
 
 function openUpdate(model: IRadioModel) {
-    navigateToAction({
-        name: 'update-model',
+    dialog.push({
+        name: 'models-form',
         props: {
             model
+        },
+        listeners: {
+            onRefresh: refresh
         }
     })
 }
