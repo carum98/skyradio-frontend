@@ -48,6 +48,9 @@ export const dialogs: DialogsOptions[] = [
     {
         name: 'apps-form',
         component: () => import('@pages/apps/form.dialog.vue'),
+        rootProps: {
+            width: 300
+        }
     },
     {
         name: 'clients-form',

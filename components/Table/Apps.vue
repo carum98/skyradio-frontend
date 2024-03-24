@@ -6,6 +6,7 @@ const dialog = useDialogs()
 const props = withDefaults(defineProps<{
     path: string
     hideClient?: boolean
+    client?: IClient | null
 }>(), {
     hideClient: false,
 })
@@ -42,10 +43,32 @@ const { page, search, data, refresh } = await useTableData<IApp>(props.path)
 function openCreate() {
     dialog.push({
         name: 'apps-form',
+        props: { client: props.client },
         listeners: {
-            refresh
+            onRefresh: refresh
         }
     })
+}
+
+function onUpdate(app: IApp) {
+    dialog.push({
+        name: 'apps-form',
+        props: { app, client: props.client },
+        listeners: {
+            onRefresh: refresh
+        }
+    })
+}
+
+function onDelete(app: IApp) {
+    // dialog.confirm({
+    //     title: 'Eliminar aplicación',
+    //     message: `¿Estás seguro de eliminar la aplicación ${app.name}?`,
+    //     onConfirm: async () => {
+    //         await api.delete(`/apps/${app.code}`)
+    //         refresh()
+    //     }
+    // })
 }
 </script>
 
@@ -82,7 +105,18 @@ function openCreate() {
 
         <template #cell(actions)="{ item }">
             <SkDropdown 
-                :options="[]" 
+                :options="[
+                    {
+                        key: 'edit',
+                        ...ActionsStatic.UPDATE,
+                        action: () => onUpdate(item),
+                    },
+                    {
+                        key: 'delete',
+                        ...ActionsStatic.DELETE,
+                        action: () => onDelete(item),
+                    }
+                ]" 
             ></SkDropdown>
         </template>
     </SkTable>

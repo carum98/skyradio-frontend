@@ -163,6 +163,7 @@ function updateConsole() {
         <TableApps
             v-if="listType === 'apps'"
             :path="`/api/clients/${code}/apps?per_page=7`"
+            :client="client"
             hide-client
         ></TableApps>
     </main>
