@@ -3,69 +3,49 @@ useHead({
   title: 'Reportes',
 })
 
-type Report = {
-    title: string
-    description: string
-    action: ProgrammaticallyReturnType
-}
+const dialog = useDialogs()
 
 const reports = [
     {
         title: 'Cliente',
         description: 'Reporte por cliente, muestra un listado los radios del cliente.',
-        action: useModal({
-            component: () => import('@views/report-client.vue'),
-            rootProps: {
-                width: 315
-            }
+        action: () => dialog.push({
+            name: 'reports-clients'
         })
     },
     {
         title: 'Vendedor',
         description: 'Reporte por vendedor, muestra los clientes del vendedor.',
-        action: useModal({
-            component: () => import('@views/report-seller.vue'),
-            rootProps: {
-                width: 315
-            }
+        action: () => dialog.push({
+            name: 'reports-seller'
         })
     },
     {
         title: 'Modelo',
         description: 'Reporte por modelo, muestra un listado de radios por modelo.',
-        action: useModal({
-            component: () => import('@views/report-model.vue'),
-            rootProps: {
-                width: 315
-            }
+        action: () => dialog.push({
+            name: 'reports-model'
         })
     },
     {
         title: 'Proveedores de SIMs',
         description: 'Reporte por proveedor de SIMs, listado de sims por proveedor.',
-        action: useModal({
-            component: () => import('@views/report-provider.vue'),
-            rootProps: {
-                width: 315
-            }
+        action: () => dialog.push({
+            name: 'reports-provider'
         })
     },
     {
         title: 'Inventario',
         description: 'Reporte de inventario, muestra un listado de los radios en inventario.',
-        action: useModal({
-            component: () => import('@views/report-inventory.vue'),
-            rootProps: {
-                width: 315
-            }
+        action: () => dialog.push({
+            name: 'reports-inventory'
         })
     }
-] as Report[]
-
-// methods
-function openReport(item: Report) {
-    item.action.open({})
-}
+] as {
+    title: string
+    description: string
+    action: Function
+}[]
 </script>
 
 <template>
@@ -76,7 +56,7 @@ function openReport(item: Report) {
                 <h2>{{ item.title }}</h2>
                 <p>{{ item.description }}</p>
 
-                <button @click="openReport(item)">
+                <button @click="item.action">
                     <IconsReport />
                     Generar
                 </button>

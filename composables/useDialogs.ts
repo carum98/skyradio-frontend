@@ -1,6 +1,14 @@
 import type { ProgrammaticallyProps } from '@utils/programmatically-component'
 
-export type DialogNames = 'apps-form' | 'clients-form' 
+export type DialogNames = 
+    'apps-form' 
+    | 'clients-form' 
+    | 'clients-report'
+    | 'reports-clients'
+    | 'reports-inventory'
+    | 'reports-model'
+    | 'reports-provider'
+    | 'reports-seller'
 
 type PushOptions = {
     name: DialogNames
@@ -21,6 +29,41 @@ export const dialogs: Dialog[] = [
         component: () => import('@pages/clients/form.dialog.vue'),
         rootProps: {
             width: 350
+        }
+    },
+    {
+        name: 'reports-clients',
+        component: () => import('@pages/reports/clients.dialog.vue'),
+        rootProps: {
+            width: 315
+        }
+    },
+    {
+        name: 'reports-inventory',
+        component: () => import('@pages/reports/inventory.dialog.vue'),
+        rootProps: {
+            width: 315
+        }
+    },
+    {
+        name: 'reports-model',
+        component: () => import('@pages/reports/model.dialog.vue'),
+        rootProps: {
+            width: 315
+        }
+    },
+    {
+        name: 'reports-provider',
+        component: () => import('@pages/reports/provider.dialog.vue'),
+        rootProps: {
+            width: 315
+        }
+    },
+    {
+        name: 'reports-seller',
+        component: () => import('@pages/reports/seller.dialog.vue'),
+        rootProps: {
+            width: 315
         }
     },
 ]
