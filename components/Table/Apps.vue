@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
+const dialog = useDialogs()
+
 const props = withDefaults(defineProps<{
     path: string
     hideClient?: boolean
@@ -35,7 +37,16 @@ const columns = ref<SkTableColumn[]>([
     }
 ])
 
-const { page, search, data, refresh, query } = await useTableData<IApp>(props.path)
+const { page, search, data, refresh } = await useTableData<IApp>(props.path)
+
+function openCreate() {
+    dialog.push({
+        name: 'apps-form',
+        listeners: {
+            refresh
+        }
+    })
+}
 </script>
 
 <template>
@@ -45,6 +56,12 @@ const { page, search, data, refresh, query } = await useTableData<IApp>(props.pa
         v-model:search="search"
         v-model:page="page"
     >
+        <template #toolbar>
+            <button class="add-button" aria-label="create client" @click="openCreate">
+                <IconsAdd />
+            </button>
+        </template>
+
         <template #cell(license)="{ value }">
             <button class="sk-link">
                 {{ value?.key }}
