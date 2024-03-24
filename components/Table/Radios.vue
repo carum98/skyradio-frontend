@@ -97,7 +97,6 @@ const { page, data, search, refresh, query } = await useTableData<IRadio>(props.
 const { navigateToAction } = useActions(refreshList)
 const { open: openLogs } = useLogs('radios')
 
-const routerModal = useRouterModal()
 const dialog = useDialogs()
 
 // methods
@@ -107,8 +106,8 @@ function refreshList() {
 }
 
 function openProfile(radio: IRadio) {
-    routerModal.push({
-        name: 'profile-radio',
+    dialog.push({
+        name: 'radios-profile',
         props: {
             code: radio.code
         }
@@ -220,38 +219,38 @@ function openAdd(client: IClient | null) {
         </template>
 
         <template #cell(model)="{ value }">
-            <SkLinkModal
+            <SkLinkDialog
                 v-if="value"
-                name="profile-model"
+                name="models-profile"
                 :props="{ code: value.code }"
                 class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
-            </SkLinkModal>
+            </SkLinkDialog>
         </template>
 
         <template #cell(sim)="{ value }">
-            <SkLinkModal
+            <SkLinkDialog
                 v-if="value"
-                name="profile-sim"
+                name="sims-profile"
                 :props="{ code: value.code }"
                 class="sk-link"
             >
                 {{ value.number  }}
-            </SkLinkModal>
+            </SkLinkDialog>
         </template>
 
         <template #cell(sim.provider)="{ value }">
-            <SkLinkModal
+            <SkLinkDialog
                 v-if="value"
-                name="profile-provider"
+                name="providers-profile"
                 :props="{ code: value.code }"
                 class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
-            </SkLinkModal>
+            </SkLinkDialog>
         </template>
 
         <template #cell(client)="{ value }">
@@ -267,15 +266,15 @@ function openAdd(client: IClient | null) {
         </template>
 
         <template #cell(status)="{ value }">
-            <SkLinkModal
+            <SkLinkDialog
                 v-if="value"
-                name="profile-status"
+                name="status-profile"
                 :props="{ code: value.code }"
                 class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
-            </SkLinkModal>
+            </SkLinkDialog>
         </template>
 
         <template #cell(logs)="{ item }">

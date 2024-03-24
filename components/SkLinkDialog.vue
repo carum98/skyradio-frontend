@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import type { RouterModalNames } from '@composables/useRouterModal'
 
 const props = defineProps<{
-    name: RouterModalNames,
-    props: Record<string, unknown>
+    name: PushOptions['name']
+    props: PushOptions['props']
 }>()
 
-const routerModal = useRouterModal()
+const dialog = useDialogs()
 
 // data
 const object = {
@@ -22,7 +21,7 @@ const href = `?${query}`
 
 // methods
 function onClick() {
-    routerModal.push(props)
+    dialog.push(props)
 }
 </script>
 

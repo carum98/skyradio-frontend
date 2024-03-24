@@ -9,17 +9,15 @@ definePageMeta({
 
 const user = useUser()
 const toast = useToast()
+const dialog = useDialogs()
 
 const { page, search, data, refresh } = await useTableData<IRadioStatus>('/api/radios-status?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
-const dialog = useDialogs()
-const routerModal = useRouterModal()
-
 // methods
 function openProfile(status: IRadioStatus) {
-    routerModal.push({
-        name: 'profile-status',
+    dialog.push({
+        name: 'status-profile',
         props: {
             code: status.code
         }

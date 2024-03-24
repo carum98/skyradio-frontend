@@ -145,26 +145,26 @@ function openCreateClient() {
         </template>
 
         <template #cell(seller)="{ value }">
-            <SkLinkModal
+            <SkLinkDialog
                 v-if="value"
-                name="profile-seller"
+                name="sellers-profile"
                 :props="{ code: value.code }"
                 class="sk-link"
             >
                 {{ value.name }}
-            </SkLinkModal> 
+            </SkLinkDialog> 
         </template>
 
         <template #cell(modality)="{ value }">
-            <SkLinkModal
+            <SkLinkDialog
                 v-if="value"
-                name="profile-modality"
+                name="modalities-profile"
                 :props="{ code: value.code }"
                 class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name  }}
-            </SkLinkModal>
+            </SkLinkDialog>
         </template>
 
         <template #cell(console)="{ value }">

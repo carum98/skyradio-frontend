@@ -24,49 +24,49 @@ const { data: radio, refresh } = await useFetch<IRadio>(`/api/radios/${code}`)
         <div class="d-2-haft">
             <p v-if="radio?.model">
                 Modelo:
-                <SkLinkModal
-                    name="profile-model"
+                <SkLinkDialog
+                    name="models-profile"
                     :props="{ code: radio.model.code }"
                     class="sk-link"
                 >
                     <span class="badge-color" :style="{ backgroundColor: radio.model.color }"></span>
                     {{ radio.model.name  }}
-                </SkLinkModal>
+                </SkLinkDialog>
             </p>
             <p v-if="radio?.status">
                 Estado:
-                <SkLinkModal
-                    name="profile-status"
+                <SkLinkDialog
+                    name="status-profile"
                     :props="{ code: radio.status.code }"
                     class="sk-link"
                 >
                     <span class="badge-color" :style="{ backgroundColor: radio.status.color }"></span>
                     {{ radio.status.name  }}
-                </SkLinkModal>
+                </SkLinkDialog>
             </p>
         </div>
 
         <div class="d-2-haft">
             <p v-if="radio?.sim">
                 SIM:
-                <SkLinkModal
-                    name="profile-sim"
+                <SkLinkDialog
+                    name="sims-profile"
                     :props="{ code: radio.sim.code }"
                     class="sk-link"
                 >
                     {{ radio.sim.number  }}
-                </SkLinkModal>
+                </SkLinkDialog>
             </p>
             <p v-if="radio?.sim?.provider">
                 Proveedor:
-                <SkLinkModal
-                    name="profile-provider"
+                <SkLinkDialog
+                    name="providers-profile"
                     :props="{ code: radio.sim.provider.code }"
                     class="sk-link"
                 >
                     <span class="badge-color" :style="{ backgroundColor: radio.sim.provider.color }"></span>
                     {{ radio.sim.provider.name  }}
-                </SkLinkModal>
+                </SkLinkDialog>
             </p>
         </div>
 

@@ -59,16 +59,15 @@ const columns = ref<SkTableColumn[]>([
     }
 ])
 
+const dialog = useDialogs()
+
 const { page, search, data, refresh, query } = await useTableData<ISim>(props.path)
 const { open: openLogs } = useLogs('sims')
 
-const dialog = useDialogs()
-const routerModal = useRouterModal()
-
 // methods
 function openProfile(sim: ISim) {
-    routerModal.push({
-        name: 'profile-sim',
+    dialog.push({
+        name: 'sims-profile',
         props: {
             code: sim.code
         }
@@ -134,26 +133,26 @@ function openImportSims() {
         </template>
 
         <template #cell(provider)="{ value }">
-            <SkLinkModal
+            <SkLinkDialog
                 v-if="value"
-                name="profile-provider"
+                name="providers-profile"
                 :props="{ code: value.code }"
                 class="sk-link"
             >
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
-            </SkLinkModal>
+            </SkLinkDialog>
         </template>
 
         <template #cell(radio)="{ value }">
-            <SkLinkModal
+            <SkLinkDialog
                 v-if="value"
-                name="profile-radio"
+                name="radios-profile"
                 :props="{ code: value.code }"
                 class="sk-link"
             >
                 {{ value.imei  }}
-            </SkLinkModal>
+            </SkLinkDialog>
         </template>
 
         <template #cell(radio.client)="{ value }">

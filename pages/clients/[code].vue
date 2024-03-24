@@ -46,26 +46,26 @@ function updateConsole() {
 
                 <p>
                     Vendedor:
-                    <SkLinkModal
+                    <SkLinkDialog
                         v-if="client?.seller"
-                        name="profile-seller"
+                        name="sellers-profile"
                         :props="{ code: client.seller.code }"
                         class="sk-link"
                     >
                         {{ client.seller.name }}
-                    </SkLinkModal> 
+                    </SkLinkDialog> 
                 </p>
 
                 <p v-if="client?.modality">
                     Modalidad:
-                    <SkLinkModal
-                        name="profile-modality"
+                    <SkLinkDialog
+                        name="modalities-profile"
                         :props="{ code: client.modality.code }"
                         class="sk-link"
                     >
                         <span class="badge-color" :style="{ backgroundColor: client.modality.color }"></span>
                         {{ client.modality.name  }}
-                    </SkLinkModal>
+                    </SkLinkDialog>
                 </p>
 
                 <p>

@@ -9,17 +9,15 @@ definePageMeta({
 
 const user = useUser()
 const toast = useToast()
+const dialog = useDialogs()
 
 const { page, search, data, refresh } = await useTableData<IRadioModel>('/api/radios-model?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
-const routerModal = useRouterModal()
-const dialog = useDialogs()
-
 // methods
 function openProfile(model: IRadioModel) {
-    routerModal.push({
-        name: 'profile-model',
+    dialog.push({
+        name: 'models-profile',
         props: {
             code: model.code
         }

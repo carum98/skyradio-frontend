@@ -8,22 +8,29 @@ export type DialogNames =
     | 'clients-report'
     // Radios
     | 'radios-form'
+    | 'radios-profile'
     // SIMs
     | 'sims-form'
+    | 'sims-profile'
     // Consoles
     | 'consoles-form'
     // Licenses
     | 'licenses-form'
     // Modalities
     | 'modalities-form'
+    | 'modalities-profile'
     // Models
     | 'models-form'
+    | 'models-profile'
     // Providers
     | 'providers-form'
+    | 'providers-profile'
     // Sellers
     | 'sellers-form'
+    | 'sellers-profile'
     // Status
     | 'status-form'
+    | 'status-profile'
     // Reports
     | 'reports-clients'
     | 'reports-inventory'
@@ -31,11 +38,13 @@ export type DialogNames =
     | 'reports-provider'
     | 'reports-seller'
 
-type PushOptions = {
+type DialogsOptions = {
     name: DialogNames
 } & ProgrammaticallyOptions
 
-export const dialogs: PushOptions[] = [
+export type PushOptions = Omit<DialogsOptions, 'component'>
+
+export const dialogs: DialogsOptions[] = [
     {
         name: 'apps-form',
         component: () => import('@pages/apps/form.dialog.vue'),
@@ -62,10 +71,24 @@ export const dialogs: PushOptions[] = [
         }
     },
     {
+        name: 'radios-profile',
+        component: () => import('@pages/radios/profile.dialog.vue'),
+        rootProps: {
+            width: 600
+        }
+    },
+    {
         name: 'sims-form',
         component: () => import('@pages/sims/form.dialog.vue'),
         rootProps: {
             width: 300
+        }
+    },
+    {
+        name: 'sims-profile',
+        component: () => import('@pages/sims/profile.dialog.vue'),
+        rootProps: {
+            width: 600
         }
     },
     {
@@ -83,10 +106,24 @@ export const dialogs: PushOptions[] = [
         }
     },
     {
+        name: 'modalities-profile',
+        component: () => import('@pages/modalities/profile.dialog.vue'),
+        rootProps: {
+            width: 800
+        }
+    },
+    {
         name: 'models-form',
         component: () => import('@pages/models/form.dialog.vue'),
         rootProps: {
             width: 310
+        }
+    },
+    {
+        name: 'models-profile',
+        component: () => import('@pages/models/profile.dialog.vue'),
+        rootProps: {
+            width: 800
         }
     },
     {
@@ -97,6 +134,13 @@ export const dialogs: PushOptions[] = [
         }
     },
     {
+        name: 'providers-profile',
+        component: () => import('@pages/providers/profile.dialog.vue'),
+        rootProps: {
+            width: 800
+        }
+    },
+    {
         name: 'sellers-form',
         component: () => import('@pages/sellers/form.dialog.vue'),
         rootProps: {
@@ -104,10 +148,24 @@ export const dialogs: PushOptions[] = [
         }
     },
     {
+        name: 'sellers-profile',
+        component: () => import('@pages/sellers/profile.dialog.vue'),
+        rootProps: {
+            width: 800
+        }
+    },
+    {
         name: 'status-form',
         component: () => import('@pages/status/form.dialog.vue'),
         rootProps: {
             width: 310
+        }
+    },
+    {
+        name: 'status-profile',
+        component: () => import('@pages/status/profile.dialog.vue'),
+        rootProps: {
+            width: 800
         }
     },
     {
@@ -148,7 +206,7 @@ export const dialogs: PushOptions[] = [
 ]
 
 export function useDialogs() {
-    function push(options: Omit<PushOptions, 'component'>) {
+    function push(options: PushOptions) {
         const { name } = options
         const dialog = dialogs.find(dialog => dialog.name === name)
 

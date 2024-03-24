@@ -9,17 +9,15 @@ definePageMeta({
 
 const user = useUser()
 const toast = useToast()
+const dialog = useDialogs()
 
 const { page, search, data, refresh } = await useTableData<ISeller>('/api/sellers?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
-const dialog = useDialogs()
-const routerModal = useRouterModal()
-
 // methods
 function openProfile(seller: ISeller) {
-    routerModal.push({
-        name: 'profile-seller',
+    dialog.push({
+        name: 'sellers-profile',
         props: {
             code: seller.code
         }

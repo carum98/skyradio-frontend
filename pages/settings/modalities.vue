@@ -9,17 +9,15 @@ definePageMeta({
 
 const user = useUser()
 const toast = useToast()
+const dialog = useDialogs()
 
 const { page, search, data, refresh } = await useTableData<IModality>('/api/clients-modality?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
-const dialog = useDialogs()
-const routerModal = useRouterModal()
-
 // methods
 function openProfile(modality: IModality) {
-    routerModal.push({
-        name: 'profile-modality',
+    dialog.push({
+        name: 'modalities-profile',
         props: {
             code: modality.code
         }

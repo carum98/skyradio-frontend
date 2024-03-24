@@ -4,7 +4,7 @@ const props = defineProps<{
 }>()
 
 const router = useRouter()
-const routerModal = useRouterModal()
+const dialog = useDialogs()
 
 // data
 let links: HTMLAnchorElement[] = []
@@ -24,8 +24,8 @@ function message(log: ILog) {
 
             if (key === 'radio') {
                 const a = document.createElement('a')
-                a.href = `?name=profile-radio&code=${log.values.radio?.code}`
-                a.dataset.type = 'modal'
+                a.href = `?name=radios-profile&code=${log.values.radio?.code}`
+                a.dataset.type = 'dialog'
                 a.innerText = log.values.radio?.imei ?? ''
 
                 message = message.replace(match, a.outerHTML)
@@ -48,8 +48,8 @@ function message(log: ILog) {
 
             if (key === 'sim') {
                 const a = document.createElement('a')
-                a.href = `?name=profile-sim&code=${log.values.sim?.code}`
-                a.dataset.type = 'modal'
+                a.href = `?name=sims-profile&code=${log.values.sim?.code}`
+                a.dataset.type = 'dialog'
                 a.innerText = log.values.sim?.number ?? ''
 
                 message = message.replace(match, a.outerHTML)
@@ -78,13 +78,13 @@ function navigate(event: Event) {
     event.preventDefault()
 
     const a = event.target as HTMLAnchorElement
-    const isModal = a.dataset.type === 'modal'
+    const isDialog = a.dataset.type === 'dialog'
 
     const path = new URL(a.href)
 
-    if (isModal) {
-        routerModal.push({
-            name: path.searchParams.get('name') as 'profile-radio' | 'profile-sim',
+    if (isDialog) {
+        dialog.push({
+            name: path.searchParams.get('name') as 'radios-profile' | 'sims-profile',
             props: Object.fromEntries(path.searchParams.entries())
         })
     } else {

@@ -9,17 +9,15 @@ definePageMeta({
 
 const user = useUser()
 const toast = useToast()
+const dialog = useDialogs()
 
 const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/sims-provider?per_page=20')
 const { navigateToAction } = useActions(refresh)
 
-const routerModal = useRouterModal()
-const dialog = useDialogs()
-
 // methods
 function openProfile(provider: ISimProvider) {
-    routerModal.push({
-        name: 'profile-provider',
+    dialog.push({
+        name: 'providers-profile',
         props: {
             code: provider.code
         }

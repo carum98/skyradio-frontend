@@ -17,26 +17,26 @@ const { data: sim, refresh } = await useFetch<ISim>(`/api/sims/${code}`)
         <div class="d-2-haft">
             <p v-if="sim?.provider">
                 Proveedor:
-                <SkLinkModal
-                    name="profile-provider"
+                <SkLinkDialog
+                    name="providers-profile"
                     :props="{ code: sim.provider.code }"
                     class="sk-link"
                 >
                     <span class="badge-color" :style="{ backgroundColor: sim.provider.color }"></span>
                     {{ sim.provider.name  }}
-                </SkLinkModal>
+                </SkLinkDialog>
             </p>
         </div>
 
         <p v-if="sim?.radio">
             Radio:
-            <SkLinkModal
-                name="profile-radio"
+            <SkLinkDialog
+                name="radios-profile"
                 :props="{ code: sim.radio.code }"
                 class="sk-link"
             >
                 {{ sim.radio.imei  }}
-            </SkLinkModal>
+            </SkLinkDialog>
         </p>
         <p v-if="sim?.radio?.client">
             Cliente:
