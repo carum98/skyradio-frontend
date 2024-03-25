@@ -58,6 +58,8 @@ function openRemove(license: ILicense) {
     
             <template #cell="{ item }">
                 {{ item.key }}
+
+                <span class="badge-color" :style="{ backgroundColor: item.is_active ? 'green' : 'red' }"></span>
     
                 <SkDropdown 
                     class="ml-auto"
