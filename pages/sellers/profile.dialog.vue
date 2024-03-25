@@ -5,27 +5,29 @@ const { code } = defineProps<{
 
 defineEmits(['close'])
 
+const dialog = useDialogs()
+
 // data
 const { data: seller, refresh } = await useFetch<ISeller>(`/api/sellers/${code}`)
 
-const { navigateToAction } = useActions(refresh)
-
 // methods
-function openUpdate() {
-    navigateToAction({
-        name: 'update-seller',
+function openUpdate(seller: ISeller) {
+    dialog.push({
+        name: 'sellers-form',
         props: {
-            seller: seller.value
+            seller
+        },
+        listeners: {
+            onRefresh: refresh
         }
     })
 }
 
-function openRemove() {
-    navigateToAction({
-        name: 'remove-seller',
-        props: {
-            code: seller.value?.code
-        }
+function openRemove(seller: ISeller) {
+    dialog.confirmRemove({
+        name: 'sellers',
+        code: seller.code,
+        callback: refresh
     })
 }
 </script>

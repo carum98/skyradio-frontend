@@ -12,7 +12,6 @@ const toast = useToast()
 const dialog = useDialogs()
 
 const { page, search, data, refresh } = await useTableData<ISimProvider>('/api/sims-provider?per_page=20')
-const { navigateToAction } = useActions(refresh)
 
 // methods
 function openProfile(provider: ISimProvider) {
@@ -54,11 +53,10 @@ function openUpdate(provider: ISimProvider) {
 }
 
 function openRemove(provider: ISimProvider) {
-    navigateToAction({
-        name: 'remove-provider',
-        props: {
-            code: provider.code
-        }
+    dialog.confirmRemove({
+        name: 'providers',
+        code: provider.code,
+        callback: refresh
     })
 }
 </script>

@@ -12,7 +12,6 @@ const toast = useToast()
 const dialog = useDialogs()
 
 const { page, search, data, refresh } = await useTableData<ISeller>('/api/sellers?per_page=20')
-const { navigateToAction } = useActions(refresh)
 
 // methods
 function openProfile(seller: ISeller) {
@@ -54,11 +53,10 @@ function openUpdate(seller: ISeller) {
 }
 
 function openRemove(seller: ISeller) {
-    navigateToAction({
-        name: 'remove-seller',
-        props: {
-            code: seller.code
-        }
+    dialog.confirmRemove({
+        name: 'sellers',
+        code: seller.code,
+        callback: refresh
     })
 }
 </script>

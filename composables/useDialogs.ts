@@ -1,4 +1,17 @@
-import type { ProgrammaticallyProps } from '@utils/programmatically-component'
+import type { ProgrammaticallyOptions } from '@utils/programmatically-component'
+
+type Instances =
+    | 'apps'
+    | 'clients'
+    | 'radios'
+    | 'sims'
+    | 'consoles'
+    | 'licenses'
+    | 'modalities'
+    | 'models'
+    | 'providers'
+    | 'sellers'
+    | 'status'
 
 export type DialogNames = 
     // Apps
@@ -42,9 +55,15 @@ type DialogsOptions = {
     name: DialogNames
 } & ProgrammaticallyOptions
 
+type RemoveOptions = {
+    instance: Instances
+    name: string
+    path: string
+}
+
 export type PushOptions = Omit<DialogsOptions, 'component'>
 
-export const dialogs: DialogsOptions[] = [
+const dialogs: DialogsOptions[] = [
     {
         name: 'apps-form',
         component: () => import('@pages/apps/form.dialog.vue'),
@@ -208,6 +227,64 @@ export const dialogs: DialogsOptions[] = [
     },
 ]
 
+const options: RemoveOptions[] = [
+    {
+        instance: 'apps',
+        name: 'Aplicación',
+        path: '/api/apps/:code'
+    },
+    {
+        instance: 'clients',
+        name: 'Cliente',
+        path: '/api/clients/:code'
+    },
+    {
+        instance: 'radios',
+        name: 'Radio',
+        path: '/api/radios/:code'
+    },
+    {
+        instance: 'sims',
+        name: 'SIM',
+        path: '/api/sims/:code'
+    },
+    {
+        instance: 'consoles',
+        name: 'Consola',
+        path: '/api/consoles/:code'
+    },
+    {
+        instance: 'licenses',
+        name: 'Licencia',
+        path: '/api/licenses/:code'
+    },
+    {
+        instance: 'modalities',
+        name: 'Modalidad',
+        path: '/api/clients-modality/:code'
+    },
+    {
+        instance: 'models',
+        name: 'Modelo',
+        path: '/api/models/:code'
+    },
+    {
+        instance: 'providers',
+        name: 'Proveedor',
+        path: '/api/sims-provider/:code'
+    },
+    {
+        instance: 'sellers',
+        name: 'Vendedor',
+        path: '/api/sellers/:code'
+    },
+    {
+        instance: 'status',
+        name: 'Estado',
+        path: '/api/radios-status/:code'
+    }
+]
+
 export function useDialogs() {
     function push(options: PushOptions) {
         const { name } = options
@@ -239,7 +316,34 @@ export function useDialogs() {
         open({})
     }
 
+    function confirmRemove({ name, code, callback }: { name: Instances, code: string, callback: Function }) {
+        const option = options.find(option => option.instance === name)
+
+        if (!option) {
+            throw new Error('Invalid option')
+        }
+
+        const { open } = programmaticallyComponent({
+            component: import("@components/SkModal.vue"),
+            params: {
+                component: () => import('@views/delete-instance.vue'),
+                listeners: {
+                    onRefresh: callback
+                }
+            }
+        })
+
+        open({
+            props: {
+                name: option.name,
+                path: option.path,
+                code
+            }
+        })
+    }
+
     return {
         push,
+        confirmRemove
     }
 }

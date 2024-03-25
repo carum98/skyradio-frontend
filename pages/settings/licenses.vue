@@ -7,9 +7,9 @@ definePageMeta({
     name: 'licenses'
 })
 
-const { page, search, data, refresh } = await useTableData<ILicense>('/api/licenses?per_page=20')
 const dialog = useDialogs()
-const { navigateToAction } = useActions(refresh)
+
+const { page, search, data, refresh } = await useTableData<ILicense>('/api/licenses?per_page=20')
 
 function openCreate() {
     dialog.push({
@@ -33,11 +33,10 @@ function openUpdate(license: ILicense) {
 }
 
 function openRemove(license: ILicense) {
-    navigateToAction({
-        name: 'remove-license',
-        props: {
-            code: license.code
-        }
+    dialog.confirmRemove({
+        name: 'licenses',
+        code: license.code,
+        callback: refresh
     })
 }
 </script>

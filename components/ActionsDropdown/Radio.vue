@@ -5,6 +5,7 @@ const props = defineProps<{
 }>()
 
 const dialog = useDialogs()
+
 const { navigateToAction } = useActions(props.refresh)
 
 // data
@@ -105,9 +106,10 @@ let actions = [
     {
         ...ActionsStatic.DELETE,
         key: 'delete-radio',
-        action: () => navigateToAction({
-            name: 'remove-radio2',
-            props: { code: props.radio.code } 
+        action: () => dialog.confirmRemove({
+            name: 'radios',
+            code: props.radio.code,
+            callback: props.refresh
         })
     }
 ]

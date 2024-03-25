@@ -12,7 +12,6 @@ const toast = useToast()
 const dialog = useDialogs()
 
 const { page, search, data, refresh } = await useTableData<IModality>('/api/clients-modality?per_page=20')
-const { navigateToAction } = useActions(refresh)
 
 // methods
 function openProfile(modality: IModality) {
@@ -54,11 +53,10 @@ function openUpdate(modality: IModality) {
 }
 
 function openRemove(modality: IModality) {
-    navigateToAction({
-        name: 'remove-modality',
-        props: {
-            code: modality.code
-        }
+    dialog.confirmRemove({
+        name: 'modalities',
+        code: modality.code,
+        callback: refresh
     })
 }
 </script>

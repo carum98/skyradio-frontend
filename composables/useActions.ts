@@ -3,21 +3,11 @@ type ActionsName =
     | 'add-radios' 
     | 'remove-radio' 
     | 'add-client' 
-    | 'remove-radio2' 
-    | 'remove-client'
-    | 'remove-modality'
-    | 'remove-model'
-    | 'remove-status'
-    | 'remove-seller'
-    | 'remove-provider'
-    | 'remove-sim'
-    | 'remove-license'
     | 'add-sim'
     | 'swap-sim'
     | 'remove-sim2'
     | 'add-radio'
     | 'edit-status'
-    | 'remove-console'
 
 export function useActions(onRefresh: () => void) {
     const { open: openSwapRadio } = useModal({
@@ -107,13 +97,6 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
-    const remove = useModal({
-        component: () => import('@views/delete-instance.vue'),
-        listeners: {
-            onRefresh
-        }
-    })
-
     function navigateToAction({ name, props } : { name: ActionsName, props?: Record<string, any> }) {
         switch (name) {
             case 'swap-radio':
@@ -127,96 +110,6 @@ export function useActions(onRefresh: () => void) {
                 break
             case 'add-client':
                 openAddClient({ props })
-                break
-            case 'remove-radio2':
-                remove.open({
-                    props: {
-                        name: 'Radio',
-                        path: `/api/radios/${props?.code}`,
-                        ...props
-                    }
-                })
-                break
-            case 'remove-client':
-                remove.open({
-                    props: {
-                        name: 'Cliente',
-                        path: `/api/clients/${props?.code}`,
-                        ...props
-                    }
-                })
-                break
-            case 'remove-sim':
-                remove.open({
-                    props: {
-                        name: 'Sim',
-                        path: `/api/sims/${props?.code}`,
-                        ...props
-                    }
-                })
-                break
-            case 'remove-modality':
-                remove.open({
-                    props: {
-                        name: 'Modalidad',
-                        path: `/api/clients-modality/${props?.code}`,
-                        ...props
-                    }
-                })
-                break
-            case 'remove-model':
-                remove.open({
-                    props: {
-                        name: 'Model',
-                        path: `/api/radios-model/${props?.code}`,
-                        ...props
-                    }
-                })
-                break
-            case 'remove-status':
-                remove.open({
-                    props: {
-                        name: 'Estado',
-                        path: `/api/radios-status/${props?.code}`,
-                        ...props
-                    }
-                })
-                break
-            case 'remove-seller':
-                remove.open({
-                    props: {
-                        name: 'Vendedor',
-                        path: `/api/sellers/${props?.code}`,
-                        ...props
-                    }
-                })
-                break
-            case 'remove-license':
-                remove.open({
-                    props: {
-                        name: 'Licensia',
-                        path: `/api/licenses/${props?.code}`,
-                        ...props
-                    }
-                })
-                break
-            case 'remove-provider':
-                remove.open({
-                    props: {
-                        name: 'Proveedor',
-                        path: `/api/sims-provider/${props?.code}`,
-                        ...props
-                    }
-                })
-                break
-            case 'remove-console':
-                remove.open({
-                    props: {
-                        name: 'Consola',
-                        path: `/api/consoles/${props?.code}`,
-                        ...props
-                    }
-                })
                 break
             case 'add-sim':
                 openAddSim({ props })

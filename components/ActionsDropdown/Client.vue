@@ -52,9 +52,10 @@ function onUpdate() {
 }
 
 function onDelete() {
-    navigateToAction({
-        name: 'remove-client',
-        props: { code: props.client.code }
+    dialog.confirmRemove({
+        name: 'clients',
+        code: props.client.code,
+        callback: props.refresh
     })
 }
 
@@ -69,9 +70,10 @@ function onEnableConsole() {
 }
 
 function onDisableConsole() {
-    navigateToAction({
-        name: 'remove-console',
-        props: { code: props.client.console?.code }
+    dialog.confirmRemove({
+        name: 'consoles',
+        code: props.client.console?.code ?? '',
+        callback: props.refresh
     })
 }
 

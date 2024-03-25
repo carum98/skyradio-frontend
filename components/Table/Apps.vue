@@ -19,8 +19,7 @@ const columns = ref<SkTableColumn[]>([
     {
         title: 'Licencia',
         key: 'license',
-        width: 150,
-        align: 'center',
+        width: 200,
     },
     {
         title: 'Cliente',
@@ -61,14 +60,11 @@ function onUpdate(app: IApp) {
 }
 
 function onDelete(app: IApp) {
-    // dialog.confirm({
-    //     title: 'Eliminar aplicación',
-    //     message: `¿Estás seguro de eliminar la aplicación ${app.name}?`,
-    //     onConfirm: async () => {
-    //         await api.delete(`/apps/${app.code}`)
-    //         refresh()
-    //     }
-    // })
+    dialog.confirmRemove({
+        name: 'apps',
+        code: app.code,
+        callback: refresh
+    })
 }
 </script>
 
@@ -86,9 +82,9 @@ function onDelete(app: IApp) {
         </template>
 
         <template #cell(license)="{ value }">
-            <button class="sk-link">
+            <CopyValue :value="value?.key">
                 {{ value?.key }}
-            </button>
+            </CopyValue>
         </template>
 
         <template #cell(client)="{ value }">

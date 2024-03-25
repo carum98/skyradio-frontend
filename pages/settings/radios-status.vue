@@ -12,7 +12,6 @@ const toast = useToast()
 const dialog = useDialogs()
 
 const { page, search, data, refresh } = await useTableData<IRadioStatus>('/api/radios-status?per_page=20')
-const { navigateToAction } = useActions(refresh)
 
 // methods
 function openProfile(status: IRadioStatus) {
@@ -54,11 +53,10 @@ function openUpdate(status: IRadioStatus) {
 }
 
 function openRemove(status: IRadioStatus) {
-    navigateToAction({
-        name: 'remove-status',
-        props: {
-            code: status.code
-        }
+    dialog.confirmRemove({
+        name: 'status',
+        code: status.code,
+        callback: refresh
     })
 }
 </script>

@@ -38,12 +38,6 @@ const columns = ref<SkTableColumn[]>([
         show: !props.hideModality
     },
     {
-        title: 'Consola',
-        key: 'console',
-        width: 100,
-        align: 'center'
-    },
-    {
         title: 'Radios',
         altTitle: 'Cantidad de radios',
         key: 'radios_count',
@@ -56,6 +50,12 @@ const columns = ref<SkTableColumn[]>([
         key: 'apps_count',
         width: 100,
         align: 'center',
+    },
+    {
+        title: 'Consola',
+        key: 'console',
+        width: 100,
+        align: 'center'
     },
     {
         title: '',

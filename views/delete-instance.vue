@@ -14,7 +14,7 @@ const emits = defineEmits<{
 
 async function onConfirm() {
     try {
-        await $fetch(props.path.replace(/\/:\w+/, `/${props.code}`), {
+        await $fetch(props.path.replace(':code', props.code), {
             method: 'DELETE'
         })
 
