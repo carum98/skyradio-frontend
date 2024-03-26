@@ -38,15 +38,22 @@ const columns = ref<SkTableColumn[]>([
 ])
 
 const { page, search, data, refresh } = await useTableData<IApp>(props.path)
+const { navigateToAction } = useActions(refresh)
 
 function openCreate() {
-    dialog.push({
-        name: 'apps-form',
-        props: { client: props.client },
-        listeners: {
-            onRefresh: refresh
-        }
-    })
+    if (props.client) {
+        navigateToAction({
+            name: 'create-apps',
+            props: { client: props.client },
+        })
+    } else {
+        dialog.push({
+            name: 'apps-form',
+            listeners: {
+                onRefresh: refresh
+            }
+        })
+    }
 }
 
 function onUpdate(app: IApp) {

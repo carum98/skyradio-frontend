@@ -8,6 +8,7 @@ type ActionsName =
     | 'remove-sim2'
     | 'add-radio'
     | 'edit-status'
+    | 'create-apps'
 
 export function useActions(onRefresh: () => void) {
     const { open: openSwapRadio } = useModal({
@@ -97,6 +98,16 @@ export function useActions(onRefresh: () => void) {
         }
     })
 
+    const { open: openCreateApps } = useModal({
+        component: () => import('@views/create-apps.vue'),
+        rootProps: {
+            width: 600
+        },
+        listeners: {
+            onRefresh
+        }
+    })
+
     function navigateToAction({ name, props } : { name: ActionsName, props?: Record<string, any> }) {
         switch (name) {
             case 'swap-radio':
@@ -125,6 +136,9 @@ export function useActions(onRefresh: () => void) {
                 break
             case 'edit-status':
                 openEditStatus({ props })
+                break
+            case 'create-apps':
+                openCreateApps({ props })
                 break
         }
     }
