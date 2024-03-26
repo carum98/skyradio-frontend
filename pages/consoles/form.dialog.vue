@@ -27,6 +27,10 @@ const form = reactive(props.console
                 show-clear
                 v-model="form.license"
             />
+
+            <small v-if="form.license?.is_active" class="text-muted">
+                La licencia seleccionada se encuentra registrada en uso.
+            </small>
         </template>
     </ScaffoldForm>
 </template>

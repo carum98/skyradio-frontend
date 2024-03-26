@@ -25,6 +25,14 @@ const form = reactive(props.app
         path-update="/api/apps/:code"
     >
         <template #form="{ form }">
+            <template v-if="!client">
+                <label required>Cliente</label>
+                <SelectClient 
+                    show-clear
+                    v-model="form.client"
+                />
+            </template>
+
             <label required>Nombre</label>
             <input 
                 type="text" 
@@ -37,20 +45,15 @@ const form = reactive(props.app
                 v-model="form.name" 
             />
 
-            <label required>Licencia</label>
+            <label>Licencia</label>
             <SelectLicense
-                required
                 show-clear
                 v-model="form.license"
             />
 
-            <template v-if="!client">
-                <label required>Cliente</label>
-                <SelectClient 
-                    show-clear
-                    v-model="form.client"
-                />
-            </template>
+            <small v-if="form.license?.is_active" class="text-muted">
+                La licencia seleccionada se encuentra registrada en uso.
+            </small>
         </template>
     </ScaffoldForm>
 </template>

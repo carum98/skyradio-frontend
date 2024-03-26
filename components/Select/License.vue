@@ -29,6 +29,12 @@ async function onCreate(key: string) {
     >
         <template #option="{ item }">
             {{ item?.key }}
+
+            <span 
+                v-if="item?.is_active !== undefined"
+                class="badge-color" 
+                :style="{ backgroundColor: item?.is_active ? 'green' : 'red' }"
+            ></span>
         </template>
     </SkSelect>
 </template>
