@@ -10,11 +10,14 @@ export default function(event: ToggleEvent, position: 'top' | 'bottom' | 'left' 
             const anchorPosition = anchor.getBoundingClientRect()
 
             const overflowRight = anchorPosition.right + target.offsetWidth > window.innerWidth
+            const overflowLeft = anchorPosition.left - target.offsetWidth < 0
+            const overflowTop = anchorPosition.top - target.offsetHeight < 0
+            const overflowBottom = anchorPosition.bottom + target.offsetHeight > window.innerHeight
 
-            const anchorBottom = anchorPosition.bottom + window.pageYOffset
+            const anchorBottom = anchorPosition.bottom + (overflowBottom ? window.pageYOffset - target.offsetHeight + anchor.offsetHeight : 0)
             const anchorLeft = anchorPosition.left + (overflowRight ? window.pageXOffset - target.offsetWidth + anchor.offsetWidth : 0)
-            const anchorRight = anchorPosition.right + (overflowRight ? window.pageXOffset - target.offsetWidth + anchor.offsetWidth : 0)
-            const anchorTop = anchorPosition.top + window.pageYOffset
+            const anchorRight = anchorPosition.right + (overflowLeft ? window.pageXOffset - target.offsetWidth + anchor.offsetWidth : 0)
+            const anchorTop = anchorPosition.top + (overflowTop ? window.pageYOffset - target.offsetHeight + anchor.offsetHeight : 0)
 
             if (position === 'bottom') {
                 target.style.left = anchorLeft + 'px'
