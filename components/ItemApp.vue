@@ -14,13 +14,21 @@ defineEmits<{
             type="text"
             class="sk-input"
             placeholder="Nombre"
+            minlength="3"
+            maxlength="100"
+            autofocus
             v-model="app.name" 
         />
 
-        <SelectLicense
-            show-clear
-            v-model="app.license"
-        />
+        <div>
+            <SelectLicense
+                show-clear
+                v-model="app.license"
+            />
+            <small v-if="app.license?.is_active">
+                La licencia se encuentra en uso
+            </small>
+        </div>
 
         <button type="button" @click="$emit('remove', app)">
             <IconsTrashBin />
@@ -30,6 +38,6 @@ defineEmits<{
 
 <style scoped>
 .item-row {
-    grid-template-columns: 235px 1fr 35px;
+    grid-template-columns: 230px 1fr 35px;
 }
 </style>
