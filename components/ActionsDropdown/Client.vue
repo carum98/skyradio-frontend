@@ -77,7 +77,7 @@ function onDisableConsole() {
     })
 }
 
-const actions = [
+const actions = computed(() => [
     {
         key: 'change',
         ...ActionsStatic.CHANGE,
@@ -136,14 +136,14 @@ const actions = [
         action: onDelete,
         show: true
     }
-].filter(action => action.show)
+].filter(action => action.show))
 
-const dividers = [
-    (props.showLogs ?? false) ? actions.length - 5 : 0,
-    actions.length - 4,
-    actions.length - 3,
-    actions.length - 2
-]
+const dividers = computed(() => [
+    (props.showLogs ?? false) ? actions.value.length - 5 : 0,
+    actions.value.length - 4,
+    actions.value.length - 3,
+    actions.value.length - 2
+])
 </script>
 
 <template>

@@ -8,7 +8,7 @@ const dialog = useDialogs()
 
 const { navigateToAction } = useActions(props.refresh)
 
-let actions = [
+let actions = computed(() => [
     {
         ...ActionsStatic.ADD,
         key: 'add-sim',
@@ -63,11 +63,11 @@ let actions = [
         }),
         show: true
     }
-].filter(action => action.show)
+].filter(action => action.show))
 
-let dividers = [
-    actions.length - 2
-]
+let dividers = computed(() => [
+    actions.value.length - 2
+])
 </script>
 
 <template>

@@ -9,7 +9,7 @@ const dialog = useDialogs()
 const { navigateToAction } = useActions(props.refresh)
 
 // data
-let actionsClient = [
+let actionsClient = computed(() => [
     {
         ...ActionsStatic.ADD,
         key: 'add-client',
@@ -46,9 +46,9 @@ let actionsClient = [
         }),
         show: props.radio.client !== null
     },
-].filter(action => action.show)
+].filter(action => action.show))
 
-let actionsSim = [
+let actionsSim = computed(() => [
     {
         ...ActionsStatic.ADD,
         key: 'add-sim',
@@ -79,11 +79,11 @@ let actionsSim = [
         }),
         show: props.radio.sim !== null
     },
-].filter(action => action.show)
+].filter(action => action.show))
 
-let actions = [
-    ...actionsClient,
-    ...actionsSim,
+let actions = computed(() => [
+    ...actionsClient.value,
+    ...actionsSim.value,
     {
         ...ActionsStatic.CHANGE,
         icon: '<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2M9 9h6v6H9"/></svg>',
@@ -112,13 +112,13 @@ let actions = [
             callback: props.refresh
         })
     }
-]
+])
 
-const dividers = [
-    actionsClient.length,
-    actionsClient.length + actionsSim.length,
-    actions.length - 2
-]
+const dividers = computed(() => [
+    actionsClient.value.length,
+    actionsClient.value.length + actionsSim.value.length,
+    actions.value.length - 2
+])
 </script>
 
 <template>
