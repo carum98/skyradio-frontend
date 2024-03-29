@@ -3,24 +3,42 @@ useHead({
   title: 'Reportes',
 })
 
-const dialog = useDialogs()
+type IReport = {
+    key: string
+    title: string
+    description: string
+    action: Function
+}
 
-const reports = [
+const dialog = useDialogs()
+const toast = useToast()
+
+// data
+const reportKey = ref<string | null>(null)
+
+// computed
+const loading = computed(() => reportKey.value !== null)
+
+// Static
+const reports: IReport[] = [
     {
+        key: 'inventory',
         title: 'Inventario',
         description: 'Reporte de inventario, muestra un listado de los radios y sims disponibles en inventario',
-        action: () => dialog.push({
-            name: 'reports-inventory'
-        })
+        action: function () {
+            generate('/api/reports/inventory', this)
+        }
     },
     {
+        key: 'general',
         title: 'General',
         description: 'Reporte con toda la información de radios, sims y apps que estan activas en clientes',
-        action: () => dialog.push({
-            name: 'reports-general'
-        })
+        action: function () {
+            generate('/api/reports/general', this)
+        }
     },
     {
+        key: 'clients',
         title: 'Cliente',
         description: 'Reporte por cliente, muestra un listado los radios del cliente.',
         action: () => dialog.push({
@@ -28,6 +46,7 @@ const reports = [
         })
     },
     {
+        key: 'seller',
         title: 'Vendedor',
         description: 'Reporte por vendedor, muestra los clientes del vendedor.',
         action: () => dialog.push({
@@ -35,6 +54,7 @@ const reports = [
         })
     },
     {
+        key: 'model',
         title: 'Modelo',
         description: 'Reporte por modelo, muestra un listado de radios por modelo.',
         action: () => dialog.push({
@@ -42,17 +62,44 @@ const reports = [
         })
     },
     {
+        key: 'provider',
         title: 'Proveedores de SIMs',
         description: 'Reporte por proveedor de SIMs, listado de sims por proveedor.',
         action: () => dialog.push({
             name: 'reports-provider'
         })
     }
-] as {
-    title: string
-    description: string
-    action: Function
-}[]
+]
+
+// methods
+async function generate(path: string, report: IReport) {
+    try {
+        reportKey.value = report.key
+
+        const data = await $fetch(path, {
+            method: 'POST'
+        })
+
+        dowloadFile({
+            data,
+            name: `skyradio-report-${Date.now()}.xlsx`
+        })
+
+        toast.open({
+            title: 'Éxito',
+            message: 'Reporte generado correctamente',
+            type: 'success'
+        })
+    } catch (error) {
+        toast.open({
+            title: 'Error',
+            message: 'Ocurrió un error al generar el reporte',
+            type: 'error'
+        })
+    } finally {
+        reportKey.value = null
+    }
+}
 </script>
 
 <template>
@@ -63,9 +110,19 @@ const reports = [
                 <h2>{{ item.title }}</h2>
                 <p>{{ item.description }}</p>
 
-                <button @click="item.action">
-                    <IconsReport />
-                    Generar
+                <button 
+                    class="sk-button sk-button--icon" 
+                    @click="item.action.call(item)" 
+                    :disabled="loading"
+                >
+                    <template v-if="loading && reportKey === item.key">
+                        <IconsLoadingAnimated />
+                        Generando...
+                    </template>
+                    <template v-else>
+                        <IconsReport />
+                        Generar
+                    </template>
                 </button>
             </article>
         </section>
@@ -91,10 +148,6 @@ const reports = [
 
         & button {
             float: right;
-            background-color: var(--primary-color);
-            color: white;
-            display: flex;
-            align-items: center;
             gap: 5px;
             padding: 5px 10px;
             border-radius: 10px;

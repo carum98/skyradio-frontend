@@ -46,11 +46,9 @@ export type DialogNames =
     | 'status-profile'
     // Reports
     | 'reports-clients'
-    | 'reports-inventory'
     | 'reports-model'
     | 'reports-provider'
     | 'reports-seller'
-    | 'reports-general'
 
 type DialogsOptions = {
     name: DialogNames
@@ -199,13 +197,6 @@ const dialogs: DialogsOptions[] = [
         }
     },
     {
-        name: 'reports-inventory',
-        component: () => import('@pages/reports/inventory.dialog.vue'),
-        rootProps: {
-            width: 315
-        }
-    },
-    {
         name: 'reports-model',
         component: () => import('@pages/reports/model.dialog.vue'),
         rootProps: {
@@ -226,13 +217,6 @@ const dialogs: DialogsOptions[] = [
             width: 315
         }
     },
-    {
-        name: 'reports-general',
-        component: () => import('@pages/reports/general.dialog.vue'),
-        rootProps: {
-            width: 315
-        }
-    }
 ]
 
 const options: RemoveOptions[] = [
