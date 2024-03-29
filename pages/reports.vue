@@ -7,6 +7,20 @@ const dialog = useDialogs()
 
 const reports = [
     {
+        title: 'Inventario',
+        description: 'Reporte de inventario, muestra un listado de los radios y sims disponibles en inventario',
+        action: () => dialog.push({
+            name: 'reports-inventory'
+        })
+    },
+    {
+        title: 'General',
+        description: 'Reporte con toda la información de radios, sims y apps que estan activas en clientes',
+        action: () => dialog.push({
+            name: 'reports-general'
+        })
+    },
+    {
         title: 'Cliente',
         description: 'Reporte por cliente, muestra un listado los radios del cliente.',
         action: () => dialog.push({
@@ -32,13 +46,6 @@ const reports = [
         description: 'Reporte por proveedor de SIMs, listado de sims por proveedor.',
         action: () => dialog.push({
             name: 'reports-provider'
-        })
-    },
-    {
-        title: 'Inventario',
-        description: 'Reporte de inventario, muestra un listado de los radios en inventario.',
-        action: () => dialog.push({
-            name: 'reports-inventory'
         })
     }
 ] as {
