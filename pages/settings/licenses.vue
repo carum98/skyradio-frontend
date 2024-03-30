@@ -9,7 +9,8 @@ definePageMeta({
 
 const dialog = useDialogs()
 
-const { page, search, data, refresh } = await useTableData<ILicense>('/api/licenses?per_page=20')
+const per_page = useTablePerPage({ sm: 20, lg: 30 })
+const { page, search, data, refresh } = await useTableData<ILicense>(`/api/licenses?per_page=${per_page}`)
 
 function openCreate() {
     dialog.push({
