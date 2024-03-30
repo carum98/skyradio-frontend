@@ -54,6 +54,14 @@ function message(log: ILog) {
 
                 message = message.replace(match, a.outerHTML)
             }
+
+            if (key === 'app') {
+                const a = document.createElement('a')
+                a.href = `?name=apps-profile&code=${log.values.app?.code}`
+                a.innerText = log.values.app?.name ?? ''
+
+                message = message.replace(match, a.outerHTML)
+            }
         })
     }
 

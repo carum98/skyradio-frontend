@@ -1,4 +1,4 @@
-export function useLogs(name: 'clients' | 'radios' | 'sims') {
+export function useLogs(name: 'clients' | 'radios' | 'sims' | 'apps') {
 
     const slideover = useSlideover({
         component: () => import('@views/logs.vue'),

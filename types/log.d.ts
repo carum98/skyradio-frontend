@@ -19,5 +19,9 @@ interface ILog {
             code: string
             number: string
         } | null
+        app: {
+            code: string
+            name: string
+        } | null
     }
 }

@@ -30,6 +30,13 @@ const columns = ref<SkTableColumn[]>([
     },
     {
         title: '',
+        altTitle: 'Historial de cambios',
+        key: 'logs',
+        width: 65,
+        align: 'center',
+    },
+    {
+        title: '',
         altTitle: 'Acciones',
         key: 'actions',
         width: 65,
@@ -39,6 +46,7 @@ const columns = ref<SkTableColumn[]>([
 
 const { page, search, data, refresh } = await useTableData<IApp>(props.path)
 const { navigateToAction } = useActions(refresh)
+const { open: openLogs } = useLogs('apps')
 
 function openCreate() {
     if (props.client) {
@@ -104,6 +112,12 @@ function onDelete(app: IApp) {
                 <span class="badge-color" :style="{ backgroundColor: value.color }"></span>
                 {{ value.name }}
             </NuxtLink>
+        </template>
+
+        <template #cell(logs)="{ item }">
+            <button class="sk-dropdown__button" aria-label="logs" @click.stop="openLogs(item.code)">
+                <IconsLogs />
+            </button>
         </template>
 
         <template #cell(actions)="{ item }">
