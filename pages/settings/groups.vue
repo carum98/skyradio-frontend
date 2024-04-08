@@ -17,8 +17,11 @@ const { page, data, search } = await useTableData<IGroup>('/api/groups')
         :table="data"
         v-model:search="search"
         v-model:page="page"
-        hover
         @onPage="page = $event"
-    ></SkTable>
+    >
+        <template #cell="{ item }">
+            {{ item.name }}
+        </template>
+    </SkTable>
 </main>
 </template>
