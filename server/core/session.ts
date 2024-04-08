@@ -5,6 +5,7 @@ import * as h3 from 'h3'
 const config = {
     name: 'skyradio',
     password: 'abe312002202557be2e39a6f20783198fd1225206ddce8170c31594c11f8d76a',
+    maxAge: 32400
 } as SessionConfig
 
 export const getSession = async (event: H3Event): Promise<SessionData> => {
