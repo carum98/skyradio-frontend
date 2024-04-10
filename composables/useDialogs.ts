@@ -49,6 +49,8 @@ export type DialogNames =
     | 'reports-model'
     | 'reports-provider'
     | 'reports-seller'
+    // Users
+    | 'users-form'
 
 type DialogsOptions = {
     name: DialogNames
@@ -217,6 +219,13 @@ const dialogs: DialogsOptions[] = [
             width: 315
         }
     },
+    {
+        name: 'users-form',
+        component: () => import('@pages/users/form.dialog.vue'),
+        rootProps: {
+            width: 300
+        }
+    }
 ]
 
 const options: RemoveOptions[] = [
