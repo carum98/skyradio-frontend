@@ -10,6 +10,7 @@ const per_page = useTablePerPage({ sm: 8, lg: 11 })
     <main>
         <TableApps
             :path="`/api/apps?per_page=${per_page}`"
+            enable-table-actions
         ></TableApps>
     </main>
 </template>

@@ -6,8 +6,10 @@ const dialog = useDialogs()
 const props = withDefaults(defineProps<{
     path: string
     hideClient?: boolean
+    enableTableActions?: boolean
     client?: IClient | null
 }>(), {
+    enableTableActions: false,
     hideClient: false,
 })
 
@@ -44,7 +46,7 @@ const columns = ref<SkTableColumn[]>([
     }
 ])
 
-const { page, search, data, refresh } = await useTableData<IApp>(props.path)
+const { page, search, data, refresh, query } = await useTableData<IApp>(props.path)
 const { navigateToAction } = useActions(refresh)
 const { open: openLogs } = useLogs('apps')
 
@@ -94,6 +96,13 @@ function onDelete(app: IApp) {
             <button class="add-button" aria-label="create client" @click="openCreate">
                 <IconsAdd />
             </button>
+        </template>
+
+        <template v-if="enableTableActions" #actions>
+            <TableActionsApps
+                :columns="columns"
+                @onApplied="query = $event"
+            />
         </template>
 
         <template #cell(license)="{ value }">
