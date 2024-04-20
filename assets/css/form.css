@@ -1,5 +1,5 @@
 .sk-form {
-    > input, > .sk-select {
+    > input, > .sk-select, > fieldset {
         margin-bottom: 15px;
     }
 
