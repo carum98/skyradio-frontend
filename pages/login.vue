@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { FetchError } from 'ofetch'
+
+const toast = useToast()
+
 useHead({
     bodyAttrs: {
         class: 'login-page'
@@ -11,21 +15,28 @@ definePageMeta({
 
 const router = useRouter()
 
-const form = reactive({
-    email: '',
-    password: ''
-})
-
 async function onSubmit(e: Event){
-    e.preventDefault()
+    try {
+        const formData = new FormData(e.target as HTMLFormElement)
+        const params = Object.fromEntries(formData)
 
-    const data = await useFetch('/api/login', {
-        method: 'POST',
-        body: form
-    })
-    
-    // Redirect to dashboard
-    router.push('/')
+        await $fetch('/api/login', {
+            method: 'POST',
+            body: params
+        })
+
+        router.push('/')
+    } catch (data) {
+        let error = data as FetchError
+
+        toast.open({
+            title: 'Error!!',
+            type: 'error',
+            message: error.statusCode === 400 
+                ? 'Correo o contraseña incorrectos'
+                : 'Error al iniciar sesión',
+        })
+    }
 }
 </script>
 
@@ -44,8 +55,8 @@ async function onSubmit(e: Event){
         <input 
             class="sk-input"
             type="email" 
+            name="email"
             placeholder="Correo" 
-            v-model="form.email"
         />
         <label>
             Contraseña
@@ -53,8 +64,8 @@ async function onSubmit(e: Event){
         <input 
             class="sk-input"
             type="password"
+            name="password"
             placeholder="Contraseña" 
-            v-model="form.password" 
         />
         <button type="submit" class="sk-button block">
             Iniciar sesión
