@@ -54,6 +54,14 @@ function openUpdate(user: IUser) {
         }
     })
 }
+
+function openRemove(user: IUser) {
+    dialog.confirmRemove({
+        name: 'users',
+        code: user.code,
+        callback: refresh
+    })
+}
 </script>
 
 <template>
@@ -88,6 +96,11 @@ function openUpdate(user: IUser) {
                         key: 'edit',
                         ...ActionsStatic.UPDATE,
                         action: () => openUpdate(item)
+                    },
+                    {
+                        key: 'delete',
+                        ...ActionsStatic.DELETE,
+                        action: () => openRemove(item)
                     }
                 ]"
             ></SkDropdown>

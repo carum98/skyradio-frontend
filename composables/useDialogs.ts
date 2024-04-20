@@ -12,6 +12,7 @@ type Instances =
     | 'providers'
     | 'sellers'
     | 'status'
+    | 'users'
 
 export type DialogNames = 
     // Apps
@@ -283,6 +284,11 @@ const options: RemoveOptions[] = [
         instance: 'status',
         name: 'Estado',
         path: '/api/radios-status/:code'
+    },
+    {
+        instance: 'users',
+        name: 'Usuario',
+        path: '/api/users/:code'
     }
 ]
 
