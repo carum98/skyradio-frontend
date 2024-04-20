@@ -1,17 +1,18 @@
 import { SkFormData } from './form-data'
+import { getRoleByValue } from './roles.static'
 
 export class FormDataUser extends SkFormData {
     constructor (
         public name: string,
         public email: string,
         public password: string | null,
-        public role: string,
+        public role: IRole,
     ) {
         super()
     }
 
     static create() {
-        return new FormDataUser('', '', null, 'user')
+        return new FormDataUser('', '', null, getRoleByValue('user'))
     }
 
     static update(params: IUser) {
@@ -19,7 +20,7 @@ export class FormDataUser extends SkFormData {
             params.name,
             params.email,
             null,
-            params.role,
+            getRoleByValue(params.role),
         )
 
         form.code = params.code
@@ -32,7 +33,7 @@ export class FormDataUser extends SkFormData {
             name: this.name || undefined,
             email: this.email || undefined,
             password: this.password || undefined,
-            role: this.role || undefined,
+            user_role: this.role?.value || undefined,
         }
     }
 }

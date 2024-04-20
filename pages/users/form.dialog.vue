@@ -10,6 +10,8 @@ const form = reactive(props.user
     ? FormDataUser.update(props.user) 
     : FormDataUser.create()
 ) as FormDataUser
+
+const isEdit = !!props.user
 </script>
 
 <template>
@@ -47,7 +49,8 @@ const form = reactive(props.user
                 type="password" 
                 class="sk-input"
                 placeholder="Contraseña"
-                required
+                :required="!isEdit"
+                minlength="6"
                 autocomplete="new-password"
                 v-model="form.password"
             />
@@ -55,7 +58,7 @@ const form = reactive(props.user
             <label>Rol</label>
             <SelectRoles 
                 required 
-                @input="form.role = $event.value"
+                v-model="form.role"
             ></SelectRoles> 
         </template>
     </ScaffoldForm>

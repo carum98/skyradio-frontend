@@ -76,6 +76,10 @@ function openUpdate(user: IUser) {
             </span>
         </template>
 
+        <template #cell(role)="{ value }">
+            {{ getRoleByValue(value).name }}
+        </template>
+
         <template #cell(actions)="{ item }">
             <SkDropdown 
                 class="ml-auto"

@@ -2,18 +2,9 @@
 import type { SkSelectProps } from '../SkSelect/sk-select'
 defineProps<Pick<SkSelectProps<IModality>, 'required'>>()
 
-interface IRole {
-    name: string
-    value: string
-}
-
-const items = [
-    { name: 'Administrador', value: 'admin' },
-    { name: 'Usuario', value: 'user' },
-] as IRole[]
-
 const search = ref('')
 const value = defineModel<IRole | null>() 
+const items = Roles
 </script>
 
 <template>
