@@ -31,6 +31,11 @@ const form = reactive(props.seller
                 maxlength="20"
                 v-model="form.name" 
             />
+
+            <label>Vendedor</label>
+            <SelectUsers
+                v-model="form.user"
+            ></SelectUsers>
         </template>
     </ScaffoldForm>
 </template>

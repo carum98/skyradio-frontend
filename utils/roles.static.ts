@@ -1,5 +1,7 @@
 export const Roles = [
     { name: 'Administrador', value: 'admin' },
+    { name: 'Invitado', value: 'guest' },
+    { name: 'Vendedor', value: 'seller' },
     { name: 'Usuario', value: 'user' },
 ] as IRole[]
 

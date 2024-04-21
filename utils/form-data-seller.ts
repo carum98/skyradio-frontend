@@ -2,10 +2,12 @@ import { SkFormData } from "./form-data"
 
 export class FormDataSeller extends SkFormData {
     public name: string
+    public user: IUser | undefined
 
-    constructor(name: string) {
+    constructor(name: string, user?: IUser) {
         super()
         this.name = name
+        this.user = user
     }
 
     static create() {
@@ -13,7 +15,7 @@ export class FormDataSeller extends SkFormData {
     }
 
     static update(params: ISeller) {
-        const form = new FormDataSeller(params.name)
+        const form = new FormDataSeller(params.name, params.user)
 
         form.code = params.code
 
@@ -23,6 +25,7 @@ export class FormDataSeller extends SkFormData {
     toParams() {
         return {
             name: this.name || undefined,
+            user_code: this.user?.code || undefined,
         }
     }
 }
