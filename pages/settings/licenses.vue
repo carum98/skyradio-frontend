@@ -4,7 +4,9 @@ useHead({
 })
 
 definePageMeta({
-    name: 'licenses'
+    name: 'licenses',
+    middleware: ['roles'],
+    roles: ['admin', 'user'],
 })
 
 const dialog = useDialogs()

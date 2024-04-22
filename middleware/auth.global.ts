@@ -3,11 +3,13 @@ import { getSession } from "~/server/core/session"
 export default defineNuxtRouteMiddleware(async (ctx) => {
     if (process.client) return
 
-    const { name } = ctx
-
     // get session from context
     const event = useRequestEvent()
+    if (!event) return
+
     const session = await getSession(event)
+
+    const { name } = ctx
 
     // redirect to /login if session is not set
     if (!session?.auth && name !== 'login') {

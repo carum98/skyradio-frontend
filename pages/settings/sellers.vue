@@ -4,7 +4,9 @@ useHead({
 })
 
 definePageMeta({
-    name: 'sellers'
+    name: 'sellers',
+    middleware: ['roles'],
+    roles: ['admin', 'user'],
 })
 
 const user = useUser()

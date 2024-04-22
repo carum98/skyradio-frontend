@@ -4,7 +4,9 @@ useHead({
 })
 
 definePageMeta({
-    name: 'groups'
+    name: 'groups',
+    middleware: ['roles'],
+    roles: ['admin', 'user'],
 })
 
 const { page, data, search } = await useTableData<IGroup>('/api/groups')

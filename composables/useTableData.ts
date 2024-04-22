@@ -25,8 +25,6 @@ export async function useTableData<T>(path: string) {
         }
     }
 
-    console.log(key)
-
     // computed
     const searchPurified = computed(() => search.value || undefined)
     const queryParams = computed(() => {

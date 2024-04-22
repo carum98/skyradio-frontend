@@ -4,7 +4,9 @@ useHead({
 })
 
 definePageMeta({
-    name: 'radios-model'
+    name: 'radios-model',
+    middleware: ['roles'],
+    roles: ['admin', 'user'],
 })
 
 const user = useUser()

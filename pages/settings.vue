@@ -1,4 +1,9 @@
 <script setup lang="ts">
+definePageMeta({
+    middleware: ['roles'],
+    roles: ['admin', 'user'],
+})
+
 const user = useUser()
 </script>
 

@@ -4,7 +4,9 @@ useHead({
 })
 
 definePageMeta({
-    name: 'sims-provider'
+    name: 'sims-provider',
+    middleware: ['roles'],
+    roles: ['admin', 'user'],
 })
 
 const user = useUser()

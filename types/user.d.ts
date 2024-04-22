@@ -2,7 +2,7 @@ interface IUser {
     code: string 
     email: string
     name: string
-    role: 'admin' | 'user'
+    role: Role
     group: {
         id: number
         name: string
