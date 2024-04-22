@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
+const dialog = useDialogs()
+const { isAdmin, isUser } = useRole()
+
 const props = withDefaults(defineProps<{
     path: string
     enableTableActions?: boolean
@@ -53,16 +56,19 @@ const columns = ref<SkTableColumn[]>([
     {
         title: '',
         altTitle: 'Acciones',
+        show: isAdmin || isUser,
         key: 'actions',
         width: 65,
         align: 'center',
     }
 ])
 
-const dialog = useDialogs()
-
+// data
 const { page, search, data, refresh, query } = await useTableData<ISim>(props.path)
 const { open: openLogs } = useLogs('sims')
+
+const showCreate = (isAdmin || isUser) && props.enableCreate
+const showTableActions = (isAdmin || isUser) && props.enableTableActions
 
 // methods
 function openProfile(sim: ISim) {
@@ -108,7 +114,7 @@ function openImportSims() {
         hover
         @onRowClick="openProfile"
     >
-        <template v-if="enableCreate" #toolbar>
+        <template v-if="showCreate" #toolbar>
             <button class="add-button" aria-label="create sim" @click="openCreate">
                 <IconsAdd />
             </button>
@@ -118,12 +124,12 @@ function openImportSims() {
             </button>
         </template>
 
-        <template v-if="enableTableActions" #actions>
+        <template v-if="showTableActions" #actions>
             <TableActionsSims 
                 :columns="columns"
                 :hide-stats-button="hideStatsButton"
                 @onApplied="query = $event"
-            />
+            ></TableActionsSims>
         </template>
 
         <template #cell(number)="{ value }">

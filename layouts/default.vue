@@ -6,6 +6,7 @@ useHead({
 })
 
 const title = ref('')
+const { isAdmin, isUser } = useRole()
 
 onMounted(() => {
     const element = document.querySelector('title') as HTMLTitleElement
@@ -67,7 +68,11 @@ onMounted(() => {
                 Reportes
             </NuxtLink>
 
-            <NuxtLink :to="{ name: 'settings' }" aria-label="settings">
+            <NuxtLink 
+                v-if="isAdmin || isUser" 
+                :to="{ name: 'settings' }" 
+                aria-label="settings"
+            >
                 <span>
                     <IconsSettings />
                 </span>

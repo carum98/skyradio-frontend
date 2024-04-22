@@ -4,7 +4,7 @@ defineProps<Pick<SkSelectProps<IModality>, 'required'>>()
 
 const search = ref('')
 const value = defineModel<IRole | null>() 
-const items = Role
+const items = Roles
 </script>
 
 <template>

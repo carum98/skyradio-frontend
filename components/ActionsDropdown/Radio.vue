@@ -5,6 +5,7 @@ const props = defineProps<{
 }>()
 
 const dialog = useDialogs()
+const { isAdmin, isUser } = useRole()
 
 const { navigateToAction } = useActions(props.refresh)
 
@@ -20,7 +21,7 @@ let actionsClient = computed(() => [
                 client: props.radio.client
             }
         }),
-        show: props.radio.client === null,
+        show: (isAdmin || isUser) && props.radio.client === null,
     },
     {
         ...ActionsStatic.CHANGE,
@@ -32,7 +33,7 @@ let actionsClient = computed(() => [
                 client: props.radio.client
             }
         }),
-        show: props.radio.client !== null,
+        show: (isAdmin || isUser) && props.radio.client !== null,
     },
     {
         ...ActionsStatic.REMOVE,
@@ -44,9 +45,9 @@ let actionsClient = computed(() => [
                 client: props.radio.client
             }
         }),
-        show: props.radio.client !== null
+        show: (isAdmin || isUser) && props.radio.client !== null
     },
-].filter(action => action.show))
+])
 
 let actionsSim = computed(() => [
     {
@@ -57,7 +58,7 @@ let actionsSim = computed(() => [
             name: 'add-sim',
             props: { radio: props.radio }
         }),
-        show: props.radio.sim === null
+        show: (isAdmin || isUser) && props.radio.sim === null
     },
     {
         ...ActionsStatic.CHANGE,
@@ -67,7 +68,7 @@ let actionsSim = computed(() => [
             name: 'swap-sim',
             props: { radio: props.radio, simOld: props.radio.sim }
         }),
-        show: props.radio.sim !== null
+        show: (isAdmin || isUser) && props.radio.sim !== null
     },
     {
         ...ActionsStatic.REMOVE,
@@ -77,9 +78,9 @@ let actionsSim = computed(() => [
             name: 'remove-sim2',
             props: { radio: props.radio }
         }),
-        show: props.radio.sim !== null
+        show: (isAdmin || isUser) && props.radio.sim !== null
     },
-].filter(action => action.show))
+])
 
 let actions = computed(() => [
     ...actionsClient.value,
@@ -93,6 +94,7 @@ let actions = computed(() => [
             name: 'edit-status',
             props: { radio: props.radio }
         }),
+        show: isAdmin || isUser
     },
     {
         ...ActionsStatic.UPDATE,
@@ -101,7 +103,8 @@ let actions = computed(() => [
             name: 'radios-form',
             props: { radio: props.radio },
             listeners: { onRefresh: props.refresh }
-        })
+        }),
+        show: isAdmin || isUser
     },
     {
         ...ActionsStatic.DELETE,
@@ -110,9 +113,10 @@ let actions = computed(() => [
             name: 'radios',
             code: props.radio.code,
             callback: props.refresh
-        })
+        }),
+        show: isAdmin || isUser
     }
-])
+].filter(action => action.show))
 
 const dividers = computed(() => [
     actionsClient.value.length,
@@ -125,5 +129,5 @@ const dividers = computed(() => [
     <SkDropdown 
         :dividers="dividers"
         :options="actions" 
-    />
+    ></SkDropdown>
 </template>

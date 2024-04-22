@@ -9,9 +9,8 @@ definePageMeta({
     roles: ['admin', 'user'],
 })
 
-const user = useUser()
-const toast = useToast()
 const dialog = useDialogs()
+const { isAdmin } = useRole()
 
 const { page, search, data, refresh } = await useTableData<ISeller>('/api/sellers?per_page=20')
 
@@ -26,20 +25,12 @@ function openProfile(seller: ISeller) {
 }
 
 function openCreate() {
-    if (user.value?.role === 'admin') {
-        dialog.push({
-            name: 'sellers-form',
-            listeners: {
-                onRefresh: refresh
-            }
-        })
-    } else {
-        toast.open({
-            title: 'No tienes permisos',
-            message: 'La creación de vendedores solo está permitida para usuarios administradores',
-            type: 'warning'
-        })
-    }
+    dialog.push({
+        name: 'sellers-form',
+        listeners: {
+            onRefresh: refresh
+        }
+    })
 }
 
 function openUpdate(seller: ISeller) {
@@ -73,7 +64,7 @@ function openRemove(seller: ISeller) {
         hover
         @onRowClick="openProfile"
     >
-        <template #toolbar>
+        <template v-if="isAdmin" #toolbar>
             <button class="add-button" aria-label="create seller" @click="openCreate">
                 <IconsAdd />
             </button>
@@ -83,6 +74,7 @@ function openRemove(seller: ISeller) {
             {{ item.name }}
 
             <SkDropdown 
+                v-if="isAdmin"
                 class="ml-auto"
                 :options="[
                     {

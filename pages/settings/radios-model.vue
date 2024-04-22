@@ -9,9 +9,8 @@ definePageMeta({
     roles: ['admin', 'user'],
 })
 
-const user = useUser()
-const toast = useToast()
 const dialog = useDialogs()
+const { isAdmin } = useRole()
 
 const { page, search, data, refresh } = await useTableData<IRadioModel>('/api/radios-model?per_page=20')
 
@@ -26,20 +25,12 @@ function openProfile(model: IRadioModel) {
 }
 
 function openCreate() {
-    if (user.value?.role === 'admin') {
-        dialog.push({
-            name: 'models-form',
-            listeners: {
-                onRefresh: refresh
-            }
-        })
-    } else {
-        toast.open({
-            title: 'No tienes permisos',
-            message: 'La creación de modelos solo está permitida para usuarios administradores',
-            type: 'warning'
-        })
-    }
+    dialog.push({
+        name: 'models-form',
+        listeners: {
+            onRefresh: refresh
+        }
+    })
 }
 
 function openUpdate(model: IRadioModel) {
@@ -73,7 +64,7 @@ function openRemove(model: IRadioModel) {
         hover
         @onRowClick="openProfile"
     >
-        <template #toolbar>
+        <template v-if="isAdmin" #toolbar>
             <button class="add-button" aria-label="create model" @click="openCreate">
                 <IconsAdd />
             </button>
@@ -85,6 +76,7 @@ function openRemove(model: IRadioModel) {
             {{ item.name }}
 
             <SkDropdown 
+                v-if="isAdmin"
                 class="ml-auto"
                 :options="[
                     {

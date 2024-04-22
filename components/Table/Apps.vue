@@ -2,6 +2,7 @@
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
 const dialog = useDialogs()
+const { isAdmin, isUser } = useRole()
 
 const props = withDefaults(defineProps<{
     path: string
@@ -40,6 +41,7 @@ const columns = ref<SkTableColumn[]>([
     {
         title: '',
         altTitle: 'Acciones',
+        show: isAdmin || isUser,
         key: 'actions',
         width: 65,
         align: 'center',
@@ -83,6 +85,9 @@ function onDelete(app: IApp) {
         callback: refresh
     })
 }
+
+const showCreate = isAdmin || isUser
+const showTableActions = (isAdmin || isUser) && props.enableTableActions
 </script>
 
 <template>
@@ -92,17 +97,17 @@ function onDelete(app: IApp) {
         v-model:search="search"
         v-model:page="page"
     >
-        <template #toolbar>
+        <template v-if="showCreate" #toolbar>
             <button class="add-button" aria-label="create client" @click="openCreate">
                 <IconsAdd />
             </button>
         </template>
 
-        <template v-if="enableTableActions" #actions>
+        <template v-if="showTableActions" #actions>
             <TableActionsApps
                 :columns="columns"
                 @onApplied="query = $event"
-            />
+            ></TableActionsApps>
         </template>
 
         <template #cell(license)="{ value }">

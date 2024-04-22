@@ -9,6 +9,7 @@ const listType = ref('radios')
 
 const route = useRoute()
 const dialog = useDialogs()
+const { isAdmin, isUser } = useRole()
 
 const code = route.params.code as string
 
@@ -128,7 +129,7 @@ function updateConsole() {
             hide-stats-button
             @refresh="refreshStats"
         >
-            <template #actions="{ openSwap, openRemove, openAdd, hasData }">
+            <template v-if="isAdmin || isUser" #actions="{ openSwap, openRemove, openAdd, hasData }">
                 <div class="table-actions">
                 <button 
                     v-sk-tooltip="ActionsStatic.CHANGE.name"

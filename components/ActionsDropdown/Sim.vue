@@ -5,6 +5,7 @@ const props = defineProps<{
 }>()
 
 const dialog = useDialogs()
+const { isAdmin, isUser } = useRole()
 
 const { navigateToAction } = useActions(props.refresh)
 
@@ -17,7 +18,7 @@ let actions = computed(() => [
             name: 'add-radio',
             props: { sim: props.sim }
         }),
-        show: props.sim.radio === null
+        show: (isAdmin || isUser) && props.sim.radio === null
     },
     {
         ...ActionsStatic.CHANGE,
@@ -27,7 +28,7 @@ let actions = computed(() => [
             name: 'swap-sim',
             props: { radio: props.sim.radio, simOld: props.sim }
         }),
-        show: props.sim.radio !== null
+        show: (isAdmin || isUser) && props.sim.radio !== null
     },
     {
         ...ActionsStatic.REMOVE,
@@ -37,7 +38,7 @@ let actions = computed(() => [
             name: 'remove-sim2',
             props: { sim: props.sim }
         }),
-        show: props.sim.radio !== null
+        show: (isAdmin || isUser) && props.sim.radio !== null
     },
     {
         ...ActionsStatic.UPDATE,
@@ -51,7 +52,7 @@ let actions = computed(() => [
                 onRefresh: props.refresh
             }
         }),
-        show: true
+        show: isAdmin || isUser
     },
     {
         ...ActionsStatic.DELETE,
@@ -61,9 +62,9 @@ let actions = computed(() => [
             code: props.sim.code,
             callback: props.refresh
         }),
-        show: true
+        show: isAdmin || isUser
     }
-].filter(action => action.show))
+])
 
 let dividers = computed(() => [
     actions.value.length - 2
@@ -74,5 +75,5 @@ let dividers = computed(() => [
     <SkDropdown 
         :dividers="dividers"
         :options="actions" 
-    />
+    ></SkDropdown>
 </template>

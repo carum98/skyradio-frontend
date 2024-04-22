@@ -4,7 +4,7 @@ definePageMeta({
     roles: ['admin', 'user'],
 })
 
-const user = useUser()
+const { isAdmin } = useRole()
 </script>
 
 <template>
@@ -36,7 +36,7 @@ const user = useUser()
                 Licencias
             </NuxtLink>
 
-            <template v-if="user?.role === 'admin'">
+            <template v-if="isAdmin">
                 <p>Admin</p>
                 <NuxtLink :to="{ name: 'users' }">
                     Usuarios

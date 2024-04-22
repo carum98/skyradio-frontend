@@ -9,9 +9,8 @@ definePageMeta({
     roles: ['admin', 'user'],
 })
 
-const user = useUser()
-const toast = useToast()
 const dialog = useDialogs()
+const { isAdmin } = useRole()
 
 const { page, search, data, refresh } = await useTableData<IRadioStatus>('/api/radios-status?per_page=20')
 
@@ -26,20 +25,12 @@ function openProfile(status: IRadioStatus) {
 }
 
 function openCreate() {
-    if (user.value?.role === 'admin') {
-        dialog.push({
-            name: 'status-form',
-            listeners: {
-                onRefresh: refresh
-            }
-        })
-    } else {
-        toast.open({
-            title: 'No tienes permisos',
-            message: 'La creación de estados solo está permitida para usuarios administradores',
-            type: 'warning'
-        })
-    }
+    dialog.push({
+        name: 'status-form',
+        listeners: {
+            onRefresh: refresh
+        }
+    })
 }
 
 function openUpdate(status: IRadioStatus) {
@@ -73,7 +64,7 @@ function openRemove(status: IRadioStatus) {
         hover
         @onRowClick="openProfile"
     >
-        <template #toolbar>
+        <template v-if="isAdmin" #toolbar>
             <button class="add-button" aria-label="create status" @click="openCreate">
                 <IconsAdd />
             </button>
@@ -85,6 +76,7 @@ function openRemove(status: IRadioStatus) {
             {{ item.name }}
 
             <SkDropdown 
+                v-if="isAdmin"
                 class="ml-auto"
                 :options="[
                     {

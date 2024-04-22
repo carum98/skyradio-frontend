@@ -45,7 +45,7 @@
             background-color: #aac5fc;
         }
 
-        &:last-of-type {
+        &[aria-label="settings"] {
             margin-top: auto;
         }
     }

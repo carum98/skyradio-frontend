@@ -10,6 +10,7 @@ definePageMeta({
 })
 
 const dialog = useDialogs()
+const { isAdmin } = useRole()
 
 const per_page = useTablePerPage({ sm: 20, lg: 30 })
 const { page, search, data, refresh } = await useTableData<ILicense>(`/api/licenses?per_page=${per_page}`)
@@ -53,7 +54,7 @@ function openRemove(license: ILicense) {
             v-model:page="page"
             hover
         >
-            <template #toolbar>
+            <template v-if="isAdmin" #toolbar>
                 <button class="add-button" aria-label="create seller" @click="openCreate">
                     <IconsAdd />
                 </button>
@@ -65,6 +66,7 @@ function openRemove(license: ILicense) {
                 <span class="badge-color" :style="{ backgroundColor: item.is_active ? 'green' : 'red' }"></span>
     
                 <SkDropdown 
+                    v-if="isAdmin"
                     class="ml-auto"
                     :options="[
                         {

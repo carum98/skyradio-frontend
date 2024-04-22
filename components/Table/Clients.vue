@@ -2,6 +2,7 @@
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
 const dialog = useDialogs()
+const { isAdmin, isUser, isSeller } = useRole()
 
 const props = withDefaults(defineProps<{
     path: string
@@ -28,7 +29,7 @@ const columns = ref<SkTableColumn[]>([
         key: 'seller',
         width: 200,
         align: 'center',
-        show: !props.hideSeller
+        show: !props.hideSeller && !isSeller
     },
     {
         title: 'Modalidad',
@@ -94,6 +95,9 @@ function openCreateClient() {
         }
     })
 }
+
+const showCreate = (isAdmin || isUser) && props.enableCreate
+const showTableActions = (isAdmin || isUser) && props.enableTableActions
 </script>
 
 <template>
@@ -105,18 +109,18 @@ function openCreateClient() {
         hover
         @onRowClick="openProfile"
     >
-        <template v-if="enableCreate" #toolbar>
+        <template v-if="showCreate" #toolbar>
             <button class="add-button" aria-label="create client" @click="openCreateClient">
                 <IconsAdd />
             </button>
         </template>
 
-        <template v-if="enableTableActions" #actions>
+        <template v-if="showTableActions" #actions>
             <TableActionsClient
                 :columns="columns"
                 :hide-stats-button="hideStatsButton"
                 @onApplied="query = $event"
-            />
+            ></TableActionsClient>
         </template>
 
         <template #cell(name)="{ value, item }">

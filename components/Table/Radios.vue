@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { SkTableColumn } from '@components/SkTable/sk-table'
 
+const dialog = useDialogs()
+const { isAdmin, isUser } = useRole()
+
 const props = withDefaults(defineProps<{
     path: string
     enableTableActions?: boolean
@@ -86,6 +89,7 @@ const columns = ref<SkTableColumn[]>([
     {
         title: '',
         altTitle: 'Acciones',
+        show: isAdmin || isUser,
         key: 'actions',
         width: 65,
         align: 'center',
@@ -97,7 +101,8 @@ const { page, data, search, refresh, query } = await useTableData<IRadio>(props.
 const { navigateToAction } = useActions(refreshList)
 const { open: openLogs } = useLogs('radios')
 
-const dialog = useDialogs()
+const showCreate = (isAdmin || isUser) && props.enableCreate
+const showTableActions = (isAdmin || isUser) && props.enableTableActions
 
 // methods
 function refreshList() {
@@ -177,7 +182,7 @@ function openAdd(client: IClient | null) {
         hover
         @onRowClick="openProfile"
     >
-        <template v-if="enableCreate" #toolbar>
+        <template v-if="showCreate" #toolbar>
             <button class="add-button" aria-label="create radio" @click="openCreateRadio">
                 <IconsAdd />
             </button>
@@ -187,12 +192,12 @@ function openAdd(client: IClient | null) {
             </button>
         </template>
 
-        <template v-if="enableTableActions" #actions>
+        <template v-if="showTableActions" #actions>
             <TableActionsRadios
                 :columns="columns"
                 :hide-stats-button="hideStatsButton"
                 @onApplied="query = $event"
-            />
+            ></TableActionsRadios>
         </template>
 
         <template v-if="enableClientActions" #toolbar>

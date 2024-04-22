@@ -8,10 +8,12 @@ type IReport = {
     title: string
     description: string
     action: Function
+    show?: boolean
 }
 
 const dialog = useDialogs()
 const toast = useToast()
+const { isSeller } = useRole()
 
 // data
 const reportKey = ref<string | null>(null)
@@ -27,7 +29,8 @@ const reports: IReport[] = [
         description: 'Reporte de inventario, muestra un listado de los radios y sims disponibles en inventario',
         action: function () {
             generate('/api/reports/inventory', this)
-        }
+        },
+        show: !isSeller
     },
     {
         key: 'general',
@@ -51,7 +54,8 @@ const reports: IReport[] = [
         description: 'Reporte por vendedor, muestra los clientes del vendedor.',
         action: () => dialog.push({
             name: 'reports-seller'
-        })
+        }),
+        show: !isSeller
     },
     {
         key: 'model',
@@ -106,7 +110,7 @@ async function generate(path: string, report: IReport) {
     <main>
         <h1>Reportes</h1>
         <section class="reports">
-            <article v-for="item in reports">
+            <article v-for="item in reports.filter(item => item?.show ?? true)">
                 <h2>{{ item.title }}</h2>
                 <p>{{ item.description }}</p>
 
