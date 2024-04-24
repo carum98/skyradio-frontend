@@ -108,7 +108,6 @@ async function generate(path: string, report: IReport) {
 
 <template>
     <main>
-        <h1>Reportes</h1>
         <section class="reports">
             <article v-for="item in reports.filter(item => item?.show ?? true)">
                 <h2>{{ item.title }}</h2>

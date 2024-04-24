@@ -5,8 +5,8 @@ useHead({
     }
 })
 
+const user = useUser()
 const title = ref('')
-const { isAdmin, isUser } = useRole()
 
 onMounted(() => {
     const element = document.querySelector('title') as HTMLTitleElement
@@ -69,7 +69,7 @@ onMounted(() => {
             </NuxtLink>
 
             <NuxtLink 
-                v-if="isAdmin || isUser" 
+                v-if="user?.role === 'admin' || user?.role === 'user'" 
                 :to="{ name: 'settings' }" 
                 aria-label="settings"
             >
