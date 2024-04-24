@@ -1,8 +1,11 @@
 <script setup lang="ts">
-function logout() {
-    useFetch(`/api/logout`, {
+async function logout() {
+    await useFetch(`/api/logout`, {
         method: 'POST'
     })
+
+    clearNuxtState('user')
+    clearNuxtData()
 }
 </script>
 

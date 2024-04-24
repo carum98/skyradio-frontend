@@ -20,4 +20,5 @@ export const setSession = async (event: H3Event, data: SessionData) => {
 
 export const clearSession = async (event: H3Event) => {
     await h3.clearSession(event, config)
+    h3.deleteCookie(event, config.name as string)
 }
