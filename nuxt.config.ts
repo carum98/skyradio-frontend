@@ -3,6 +3,9 @@ import { resolve } from 'path'
 export default defineNuxtConfig({
   devtools: {
     enabled: true,
+    timeline: {
+      enabled: true
+    }
   },
   ignore: [
     'pages/*/*.dialog.vue'

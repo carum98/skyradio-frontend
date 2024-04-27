@@ -20,11 +20,19 @@ async function onSubmit(e: Event){
         const formData = new FormData(e.target as HTMLFormElement)
         const params = Object.fromEntries(formData)
 
-        await $fetch('/api/login', {
+        const data = await $fetch('/api/login', {
             method: 'POST',
             body: params
         })
 
+        // Cache user data
+        const nuxt = useNuxtData('user')
+        nuxt.data.value = data
+
+        const user = useUser()
+        user.value = data
+
+        // Redirect to home
         router.push('/')
     } catch (data) {
         let error = data as FetchError

@@ -2,12 +2,7 @@ export interface LoginResponse {
     token: string
     refreshToken: string
     expiredAt: number
-    user: {
-        id: string
-        email: string
-        name: string
-        role: Role
-    }
+    user: IUser
 }
 
 export type SessionData = {
