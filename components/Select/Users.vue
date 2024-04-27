@@ -2,7 +2,7 @@
 import type { SkSelectProps } from '../SkSelect/sk-select'
 defineProps<Pick<SkSelectProps<IUser>, 'required' | 'showClear'>>()
 
-const { items, search, onData, loading } = useSelect<IUser>('/api/users')
+const { items, search, onData, loading } = useSelect<IUser>('/api/users?role[equal]=seller')
 
 const value = defineModel<IUser | null>() 
 </script>
