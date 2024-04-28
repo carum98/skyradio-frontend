@@ -97,5 +97,9 @@ body {
         text-align: center;
         font-size: 14px;
         color: rgba(var(--text-color-rgb), 0.3);
+
+        a {
+            text-decoration: underline;
+        }
     }
 }
