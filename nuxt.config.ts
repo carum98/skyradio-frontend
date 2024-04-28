@@ -25,6 +25,11 @@ export default defineNuxtConfig({
         { name: 'supported-color-schemes', content: 'light dark' },
         { name: 'color-scheme', content: 'dark light' },
         { name: 'theme-color', content: '' },
+        { property: 'og:description', content: 'SkyRadio - Control radios SkyData' },
+        { property: 'og:title', content: 'SkyRadio' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: 'https://skyradio.skydatacontrol.com' },
+        { property: 'og:image', content: '/banner.webp' },
       ],
       viewport: 'width=device-width, initial-scale=1',
       htmlAttrs: {
