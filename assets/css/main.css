@@ -13,6 +13,10 @@
 @import './toast.css';
 @import './form.css';
 
+.sk-logo {
+    filter: var(--drop-shadow)
+}
+
 .add-button {
     background-color: var(--primary-color);
     color: #fff;
@@ -316,7 +320,6 @@
     img {
         display: block;
         margin: auto;
-        filter: var(--drop-shadow);
     }
 
     .password {

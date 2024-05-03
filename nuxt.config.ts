@@ -75,6 +75,7 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { redirect: '/clients' },
     '/login': { prerender: true },
+    '/mobile': { prerender: true },
     '/settings': { redirect: '/settings/modalities' },
     '/reports': { prerender: true },
     '/api/**': { 

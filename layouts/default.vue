@@ -35,6 +35,7 @@ onMounted(() => {
             alt="Logo" 
             width="65" 
             height="65"
+            class="sk-logo"
         />
         <nav>
             <NuxtLink :to="{ name: 'clients' }">

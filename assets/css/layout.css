@@ -3,6 +3,20 @@ body {
     color: var(--text-color);
 }
 
+footer {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 14px;
+    color: rgba(var(--text-color-rgb), 0.3);
+
+    a {
+        text-decoration: underline;
+    }
+}
+
 #app:has(header):has(main):has(aside) {
     --sidebar-width: 95px;
     --header-height: 75px;
@@ -80,26 +94,10 @@ body {
     }
 }
 
-.login-page #app {
-    main {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-flow: column;
-    }
-
-    footer {
-        position: fixed;
-        bottom: 10px;
-        left: 0;
-        right: 0;
-        text-align: center;
-        font-size: 14px;
-        color: rgba(var(--text-color-rgb), 0.3);
-
-        a {
-            text-decoration: underline;
-        }
-    }
+.login-page #app main {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
 }

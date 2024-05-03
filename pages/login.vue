@@ -55,6 +55,7 @@ async function onSubmit(e: Event){
             alt="Logo" 
             width="80" 
             height="80"
+            class="sk-logo"
         />
 
         <label>

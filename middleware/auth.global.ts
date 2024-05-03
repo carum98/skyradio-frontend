@@ -11,6 +11,9 @@ export default defineNuxtRouteMiddleware(async (ctx) => {
 
     const { name } = ctx
 
+    // Whitelist pages
+    if (name === 'mobile') return
+
     // redirect to /login if session is not set
     if (!session?.auth && name !== 'login') {
         return navigateTo('/login')
