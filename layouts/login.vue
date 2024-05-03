@@ -1,3 +1,11 @@
+<script setup lang="ts">
+useHead({
+    bodyAttrs: {
+        class: 'login-page'
+    }
+})
+</script>
+
 <template>
     <main>
         <slot />

@@ -5,12 +5,6 @@ const toast = useToast()
 const router = useRouter()
 const passwordVisible = ref(false)
 
-useHead({
-    bodyAttrs: {
-        class: 'login-page'
-    }
-})
-
 definePageMeta({
   layout: 'login',
 })
