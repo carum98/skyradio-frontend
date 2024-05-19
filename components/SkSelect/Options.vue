@@ -34,9 +34,9 @@ onMounted(() => {
         let { newState } = event as ToggleEvent
 
         if (newState === 'open') {
-            if (!("anchorName" in document.documentElement.style)) {
+            // if (!("anchorName" in document.documentElement.style)) {
                 cssAnchorPosition(event as ToggleEvent)
-            }
+            // }
 
             emits('onData')
 
