@@ -20,9 +20,9 @@ onMounted(() => {
         let { newState } = event as ToggleEvent
 
         if (newState === 'open') {
-            // if (!("anchorName" in document.documentElement.style)) {
+            if (!("anchorName" in document.documentElement.style)) {
                 cssAnchorPosition(event as ToggleEvent)
-            // }
+            }
         }
     })
 
@@ -45,6 +45,7 @@ onMounted(() => {
         @click.stop
         v-bind="$attrs"
         aria-label="Open dropdown"
+        :style="`anchor-name: --sk-dropdown-${id}`"
     >
         <slot name="icon">
             <svg width="17" height="17" viewBox="0 0 256 256"><path fill="currentColor" d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28Zm-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28Zm0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28Z"/></svg>
@@ -58,6 +59,7 @@ onMounted(() => {
         :anchor="id + '_anchor'"
         :id="id"
         @click.stop
+        :style="`position-anchor: --sk-dropdown-${id}`"
     >
         <button 
             v-for="option in options" 

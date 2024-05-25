@@ -40,4 +40,6 @@
     border-radius: 15px;
     padding: 5px 10px;
     background-color: var(--background-color);
+    inset-area: top;
+    position-try-options: flip-block;
 }

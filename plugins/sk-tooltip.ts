@@ -22,6 +22,7 @@ class SkTooltip {
     ) {
         this.el.setAttribute('popovertarget', this.id)
         this.el.setAttribute('id', this.id + '-anchor')
+        this.el.style.anchorName = `--${this.id}`
 
         this.el.addEventListener('mouseenter', this.onMouseEnter.bind(this))
     }
@@ -32,6 +33,7 @@ class SkTooltip {
         this.tooltip.setAttribute('id', this.id)
         this.tooltip.setAttribute('popover', '')
         this.tooltip.setAttribute('anchor', this.id + '-anchor')
+        this.tooltip.style.positionAnchor = `--${this.id}`
         this.tooltip.innerText = this.text
 
         this.el.parentNode?.insertBefore(this.tooltip, this.el.nextSibling)
@@ -50,9 +52,9 @@ class SkTooltip {
         let { newState } = event as ToggleEvent
 
         if (newState === 'open') {
-            // if (!("anchorName" in document.documentElement.style)) {
+            if (!("anchorName" in document.documentElement.style)) {
                 cssAnchorPosition(event as ToggleEvent, 'top')
-            // }
+            }
         }
     }
 

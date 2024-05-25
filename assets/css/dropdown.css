@@ -26,8 +26,8 @@
     border-radius: 15px;
     width: 200px;
     padding: 15px;
-    top: anchor(bottom);
-    right: anchor(right);
+    inset-area: bottom span-left;
+    position-try-options: flip-block;
 
     --border: 1px solid var(--background-color);
 

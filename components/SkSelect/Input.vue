@@ -9,7 +9,13 @@ const id = attrs['data-id'] as string
 </script>
 
 <template>
-    <button type="button" class="sk-select__input sk-input" :popovertarget="id" :id="id + '_anchor'">
+    <button 
+        type="button" 
+        class="sk-select__input sk-input" 
+        :popovertarget="id" 
+        :id="id + '_anchor'"
+        :style="`anchor-name: --${id}`"
+    >
         <slot v-if="value" name="option" :item="(value as T)">
             {{ value }}
         </slot>

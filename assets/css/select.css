@@ -28,8 +28,8 @@
     padding: 15px;
     border-radius: 15px;
 
-    top: anchor(bottom);
-    left: anchor(left);
+    inset-area: bottom span-right;
+    position-try-options: flip-block;
     transform: translate(0, 5px);
 
     & ul {
