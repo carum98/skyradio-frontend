@@ -26,13 +26,15 @@
     border: unset;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    overflow: visible;
     padding: 20px;
     background-color: var(--background-color);
 
-    position: absolute;
-    top: var(--popover-top);
-    left: var(--popover-left);
+    max-height: unset;
+    overflow: unset;
+    max-width: unset;
+
+    inset-area: bottom span-right;
+    position-try-options: flip-block, flip-inline, flip-block flip-inline;;
 }
 
 .sk-tooltip {

@@ -14,16 +14,22 @@ function open() {
 
     popover.value?.showModal()
 
-    // Set the position of the popover
-    const anchorRect = props.anchor.getBoundingClientRect()
-    const popoverRect = popover.value.getBoundingClientRect()
+    if (!("anchorName" in document.documentElement.style)) {
+        // Set the position of the popover
+        const anchorRect = props.anchor.getBoundingClientRect()
+        const popoverRect = popover.value.getBoundingClientRect()
 
-    popover.value?.style.setProperty('--popover-top', `${anchorRect.bottom}px`)
-    popover.value?.style.setProperty('--popover-left', `${anchorRect.left - popoverRect.width + anchorRect.width}px`)
+        popover.value?.style.setProperty('--popover-top', `${anchorRect.bottom}px`)
+        popover.value?.style.setProperty('--popover-left', `${anchorRect.left - popoverRect.width + anchorRect.width}px`)
+    } else {
+        console.log(props.anchor)
+        props.anchor.style.anchorName = `--popover-anchor`
+    }
 }
 
 function close() {
     popover.value?.close()
+    props.anchor.style.anchorName = ''
     emits('close')
 }
 
@@ -41,7 +47,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <dialog ref="popover" class="sk-popover">
+    <dialog ref="popover" class="sk-popover" style="position-anchor: --popover-anchor;">
         <slot />
     </dialog>
 </template>
