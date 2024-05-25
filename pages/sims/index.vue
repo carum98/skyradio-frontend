@@ -12,6 +12,7 @@ const per_page = useTablePerPage({ sm: 8, lg: 11 })
             :path="`/api/sims?per_page=${per_page}`"
             enable-create
             enable-table-actions
-        />
+            hide-stats-button
+        ></TableSims>
     </main>
 </template>
