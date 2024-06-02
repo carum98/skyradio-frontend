@@ -41,9 +41,9 @@ const { isAdmin } = useRole()
                 <NuxtLink :to="{ name: 'users' }">
                     Usuarios
                 </NuxtLink>
-                <NuxtLink :to="{ name: 'groups' }">
+                <!-- <NuxtLink :to="{ name: 'groups' }">
                     Grupos
-                </NuxtLink>
+                </NuxtLink> -->
             </template>
         </section>
 
