@@ -16,6 +16,13 @@ The project has a `.env` file, which contains the environment variables, which a
 | --- | --- |
 | `PORT` | Port where the API will run |
 | `NUXT_API_BASE_URL` | Port of the database |
+| `ANALYTICS_HOST` | Host of the analytics server |
+| `ANALYTICS_KEY` | Key of the analytics server |
+| `CORS_ALLOW_ORIGIN` | Origin allowed by the CORS policy |
+
+> Note that the `ANALYTICS_HOST` and `ANALYTICS_KEY` variables are used to send the analytics data to the analytics server. This project uses [SkyAnalytics](https://github.com/carum98/skyanalytics) as the analytics server.
+
+> Note that the proxy server is [Nitro](https://nitro.unjs.io/), and the `CORS_ALLOW_ORIGIN` variable is used to set the `Access-Control-Allow-Origin` header.
 
 ## Generate Docker image to production
 To generate the Docker image, you must run the following command:

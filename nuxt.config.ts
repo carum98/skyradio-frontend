@@ -7,6 +7,11 @@ export default defineNuxtConfig({
       enabled: true
     }
   },
+  modules: ['@skyanalytics/nuxt'],
+  skyanalytics: {
+    key: process.env.ANALYTICS_KEY,
+    host: process.env.ANALYTICS_HOST,
+  },
   ignore: [
     'pages/*/*.dialog.vue'
   ],
@@ -81,7 +86,7 @@ export default defineNuxtConfig({
     '/api/**': { 
       cors: true,
       headers: {
-        'Access-Control-Allow-Origin': 'https://skyradio.skydatacontrol.com',
+        'Access-Control-Allow-Origin': process.env.CORS_ALLOW_ORIGIN,
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         'Access-Control-Max-Age': '86400',

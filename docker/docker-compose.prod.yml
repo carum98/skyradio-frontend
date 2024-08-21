@@ -10,6 +10,9 @@ services:
     container_name: skyradio-frontend
     environment:
       - NUXT_API_BASE_URL=${NUXT_API_BASE_URL}
+      - ANALYTICS_HOST=${ANALYTICS_HOST}
+      - ANALYTICS_KEY=${ANALYTICS_KEY}
+      - CORS_ALLOW_ORIGIN=${CORS_ALLOW_ORIGIN}
       - NODE_ENV=production
     networks:
       - skyradio-network
