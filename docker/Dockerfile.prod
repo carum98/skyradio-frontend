@@ -1,6 +1,10 @@
 # State 1
 FROM node:20-alpine3.17 as builder
 
+ARG ANALYTICS_HOST=
+ARG ANALYTICS_KEY=
+ARG CORS_ALLOW_ORIGIN=
+
 WORKDIR /app
 
 COPY package*.json ./
