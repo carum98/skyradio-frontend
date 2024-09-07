@@ -24,7 +24,7 @@ jobs:
         logout: true
     
     - name: Build the Docker image
-      run: docker build . --file ./docker/Dockerfile.prod --tag ghcr.io/carum98/skyradio-frontend:latest --build-arg ANALYTICS_HOST=${{ secrets.ANALYTICS_HOST }} --build-arg ANALYTICS_KEY=${{ secrets.ANALYTICS_KEY }} --build-arg CORS_ALLOW_ORIGIN=${{ secrets.CORS_ALLOW_ORIGIN }}
+      run: docker build . --file ./docker/Dockerfile.prod --tag ghcr.io/carum98/skyradio-frontend:latest --build-arg ANALYTICS_HOST=${{ vars.ANALYTICS_HOST }} --build-arg ANALYTICS_KEY=${{ secrets.ANALYTICS_KEY }} --build-arg CORS_ALLOW_ORIGIN=${{ vars.URL_FRONTEND }}
 
     - name: Send to registry
       run: docker push ghcr.io/carum98/skyradio-frontend:latest
@@ -59,7 +59,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
-          mkdir -p ~/frontend
+          mkdir -p ~/skyradio/frontend
 
   env-file:
     runs-on: ubuntu-latest
@@ -75,7 +75,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            echo -e "NUXT_API_BASE_URL=${{ secrets.NUXT_API_BASE_URL }}" > ~/frontend/.env
+            echo -e "PORT=${{ vars.PORT }}\nNUXT_API_BASE_URL=${{ vars.URL_BACKEND }}" > ~/skyradio/frontend/.env
 
   docker-compose-files:
     runs-on: ubuntu-latest
@@ -94,7 +94,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         source: "docker/docker-compose.prod.yml"
-        target: "~/frontend"
+        target: "~/skyradio/frontend"
         strip_components: 1
 
     - name: Create docker-compose override
@@ -105,7 +105,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
-          echo -e "services:\n  web:\n    image: ghcr.io/carum98/skyradio-frontend:latest" > ~/frontend/docker-compose.override.yml
+          echo -e "services:\n  web:\n    image: ghcr.io/carum98/skyradio-frontend:latest" > ~/skyradio/frontend/docker-compose.override.yml
 
   docker-compose-up:
     runs-on: ubuntu-latest
@@ -121,7 +121,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
-          cd ~/frontend &&
+          cd ~/skyradio/frontend &&
           # Check if the container is running
           if [ "$(docker ps -q -f name=skyradio-frontend)" ]; then
             # Stop the container
