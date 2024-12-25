@@ -26,8 +26,8 @@
     border-radius: 15px;
     width: 200px;
     padding: 15px;
-    inset-area: bottom span-left;
-    position-try-options: flip-block;
+    position-area: bottom span-left;
+    position-try-fallbacks: flip-block;
 
     --border: 1px solid var(--background-color);
 

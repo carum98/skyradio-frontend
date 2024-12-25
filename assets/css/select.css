@@ -28,8 +28,8 @@
     padding: 15px;
     border-radius: 15px;
 
-    inset-area: bottom span-right;
-    position-try-options: flip-block;
+    position-area: bottom span-right;
+    position-try-fallbacks: flip-block;
     transform: translate(0, 5px);
 
     & ul {
