@@ -2,10 +2,11 @@ import { resolve } from 'path'
 
 export default defineNuxtConfig({
   devtools: {
-    enabled: true,
-    timeline: {
-      enabled: true
-    }
+    enabled: false,
+  },
+  compatibilityDate: "2024-12-20",
+  future: {
+    compatibilityVersion: 4
   },
   modules: ['@skyanalytics/nuxt'],
   skyanalytics: {
@@ -45,11 +46,11 @@ export default defineNuxtConfig({
   },
   alias: {
     '@': resolve(__dirname, './'),
-    '@components': resolve(__dirname, './components'),
-    '@composables': resolve(__dirname, './composables'),
-    '@utils': resolve(__dirname, './utils'),
-    '@pages': resolve(__dirname, './pages'),
-    '@views': resolve(__dirname, './views'),
+    '@components': resolve(__dirname, './app/components'),
+    '@composables': resolve(__dirname, './app/composables'),
+    '@utils': resolve(__dirname, './app/utils'),
+    '@pages': resolve(__dirname, './app/pages'),
+    '@views': resolve(__dirname, './app/views'),
   },
   vite: {
     vue: {
@@ -62,7 +63,7 @@ export default defineNuxtConfig({
     }
   },
   css: [
-    '@/assets/css/main.css',
+    '@/app/assets/css/main.css',
   ],
   runtimeConfig: {
     apiBaseUrl: ''

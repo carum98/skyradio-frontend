@@ -10,17 +10,9 @@ services:
         - ./package.json:/app/package.json
         #
         - ./server:/app/server
-        - ./pages:/app/pages
-        - ./middleware:/app/middleware
-        - ./assets:/app/assets
-        - ./layouts:/app/layouts
-        - ./components:/app/components
-        - ./plugins:/app/plugins
-        - ./types:/app/types
-        - ./composables:/app/composables
+        - ./app:/app/app
+
         - ./public:/app/public
-        - ./utils:/app/utils
-        - ./views:/app/views
         - ./nuxt.config.ts:/app/nuxt.config.ts
         # 
         - ..:/workspaces:cached

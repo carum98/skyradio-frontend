@@ -1,4 +1,4 @@
-import { getSession } from "~/server/core/session"
+import { getSession } from "@/server/core/session"
 
 export default defineNuxtRouteMiddleware(async (ctx) => {
     if (process.client) return
