@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { SkToastProps } from '../composables/useToast'
+
 const props = withDefaults(defineProps<SkToastProps>(),
     {
         type: 'info',
